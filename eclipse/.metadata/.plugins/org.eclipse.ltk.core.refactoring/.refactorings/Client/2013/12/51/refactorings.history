@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;org.greencubes.items.decor&apos; to &apos;org.greencubes.items.unique&apos;&#x0D;&#x0A;- Original project: &apos;Client&apos;&#x0D;&#x0A;- Original element: &apos;Client/src/org.greencubes.items.decor&apos;&#x0D;&#x0A;- Renamed element: &apos;Client/src/org.greencubes.items.unique&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings&#x0D;&#x0A;- Rename subpackages of the package" description="Rename package &apos;org.greencubes.items.decor&apos;" flags="589830" hierarchical="true" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;org.greencubes.items.decor" name="org.greencubes.items.unique" qualified="false" references="true" stamp="1387714001834" textual="false" version="1.0"/>
+</session>

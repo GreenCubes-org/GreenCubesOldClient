@@ -1,0 +1,7 @@
+1367178791235	Move compilation unit
+1367179660337	Delete element
+1367179979162	Delete element
+1367180841173	Rename local variable 'arg0'
+1367180844683	Rename local variable 'arg1'
+1367181076123	Rename method 'update'
+1367185601212	Rename method 'hasFocus'

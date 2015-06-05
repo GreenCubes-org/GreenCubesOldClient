@@ -1,0 +1,15 @@
+1432814070699	Rename type 'ItemArmor'
+1432814077085	Rename field 'armorHeight'
+1432814668382	Delete element
+1432815412274	Delete element
+1432815913927	Rename field 'field_40578_g'
+1432816676475	Rename local variable 'i10'
+1432824648924	Copy compilation unit
+1432834361626	Rename local variable 'flag'
+1432834376681	Rename local variable 'i'
+1432834381229	Rename local variable 'j'
+1432834386262	Rename local variable 'entityplayer'
+1432834698351	Rename method 'transferStackInSlot'
+1432837139841	Rename method 'func_35373_b'
+1432838571063	Rename method 'getStackInSlot'
+1433023517507	Rename local variable 'slot'

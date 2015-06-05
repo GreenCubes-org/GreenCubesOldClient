@@ -1,0 +1,13 @@
+package net.minecraft.src;
+
+public class BlockStairsTextured extends BlockStairs {
+
+	public BlockStairsTextured(int i, Block block, int t) {
+		super(i, block);
+	}
+
+    public int getBlockTextureFromSide(int i)
+    {
+        return modelBlock.getBlockTextureFromSideAndMetadata(i, 0);
+    }
+}

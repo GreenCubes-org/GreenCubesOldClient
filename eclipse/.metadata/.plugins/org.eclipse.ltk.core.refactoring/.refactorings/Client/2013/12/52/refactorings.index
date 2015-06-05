@@ -1,0 +1,16 @@
+1387882240284	Move compilation unit
+1387883757879	Rename local variable 'block'
+1387884129526	Rename method 'setIsGroundCover'
+1387884137486	Rename method 'getIsGroundCover'
+1387884145723	Rename field 'groundCover'
+1387982153801	Copy compilation unit
+1388160974083	Delete elements
+1388228248970	Delete element
+1388233316646	Rename local variable 'i'
+1388233321667	Rename local variable 'j'
+1388233325658	Rename local variable 'k'
+1388233330683	Rename local variable 'l'
+1388233335699	Rename local variable 'i1'
+1388233341212	Rename local variable 'j1'
+1388244942117	Copy compilation unit
+1388247112018	Rename field 'feltboots'

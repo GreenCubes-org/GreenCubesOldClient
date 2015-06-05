@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class BlockSakuraFlowers extends BlockLeaves {
+
+	public BlockSakuraFlowers(int i, int j) {
+		super(i, j);
+		// TODO Auto-generated constructor stub
+	}
+
+}

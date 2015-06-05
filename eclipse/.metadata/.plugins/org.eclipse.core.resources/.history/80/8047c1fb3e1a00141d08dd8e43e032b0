@@ -1,0 +1,57 @@
+package net.minecraft.src;
+
+public class ItemCounter extends Item {
+
+	public ItemCounter(int i) {
+		super(i);
+		setMaxStackSize(1);
+	}
+
+	@Override
+	public String getTranslatedName(ItemStack itemstack) {
+		String name = new StringBuilder().append(StringTranslate.getInstance().translateNamedKey(getUntranslatedName(itemstack))).toString().trim();
+		switch(itemstack.itemDamage) {
+		case 1:
+			name += " - булыжника добыто";
+			break;
+		case 2:
+			name += " - алмазов добыто";
+			break;
+		case 3:
+			name += " - ростков сакуры получено";
+			break;
+		case 4:
+			name += " - светопыли добыто";
+			break;
+		case 5:
+			name += " - фейерверков запущено";
+			break;
+		case 6:
+			name += " - листвы получено";
+			break;
+		case 7:
+			name += " - красной пыли добыто";
+			break;
+		case 8:
+			name += " - железной руды добыто";
+			break;
+		case 9:
+			name += " - золотой руды добыто";
+			break;
+		case 10:
+			name += " - лазурита добыто";
+			break;
+		case 11:
+			name += " - дерева срублено";
+			break;
+		case 12:
+			name += " - угля добыто";
+			break;
+		case 13:
+			name += " - земли выкопано";
+			break;
+		}
+		return name;
+	}
+
+}

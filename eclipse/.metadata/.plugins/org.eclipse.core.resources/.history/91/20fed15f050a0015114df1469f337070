@@ -1,0 +1,60 @@
+package net.minecraft.src;
+
+import org.greencubes.util.HSVColor;
+import org.greencubes.util.RGBUtils;
+
+public class BlockColoredGlass extends BlockGlassNew {
+
+	public final int[][] colors;
+	private int currentPass;
+	
+	public BlockColoredGlass(int id, int[][] colors) {
+		super(id, 49, Material.glass, false);
+		this.colors = colors;
+		for(int i = 0; i < colors.length; ++i) {
+			HSVColor hsv = HSVColor.fromRGB(colors[i][1]);
+			hsv = new HSVColor(hsv.h, Math.min(1.0f, hsv.s / 1.5f), Math.min(1.0f, hsv.v * 1.15f));
+			colors[i][1] = hsv.getRGB();
+			/*int[] rgb = RGBUtils.toIntArray(colors[i][1]);
+			for(int i1 = 0; i1 < rgb.length; ++i1)
+				rgb[i1] = Math.min(255, (int) (rgb[i1] * 1.3f));
+			colors[i][1] = RGBUtils.toRGB(rgb[0], rgb[1], rgb[2]);*/
+		}
+		multipassBlocks[id] = true;
+	}
+
+	@Override
+	public boolean setUpPass(int pass) {
+		this.currentPass = pass;
+		return pass == 0 || pass == 2;
+	}
+	
+	@Override
+	public int getBlockTexture(IBlockAccess iblockaccess, int x, int y, int z, int i) {
+		if(currentPass == 2)
+			return colors[iblockaccess.getBlockMetadata(x, y, z) % colors.length][0];
+		return super.getBlockTexture(iblockaccess, x, y, z, i);
+	}
+	
+	@Override
+	public int getRenderColor(int i) {
+		return currentPass == 2 ? 0xffffff : colors[i % colors.length][1];
+	}
+
+	@Override
+	public int colorMultiplier(IBlockAccess iblockaccess, int i, int j, int k) {
+		return currentPass == 2 ? 0xffffff : getRenderColor(iblockaccess.getBlockMetadata(i, j, k));
+	}
+	
+	@Override
+	protected void init() {
+		if(Item.itemsList[blockID] == null)
+			new ItemBlock(blockID - 256) {
+				@Override
+				public int getPlacedBlockMetadata(int i) {
+					return i;
+				}
+			};
+		super.init();
+	}
+}

@@ -1,0 +1,9 @@
+package net.minecraft.src;
+
+public class BlockColoredHalfBlockGlass extends BlockHalfBlockGlass {
+
+	public BlockColoredHalfBlockGlass(int i, Block original, int[][] colors) {
+		super(i, 49, 49, original);
+	}
+
+}

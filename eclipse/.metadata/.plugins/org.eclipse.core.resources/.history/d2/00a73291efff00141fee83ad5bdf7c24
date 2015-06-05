@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class ItemArrow extends Item {
+
+	public ItemArrow(int i) {
+		super(i);
+		// TODO Auto-generated constructor stub
+	}
+
+}

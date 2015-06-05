@@ -1,0 +1,17 @@
+package net.minecraft.src;
+
+import com.sk89q.worldedit.util.PropertiesConfiguration;
+import java.io.File;
+
+public class SPCLocalConfiguration extends PropertiesConfiguration {
+	public File mcdir;
+
+	public SPCLocalConfiguration(File mcdir) {
+		super(new File(mcdir, "mods/sppcommands/worldedit.properties"));
+		this.mcdir = mcdir;
+	}
+
+	public File getWorkingDirectory() {
+		return this.mcdir;
+	}
+}

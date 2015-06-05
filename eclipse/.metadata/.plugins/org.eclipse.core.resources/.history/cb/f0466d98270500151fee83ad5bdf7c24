@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class BlockBanner extends BlockOnWall {
+
+	public BlockBanner(int i, int[] textures) {
+		super(i, Material.wool);
+
+	}
+
+}

@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class BlockColoredStairsGlass extends BlockStairsGlass {
+
+	public BlockColoredStairsGlass(int i, Block block) {
+		super(i, block);
+		// TODO Auto-generated constructor stub
+	}
+
+}

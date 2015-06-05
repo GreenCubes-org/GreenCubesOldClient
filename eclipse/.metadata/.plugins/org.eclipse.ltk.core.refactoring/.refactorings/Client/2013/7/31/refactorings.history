@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;net.minecraft.src.ItemFirework&apos; to &apos;ItemFireworkAmmo&apos;&#x0D;&#x0A;- Original project: &apos;Client&apos;&#x0D;&#x0A;- Original element: &apos;net.minecraft.src.ItemFirework&apos;&#x0D;&#x0A;- Renamed element: &apos;net.minecraft.src.ItemFireworkAmmo&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ItemFirework&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;net.minecraft.src{ItemFirework.java[ItemFirework" matchStrategy="1" name="ItemFireworkAmmo" qualified="false" references="true" similarDeclarations="false" stamp="1375211066132" textual="false" version="1.0"/>
+</session>

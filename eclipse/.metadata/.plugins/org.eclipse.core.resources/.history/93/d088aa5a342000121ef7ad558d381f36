@@ -1,0 +1,8 @@
+package net.minecraft.src;
+
+public class GuiReplays extends GuiScreen {
+
+	public GuiReplays(GuiScreen parent) {
+		
+	}
+}

@@ -1,0 +1,16 @@
+package net.minecraft.src;
+
+public class BlockSakuraLeaves extends BlockLeavesBase {
+	
+	public BlockSakuraLeaves(int i, int j) {
+		super(i, j, Material.leaves, false);
+	}
+	
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
+
+	public boolean isOpaqueCube() {
+		return false;
+	}
+}

@@ -1,0 +1,100 @@
+package net.minecraft.src;
+
+import com.sk89q.worldedit.LocalSession;
+import com.sk89q.worldedit.WorldEdit;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import net.minecraft.client.Minecraft;
+
+public class WorldEditPlugin {
+	public WorldEdit controller;
+	public Constructor worldvector;
+	public Method handleCommand;
+	public Method handleBlockLeftClick;
+	public Method handleBlockRightClick;
+	public Method handleArmSwing;
+	public Method handleRightClick;
+	public SPCLocalPlayer localplayer;
+	public SPCServerInterface serverinterface;
+	public SPCLocalConfiguration localconfiguration;
+
+	public WorldEditPlugin() throws Exception {
+		this.localconfiguration = new SPCLocalConfiguration(Minecraft.b());
+		this.localconfiguration.load();
+		di player = PlayerHelper.PH.ep;
+		this.serverinterface = new SPCServerInterface(player.o);
+		try {
+			Class wec = Class.forName("com.sk89q.worldedit.WorldEdit");
+			this.controller = ((WorldEdit) wec.getConstructors()[0].newInstance(new Object[]{this.serverinterface, this.localconfiguration}));
+			Method[] m = wec.getMethods();
+			for(int i = 0; i < m.length; i++)
+				if(m[i].getName().compareTo("handleCommand") == 0)
+					this.handleCommand = m[i];
+				else if(m[i].getName().compareTo("handleBlockLeftClick") == 0)
+					this.handleBlockLeftClick = m[i];
+				else if(m[i].getName().compareTo("handleBlockRightClick") == 0)
+					this.handleBlockRightClick = m[i];
+				else if(m[i].getName().compareTo("handleRightClick") == 0)
+					this.handleRightClick = m[i];
+				else if(m[i].getName().compareTo("handleArmSwing") == 0)
+					this.handleArmSwing = m[i];
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Couldnt find the WorldEdit method.");
+		}
+		try {
+			Class worldvector = Class.forName("com.sk89q.worldedit.WorldVector");
+			Class localworld = Class.forName("com.sk89q.worldedit.LocalWorld");
+			this.worldvector = worldvector.getConstructor(new Class[]{localworld, Integer.TYPE, Integer.TYPE, Integer.TYPE});
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Couldnt find the WorldVector method.");
+		}
+	}
+
+	public Object getController() {
+		return this.controller;
+	}
+
+	public Constructor getWorldvector() {
+		return this.worldvector;
+	}
+
+	public Method getHandleCommand() {
+		return this.handleCommand;
+	}
+
+	public Method getHandleBlockLeftClick() {
+		return this.handleBlockLeftClick;
+	}
+
+	public Method getHandleBlockRightClick() {
+		return this.handleBlockRightClick;
+	}
+
+	public Method getHandleArmSwing() {
+		return this.handleArmSwing;
+	}
+
+	public Method getHandleRightClick() {
+		return this.handleRightClick;
+	}
+
+	public void setPlayer(EntityPlayerSP ep) {
+		this.localplayer = new SPCLocalPlayer(this.serverinterface, ep);
+		this.controller.getSession(this.localplayer).setCUISupport(true);
+		this.controller.getSession(this.localplayer).dispatchCUISetup(this.localplayer);
+	}
+
+	public SPCLocalPlayer getPlayer() {
+		return this.localplayer;
+	}
+
+	public SPCServerInterface getServerinterface() {
+		return this.serverinterface;
+	}
+
+	public SPCLocalConfiguration getLocalconfiguration() {
+		return this.localconfiguration;
+	}
+}

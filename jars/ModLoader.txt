@@ -1,0 +1,20 @@
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader init
+FINE: ModLoader for GreenCubes Initializing...
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader readFromClassPath
+FINER: Adding mods from C:\Users\Rena\Desktop\MCP\eclipse\Client\bin
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader readFromClassPath
+FINER: Directory found.
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader addMod
+FINE: Mod Initialized: "mod_TooManyItems 12w17a 2012-04-26" from mod_TooManyItems.class
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader addMod
+FINE: Mod Initialized: "mod_WorldEditCUI v1.0 for GreenCubes" from mod_WorldEditCUI.class
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader readFromModFolder
+FINER: Adding mods from C:\Users\Rena\Desktop\MCP\jars\mods\sppcommands
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader readFromModFolder
+FINER: Directory found.
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader init
+FINE: Mod Loaded: "mod_TooManyItems 12w17a 2012-04-26"
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader init
+FINE: Mod Loaded: "mod_WorldEditCUI v1.0 for GreenCubes"
+θών 05, 2015 5:06:32 AM net.minecraft.src.ModLoader AddAllRenderers
+FINE: Initialized

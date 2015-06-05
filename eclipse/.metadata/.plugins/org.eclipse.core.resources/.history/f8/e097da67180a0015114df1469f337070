@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class BlockColoredPane extends BlockPane {
+
+	public BlockColoredPane(int i, int j, int k, Material material, boolean flag) {
+		super(i, j, k, material, flag);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,35 @@
+package net.minecraft.src;
+
+public class GuiSlotReplay extends GuiSlot {
+
+	@Override
+	protected int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void elementClicked(int i, boolean flag) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected boolean isSelected(int i) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void drawBackground() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void drawSlot(int i, int j, int k, int l, Tessellator tessellator) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

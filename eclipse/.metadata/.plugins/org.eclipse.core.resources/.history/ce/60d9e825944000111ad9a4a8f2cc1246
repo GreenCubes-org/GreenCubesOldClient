@@ -1,0 +1,299 @@
+package net.minecraft.src;
+
+public class BlockSlope extends Block {
+
+    protected BlockSlopes_Kaevator(int i, int j, Material material)
+    {
+        super(i, j, material);
+        setTickOnLoad(true);
+        setLightOpacity(mod_Kaevator_Slopes.SlopesOpacity);
+    }
+
+    public int getRenderType()
+    {
+        return mod_Kaevator_Slopes.SlopesRenderID;
+    }
+
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
+    {
+        return true;
+    }
+
+    public void onBlockPlacedBy(World world, int i, int j, int k, EntityLiving entityliving)
+    {
+        int l = world.getBlockMetadata(i, j, k);
+        int i1;
+        if(l == 12)
+        {
+            i1 = MathHelper.floor_double((entityliving.rotationYaw * 4F) / 360F) & 3;
+        } else
+        {
+            i1 = MathHelper.floor_double((double)((entityliving.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+        }
+        if(i1 == 0)
+        {
+            world.setBlockMetadataWithNotify(i, j, k, 2 + l);
+        }
+        if(i1 == 1)
+        {
+            world.setBlockMetadataWithNotify(i, j, k, 1 + l);
+        }
+        if(i1 == 2)
+        {
+            world.setBlockMetadataWithNotify(i, j, k, 3 + l);
+        }
+        if(i1 == 3)
+        {
+            world.setBlockMetadataWithNotify(i, j, k, 0 + l);
+        }
+    }
+
+
+    protected int damageDropped(int i)
+    {
+        if(i == 0 || i == 1 || i == 2 || i == 3)
+        {
+            return 0;
+        }
+        if(i == 4 || i == 5 || i == 6 || i == 7)
+        {
+            return 4;
+        }
+        if(i == 8 || i == 9 || i == 10 || i == 11)
+        {
+            return 8;
+        }
+        if(i == 12 || i == 13 || i == 14 || i == 15)
+        {
+            return 12;
+        } else
+        {
+            return i;
+        }
+    }
+
+    public void getCollidingBoundingBoxes(World world, int i, int j, int k, AxisAlignedBB axisalignedbb, ArrayList arraylist)
+    {
+        int l = world.getBlockMetadata(i, j, k);
+        if(l == 0)
+        {
+            setBlockBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 1)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 2)
+        {
+            setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.0F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 3)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 4)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 5)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 6)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.0F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 7)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 8)
+        {
+            setBlockBounds(0.0F, 0.5F, 0.0F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 9)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.5F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 10)
+        {
+            setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.0F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 11)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+            setBlockBounds(0.0F, 0.5F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 12)
+        {
+            setBlockBounds(0.5F, 0.0F, 0.5F, 1.0F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 13)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.0F, 0.5F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 14)
+        {
+            setBlockBounds(0.0F, 0.0F, 0.5F, 0.5F, 1.0F, 1.0F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        } else
+        if(l == 15)
+        {
+            setBlockBounds(0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+            super.getCollidingBoundingBoxes(world, i, j, k, axisalignedbb, arraylist);
+        }
+        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+    }
+
+    public boolean blockActivated(World world, int i, int j, int k, EntityPlayer entityplayer)
+    {
+        int l = world.getBlockId(i, j, k);
+        if(l == mod_Kaevator_Slopes.BlockKaevBlackWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevRedWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevGreenWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevBrownWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevBlueWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevPurpleWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevCyanWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevSilverWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevGrayWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevPinkWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevLimeWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevYellowWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevLightBlueWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevMagentaWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevOrangeWoolSlopes.blockID || l == mod_Kaevator_Slopes.BlockKaevWhiteWoolSlopes.blockID)
+        {
+            ItemStack itemstack = entityplayer.inventory.getCurrentItem();
+            if(itemstack != null && itemstack.itemID == Item.dyePowder.shiftedIndex)
+            {
+                int i1 = world.getBlockMetadata(i, j, k);
+                if(itemstack.getItemDamage() == 0 && mod_Kaevator_Slopes.BlockKaevBlackWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevBlackWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 1 && mod_Kaevator_Slopes.BlockKaevRedWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevRedWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 2 && mod_Kaevator_Slopes.BlockKaevGreenWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevGreenWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 3 && mod_Kaevator_Slopes.BlockKaevBrownWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevBrownWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 4 && mod_Kaevator_Slopes.BlockKaevBlueWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevBlueWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 5 && mod_Kaevator_Slopes.BlockKaevPurpleWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevPurpleWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 6 && mod_Kaevator_Slopes.BlockKaevCyanWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevCyanWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 7 && mod_Kaevator_Slopes.BlockKaevSilverWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevSilverWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 8 && mod_Kaevator_Slopes.BlockKaevGrayWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevGrayWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 9 && mod_Kaevator_Slopes.BlockKaevPinkWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevPinkWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 10 && mod_Kaevator_Slopes.BlockKaevLimeWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevLimeWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 11 && mod_Kaevator_Slopes.BlockKaevYellowWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevYellowWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 12 && mod_Kaevator_Slopes.BlockKaevLightBlueWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevLightBlueWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 13 && mod_Kaevator_Slopes.BlockKaevMagentaWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevMagentaWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 14 && mod_Kaevator_Slopes.BlockKaevOrangeWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevOrangeWoolSlopes.blockID, i1);
+                    return true;
+                }
+                if(itemstack.getItemDamage() == 15 && mod_Kaevator_Slopes.BlockKaevWhiteWoolSlopes.blockID != Block.stone.blockID)
+                {
+                    world.setBlockAndMetadataWithNotify(i, j, k, mod_Kaevator_Slopes.BlockKaevWhiteWoolSlopes.blockID, i1);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static int getBlockFromDye(int i)
+    {
+        return i;
+    }
+
+    public static int getDyeFromBlock(int i)
+    {
+        return i;
+    }
+
+}

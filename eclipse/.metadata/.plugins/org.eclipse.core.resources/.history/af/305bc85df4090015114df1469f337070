@@ -1,0 +1,16 @@
+package net.minecraft.src;
+
+public class BlockCarpet extends Block {
+
+	public final int[][] textures;
+	
+	public BlockCarpet(int id, int[][] textures) {
+		super(id, Material.wool);
+		this.textures = textures;
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		return null;
+	}
+}

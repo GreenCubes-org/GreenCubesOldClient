@@ -1,0 +1,46 @@
+package net.minecraft.src;
+
+import java.io.File;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
+
+import net.minecraft.client.Minecraft;
+
+public class ThreadReplayLoading extends Thread {
+
+	private GuiLoadReplay gui;
+	private Minecraft mc;
+	private File folder;
+	
+	public ThreadReplayLoading(GuiLoadReplay guiLoadReplay, Minecraft minecraft, File folder) {
+		this.gui = guiLoadReplay;
+		this.mc = minecraft;
+		this.folder = folder;
+	}
+	
+	public void run() {
+		try {
+			gui.clientHandler = new NetClientHandlerReplay(mc, folder));
+			if(gui.cancelled)
+				return;
+			GuiConnecting.getNetClientHandler(connectingGui).addToSendQueue(new Packet2Handshake(mc.session.username, NetClientHandler.gcProtocol));
+		} catch (UnknownHostException unknownhostexception) {
+			if(GuiConnecting.isCancelled(connectingGui)) {
+				return;
+			}
+			mc.displayGuiScreen(new GuiDisconnected("connect.failed", "disconnect.genericReason", new Object[]{(new StringBuilder()).append("Unknown host '").append(hostName).append("'").toString()}));
+		} catch (ConnectException connectexception) {
+			if(GuiConnecting.isCancelled(connectingGui)) {
+				return;
+			}
+			mc.displayGuiScreen(new GuiDisconnected("connect.failed", "disconnect.genericReason", new Object[]{connectexception.getMessage()}));
+		} catch (Exception exception) {
+			if(GuiConnecting.isCancelled(connectingGui)) {
+				return;
+			}
+			exception.printStackTrace();
+			mc.displayGuiScreen(new GuiDisconnected("connect.failed", "disconnect.genericReason", new Object[]{exception.toString()}));
+		}
+	}
+
+}

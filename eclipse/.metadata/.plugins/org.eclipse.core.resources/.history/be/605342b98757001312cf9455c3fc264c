@@ -1,0 +1,14 @@
+package net.minecraft.src;
+
+public class ItemCounter extends Item {
+
+	public ItemCounter(int i) {
+		super(i);
+		setMaxStackSize(1);
+	}
+	
+	public String getTranslatedName(ItemStack itemstack) {
+		return new StringBuilder().append(StringTranslate.getInstance().translateNamedKey(getUntranslatedName(itemstack))).toString().trim();
+	}
+
+}

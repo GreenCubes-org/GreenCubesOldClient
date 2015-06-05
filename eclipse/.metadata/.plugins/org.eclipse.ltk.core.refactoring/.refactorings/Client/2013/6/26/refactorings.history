@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;flag&apos; in &apos;net.minecraft.src.World.rayTraceBlocks_do_do(...)&apos; to &apos;traceLiquids&apos;&#x0D;&#x0A;- Original project: &apos;Client&apos;&#x0D;&#x0A;- Original element: &apos;net.minecraft.src.World.rayTraceBlocks_do_do(Vec3D, Vec3D, boolean, boolean).flag&apos;&#x0D;&#x0A;- Renamed element: &apos;flag&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;flag&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;net.minecraft.src{World.java[World~rayTraceBlocks_do_do~QVec3D;~QVec3D;~Z~Z@flag!20882!20893!20890!20893!Z!0!true" name="traceLiquids" references="true" stamp="1372250482450" version="1.0"/>
+</session>

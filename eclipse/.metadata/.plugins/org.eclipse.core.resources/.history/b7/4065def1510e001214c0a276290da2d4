@@ -1,0 +1,781 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) braces deadcode fieldsfirst 
+
+package net.minecraft.src;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.JTextPane;
+
+import org.lwjgl.opengl.Display;
+
+import net.minecraft.client.Minecraft;
+
+// Referenced classes of package net.minecraft.src:
+//            EntityPlayer, MouseFilter, Session, MovementInput, 
+//            PlayerController, AchievementList, StatFileWriter, GuiAchievement, 
+//            World, SoundManager, Potion, PotionEffect, 
+//            AxisAlignedBB, FoodStats, PlayerCapabilities, GuiWinGame, 
+//            ItemStack, Item, NBTTagCompound, GuiEditSign, 
+//            GuiChest, GuiCrafting, GuiEnchantment, GuiFurnace, 
+//            GuiBrewingStand, GuiDispenser, EntityCrit2FX, EffectRenderer, 
+//            EntityPickupFX, InventoryPlayer, DamageSource, GuiIngame, 
+//            StatBase, Achievement, MathHelper, TileEntitySign, 
+//            IInventory, TileEntityFurnace, TileEntityBrewingStand, TileEntityDispenser, 
+//            Entity
+
+public class EntityPlayerSP extends EntityPlayer {
+
+	public MovementInput movementInput;
+	protected Minecraft mc;
+	protected int sprintToggleTimer;
+	public int sprintingTicksLeft;
+	public float renderArmYaw;
+	public float renderArmPitch;
+	public float prevRenderArmYaw;
+	public float prevRenderArmPitch;
+	private MouseFilter field_21903_bJ;
+	private MouseFilter field_21904_bK;
+	private MouseFilter field_21902_bL;
+	public PlayerHelper ph;
+	public boolean multiplayer;
+	public boolean phexists;
+	public static Object MESSAGESHOWN;
+	public static Object STARTUP;
+	public String curmcversion;
+	public static final String MCVERSION = "GreenCubes";
+	public static final SPCVersion SPCVERSION = new SPCVersion("Single Player Commands", "3.0.1", new Date(0x1340dc29478L));
+	public Vector missingRequiredClasses;
+	public Vector missingOptionalClasses;
+
+	public EntityPlayerSP(Minecraft minecraft, World world, Session session, int i) {
+		super(world);
+		sprintToggleTimer = 0;
+		sprintingTicksLeft = 0;
+		field_21903_bJ = new MouseFilter();
+		field_21904_bK = new MouseFilter();
+		field_21902_bL = new MouseFilter();
+		mc = minecraft;
+		dimension = i;
+		if(session != null && session.username != null && session.username.length() > 0) {
+			skinUrl = (new StringBuilder()).append("http://greenusercontent.net/mc/skins/").append(session.username).append(".png").toString();
+		}
+		username = session.username;
+		initPlayerHelper(session);
+		phexists = true;
+	}
+
+	public void updateCloak() {
+		playerCloakUrl = (new StringBuilder()).append("http://greenusercontent.net/mc/capes/").append(username).append(".png").toString();
+		cloakUrl = playerCloakUrl;
+	}
+
+	public void moveEntity(double d, double d1, double d2) {
+		if(canRunSPC() && ph.moveplayer && !ph.movecamera && (mc.renderViewEntity instanceof SPCEntityCamera)) {
+			((SPCEntityCamera) mc.renderViewEntity).setCamera(0.0D, 0.0D, 0.0D, ph.freezecamyaw, ph.freezecampitch);
+		} else {
+			if(canRunSPC() && ph.noClip) {
+				posX += d;
+				posY += d1;
+				posZ += d2;
+				return;
+			}
+			if(canRunSPC() && (mc.renderViewEntity instanceof SPCEntityCamera)) {
+				((SPCEntityCamera) mc.renderViewEntity).setCamera(d, d1, d2, rotationYaw, rotationPitch);
+				return;
+			}
+		}
+		super.moveEntity(d, d1, d2);
+	}
+
+	public void updateEntityActionState() {
+		super.updateEntityActionState();
+		moveStrafing = movementInput.moveStrafe;
+		moveForward = movementInput.moveForward;
+		isJumping = movementInput.jump;
+		prevRenderArmYaw = renderArmYaw;
+		prevRenderArmPitch = renderArmPitch;
+		renderArmPitch += (double) (rotationPitch - renderArmPitch) * 0.5D;
+		renderArmYaw += (double) (rotationYaw - renderArmYaw) * 0.5D;
+	}
+
+	public void onLivingUpdate() {
+		if(canRunSPC() && ph.sprinting) {
+			setSprinting(true);
+		} else if(sprintingTicksLeft > 0) {
+			sprintingTicksLeft--;
+			if(sprintingTicksLeft == 0) {
+				setSprinting(false);
+			}
+		}
+		if(sprintToggleTimer > 0) {
+			sprintToggleTimer--;
+		}
+		if(mc.playerController.func_35643_e()) {
+			posX = posZ = 0.5D;
+			posX = 0.0D;
+			posZ = 0.0D;
+			rotationYaw = (float) ticksExisted / 12F;
+			rotationPitch = 10F;
+			posY = 68.5D;
+			return;
+		}
+		if(!mc.statFileWriter.hasAchievementUnlocked(AchievementList.openInventory)) {
+			mc.guiAchievement.queueAchievementInformation(AchievementList.openInventory);
+		}
+		prevTimeInPortal = timeInPortal;
+		if(inPortal) {
+			if(!worldObj.multiplayerWorld && ridingEntity != null) {
+				mountEntity(null);
+			}
+			if(mc.currentScreen != null) {
+				mc.displayGuiScreen(null);
+			}
+			if(timeInPortal == 0.0F) {
+				mc.sndManager.playSoundFX("portal.trigger", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+			}
+			timeInPortal += 0.0125F;
+			if(timeInPortal >= 1.0F) {
+				timeInPortal = 1.0F;
+				if(!worldObj.multiplayerWorld) {
+					timeUntilPortal = 10;
+					mc.sndManager.playSoundFX("portal.travel", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+					byte byte0 = 0;
+					if(dimension == -1) {
+						byte0 = 0;
+					} else {
+						byte0 = -1;
+					}
+					mc.usePortal(byte0);
+					triggerAchievement(AchievementList.portal);
+				}
+			}
+			inPortal = false;
+		} else if(isPotionActive(Potion.potionConfusion) && getActivePotionEffect(Potion.potionConfusion).getDuration() > 60) {
+			timeInPortal += 0.006666667F;
+			if(timeInPortal > 1.0F) {
+				timeInPortal = 1.0F;
+			}
+		} else {
+			if(timeInPortal > 0.0F) {
+				timeInPortal -= 0.05F;
+			}
+			if(timeInPortal < 0.0F) {
+				timeInPortal = 0.0F;
+			}
+		}
+		if(timeUntilPortal > 0) {
+			timeUntilPortal--;
+		}
+		boolean flag = movementInput.jump;
+		float f = 0.8F;
+		boolean flag1 = movementInput.moveForward >= f;
+		movementInput.updatePlayerMoveState(this);
+		if(isUsingItem()) {
+			movementInput.moveStrafe *= 0.2F;
+			movementInput.moveForward *= 0.2F;
+			sprintToggleTimer = 0;
+		}
+		if(movementInput.sneak && ySize < 0.2F) {
+			ySize = 0.2F;
+		}
+		pushOutOfBlocks(posX - (double) width * 0.34999999999999998D, boundingBox.minY + 0.5D, posZ + (double) width * 0.34999999999999998D);
+		pushOutOfBlocks(posX - (double) width * 0.34999999999999998D, boundingBox.minY + 0.5D, posZ - (double) width * 0.34999999999999998D);
+		pushOutOfBlocks(posX + (double) width * 0.34999999999999998D, boundingBox.minY + 0.5D, posZ - (double) width * 0.34999999999999998D);
+		pushOutOfBlocks(posX + (double) width * 0.34999999999999998D, boundingBox.minY + 0.5D, posZ + (double) width * 0.34999999999999998D);
+		boolean flag2 = (float) getFoodStats().getFoodLevel() > 6F;
+		if(onGround && !flag1 && movementInput.moveForward >= f && !isSprinting() && flag2 && !isUsingItem() && !isPotionActive(Potion.potionBlindness)) {
+			if(sprintToggleTimer == 0) {
+				sprintToggleTimer = 7;
+			} else {
+				setSprinting(true);
+				sprintToggleTimer = 0;
+			}
+		}
+		if(isSneaking()) {
+			sprintToggleTimer = 0;
+		}
+		if(isSprinting() && (movementInput.moveForward < f || isCollidedHorizontally || !flag2)) {
+			setSprinting(false);
+		}
+		if(capabilities.allowFlying && !flag && movementInput.jump) {
+			if(flyToggleTimer == 0) {
+				flyToggleTimer = 7;
+			} else {
+				capabilities.isFlying = !capabilities.isFlying;
+				flyToggleTimer = 0;
+			}
+		}
+		if(capabilities.isFlying) {
+			if(movementInput.sneak) {
+				motionY -= 0.14999999999999999D;
+			}
+			if(movementInput.jump) {
+				motionY += 0.14999999999999999D;
+			}
+		} else if(canRunSPC() && ph.flying && ph.flymode.equalsIgnoreCase("minecraft") && !capabilities.isFlying) {
+			if(movementInput.sneak) {
+				motionY -= 0.29999999999999999D;
+			}
+			if(movementInput.jump) {
+				motionY += 0.29999999999999999D;
+			}
+		}
+		super.onLivingUpdate();
+		if(onGround && capabilities.isFlying) {
+			capabilities.isFlying = false;
+		}
+	}
+
+	public void func_40182_b(int i) {
+		if(!worldObj.multiplayerWorld) {
+			if(dimension == 1 && i == 1) {
+				triggerAchievement(AchievementList.theEnd2);
+				mc.displayGuiScreen(new GuiWinGame());
+			} else {
+				triggerAchievement(AchievementList.theEnd);
+				mc.sndManager.playSoundFX("portal.travel", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+				mc.usePortal(1);
+			}
+		}
+	}
+
+	public float getFOVMultiplier() {
+		float f = 1.0F;
+		if(capabilities.isFlying) {
+			f *= 1.1F;
+		}
+		f *= ((landMovementFactor * func_35166_t_()) / speedOnGround + 1.0F) / 2.0F;
+		if(isUsingItem() && getItemInUse().getItem() instanceof ItemBow) {
+			int i = getItemInUseDuration();
+			float f1 = (float) i / 20F;
+			if(f1 > 1.0F) {
+				f1 = 1.0F;
+			} else {
+				f1 *= f1;
+			}
+			f *= 1.0F - f1 * 0.15F;
+		}
+		return f;
+	}
+
+	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+		super.writeEntityToNBT(nbttagcompound);
+		nbttagcompound.setInteger("Score", score);
+		if(canRunSPC()) {
+			ph.writeWaypointsToNBT(((SaveHandler) mc.theWorld.saveHandler).getSaveDirectory());
+		}
+	}
+
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+		super.readEntityFromNBT(nbttagcompound);
+		score = nbttagcompound.getInteger("Score");
+		if(canRunSPC()) {
+			ph.readWaypointsFromNBT(((SaveHandler) mc.theWorld.saveHandler).getSaveDirectory());
+		}
+	}
+
+	public void closeScreen() {
+		super.closeScreen();
+		mc.displayGuiScreen(null);
+	}
+
+	public void displayGUIEditSign(TileEntitySign tileentitysign) {
+		mc.displayGuiScreen(new GuiEditSign(tileentitysign));
+	}
+
+	public void displayGUIChest(IInventory iinventory) {
+		mc.displayGuiScreen(new GuiChest(inventory, iinventory));
+	}
+
+	public void displayWorkbenchGUI(int i, int j, int k) {
+		mc.displayGuiScreen(new GuiCrafting(inventory, worldObj, i, j, k));
+	}
+
+	public void func_40181_c(int i, int j, int k) {
+		mc.displayGuiScreen(new GuiEnchantment(inventory, worldObj, i, j, k));
+	}
+
+	public void displayGUIFurnace(TileEntityFurnace tileentityfurnace) {
+		mc.displayGuiScreen(new GuiFurnace(inventory, tileentityfurnace));
+	}
+
+	public void func_40180_a(TileEntityBrewingStand tileentitybrewingstand) {
+		mc.displayGuiScreen(new GuiBrewingStand(inventory, tileentitybrewingstand));
+	}
+
+	public void displayGUIDispenser(TileEntityDispenser tileentitydispenser) {
+		mc.displayGuiScreen(new GuiDispenser(inventory, tileentitydispenser));
+	}
+
+	public void onCriticalHit(Entity entity) {
+		mc.effectRenderer.addEffect(new EntityCrit2FX(mc.theWorld, entity));
+	}
+
+	public void func_40183_c(Entity entity) {
+		EntityCrit2FX entitycrit2fx = new EntityCrit2FX(mc.theWorld, entity, "magicCrit");
+		mc.effectRenderer.addEffect(entitycrit2fx);
+	}
+
+	public void onItemPickup(Entity entity, int i) {
+		mc.effectRenderer.addEffect(new EntityPickupFX(mc.theWorld, entity, this, -0.5F));
+	}
+
+	public int getPlayerArmorValue() {
+		return inventory.getTotalArmorValue();
+	}
+
+	public void sendChatMessage(String s) {
+		if(canRunSPC()) {
+			ph.processCommand(s);
+		}
+	}
+
+	public boolean isSneaking() {
+		return movementInput.sneak && !sleeping;
+	}
+
+	public void setHealth(int i) {
+		int j = getEntityHealth() - i;
+		if(j <= 0) {
+			setEntityHealth(i);
+			if(j < 0) {
+				heartsLife = heartsHalvesLife / 2;
+			}
+		} else {
+			naturalArmorRating = j;
+			setEntityHealth(getEntityHealth());
+			heartsLife = heartsHalvesLife;
+			damageEntity(DamageSource.generic, j);
+			hurtTime = maxHurtTime = 10;
+		}
+	}
+
+	public void respawnPlayer() {
+		mc.respawn(false, 0, false);
+	}
+
+	public void func_6420_o() {
+	}
+
+	public void addChatMessage(String s) {
+		mc.ingameGUI.addChatMessageTranslate(s);
+	}
+
+	public void addStat(StatBase statbase, int i) {
+		if(statbase == null) {
+			return;
+		}
+		if(statbase.isAchievement()) {
+			Achievement achievement = (Achievement) statbase;
+			if(achievement.parentAchievement == null || mc.statFileWriter.hasAchievementUnlocked(achievement.parentAchievement)) {
+				if(!mc.statFileWriter.hasAchievementUnlocked(achievement)) {
+					mc.guiAchievement.queueTakenAchievement(achievement);
+				}
+				mc.statFileWriter.readStat(statbase, i);
+			}
+		} else {
+			mc.statFileWriter.readStat(statbase, i);
+		}
+	}
+
+	private boolean isBlockTranslucent(int i, int j, int k) {
+		return worldObj.isBlockNormalCube(i, j, k);
+	}
+
+	protected boolean pushOutOfBlocks(double d, double d1, double d2) {
+		int i = MathHelper.floor_double(d);
+		int j = MathHelper.floor_double(d1);
+		int k = MathHelper.floor_double(d2);
+		double d3 = d - (double) i;
+		double d4 = d2 - (double) k;
+		if(isBlockTranslucent(i, j, k) || isBlockTranslucent(i, j + 1, k)) {
+			boolean flag = !isBlockTranslucent(i - 1, j, k) && !isBlockTranslucent(i - 1, j + 1, k);
+			boolean flag1 = !isBlockTranslucent(i + 1, j, k) && !isBlockTranslucent(i + 1, j + 1, k);
+			boolean flag2 = !isBlockTranslucent(i, j, k - 1) && !isBlockTranslucent(i, j + 1, k - 1);
+			boolean flag3 = !isBlockTranslucent(i, j, k + 1) && !isBlockTranslucent(i, j + 1, k + 1);
+			byte byte0 = -1;
+			double d5 = 9999D;
+			if(flag && d3 < d5) {
+				d5 = d3;
+				byte0 = 0;
+			}
+			if(flag1 && 1.0D - d3 < d5) {
+				d5 = 1.0D - d3;
+				byte0 = 1;
+			}
+			if(flag2 && d4 < d5) {
+				d5 = d4;
+				byte0 = 4;
+			}
+			if(flag3 && 1.0D - d4 < d5) {
+				double d6 = 1.0D - d4;
+				byte0 = 5;
+			}
+			float f = 0.1F;
+			if(byte0 == 0) {
+				motionX = -f;
+			}
+			if(byte0 == 1) {
+				motionX = f;
+			}
+			if(byte0 == 4) {
+				motionZ = -f;
+			}
+			if(byte0 == 5) {
+				motionZ = f;
+			}
+		}
+		return false;
+	}
+
+	public void setSprinting(boolean flag) {
+		super.setSprinting(flag);
+		if(!flag) {
+			sprintingTicksLeft = 0;
+		} else {
+			sprintingTicksLeft = 600;
+		}
+	}
+
+	public void setXPStats(float f, int i, int j) {
+		currentXP = f;
+		totalXP = i;
+		playerLevel = j;
+	}
+
+	public boolean isEntityInsideOpaqueBlock() {
+		if(canRunSPC() && ph.noClip) {
+			return false;
+		} else {
+			return super.isEntityInsideOpaqueBlock();
+		}
+	}
+
+	protected String getHurtSound() {
+		if(multiplayer || canRunSPC() && ph.damage) {
+			return super.getHurtSound();
+		} else {
+			return "";
+		}
+	}
+
+	public float getCurrentPlayerStrVsBlock(Block block) {
+		if(canRunSPC() && ph.instant) {
+			return 3.402823E+038F;
+		} else {
+			return super.getCurrentPlayerStrVsBlock(block);
+		}
+	}
+
+	public boolean canHarvestBlock(Block block) {
+		if(canRunSPC() && ph.instant) {
+			return true;
+		} else {
+			return super.canHarvestBlock(block);
+		}
+	}
+
+	protected void fall(float f) {
+		if(canRunSPC() && !ph.falldamage) {
+			return;
+		} else {
+			super.fall(f);
+			return;
+		}
+	}
+
+	public void addExhaustion(float f) {
+		if(canRunSPC() && (ph.flying || ph.disableHunger)) {
+			return;
+		} else {
+			super.addExhaustion(f);
+			return;
+		}
+	}
+
+	protected void jump() {
+		if(canRunSPC() && ph.gravity > 1.0D) {
+			motionY = 0.4199999868869782D * ph.gravity;
+			return;
+		} else {
+			super.jump();
+			return;
+		}
+	}
+
+	public void moveFlying(float f, float f1, float f2) {
+		if(!canRunSPC() || ph.speed <= 1.0D) {
+			super.moveFlying(f, f1, f2);
+			return;
+		}
+		float f3 = MathHelper.sqrt_float(f * f + f1 * f1);
+		if(f3 < 0.01F) {
+			return;
+		}
+		if(f3 < 1.0F) {
+			f3 = 1.0F;
+		}
+		f3 = f2 / f3;
+		f *= f3;
+		f1 *= f3;
+		float f4 = MathHelper.sin((rotationYaw * 3.141593F) / 180F);
+		float f5 = MathHelper.cos((rotationYaw * 3.141593F) / 180F);
+		double d = canRunSPC() ? ph.speed : 1.0D;
+		motionX += (double) (f * f5 - f1 * f4) * d;
+		motionZ += (double) (f1 * f5 + f * f4) * d;
+	}
+
+	public void onUpdate() {
+		if(canRunSPC()) {
+			ph.beforeUpdate();
+			super.onUpdate();
+			ph.afterUpdate();
+		} else {
+			super.onUpdate();
+		}
+	}
+
+	protected void damageEntity(DamageSource damagesource, int i) {
+		if(canRunSPC() && !ph.damage) {
+			return;
+		} else {
+			super.damageEntity(damagesource, i);
+			return;
+		}
+	}
+
+	public void setEntityDead() {
+		if(canRunSPC()) {
+			ph.setCurrentPosition();
+		}
+		super.setEntityDead();
+	}
+
+	public double getDistanceSqToEntity(Entity entity) {
+		if(canRunSPC() && (!ph.mobdamage || ph.mobsfrozen)) {
+			return 1.7976931348623157E+308D;
+		} else {
+			return super.getDistanceSqToEntity(entity);
+		}
+	}
+
+	public void onDeath(DamageSource damagesource) {
+		if(canRunSPC() && ph.keepitems && PlayerHelper.INV_BEFORE_DEATH != null) {
+			for(int i = 0; i < inventory.armorInventory.length; i++) {
+				PlayerHelper.INV_BEFORE_DEATH.armorInventory[i] = inventory.armorItemInSlot(i);
+			}
+
+			for(int j = 0; j < inventory.mainInventory.length; j++) {
+				PlayerHelper.INV_BEFORE_DEATH.mainInventory[j] = inventory.mainInventory[j];
+			}
+
+			ph.destroyInventory();
+		}
+		super.onDeath(damagesource);
+	}
+
+	public void attackTargetEntityWithCurrentItem(Entity entity) {
+		if(canRunSPC() && ph.instantkill) {
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(this), 0x7fffffff);
+			return;
+		}
+		if(canRunSPC() && ph.criticalHit) {
+			double d = motionY;
+			boolean flag = onGround;
+			boolean flag1 = inWater;
+			float f = fallDistance;
+			super.motionY = -0.10000000000000001D;
+			super.inWater = false;
+			super.onGround = false;
+			super.fallDistance = 0.1F;
+			System.out.println("Called - critical hit!");
+			super.attackTargetEntityWithCurrentItem(entity);
+			motionY = d;
+			onGround = flag;
+			inWater = flag1;
+			fallDistance = f;
+			return;
+		} else {
+			super.attackTargetEntityWithCurrentItem(entity);
+			return;
+		}
+	}
+
+	public boolean handleWaterMovement() {
+		if(canRunSPC() && !ph.watermovement) {
+			return false;
+		} else {
+			return super.handleWaterMovement();
+		}
+	}
+
+	public boolean handleLavaMovement() {
+		if(canRunSPC() && !ph.watermovement) {
+			return false;
+		} else {
+			return super.handleLavaMovement();
+		}
+	}
+
+	public void dropCurrentStack() {
+		ItemStack prev = inventory.mainInventory[inventory.currentItem];
+		dropPlayerItemWithRandomChoice(prev, false);
+		inventory.mainInventory[inventory.currentItem] = null;
+		int slot = inventory.getInventorySlotContainItemWithData(prev.itemID, prev.getItemDamage());
+		if(slot != -1) {
+			inventory.mainInventory[inventory.currentItem] = inventory.mainInventory[slot];
+			inventory.mainInventory[slot] = null;
+		}
+	}
+
+	public void dropPlayerItemWithRandomChoice(ItemStack itemstack, boolean flag) {
+		if(canRunSPC()) {
+			ph.givePlayerItemNaturally(itemstack);
+			return;
+		} else {
+			super.dropPlayerItemWithRandomChoice(itemstack, flag);
+			return;
+		}
+	}
+
+	public MovingObjectPosition rayTrace(double d, float f) {
+		if(canRunSPC() && d == (double) mc.playerController.getBlockReachDistance()) {
+			d = ph.reachdistance;
+		}
+		return super.rayTrace(d, f);
+	}
+
+	public boolean isOnLadder() {
+		if(canRunSPC() && ph.ladderMode && isCollidedHorizontally) {
+			return true;
+		} else {
+			return super.isOnLadder();
+		}
+	}
+
+	public void showErrorFrame() {
+		JFrame jframe = new JFrame();
+		JTextPane jtextpane = new JTextPane();
+		jframe.setBackground(Color.lightGray);
+		jtextpane.setContentType("text/html");
+		String s = "<html><p>";
+		s = s.concat((new StringBuilder()).append("Single Player Commands v").append(SPCVERSION.getVersion()).append(" for Minecraft version ").append("GreenCubes").append("<br />").toString());
+		s = s.concat((new StringBuilder()).append("Running Minecraft version ").append(curmcversion).append("<br />").toString());
+		s = s.concat("You are missing the following class files necessary for <br />Single Player Commands to operate:<br /><br /><ul>");
+		for(Iterator iterator = missingRequiredClasses.iterator(); iterator.hasNext();) {
+			String s1 = (String) iterator.next();
+			s = s.concat((new StringBuilder()).append("<li>").append(s1).append("</li>").toString());
+		}
+
+		s = s.concat("</ul><br />");
+		s = s.concat("Make sure that all of the class files listed above are in minecraft.jar.<br />");
+		s = s.concat("If they are not, copy them from your SPC download folder into minecraft.jar<br />and try running Minecraft again.<br />");
+		s = s.concat("If errors persist, copy and paste this error log to <a href=\"http://bit.ly/spcmod\">http://bit.ly/spcmod</a> for help.");
+		s = s.concat("</p></html>");
+		jtextpane.setText(s);
+		jframe.setLayout(new BorderLayout());
+		jframe.add(jtextpane, "Center");
+		jframe.pack();
+		jframe.setVisible(true);
+		addChatMessage("\2474SPC Error: Not installed properly.");
+		addChatMessage("\2474Check dialog window for more information.");
+		MESSAGESHOWN = new Object();
+	}
+
+	public void initPlayerHelper(Session session) {
+		ph = new PlayerHelper(mc, this);
+		ph.readWaypointsFromNBT(ph.getWorldDir());
+		multiplayer = mc.isMultiplayerWorld();
+		if(STARTUP == null && !multiplayer) {
+			ph.sendMessage((new StringBuilder()).append("\2478Single Player Commands (").append(SPCVERSION.getVersion()).append(") - http://bit.ly/spcmod").toString());
+			Calendar calendar = Calendar.getInstance();
+			if(calendar.get(5) == 25 && calendar.get(2) == 11) {
+				String s = username != null && !username.equalsIgnoreCase("") ? (new StringBuilder()).append("Dear ").append(username).append(", ").toString() : "";
+				ph.sendMessage((new StringBuilder()).append("\2474").append(s).append("Merry Christmas! From simo_415").toString());
+			} else if(calendar.get(5) == 6 && calendar.get(2) == 11) {
+				ph.sendMessage("\2475Happy birthday Single Player Commands. Now a year older!");
+			}
+			STARTUP = new Object();
+		}
+		if(session != null && session.username != null && session.username.length() > 0) {
+			ph.sessionusername = session.username;
+		}
+	}
+
+	public boolean checkClasses() {
+		missingRequiredClasses = new Vector();
+		missingOptionalClasses = new Vector();
+		phexists = true;
+		curmcversion = Display.getTitle().split(" ")[Display.getTitle().split(" ").length - 1];
+		if(!curmcversion.equalsIgnoreCase("for GreenCubes")) {
+			addChatMessage((new StringBuilder()).append("\2474Single Player Commands v").append(SPCVERSION.getVersion()).append(" is not compatible with Minecraft v").append(curmcversion).toString());
+			addChatMessage("\2474Visit http://bit.ly/spcmod to download the correct version.");
+			System.err.println((new StringBuilder()).append("Single Player Commands v").append(SPCVERSION.getVersion()).append(" is not compatible with Minecraft v").append(curmcversion).toString());
+			System.err.println("Visit http://bit.ly/spcmod to download the correct version.");
+		}
+		Package package1 = (net.minecraft.src.EntityPlayerSP.class).getPackage();
+		String s = package1 != null ? (new StringBuilder()).append(package1.getName()).append(".").toString() : "";
+		String as[] = {"PlayerHelper", "Settings", "SPCPlugin", "SPCPluginManager", "SPCCommand"};
+		String as1[] = {"spc_WorldEdit", "SPCLocalConfiguration", "SPCLocalPlayer", "SPCLocalWorld", "SPCServerInterface", "WorldEditPlugin"};
+		String as2[] = as;
+		int i = as2.length;
+		for(int j = 0; j < i; j++) {
+			String s3 = as2[j];
+			try {
+				Class.forName((new StringBuilder()).append(s).append(s3).toString());
+			} catch (Throwable throwable) {
+				missingRequiredClasses.add(s3);
+			}
+		}
+
+		as2 = as1;
+		i = as2.length;
+		for(int k = 0; k < i; k++) {
+			String s4 = as2[k];
+			try {
+				Class.forName((new StringBuilder()).append(s).append(s4).toString());
+			} catch (Throwable throwable1) {
+				missingOptionalClasses.add(s4);
+			}
+		}
+
+		if(missingRequiredClasses.size() != 0) {
+			addChatMessage("\2474You are missing these class files: ");
+			String s1 = "";
+			for(Iterator iterator = missingRequiredClasses.iterator(); iterator.hasNext();) {
+				String s2 = (String) iterator.next();
+				s1 = (new StringBuilder()).append(s1).append(s2).append(", ").toString();
+			}
+
+			addChatMessage((new StringBuilder()).append("\2474").append(s1).toString());
+			addChatMessage("\2474Please try reinstalling.");
+			phexists = false;
+		}
+		return phexists;
+	}
+
+	public boolean canRunSPC() {
+		return phexists && !multiplayer;
+	}
+
+	// GreenCubes Books start
+	public void displayGUIBookShelf(int inventoryType, IInventory iinventory) {
+		mc.displayGuiScreen(new GuiBookShelf(mc, inventoryType, inventory, iinventory));
+	}
+
+	public void displayGUIGift(IInventory iinventory, String title, boolean editable) {
+		mc.displayGuiScreen(new GuiGift(inventory, iinventory, title, editable));
+	}
+
+	// GreenCubes end
+
+}

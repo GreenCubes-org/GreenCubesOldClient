@@ -1,0 +1,26 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) braces deadcode fieldsfirst 
+
+package net.minecraft.src;
+
+// Referenced classes of package net.minecraft.src:
+//            StatBase, StatList, IStatType
+
+public class StatBasic extends StatBase {
+
+	public StatBasic(int i, String s, IStatType istattype) {
+		super(i, s, istattype);
+	}
+
+	public StatBasic(int i, String s) {
+		super(i, s);
+	}
+
+	@Override
+	public StatBase registerStat() {
+		super.registerStat();
+		StatList.generalStats.add(this);
+		return this;
+	}
+}

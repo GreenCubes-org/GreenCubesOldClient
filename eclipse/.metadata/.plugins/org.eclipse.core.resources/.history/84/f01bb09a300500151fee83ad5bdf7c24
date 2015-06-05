@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class ItemArmor extends ItemWearable {
+
+	public ItemArmor(int i, EnumArmorMaterial enumarmormaterial, int j, int k) {
+		super(i, enumarmormaterial, j, k);
+		// TODO Auto-generated constructor stub
+	}
+
+}

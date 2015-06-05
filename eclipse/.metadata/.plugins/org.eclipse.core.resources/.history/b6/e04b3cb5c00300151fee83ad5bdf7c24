@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class RenderSatyr extends RenderLiving {
+
+	public RenderSatyr(ModelBase modelbase, float f) {
+		super(modelbase, f);
+		// TODO Auto-generated constructor stub
+	}
+
+}

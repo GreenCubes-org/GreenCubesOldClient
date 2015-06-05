@@ -1,0 +1,5 @@
+package jme3;
+
+public class BombControl {
+
+}

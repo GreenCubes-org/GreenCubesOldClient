@@ -1,0 +1,17 @@
+package net.minecraft.src;
+
+public class ItemArmor extends ItemWearable {
+	
+	private final EnumArmorMaterial material;
+	public final int armorType;
+	public final int damageReduceAmount;
+
+	public ItemArmor(int id, EnumArmorMaterial material, int slot, int grade) {
+		super(id, slot);
+		this.material = material;
+		this.armorType = grade;
+		this.damageReduceAmount = material.damageReduction(grade);
+		setMaxDamage(enumarmormaterial.durability(grade));
+	}
+
+}

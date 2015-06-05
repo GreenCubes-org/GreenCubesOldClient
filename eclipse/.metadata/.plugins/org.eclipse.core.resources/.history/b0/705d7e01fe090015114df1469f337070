@@ -1,0 +1,25 @@
+package net.minecraft.src;
+
+public class BlockTransparentGlass extends BlockGlassNew {
+
+	public final int[][] colors;
+	private int currentPass;
+	
+	public BlockTransparentGlass(int id, int[][] colors) {
+		super(id, 49, Material.glass, false);
+		this.colors = colors;
+		multipassBlocks[id] = true;
+	}
+
+	@Override
+	public void setUpPass(int pass) {
+		this.currentPass = pass;
+	}
+	
+	@Override
+	public int getBlockTexture(IBlockAccess iblockaccess, int x, int y, int z, int i) {
+		if(currentPass == 1)
+			return colors[iblockaccess.getBlockMetadata(x, y, z) % colors.length][0];
+		return super.getBlockTexture(iblockaccess, x, y, z, i);
+	}
+}

@@ -1,0 +1,38 @@
+package net.minecraft.src;
+
+import java.io.File;
+import java.net.ConnectException;
+import java.net.UnknownHostException;
+
+import net.minecraft.client.Minecraft;
+
+public class ThreadReplayLoading extends Thread {
+
+	private GuiLoadReplay gui;
+	private Minecraft mc;
+	private File folder;
+	
+	public ThreadReplayLoading(GuiLoadReplay guiLoadReplay, Minecraft minecraft, File folder) {
+		this.gui = guiLoadReplay;
+		this.mc = minecraft;
+		this.folder = folder;
+	}
+	
+	public void run() {
+		try {
+			gui.clientHandler = new NetClientHandlerReplay(mc, folder));
+			if(gui.cancelled)
+				return;
+		}catch (ConnectException connectexception) {
+			if(gui.cancelled)
+				return;
+			mc.displayGuiScreen(new GuiDisconnected("connect.failed", "disconnect.genericReason", new Object[]{connectexception.getMessage()}));
+		} catch (Exception exception) {
+			if(gui.cancelled)
+				return;
+			exception.printStackTrace();
+			mc.displayGuiScreen(new GuiDisconnected("connect.failed", "disconnect.genericReason", new Object[]{exception.toString()}));
+		}
+	}
+
+}

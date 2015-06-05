@@ -1,0 +1,9 @@
+package net.minecraft.src;
+
+public class ItemArrow extends Item {
+
+	public ItemArrow(int i, float damageMultipler) {
+		super(i);
+	}
+
+}
