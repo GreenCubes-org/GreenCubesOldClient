@@ -1,0 +1,42 @@
+package net.minecraft.src;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+/**
+ * GreenCubes
+ * Books mod
+ * @author Rena
+ *
+ */
+public class Packet223OpenBookshelf extends Packet {
+
+	public int windowId;
+	public int inventoryType;
+	public String windowTitle;
+	public int slotsCount;
+
+	@Override
+	public void readPacketData(DataInputStream datainputstream) throws IOException {
+		windowId = datainputstream.readByte();
+		inventoryType = datainputstream.readByte();
+		windowTitle = readString(datainputstream, 16);
+		slotsCount = datainputstream.readByte();
+	}
+
+	@Override
+	public void writePacketData(DataOutputStream dataoutputstream) throws IOException {
+	}
+
+	@Override
+	public void processPacket(NetHandler nethandler) {
+		nethandler.handleOpenBookShelf(this);
+	}
+
+	@Override
+	public int getPacketSize() {
+		return 3 + windowTitle.length();
+	}
+
+}

@@ -1,0 +1,22 @@
+package net.minecraft.src;
+
+import com.sk89q.worldedit.ServerInterface;
+
+public class SPCServerInterface extends ServerInterface {
+	public World world;
+
+	public SPCServerInterface(World world) {
+		this.world = world;
+	}
+
+	public boolean isValidMobType(String arg0) {
+		return true;
+	}
+
+	public int resolveItem(String arg0) {
+		return 0;
+	}
+
+	public void reload() {
+	}
+}

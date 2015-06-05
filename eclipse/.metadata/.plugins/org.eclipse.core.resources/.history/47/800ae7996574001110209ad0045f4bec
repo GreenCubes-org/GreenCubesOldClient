@@ -1,0 +1,463 @@
+package net.minecraft.src;
+
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
+
+/**
+ * GreenCubes
+ * @author Feyola
+ *
+ */
+
+public class mod_gc extends BaseMod {
+	
+	//private final RenderSlope renderSlope = new RenderSlope();
+	
+    //static Block BlockDirtSlope;
+	//public static Item ItemDirtSlopes;
+
+	public static int whiteStoneBrickTexture = ModLoader.addOverride("/terrain.png", "/gc_images/whitestonebrick.png");
+	public static int whiteStoneTexture = ModLoader.addOverride("/terrain.png", "/gc_images/whitestone.png");
+	public static int whiteStoneBrickCracked = ModLoader.addOverride("/terrain.png", "/gc_images/whitestonebrickcracked.png");
+	public static int whiteStoneBrickMossy = ModLoader.addOverride("/terrain.png", "/gc_images/whitestonebrickmossy.png");
+	public static int grassStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/grassstep.png");
+	public static int snowgrassStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/snowgrassstep.png");
+	public static int glassStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/glassstep.png");
+	public static int ironStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/ironstep.png");
+	public static int goldStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/goldstep.png");
+	public static int diamondStepTexture = ModLoader.addOverride("/terrain.png", "/gc_images/diamondstep.png");
+	public static int logslice = ModLoader.addOverride("/terrain.png", "/gc_images/logslice.png");
+	public static int glassHalfTexture = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf.png");
+	public static int ironHalfTexture = ModLoader.addOverride("/terrain.png", "/gc_images/ironhalf.png");
+	public static int goldHalfTexture = ModLoader.addOverride("/terrain.png", "/gc_images/goldhalf.png");
+	public static int diamondHalfTexture = ModLoader.addOverride("/terrain.png", "/gc_images/diamondhalf.png");
+	public static int stoneSlabHalfTexture = ModLoader.addOverride("/terrain.png", "/gc_images/slabhalf.png");
+	public static int bluetorchtexture = ModLoader.addOverride("/terrain.png", "/gc_images/bluetorch.png");
+	public static int grassstepoverlay = ModLoader.addOverride("/terrain.png", "/gc_images/grassstepoverlay.png");
+	public static int whiteFenceTexture = ModLoader.addOverride("/terrain.png", "/gc_images/whitefence.png");
+	public static int sakuralogside = ModLoader.addOverride("/terrain.png", "/gc_images/sakuralogside.png");
+	public static int sakuralog = ModLoader.addOverride("/terrain.png", "/gc_images/sakuralog.png");
+	public static int sakuralogslice = ModLoader.addOverride("/terrain.png", "/gc_images/sakuralogslice.png");
+	public static int sakuraFlowers = ModLoader.addOverride("/terrain.png", "/gc_images/sakuraflowers.png");
+	public static int sakuraFlowersDense = ModLoader.addOverride("/terrain.png", "/gc_images/sakuraflowersdense.png");
+	public static int sakuraSapling = ModLoader.addOverride("/terrain.png", "/gc_images/sakurasapling.png");
+	//public static int rainbow = ModLoader.addOverride("/terrain.png", "/gc_images/rainbow.png");
+	
+	public static int readableBookIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebook.png");
+	public static int readableBookGoldenIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebookgolden.png");
+	public static int readableBookDiamondIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebookdiamond.png");
+	public static int readableBookObsidianIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebookobsidian.png");
+	public static int readableBookLockedIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebooklocked.png");
+	public static int readableBookGoldenLockedIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebookgoldenlocked.png");
+	public static int readableBookDiamondLockedIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/readablebookdiamondlocked.png");
+	public static int limestoneTexture = ModLoader.addOverride("/terrain.png", "/gc_images/limestone.png");
+	public static int limestoneItemTexture = ModLoader.addOverride("/gui/items.png", "/gc_images/limestoneitem.png");
+	public static int slakedLimeTexture = ModLoader.addOverride("/gui/items.png", "/gc_images/slakedlime.png");
+	public static int whiteSignIcon = ModLoader.addOverride("/gui/items.png", "/gc_images/whitesignitem.png");
+	public static int sakurapetal1 = ModLoader.addOverride("/gui/items.png", "/gc_images/sakurapetal1.png");
+	public static int sakurapetal2 = ModLoader.addOverride("/gui/items.png", "/gc_images/sakurapetal2.png");
+	public static int sakurapetal3 = ModLoader.addOverride("/gui/items.png", "/gc_images/sakurapetal3.png");
+	//public static int bananaGreenItemTexture = ModLoader.addOverride("/gui/items.png", "/gc_images/bananagreenitem.png");
+	//public static int bananaItemTexture = ModLoader.addOverride("/gui/items.png", "/gc_images/bananaitem.png");
+	
+	public static final Block netherFenceGate = new BlockFenceGate(210, 224, Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("netherGate").setRequiresSelfNotify();
+	
+	public static Block blockGreenFlowers = new BlockGreenFlowers(213).setHardness(0.0F).setLightOpacity(0);
+	public static Block blockWhiteStone = new Block(1001, whiteStoneTexture, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("whiteStoneGC");
+	public static Block blockWhiteStoneBrick = new Block(1002, whiteStoneBrickTexture, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("whiteStoneBrick");
+	public static Block blockLimestone = new Block(1003, limestoneTexture, Material.rock).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundGravelFootstep).setBlockName("limestone");
+	public static Block blockWhiteStoneBrickCracked = new Block(1005, whiteStoneBrickCracked, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("blockWhiteStoneBrickCracked");
+	public static Block blockWhiteStoneBrickMossy = new Block(1004, whiteStoneBrickMossy, Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundStoneFootstep).setBlockName("blockWhiteStoneBrickMossy");
+	
+	public static Block blockStepWhiteStoneBrick = new BlockGreenStep(1010, whiteStoneBrickTexture, blockWhiteStoneBrick, false).setBlockName("whiteStoneBrickStep");
+	public static Block blockStepWhiteStone = new BlockGreenStep(1011, whiteStoneTexture, blockWhiteStone, false).setBlockName("whiteStoneStep");
+	public static Block blockStepLog = new BlockGreenStepLog(1012, Material.wood, Block.wood, false);
+	public static Block blockStepSnow = new BlockGreenStep(1013, Block.snow.blockIndexInTexture, Block.snow, false).setBlockName("snowStep");
+	public static Block blockStepNetherrack = new BlockGreenStep(1014, Block.netherrack.blockIndexInTexture, Block.netherrack, false).setBlockName("netherrackStep");
+	public static Block blockStepNetherBrick = new BlockGreenStep(1015, Block.netherBrick.blockIndexInTexture, Block.netherBrick, false).setBlockName("netherBrickStep");
+	public static Block blockStepDirt = new BlockGreenStep(1016, Block.dirt.blockIndexInTexture, Block.dirt, false).setBlockName("dirtStep");
+	public static Block blockStepGrass = new BlockGreenStepGrass(1017, Block.grass.blockIndexInTexture, Block.grass, false).setBlockName("grassStep");
+	public static Block blockStepGlass = new BlockGreenStepTextured(1018, Block.glass.blockIndexInTexture, glassStepTexture, Block.glass, false).setBlockName("glassStep");
+	public static Block blockStepObsidian = new BlockGreenStep(1019, Block.obsidian.blockIndexInTexture, Block.obsidian, false).setBlockName("obsidianStep");
+	public static Block blockStepLapis = new BlockGreenStep(1020, Block.blockLapis.blockIndexInTexture, Block.blockLapis, false).setBlockName("lapisStep");
+	public static Block blockStepMossyCobble = new BlockGreenStep(1021, Block.cobblestoneMossy.blockIndexInTexture, Block.cobblestoneMossy, false).setBlockName("mossyCobbleStep");
+	public static Block blockStepMossyBrick = new BlockGreenStep(1022, 100, Block.stoneBrick, false).setBlockName("mossyBrickStep");
+	public static Block blockStepCloth = new BlockStepCloth(1023, Material.cloth, false);
+	public static Block blockStepIron = new BlockGreenStepTextured(1024, Block.blockSteel.blockIndexInTexture, ironStepTexture, Block.blockSteel, false).setBlockName("ironStep");
+	public static Block blockStepGold = new BlockGreenStepTextured(1025, Block.blockGold.blockIndexInTexture, goldStepTexture, Block.blockGold, false).setBlockName("goldStep");
+	public static Block blockStepDiamond = new BlockGreenStepTextured(1026, Block.blockDiamond.blockIndexInTexture, diamondStepTexture, Block.blockDiamond, false).setBlockName("diamondStep");
+	public static Block blockStepStone = new BlockGreenStep(1027, Block.stone.blockIndexInTexture, Block.stone, false).setBlockName("stoneStep");
+	public static Block blockStepWhiteStoneBrickMossy = new BlockGreenStep(1029, whiteStoneBrickMossy, blockWhiteStone, false).setBlockName("whiteStoneBrickMossyStep");
+	
+	public static Block blockStepWhiteStoneBrickUp = new BlockGreenStep(1030, whiteStoneBrickTexture, blockWhiteStoneBrick, true).setBlockName("whiteStoneBrickStep");
+	public static Block blockStepWhiteStoneUp = new BlockGreenStep(1031, whiteStoneTexture, blockWhiteStone, true).setBlockName("whiteStoneStep");
+	public static Block blockStepLogUp = new BlockGreenStepLog(1032, Material.wood, Block.wood, true);
+	public static Block blockStepSnowUp = new BlockGreenStep(1033, Block.snow.blockIndexInTexture, Block.netherrack, true).setBlockName("snowStep");
+	public static Block blockStepNetherrackUp = new BlockGreenStep(1034, Block.netherrack.blockIndexInTexture, Block.netherrack, true).setBlockName("netherrackStep");
+	public static Block blockStepNetherBrickUp = new BlockGreenStep(1035, Block.netherBrick.blockIndexInTexture, Block.netherBrick, true).setBlockName("netherBrickStep");
+	public static Block blockStepDirtUp = new BlockGreenStep(1036, Block.dirt.blockIndexInTexture, Block.dirt, true).setBlockName("dirtStep");
+	public static Block blockStepGrassUp = new BlockGreenStepGrass(1037, Block.grass.blockIndexInTexture, Block.grass, true).setBlockName("grassStep");
+	public static Block blockStepGlassUp = new BlockGreenStepTextured(1038, Block.glass.blockIndexInTexture, glassStepTexture, Block.glass, true).setBlockName("glassStep");
+	public static Block blockStepObsidianUp = new BlockGreenStep(1039, Block.obsidian.blockIndexInTexture, Block.obsidian, true).setBlockName("obsidianStep");
+	public static Block blockStepLapisUp = new BlockGreenStep(1040, Block.blockLapis.blockIndexInTexture, Block.blockLapis, true).setBlockName("lapisStep");
+	public static Block blockStepMossyCobbleUp = new BlockGreenStep(1041, Block.cobblestoneMossy.blockIndexInTexture, Block.cobblestoneMossy, true).setBlockName("mossyCobbleStep");
+	public static Block blockStepMossyBrickUp = new BlockGreenStep(1042, 100, Block.stoneBrick, true).setBlockName("mossyBrickStep");
+	public static Block blockStepClothUp = new BlockStepCloth(1043, Material.cloth, true).setBlockName("stepCloth");
+	public static Block blockStepIronUp = new BlockGreenStepTextured(1044, Block.blockSteel.blockIndexInTexture, ironStepTexture, Block.blockSteel, true).setBlockName("ironStep");
+	public static Block blockStepGoldUp = new BlockGreenStepTextured(1045, Block.blockGold.blockIndexInTexture, goldStepTexture, Block.blockGold, true).setBlockName("goldStep");
+	public static Block blockStepDiamondUp = new BlockGreenStepTextured(1046, Block.blockDiamond.blockIndexInTexture, diamondStepTexture, Block.blockDiamond, true).setBlockName("diamondStep");
+	public static Block blockStepStoneUp = new BlockGreenStep(1047, Block.stone.blockIndexInTexture, Block.stone, true).setBlockName("stoneStep");
+	public static Block blockStepUp = new BlockStepUp(1048).setBlockName("stoneSlab");
+	public static Block blockStepWhiteStoneBrickMossyUp = new BlockGreenStep(1049, whiteStoneBrickMossy, blockWhiteStone, true).setBlockName("whiteStoneBrickMossyStep");
+	
+	public static Block blockStairsWhiteStoneBrick = new BlockStairs(1050, mod_gc.blockWhiteStoneBrick).setLightOpacity(0).setBlockName("whiteStoneBrickStairs");
+	public static Block blockStairsWhiteStone = new BlockStairs(1051, mod_gc.blockWhiteStone).setLightOpacity(0).setBlockName("whiteStoneStairs");
+	public static Block blockStairsMossyCobbleStone = new BlockStairs(1052, Block.cobblestoneMossy).setLightOpacity(0).setBlockName("mossyCobblestoneStairs");
+	public static Block blockStairsSnow = new BlockStairs(1053, Block.blockSnow).setLightOpacity(0).setBlockName("snowStairs");
+	public static Block blockStairsPlanks = new BlockStairs(1054, Block.planks).setLightOpacity(0).setBlockName("planksStairs");
+	public static Block blockStairsNetherRack = new BlockStairs(1055, Block.netherrack).setLightOpacity(0).setBlockName("netherRackStairs");
+	public static Block blockStairsLapisLazuli = new BlockStairs(1056, Block.blockLapis).setLightOpacity(0).setBlockName("lapisLazuliStairs");
+	public static Block blockStairsObsidian = new BlockStairs(1057, Block.obsidian).setLightOpacity(0).setBlockName("obsidianStairs");
+	public static Block blockStairsSandStone = new BlockStairs(1058, Block.sandStone).setLightOpacity(0).setBlockName("sandStoneStairs");
+	public static Block blockStairsMossyStoneBrick = new BlockStairsTextured(1059, Block.stoneBrick, 1).setLightOpacity(0).setBlockName("mossyStoneBrickStairs");
+	public static Block blockStairsGlass = new BlockStairs(1060, Block.glass).setLightOpacity(0).setBlockName("glassStairs");
+	
+	public static Block blockHalfBlockWhiteStoneBrick = new BlockHalfBlock(1070, blockWhiteStoneBrick).setBlockName("whiteStoneBrickStep");
+	public static Block blockHalfBlockWhiteStoneBrickMossy = new BlockHalfBlock(1071, blockWhiteStoneBrickMossy).setBlockName("whiteStoneBrickMossyStep");
+	public static Block blockHalfBlockWhiteStone = new BlockHalfBlock(1072, blockWhiteStone).setBlockName("whiteStoneStep");
+	public static Block blockHalfBlockLogOak = new BlockHalfBlockLog(1073, Material.wood, 21, logslice, 20).setBlockName("oakLogStep");
+	public static Block blockHalfBlockLogRedWood = new BlockHalfBlockLog(1074, Material.wood, 21, logslice, 116).setBlockName("redwoodLogStep");
+	public static Block blockHalfBlockLogBirch = new BlockHalfBlockLog(1075, Material.wood, 21, logslice, 117).setBlockName("birchLogStep");
+	public static Block blockHalfBlockLogSakura = new BlockHalfBlockLog(1076, Material.wood, sakuralog, sakuralogslice, sakuralogside).setBlockName("sakuraLogStep");
+	public static Block blockHalfBlockSnow = new BlockHalfBlock(1081, Block.snow).setBlockName("snowStep");
+	public static Block blockHalfBlockNetherrack = new BlockHalfBlock(1082, Block.netherrack).setBlockName("netherrackStep");
+	public static Block blockHalfBlockNetherBrick = new BlockHalfBlock(1083, Block.netherBrick).setBlockName("netherBrickStep");
+	public static Block blockHalfBlockDirt = new BlockHalfBlock(1084, Block.dirt).setBlockName("dirtStep");
+	public static Block blockHalfBlockGrass = new BlockHalfBlockGrass(1085, Block.grass).setBlockName("grassStep");
+	public static Block blockHalfBlockGlass = new BlockHalfBlockTextured(1086, glassStepTexture, glassHalfTexture, Block.glass).setBlockName("glassStep");
+	public static Block blockHalfBlockObsidian = new BlockHalfBlock(1087, Block.obsidian).setBlockName("obsidianStep");
+	public static Block blockHalfBlockLapis = new BlockHalfBlock(1088, Block.blockLapis).setBlockName("lapisStep");
+	public static Block blockHalfBlockMossyCobble = new BlockHalfBlock(1089, Block.cobblestoneMossy).setBlockName("mossyCobbleStep");
+	public static Block blockHalfBlockMossyBrick = new BlockHalfBlock(1090, blockStepMossyBrickUp).setBlockName("mossyBrickStep");;
+	public static Block blockHalfBlockCloth0 = new BlockHalfBlockCloth(1091, 0).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(0)]).toString());
+	public static Block blockHalfBlockCloth1 = new BlockHalfBlockCloth(1092, 1).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(1)]).toString());
+	public static Block blockHalfBlockCloth2 = new BlockHalfBlockCloth(1093, 2).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(2)]).toString());
+	public static Block blockHalfBlockCloth3 = new BlockHalfBlockCloth(1094, 3).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(3)]).toString());
+	public static Block blockHalfBlockCloth4 = new BlockHalfBlockCloth(1095, 4).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(4)]).toString());
+	public static Block blockHalfBlockCloth5 = new BlockHalfBlockCloth(1096, 5).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(5)]).toString());
+	public static Block blockHalfBlockCloth6 = new BlockHalfBlockCloth(1097, 6).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(6)]).toString());
+	public static Block blockHalfBlockCloth7 = new BlockHalfBlockCloth(1098, 7).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(7)]).toString());
+	public static Block blockHalfBlockCloth8 = new BlockHalfBlockCloth(1099, 8).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(8)]).toString());
+	public static Block blockHalfBlockCloth9 = new BlockHalfBlockCloth(1100, 9).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(9)]).toString());
+	public static Block blockHalfBlockCloth10 = new BlockHalfBlockCloth(1101, 10).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(10)]).toString());
+	public static Block blockHalfBlockCloth11 = new BlockHalfBlockCloth(1102, 11).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(11)]).toString());
+	public static Block blockHalfBlockCloth12 = new BlockHalfBlockCloth(1103, 12).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(12)]).toString());
+	public static Block blockHalfBlockCloth13 = new BlockHalfBlockCloth(1104, 13).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(13)]).toString());
+	public static Block blockHalfBlockCloth14 = new BlockHalfBlockCloth(1105, 14).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(14)]).toString());
+	public static Block blockHalfBlockCloth15 = new BlockHalfBlockCloth(1106, 15).setBlockName((new StringBuilder()).append("clothStep").append(".").append(ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(15)]).toString());
+	public static Block blockHalfBlockIron = new BlockHalfBlockTextured(1107, ironStepTexture, ironHalfTexture, Block.blockSteel).setBlockName("ironStep");
+	public static Block blockHalfBlockGold = new BlockHalfBlockTextured(1108, goldStepTexture, goldHalfTexture, Block.blockGold).setBlockName("goldStep");
+	public static Block blockHalfBlockDiamond = new BlockHalfBlockTextured(1109, diamondStepTexture, diamondHalfTexture, Block.blockDiamond).setBlockName("diamondStep");
+	public static Block blockHalfBlockStone = new BlockHalfBlock(1111, Block.stone).setBlockName("stoneStep");
+	public static Block blockHalfBlockSlabs = new BlockHalfBlockSlabs(1112, Block.stairSingle, 0).setBlockName("stoneSlab.stone");
+	public static Block blockHalfBlockSlabsSandStone = new BlockHalfBlockSlabs(1113, Block.stairSingle, 1).setBlockName("stoneSlab.sand");
+	public static Block blockHalfBlockSlabsWood = new BlockHalfBlockSlabs(1114, Block.stairSingle, 2).setBlockName("stoneSlab.wood");
+	public static Block blockHalfBlockSlabsCobble = new BlockHalfBlockSlabs(1115, Block.stairSingle, 3).setBlockName("stoneSlab.cobble");
+	public static Block blockHalfBlockSlabsBrick = new BlockHalfBlockSlabs(1116, Block.stairSingle, 4).setBlockName("stoneSlab.brick");
+	public static Block blockHalfBlockSlabsStoneBrick = new BlockHalfBlockSlabs(1117, Block.stairSingle, 5).setBlockName("stoneSlab.smoothStoneBrick");
+	
+	public static Block blockSakuraFlowers = new BlockSakuraLeaves(1210, sakuraFlowers).setBlockName("sakuraFlowers");
+	public static Block blockSakuraFlowersDense = new BlockSakuraLeaves(1211, sakuraFlowersDense).setBlockName("sakuraFlowersDense");
+	public static Block blockSakuraLeaves = new BlockLeaves(1212, 52).setHardness(0.2F).setLightOpacity(1).setStepSound(soundGrassFootstep).setRequiresSelfNotify().setBlockName("sakuraLeaves");
+	public static Block blockSakuraLog = new BlockSakuraLog(1213).setBlockName("sakuraLog");
+	public static Block blockSakuraSapling = new BlockSapling(1214, sakuraSapling).setBlockName("sakuraSapling");
+	//public static Block blockPalmLog = new BlockPalmLog(1200).setHardness(0.5F).setBlockName("palmLog");
+	//public static Block blockPalmLeaves = new BlockPalmLeaves(1201).setHardness(0.2F).setBlockName("palmLeaves").setLightOpacity(0);
+	//public static Block blockBanana = new BlockBanana(1201).setHardness(1.0F).setBlockName("banana");
+	//public static Block blockAppleTreeLeaves = new BlockAppleTreeLeaves(219, BlockAppleTreeLeaves.leaves);
+	//public static Block cocoaSaplingBlock = new BlockCocoaSapling(216, cocoaSaplingTexture).setHardness(0.0F).setBlockName("cocoaSapling");
+	//public static Block cocoaBlock = new BlockCocoa(222, cocoaBlockTexture).setHardness(1.0F).setBlockName("cocoaBlock");
+	
+	//public static Block bananaCake = new BlockBananaCake(224, BlockBananaCake.cake1).setHardness(0.5F).setStepSound(Block.soundClothFootstep).setBlockName("bananaCake");
+
+	//public static Block blockWhiteBrickFence = new BlockFence(1060, whiteStoneTexture, Material.rock).setHardness(Block.fence.blockHardness);
+	public static Block blockGift = new BlockGift(1110, Block.cloth).setBlockName("blockGift");
+	public static Block blockGiftNY = new BlockGiftNY(1120, Block.cloth).setBlockName("blockGiftNY");
+	public static Block blockGift1402 = new BlockGift1402(1402, Block.cloth).setBlockName("blockGift1402");
+	public static Block blockBadnick = new BlockBadnick(1201, Block.obsidian).setBlockName("badnick"); 
+	public static Block blockBlueTorch = (new BlockBlueTorch(1202, bluetorchtexture)).setHardness(0.0F).setLightValue(1.0F).setBlockName("bluetorch").setRequiresSelfNotify();
+	public static Block blockWhiteFence;
+	public static Block blockWhiteButton = new BlockButton(1204, whiteFenceTexture).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("whiteButton").setRequiresSelfNotify();;
+	public static Block blockWhitePressurePlate = new BlockPressurePlate(1205, whiteStoneTexture, EnumMobType.mobs, Material.rock).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("whitePressurePlate").setRequiresSelfNotify();
+	//public static Block blockRainbow = new BlockReed(1202, rainbow).setBlockName("rainbow"); 
+	public static Block blockWhiteSign = new BlockWhiteSign(1206, net.minecraft.src.TileEntitySign.class, true).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setBlockName("whitesign").disableStats().setRequiresSelfNotify();
+	public static Block blockWhiteSignWall = new BlockWhiteSign(1207, net.minecraft.src.TileEntitySign.class, false).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setBlockName("whitesign").disableStats().setRequiresSelfNotify();
+
+	public static Item readableBook = new ItemReadableBook(3000 - 256).setIconIndex(readableBookIcon).setItemName("readableBook").setMaxStackSize(1);
+	//public static Item CocoaFruit = new Item(3001 - 256).setIconIndex(cocoaFruitTexture).setItemName("cocoaFruit").setMaxStackSize(8);
+	//public static Item banana = new ItemFood((3002 - 256), 2, 0.1F, false).setIconIndex(bananaItemTexture).setItemName("bananaItem").setMaxStackSize(8);	
+	//public static Item bananaGreen = new ItemFood((3003 - 256), 1, 0.1F, false).setIconIndex(bananaGreenItemTexture).setItemName("bananaGreenItem").setMaxStackSize(8);
+	//public static Item bananaCakeItem = new Item(3004 - 256)
+	public static Item readableBookGolden = new ItemReadableBook(3005 - 256).setIconIndex(readableBookGoldenIcon).setItemName("readableBookGolden").setMaxStackSize(1);
+	public static Item readableBookDiamond = new ItemReadableBook(3006 - 256).setIconIndex(readableBookDiamondIcon).setItemName("readableBookDiamond").setMaxStackSize(1);
+	public static Item readableBookObsidian = new ItemReadableBook(3007 - 256).setIconIndex(readableBookObsidianIcon).setItemName("readableBookobsg").setMaxStackSize(1);
+	public static Item readableBookLocked = new ItemReadableBook(3008 - 256).setIconIndex(readableBookLockedIcon).setItemName("readableBookLocked").setMaxStackSize(1);
+	public static Item readableBookGoldenLocked = new ItemReadableBook(3009 - 256).setIconIndex(readableBookGoldenLockedIcon).setItemName("readableBookGoldenLocked").setMaxStackSize(1);
+	public static Item readableBookDiamondLocked = new ItemReadableBook(3010 - 256).setIconIndex(readableBookDiamondLockedIcon).setItemName("readableBookDiamondLocked").setMaxStackSize(1);
+	public static Item limestoneItem = new Item(3020 - 256).setIconIndex(limestoneItemTexture).setItemName("limestoneItem").setMaxStackSize(64);
+	public static Item slakedLime = new Item(3021 - 256).setIconIndex(slakedLimeTexture).setItemName("slakedlime").setMaxStackSize(64);
+	public static Item whiteSign = new ItemWhiteSign(3022 - 256).setIconIndex(whiteSignIcon).setItemName("whitesign");
+	public static Item sakuraPetal = new ItemSakuraPetal(3023 - 256).setIconIndex(sakurapetal1).setItemName("sakurapetal");
+	//public static Item bananaGreenItem = new Item(3022 - 256).setIconIndex(bananaGreenItemTexture).setItemName("bananagreenItemTexture").setMaxStackSize(64);
+	//public static Item bananaItem = new Item(3023 - 256).setIconIndex(bananaItemTexture).setItemName("bananaItemTexture").setMaxStackSize(64);
+	
+	// FOR FLUFFY 
+	/*
+	public static int testblock1 = ModLoader.addOverride("/terrain.png", "/gc_images/block1.png");
+	public static int testblock2 = ModLoader.addOverride("/terrain.png", "/gc_images/block2.png");
+	public static int testblock3 = ModLoader.addOverride("/terrain.png", "/gc_images/block3.png");
+	public static int testblock4 = ModLoader.addOverride("/terrain.png", "/gc_images/block4.png");
+	public static int testblock5 = ModLoader.addOverride("/terrain.png", "/gc_images/block5.png");
+	public static int testblocklight1 = ModLoader.addOverride("/terrain.png", "/gc_images/blocklight0.3.png");
+	public static int testblocklight2 = ModLoader.addOverride("/terrain.png", "/gc_images/blocklight0.5.png");
+	public static int testblocklight3 = ModLoader.addOverride("/terrain.png", "/gc_images/blocklight1.0.png");
+	
+	public static Block blocktest1 = new Block(2901, testblock1, Material.rock).setHardness(1.0F);
+	public static Block blocktest2 = new Block(2902, testblock2, Material.rock).setHardness(1.0F);
+	public static Block blocktest3 = new Block(2903, testblock3, Material.rock).setHardness(1.0F);
+	public static Block blocktest4 = new Block(2904, testblock4, Material.rock).setHardness(1.0F);
+	public static Block blocktestlight1 = new Block(2905, testblock1, Material.rock).setHardness(1.0F).setLightValue(0.3F);
+	public static Block blocktestlight2 = new Block(2906, testblock1, Material.rock).setHardness(1.0F).setLightValue(0.5F);
+	public static Block blocktestlight3 = new Block(2907, testblock1, Material.rock).setHardness(1.0F).setLightValue(1.0F);
+	public static Block blocktesthalf = new BlockHalfBlock(2908, blocktest1);
+	*/
+	public mod_gc() {
+		blockWhiteFence = new BlockWhiteFence(1203, whiteFenceTexture, Material.rock, ModLoader.getUniqueBlockModelID(this, true)).setHardness(mod_gc.blockWhiteStone.blockHardness).setResistance(mod_gc.blockWhiteStone.blockResistance).setStepSound(mod_gc.blockWhiteStone.stepSound).setBlockName("whiteFence");
+		
+        Item.itemsList[blockGreenFlowers.blockID] = new ItemGreenFlowers(blockGreenFlowers.blockID - 256);
+
+        ModLoader.RegisterBlock(blockLimestone);
+        ModLoader.RegisterBlock(blockWhiteStone);
+        ModLoader.RegisterBlock(blockWhiteStoneBrick);
+        ModLoader.RegisterBlock(blockWhiteStoneBrickCracked);
+        ModLoader.RegisterBlock(blockWhiteStoneBrickMossy);
+		ModLoader.RegisterBlock(netherFenceGate);
+		
+		ModLoader.RegisterBlock(blockStairsWhiteStoneBrick);
+		ModLoader.RegisterBlock(blockStairsWhiteStone);
+		ModLoader.RegisterBlock(blockStairsMossyCobbleStone);
+		ModLoader.RegisterBlock(blockStairsSnow);
+		ModLoader.RegisterBlock(blockStairsPlanks);
+		ModLoader.RegisterBlock(blockStairsNetherRack);
+		ModLoader.RegisterBlock(blockStairsLapisLazuli);
+		ModLoader.RegisterBlock(blockStairsObsidian);
+		ModLoader.RegisterBlock(blockStairsSandStone);
+		ModLoader.RegisterBlock(blockStairsMossyStoneBrick);
+		ModLoader.RegisterBlock(blockStairsGlass);
+		
+		ModLoader.RegisterBlock(blockStepWhiteStoneBrick);
+		ModLoader.RegisterBlock(blockStepWhiteStone);
+		Item.itemsList[blockStepLog.blockID] = new ItemGreenStepLog(blockStepLog.blockID - 256);
+		ModLoader.RegisterBlock(blockStepSnow);
+		ModLoader.RegisterBlock(blockStepNetherrack);
+		ModLoader.RegisterBlock(blockStepNetherBrick);
+		ModLoader.RegisterBlock(blockStepDirt);
+		ModLoader.RegisterBlock(blockStepGrass);
+		ModLoader.RegisterBlock(blockStepGlass);
+		ModLoader.RegisterBlock(blockStepObsidian);
+		ModLoader.RegisterBlock(blockStepLapis);
+		ModLoader.RegisterBlock(blockStepMossyCobble);
+		ModLoader.RegisterBlock(blockStepMossyBrick);
+        Item.itemsList[blockStepCloth.blockID] = new ItemStepCloth(blockStepCloth.blockID - 256);
+		ModLoader.RegisterBlock(blockStepIron);
+		ModLoader.RegisterBlock(blockStepGold);
+		ModLoader.RegisterBlock(blockStepDiamond);
+		ModLoader.RegisterBlock(blockStepStone);
+		ModLoader.RegisterBlock(blockStepWhiteStoneBrickMossy);
+
+        Item.itemsList[blockStepWhiteStoneBrickUp.blockID] = new ItemGreenStepUp(blockStepWhiteStoneBrickUp.blockID - 256);
+        Item.itemsList[blockStepWhiteStoneUp.blockID] = new ItemGreenStepUp(blockStepWhiteStoneUp.blockID - 256);
+		Item.itemsList[blockStepLogUp.blockID] = new ItemGreenStepLog(blockStepLogUp.blockID - 256);
+		Item.itemsList[blockStepSnowUp.blockID] = new ItemGreenStepUp(blockStepSnowUp.blockID - 256);
+		Item.itemsList[blockStepNetherrackUp.blockID] = new ItemGreenStepUp(blockStepNetherrackUp.blockID - 256);
+		Item.itemsList[blockStepNetherBrickUp.blockID] = new ItemGreenStepUp(blockStepNetherBrickUp.blockID - 256);
+		Item.itemsList[blockStepDirtUp.blockID] = new ItemGreenStepUp(blockStepDirtUp.blockID - 256);
+		Item.itemsList[blockStepGrassUp.blockID] = new ItemGreenStepUp(blockStepGrassUp.blockID - 256);
+		Item.itemsList[blockStepGlassUp.blockID] = new ItemGreenStepUp(blockStepGlassUp.blockID - 256);
+		Item.itemsList[blockStepObsidianUp.blockID] = new ItemGreenStepUp(blockStepObsidianUp.blockID - 256);
+		Item.itemsList[blockStepLapisUp.blockID] = new ItemGreenStepUp(blockStepLapisUp.blockID - 256);
+		Item.itemsList[blockStepMossyCobbleUp.blockID] = new ItemGreenStepUp(blockStepMossyCobbleUp.blockID - 256);
+		Item.itemsList[blockStepMossyBrickUp.blockID] = new ItemGreenStepUp(blockStepMossyBrickUp.blockID - 256);
+		Item.itemsList[blockStepClothUp.blockID] = new ItemStepCloth(blockStepClothUp.blockID - 256);
+		Item.itemsList[blockStepIronUp.blockID] = new ItemGreenStepUp(blockStepIronUp.blockID - 256);
+		Item.itemsList[blockStepGoldUp.blockID] = new ItemGreenStepUp(blockStepGoldUp.blockID - 256);
+		Item.itemsList[blockStepDiamondUp.blockID] = new ItemGreenStepUp(blockStepDiamondUp.blockID - 256);
+		Item.itemsList[blockStepStoneUp.blockID] = new ItemGreenStepUp(blockStepStoneUp.blockID - 256);
+		Item.itemsList[blockStepUp.blockID] = new ItemSlabUp(blockStepUp.blockID - 256);
+		Item.itemsList[blockStepWhiteStoneBrickMossyUp.blockID] = new ItemGreenStepUp(blockStepWhiteStoneBrickMossyUp.blockID - 256);
+		
+		Item.itemsList[blockHalfBlockWhiteStoneBrick.blockID] = new ItemHalfBlock(blockHalfBlockWhiteStoneBrick.blockID - 256);
+		Item.itemsList[blockHalfBlockWhiteStoneBrickMossy.blockID] = new ItemHalfBlock(blockHalfBlockWhiteStoneBrickMossy.blockID - 256);
+		Item.itemsList[blockHalfBlockWhiteStone.blockID] = new ItemHalfBlock(blockHalfBlockWhiteStone.blockID - 256);
+		Item.itemsList[blockHalfBlockLogOak.blockID] = new ItemHalfBlock(blockHalfBlockLogOak.blockID - 256);
+		Item.itemsList[blockHalfBlockLogRedWood.blockID] = new ItemHalfBlock(blockHalfBlockLogRedWood.blockID - 256);
+		Item.itemsList[blockHalfBlockLogBirch.blockID] = new ItemHalfBlock(blockHalfBlockLogBirch.blockID - 256);
+		Item.itemsList[blockHalfBlockLogSakura.blockID] = new ItemHalfBlock(blockHalfBlockLogSakura.blockID - 256);
+		Item.itemsList[blockHalfBlockSnow.blockID] = new ItemHalfBlock(blockHalfBlockSnow.blockID - 256);
+		Item.itemsList[blockHalfBlockNetherrack.blockID] = new ItemHalfBlock(blockHalfBlockNetherrack.blockID - 256);
+		Item.itemsList[blockHalfBlockNetherBrick.blockID] = new ItemHalfBlock(blockHalfBlockNetherBrick.blockID - 256);
+		Item.itemsList[blockHalfBlockDirt.blockID] = new ItemHalfBlock(blockHalfBlockDirt.blockID - 256);
+		Item.itemsList[blockHalfBlockGrass.blockID] = new ItemHalfBlock(blockHalfBlockGrass.blockID - 256);
+		Item.itemsList[blockHalfBlockGlass.blockID] = new ItemHalfBlock(blockHalfBlockGlass.blockID - 256);
+		Item.itemsList[blockHalfBlockObsidian.blockID] = new ItemHalfBlock(blockHalfBlockObsidian.blockID - 256);
+		Item.itemsList[blockHalfBlockLapis.blockID] = new ItemHalfBlock(blockHalfBlockLapis.blockID - 256);
+		Item.itemsList[blockHalfBlockMossyCobble.blockID] = new ItemHalfBlock(blockHalfBlockMossyCobble.blockID - 256);
+		Item.itemsList[blockHalfBlockMossyBrick.blockID] = new ItemHalfBlock(blockHalfBlockMossyBrick.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth0.blockID] = new ItemHalfBlock(blockHalfBlockCloth0.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth1.blockID] = new ItemHalfBlock(blockHalfBlockCloth1.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth2.blockID] = new ItemHalfBlock(blockHalfBlockCloth2.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth3.blockID] = new ItemHalfBlock(blockHalfBlockCloth3.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth4.blockID] = new ItemHalfBlock(blockHalfBlockCloth4.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth5.blockID] = new ItemHalfBlock(blockHalfBlockCloth5.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth6.blockID] = new ItemHalfBlock(blockHalfBlockCloth6.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth7.blockID] = new ItemHalfBlock(blockHalfBlockCloth7.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth8.blockID] = new ItemHalfBlock(blockHalfBlockCloth8.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth9.blockID] = new ItemHalfBlock(blockHalfBlockCloth9.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth10.blockID] = new ItemHalfBlock(blockHalfBlockCloth10.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth11.blockID] = new ItemHalfBlock(blockHalfBlockCloth11.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth12.blockID] = new ItemHalfBlock(blockHalfBlockCloth12.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth13.blockID] = new ItemHalfBlock(blockHalfBlockCloth13.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth14.blockID] = new ItemHalfBlock(blockHalfBlockCloth14.blockID - 256);
+		Item.itemsList[blockHalfBlockCloth15.blockID] = new ItemHalfBlock(blockHalfBlockCloth15.blockID - 256);
+		Item.itemsList[blockHalfBlockIron.blockID] = new ItemHalfBlock(blockHalfBlockIron.blockID - 256);
+		Item.itemsList[blockHalfBlockGold.blockID] = new ItemHalfBlock(blockHalfBlockGold.blockID - 256);
+		Item.itemsList[blockHalfBlockDiamond.blockID] = new ItemHalfBlock(blockHalfBlockDiamond.blockID - 256);
+		Item.itemsList[blockHalfBlockStone.blockID] = new ItemHalfBlock(blockHalfBlockStone.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabs.blockID] = new ItemHalfBlock(blockHalfBlockSlabs.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsSandStone.blockID] = new ItemHalfBlock(blockHalfBlockSlabsSandStone.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsWood.blockID] = new ItemHalfBlock(blockHalfBlockSlabsWood.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsCobble.blockID] = new ItemHalfBlock(blockHalfBlockSlabsCobble.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsBrick.blockID] = new ItemHalfBlock(blockHalfBlockSlabsBrick.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsStoneBrick.blockID] = new ItemHalfBlock(blockHalfBlockSlabsStoneBrick.blockID - 256);
+		Item.itemsList[blockHalfBlockSlabsStoneBrick.blockID] = new ItemHalfBlock(blockHalfBlockSlabsStoneBrick.blockID - 256);
+		
+		ModLoader.RegisterBlock(blockGift);
+		ModLoader.RegisterBlock(blockGiftNY);
+		ModLoader.RegisterBlock(blockGift1402);
+		Item.itemsList[blockGiftNY.blockID].setMaxStackSize(1);
+		Item.itemsList[blockGift1402.blockID].setMaxStackSize(1);
+		ModLoader.RegisterBlock(blockBadnick);
+		ModLoader.RegisterBlock(blockBlueTorch);
+        ModLoader.RegisterBlock(blockWhiteFence);
+        ModLoader.RegisterBlock(blockWhiteButton);
+        ModLoader.RegisterBlock(blockWhitePressurePlate);
+        
+		
+		//ModLoader.RegisterBlock(blockRainbow);
+		
+		
+		ModLoader.RegisterBlock(blockSakuraLeaves);
+		ModLoader.RegisterBlock(blockSakuraFlowers);
+		ModLoader.RegisterBlock(blockSakuraFlowersDense);
+		ModLoader.RegisterBlock(blockSakuraLog);
+		ModLoader.RegisterBlock(blockSakuraSapling);
+		//ModLoader.RegisterBlock(blockAppleTreeLeaves);
+		//ModLoader.RegisterBlock(cocoaSaplingBlock);
+		//ModLoader.RegisterBlock(cocoaBlock);
+		//ModLoader.RegisterBlock(blockBanana);
+//		ModLoader.RegisterBlock(bananaCake);
+		
+		// FOR FLUFFY
+		/*
+		ModLoader.RegisterBlock(blocktest1);
+		ModLoader.RegisterBlock(blocktest2);
+		ModLoader.RegisterBlock(blocktest3);
+		ModLoader.RegisterBlock(blocktest4);
+		ModLoader.RegisterBlock(blocktestlight1);
+		ModLoader.RegisterBlock(blocktestlight2);
+		ModLoader.RegisterBlock(blocktestlight3);
+		ModLoader.RegisterBlock(blocktesthalf);
+		*/
+        //RenderSlope.SlopesRenderID = ModLoader.getUniqueBlockModelID(this, true);
+        //System.out.println("RenderID is " + RenderSlope.SlopesRenderID);
+        //BlockDirtSlope = (new BlockSlope(2500, 24, Material.ground)).setHardness(0.5F).setStepSound(Block.soundGravelFootstep).setBlockName("BlockKaevDirtSlopes");
+    	//Item.itemsList[2500] = new ItemSlopes(2500 - 256).setItemName("ItemDirtSlopes");
+        
+	}
+	
+    public void RenderInvBlock(RenderBlocks renderblocks, Block block, int i, int j) {
+    	if(block == blockWhiteFence) {
+    		Tessellator tessellator = Tessellator.instance;
+    		for(int j1 = 0; j1 < 4; j1++) {
+				float f4 = 0.125F;
+				if(j1 == 0) {
+					block.setBlockBounds(0.5F - f4, 0.0F, 0.0F, 0.5F + f4, 1.0F, f4 * 2.0F);
+				}
+				if(j1 == 1) {
+					block.setBlockBounds(0.5F - f4, 0.0F, 1.0F - f4 * 2.0F, 0.5F + f4, 1.0F, 1.0F);
+				}
+				f4 = 0.0625F;
+				if(j1 == 2) {
+					block.setBlockBounds(0.5F - f4, 1.0F - f4 * 3F, -f4 * 2.0F, 0.5F + f4, 1.0F - f4, 1.0F + f4 * 2.0F);
+				}
+				if(j1 == 3) {
+					block.setBlockBounds(0.5F - f4, 0.5F - f4 * 3F, -f4 * 2.0F, 0.5F + f4, 0.5F - f4, 1.0F + f4 * 2.0F);
+				}
+				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(0.0F, -1F, 0.0F);
+				renderblocks.renderBottomFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(0));
+				tessellator.draw();
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(0.0F, 1.0F, 0.0F);
+				renderblocks.renderTopFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(1));
+				tessellator.draw();
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(0.0F, 0.0F, -1F);
+				renderblocks.renderEastFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(2));
+				tessellator.draw();
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(0.0F, 0.0F, 1.0F);
+				renderblocks.renderWestFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(3));
+				tessellator.draw();
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(-1F, 0.0F, 0.0F);
+				renderblocks.renderNorthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(4));
+				tessellator.draw();
+				tessellator.startDrawingQuads();
+				tessellator.setNormal(1.0F, 0.0F, 0.0F);
+				renderblocks.renderSouthFace(block, 0.0D, 0.0D, 0.0D, block.getBlockTextureFromSide(5));
+				tessellator.draw();
+				GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			}
+
+			block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+    	}
+    	//renderSlope.RenderInvBlock(renderblocks, block, i, j);
+    }
+	
+	public boolean RenderWorldBlock(RenderBlocks renderblocks, IBlockAccess iblockaccess, int i, int j, int k, Block block, int l) {
+		if(block == blockWhiteFence) {
+			renderblocks.renderBlockWhiteFence((BlockFence) block, i, j, k);
+    	}
+		//if(l == RenderSlope.SlopesRenderID)
+        //    return renderSlope.renderBlockSlopes(block, i, j, k, renderblocks, iblockaccess);
+        return true;
+	}
+	
+	
+//	public void AddRecipes() {
+//		ModLoader.AddRecipe(new ItemStack);
+//	}
+
+ 
+	public String getVersion() {
+		return "Release 1.0.0 - By GreenCubes";
+	}
+
+	@Override
+	public void load() {
+		
+	}
+}

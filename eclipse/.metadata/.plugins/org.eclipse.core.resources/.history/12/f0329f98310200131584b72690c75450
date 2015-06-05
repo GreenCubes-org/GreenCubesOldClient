@@ -1,0 +1,9 @@
+package net.minecraft.src;
+
+public class ItemMysterious extends Item {
+
+	public ItemMysterious(int i) {
+		super(i);
+	}
+
+}

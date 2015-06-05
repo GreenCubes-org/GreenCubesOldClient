@@ -1,0 +1,42 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) braces deadcode fieldsfirst 
+
+package net.minecraft.src;
+
+// Referenced classes of package net.minecraft.src:
+//            Slot, ItemStack, ItemArmor, Item, 
+//            Block, ContainerPlayer, IInventory
+
+class SlotArmor extends Slot {
+
+	public static final int[] icons = new int[] {Item.helmetLeather.iconIndex, Item.plateLeather.iconIndex, Item.legsLeather.iconIndex, Item.bootsLeather.iconIndex};
+	public final int armorType; /* synthetic field */
+	public final ContainerPlayer inventory; /* synthetic field */
+
+	public SlotArmor(ContainerPlayer containerplayer, IInventory iinventory, int slot, int x, int y, int armorSlot) {
+		super(iinventory, slot, x, y);
+		inventory = containerplayer;
+		armorType = armorSlot;
+	}
+
+	@Override
+	public int getSlotStackLimit() {
+		return 1;
+	}
+
+	@Override
+	public boolean isItemValid(ItemStack itemstack) {
+		if(itemstack.getItem() instanceof ItemWearable)
+			return ((ItemWearable) itemstack.getItem()).slot == armorType;
+		if(itemstack.getItem().shiftedIndex == Block.pumpkin.blockID)
+			return armorType == 0;
+		return false;
+	}
+	
+	@Override
+	public int getBackgroundIconIndex() {
+		// TODO Auto-generated method stub
+		return super.getBackgroundIconIndex();
+	}
+}

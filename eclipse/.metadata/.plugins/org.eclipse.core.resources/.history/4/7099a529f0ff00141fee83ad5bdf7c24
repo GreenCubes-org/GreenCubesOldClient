@@ -1,0 +1,14 @@
+package net.minecraft.src;
+
+public class ItemArrow extends Item {
+	
+	protected final float damageMultipler;
+	protected final float accuracy;
+
+	public ItemArrow(int i, float damageMultipler, float accuracy) {
+		super(i);
+		this.damageMultipler = damageMultipler;
+		this.accuracy = accuracy;
+	}
+
+}

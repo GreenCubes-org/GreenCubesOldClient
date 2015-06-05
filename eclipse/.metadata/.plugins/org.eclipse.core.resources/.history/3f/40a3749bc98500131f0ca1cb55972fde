@@ -1,0 +1,15 @@
+package net.minecraft.src;
+
+public class BlockWheat extends Block {
+
+	public BlockWheat(int i, Material material) {
+		super(i, material);
+		// TODO Auto-generated constructor stub
+	}
+
+	public BlockWheat(int i, int j, Material material) {
+		super(i, j, material);
+		// TODO Auto-generated constructor stub
+	}
+
+}

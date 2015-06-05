@@ -1,0 +1,21 @@
+package net.minecraft.src;
+
+import org.greencubes.util.HSVColor;
+
+public class BlockColoredPane extends BlockPane {
+	
+	public final int[][] colors;
+	private int currentPass;
+
+	public BlockColoredPane(int id, int j, int k, Material material, boolean flag, int[][] colors) {
+		super(id, j, k, material, flag);
+		this.colors = colors;
+		for(int i = 0; i < colors.length; ++i) {
+			HSVColor hsv = HSVColor.fromRGB(colors[i][1]);
+			hsv = new HSVColor(hsv.h, Math.min(1.0f, hsv.s / 1.75f), Math.min(1.0f, hsv.v * 1.75f));
+			colors[i][1] = hsv.getRGB();
+		}
+		multipassBlocks[id] = true;
+	}
+
+}

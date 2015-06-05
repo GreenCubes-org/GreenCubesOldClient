@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class ItemArmorRepairable extends ItemArmor {
+
+	public ItemArmorRepairable(int id, EnumArmorMaterial material, int texture, int slot) {
+		super(id, material, texture, slot);
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,12 @@
+package net.minecraft.src;
+
+public class SlotTrashcan extends Slot {
+
+	public SlotTrashcan(IInventory iinventory, int slot, int x, int y) {
+		super(iinventory, slot, x, y);
+	}
+
+	public int getBackgroundIconIndex() {
+		return -1;
+	}
+}

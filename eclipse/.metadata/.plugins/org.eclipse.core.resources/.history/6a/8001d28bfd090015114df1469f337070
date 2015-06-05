@@ -1,0 +1,9 @@
+package net.minecraft.src;
+
+public class BlockTransparentGlass extends BlockGlassNew {
+
+	public BlockTransparentGlass(int i) {
+		super(i, 49, Material.glass, false);
+	}
+
+}

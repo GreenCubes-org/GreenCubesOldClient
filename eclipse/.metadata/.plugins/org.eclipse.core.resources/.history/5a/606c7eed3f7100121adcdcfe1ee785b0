@@ -1,0 +1,90 @@
+package net.minecraft.src;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import net.minecraft.client.Minecraft;
+
+public class spc_WorldEdit extends SPCPlugin {
+	public int blockrightx;
+	public int blockrighty;
+	public int blockrightz;
+	public int blockleftx;
+	public int blocklefty;
+	public int blockleftz;
+	public static File WORLDEDITJAR = new File(Minecraft.getAppDir(), "bin/WorldEdit.jar");
+	public static File RHINOJAR = new File(Minecraft.getAppDir(), "bin/rhino.jar");
+
+	public static boolean CANINITIALISE = true;
+	public WorldEditPlugin WEP;
+
+	public spc_WorldEdit() throws Exception {
+		if(!CANINITIALISE) {
+			throw new Exception("Check WorldEdit.jar is in the correct location");
+		}
+		if(this.WEP == null)
+			this.WEP = new WorldEditPlugin();
+	}
+
+	public void setPlayerHelper(PlayerHelper ph) {
+		super.setPlayerHelper(ph);
+		this.WEP.setPlayer(ph.ep);
+	}
+
+	public boolean handleCommand(String[] args) {
+		try {
+			if(((Boolean) this.WEP.getHandleCommand().invoke(this.WEP.getController(), new Object[]{this.WEP.getPlayer(), args.clone()})).booleanValue()) {
+				return true;
+			}
+			return false;
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+		return false;
+	}
+
+	public void handleLeftButtonDown(SPCObjectHit o) {
+		try {
+			this.WEP.getHandleArmSwing().invoke(this.WEP.getController(), new Object[]{this.WEP.getPlayer()});
+			if((o.blockx != this.blockleftx) || (o.blocky != this.blocklefty) || (o.blockz != this.blockleftz)) {
+				Object vector = this.WEP.getWorldvector().newInstance(new Object[]{this.WEP.getPlayer().getWorld(), Integer.valueOf(o.blockx), Integer.valueOf(o.blocky), Integer.valueOf(o.blockz)});
+				this.WEP.getHandleBlockLeftClick().invoke(this.WEP.getController(), new Object[]{this.WEP.getPlayer(), vector});
+				this.blockleftx = o.blockx;
+				this.blocklefty = o.blocky;
+				this.blockleftz = o.blockz;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void handleRightButtonDown(SPCObjectHit o) {
+		try {
+			this.WEP.getHandleRightClick().invoke(this.WEP.getController(), new Object[]{this.WEP.getPlayer()});
+			if((o.blockx != this.blockrightx) || (o.blocky != this.blockrighty) || (o.blockz != this.blockrightz)) {
+				Object vector = this.WEP.getWorldvector().newInstance(new Object[]{this.WEP.getPlayer().getWorld(), Integer.valueOf(o.blockx), Integer.valueOf(o.blocky), Integer.valueOf(o.blockz)});
+				this.WEP.getHandleBlockRightClick().invoke(this.WEP.getController(), new Object[]{this.WEP.getPlayer(), vector});
+				this.blockrightx = o.blockx;
+				this.blockrighty = o.blocky;
+				this.blockrightz = o.blockz;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String getVersion() {
+		return "1.1";
+	}
+
+	public String getName() {
+		return "WorldEditPlugin";
+	}
+
+	static {
+		if(!PlayerHelper.addToClasspath(WORLDEDITJAR)) {
+			CANINITIALISE = false;
+		}
+		PlayerHelper.addToClasspath(RHINOJAR);
+	}
+}

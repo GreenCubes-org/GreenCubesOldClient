@@ -1,0 +1,48 @@
+package net.minecraft.src;
+
+public class BlockColoredGlass extends BlockGlassNew {
+
+	public final int[][] colors;
+	private int currentPass;
+	
+	public BlockColoredGlass(int id, int[][] colors) {
+		super(id, 49, Material.glass, false);
+		this.colors = colors;
+		multipassBlocks[id] = true;
+	}
+
+	@Override
+	public boolean setUpPass(int pass) {
+		this.currentPass = pass;
+		return pass == 0 || pass == 2;
+	}
+	
+	@Override
+	public int getBlockTexture(IBlockAccess iblockaccess, int x, int y, int z, int i) {
+		if(currentPass == 1)
+			return colors[iblockaccess.getBlockMetadata(x, y, z) % colors.length][0];
+		return super.getBlockTexture(iblockaccess, x, y, z, i);
+	}
+	
+	@Override
+	public int getRenderColor(int i) {
+		return currentPass == 1 ? 0xffffff : colors[i % colors.length][1];
+	}
+
+	@Override
+	public int colorMultiplier(IBlockAccess iblockaccess, int i, int j, int k) {
+		return currentPass == 1 ? 0xffffff : getRenderColor(iblockaccess.getBlockMetadata(i, j, k));
+	}
+	
+	@Override
+	protected void init() {
+		if(Item.itemsList[blockID] == null)
+			new ItemBlock(blockID - 256) {
+				@Override
+				public int getPlacedBlockMetadata(int i) {
+					return i;
+				}
+			};
+		super.init();
+	}
+}

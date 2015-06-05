@@ -1,0 +1,26 @@
+package net.minecraft.src;
+
+import org.greencubes.items.unique.DecorItemQuality;
+
+public class ItemChainArmor extends ItemArmor {
+
+	public ItemChainArmor(int i, EnumArmorMaterial enumarmormaterial, int j, int k) {
+		super(i, enumarmormaterial, j, k);
+	}
+
+	@Override
+	public boolean isUnbreakable() {
+		return true;
+	}
+
+	@Override
+	public boolean noDrop() {
+		return true;
+	}
+
+	@Override
+	public DecorItemQuality getDecorQuality() {
+		return DecorItemQuality.NORMAL_WEAR;
+	}
+
+}

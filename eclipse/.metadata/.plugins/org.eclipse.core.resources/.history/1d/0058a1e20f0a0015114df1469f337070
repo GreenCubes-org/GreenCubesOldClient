@@ -1,0 +1,24 @@
+package net.minecraft.src;
+
+import static net.minecraft.src.GreenTextures.glassStepTexture;
+
+import org.greencubes.util.HSVColor;
+
+public class BlockColoredGreenStelGlass extends BlockGreenStepGlass {
+	
+	public final int[][] colors;
+	private int currentPass;
+	private boolean renderingItem = false;
+
+	public BlockColoredGreenStelGlass(int id, Block original, boolean up, int[][] colors) {
+		super(id, Block.glass.blockIndexInTexture, glassStepTexture, original, up);
+		this.colors = colors;
+		for(int i = 0; i < colors.length; ++i) {
+			HSVColor hsv = HSVColor.fromRGB(colors[i][1]);
+			hsv = new HSVColor(hsv.h, Math.min(1.0f, hsv.s / 1.75f), Math.min(1.0f, hsv.v * 1.75f));
+			colors[i][1] = hsv.getRGB();
+		}
+		multipassBlocks[id] = true;
+	}
+
+}

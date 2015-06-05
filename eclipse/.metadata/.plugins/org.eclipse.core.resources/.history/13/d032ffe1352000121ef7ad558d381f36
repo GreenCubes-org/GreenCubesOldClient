@@ -1,0 +1,19 @@
+package net.minecraft.src;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GuiReplays extends GuiScreen {
+
+	private final GuiScreen parentScreen;
+	public List<GuiReplayElement> replaysList = new ArrayList<GuiReplayElement>();
+	
+	public GuiReplays(GuiScreen parent) {
+		parentScreen = parent;
+	}
+	
+	@Override
+	public void initGui() {
+		replaysList.clear();
+	}
+}

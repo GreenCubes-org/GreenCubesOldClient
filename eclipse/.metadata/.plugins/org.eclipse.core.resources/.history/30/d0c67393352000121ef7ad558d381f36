@@ -1,0 +1,15 @@
+package net.minecraft.src;
+
+import java.io.File;
+import java.io.FileInputStream;
+
+public class GuiReplayElement {
+
+	public NBTTagCompound replayTag;
+	public File replayFolder;
+	
+	public GuiReplayElement(File folder) {
+		replayFolder = folder;
+		replayTag =  = CompressedStreamTools.loadGzippedCompoundFromOutputStream(new FileInputStream(replayConfig))
+	}
+}

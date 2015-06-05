@@ -1,0 +1,10 @@
+/temp
+/reobf
+/eclipse/Client/bin
+/jars/saves/
+/jars/stats/
+/jars/screenshots
+/jars/replay
+/bin
+/jars/chat/
+**/Thumbs.db

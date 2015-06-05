@@ -1,0 +1,17 @@
+package net.minecraft.src;
+
+import java.io.File;
+
+import net.minecraft.client.Minecraft;
+
+public class ThreadReplayLoading extends Thread {
+
+	private GuiLoadReplay guiLoadReplay;
+	private Minecraft mc;
+	private File folder;
+	
+	public ThreadReplayLoading(GuiLoadReplay guiLoadReplay, Minecraft minecraft, File folder) {
+		
+	}
+
+}

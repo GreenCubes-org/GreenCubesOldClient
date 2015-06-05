@@ -1,0 +1,28 @@
+package net.minecraft.src;
+
+public class BlockCarpet extends Block {
+
+	public final int[][] textures;
+	
+	public BlockCarpet(int id, int[][] textures) {
+		super(id, Material.wool);
+		this.textures = textures;
+		setBlockBounds(0f, 0f, 0f, 1f, 1f / 32f, 1f);
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		return null;
+	}
+	
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k) {
+		int data = iblockaccess.getBlockMetadata(i, j, k);
+		setBlockBounds((data & 1) == 1 ? 1f / 16f : 0, 0f, (data & 2) == 2 ? 1f / 16f : 0f, (data & 4) == 4 ? 15f / 16f : 1f, 1f / 32f, (data & 8) == 8 ? 15f / 16f : 1f);
+	}
+	
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int i, int j) {
+		return super.getBlockTextureFromSideAndMetadata(i, j);
+	}
+}

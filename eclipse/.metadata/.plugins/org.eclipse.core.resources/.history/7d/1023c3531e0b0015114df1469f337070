@@ -1,0 +1,246 @@
+package net.minecraft.src;
+
+public class BlockGreenStepGlass extends BlockGreenStepTextured {
+	
+	public static int end_down = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_end_down.png");
+	public static int end_up = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_end_up.png");
+	public static int end_left = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_end_left.png");
+	public static int end_right = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_end_right.png");
+	public static int line_x = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_line_x.png");
+	public static int line_z = ModLoader.addOverride("/terrain.png", "/gc_images/glasshalf_line_z.png");
+
+	public BlockGreenStepGlass(int i, int upTexture, int sideTexture, Block original, boolean up) {
+		super(i, upTexture, sideTexture, original, up);
+	}
+
+	@Override
+	public int getBlockTexture(IBlockAccess iblockaccess, int x, int y, int z, int i) {
+		int d = iblockaccess.getBlockMetadata(x, y, z);
+		int t = genericBlockTextureFromSideAndMetadata(i, d);
+		if(t != super.getBlockTextureFromSideAndMetadata(i, d))
+			return t;
+		int texture = BlockGlassNew.glass0;
+		boolean b[] = new boolean[6];
+		if(i > 1) {
+			switch(BlockFace.getFaceById(i)) {
+			case EAST:
+				b[0] = isShouldBeConnected(iblockaccess, x - 1, y, z, i, d);
+				b[1] = isShouldBeConnected(iblockaccess, x + 1, y, z, i, d);
+				if(b[0] && b[1])
+					return line_x;
+				else if(b[0])
+					return end_left;
+				else if(b[1])
+					return end_right;
+				break;
+			case WEST:
+				b[0] = isShouldBeConnected(iblockaccess, x - 1, y, z, i, d);
+				b[1] = isShouldBeConnected(iblockaccess, x + 1, y, z, i, d);
+				if(b[0] && b[1])
+					return line_x;
+				else if(b[0])
+					return end_right;
+				else if(b[1])
+					return end_left;
+				break;
+			case NORTH:
+				b[2] = isShouldBeConnected(iblockaccess, x, y, z + 1, i, d);
+				b[3] = isShouldBeConnected(iblockaccess, x, y, z - 1, i, d);
+				
+				break;
+			case SOUTH:
+				b[2] = isShouldBeConnected(iblockaccess, x, y, z + 1, i, d);
+				b[3] = isShouldBeConnected(iblockaccess, x, y, z - 1, i, d);
+				
+				break;
+			default:
+				break;
+			}
+			return t;
+		}
+		if(i <= 1) {
+			b[0] = isShouldBeConnected(iblockaccess, x - 1, y, z, i, d);
+			b[1] = isShouldBeConnected(iblockaccess, x + 1, y, z, i, d);
+			b[2] = isShouldBeConnected(iblockaccess, x, y, z + 1, i, d);
+			b[3] = isShouldBeConnected(iblockaccess, x, y, z - 1, i, d);
+		} else if(i == 2) {
+			b[0] = isShouldBeConnected(iblockaccess, x + 1, y, z, i, d);
+			b[1] = isShouldBeConnected(iblockaccess, x - 1, y, z, i, d);
+			b[2] = isShouldBeConnected(iblockaccess, x, y - 1, z, i, d);
+			b[3] = isShouldBeConnected(iblockaccess, x, y + 1, z, i, d);
+		} else if(i == 3) {
+			b[0] = isShouldBeConnected(iblockaccess, x - 1, y, z, i, d);
+			b[1] = isShouldBeConnected(iblockaccess, x + 1, y, z, i, d);
+			b[2] = isShouldBeConnected(iblockaccess, x, y - 1, z, i, d);
+			b[3] = isShouldBeConnected(iblockaccess, x, y + 1, z, i, d);
+		} else if(i == 4) {
+			b[0] = isShouldBeConnected(iblockaccess, x, y, z - 1, i, d);
+			b[1] = isShouldBeConnected(iblockaccess, x, y, z + 1, i, d);
+			b[2] = isShouldBeConnected(iblockaccess, x, y - 1, z, i, d);
+			b[3] = isShouldBeConnected(iblockaccess, x, y + 1, z, i, d);
+		} else if(i == 5) {
+			b[0] = isShouldBeConnected(iblockaccess, x, y, z + 1, i, d);
+			b[1] = isShouldBeConnected(iblockaccess, x, y, z - 1, i, d);
+			b[2] = isShouldBeConnected(iblockaccess, x, y - 1, z, i, d);
+			b[3] = isShouldBeConnected(iblockaccess, x, y + 1, z, i, d);
+		}
+		if(b[0] & !b[1] & !b[2] & !b[3])
+			texture = BlockGlassNew.glass3;
+		else if(!b[0] & b[1] & !b[2] & !b[3])
+			texture = BlockGlassNew.glass1;
+		else if(!b[0] & !b[1] & b[2] & !b[3])
+			texture = BlockGlassNew.glass16;
+		else if(!b[0] & !b[1] & !b[2] & b[3])
+			texture = BlockGlassNew.glass48;
+		else if(b[0] & b[1] & !b[2] & !b[3])
+			texture = BlockGlassNew.glass2;
+		else if(!b[0] & !b[1] & b[2] & b[3])
+			texture = BlockGlassNew.glass32;
+		else if(b[0] & !b[1] & b[2] & !b[3])
+			texture = BlockGlassNew.glass19;
+		else if(b[0] & !b[1] & !b[2] & b[3])
+			texture = BlockGlassNew.glass51;
+		else if(!b[0] & b[1] & b[2] & !b[3])
+			texture = BlockGlassNew.glass17;
+		else if(!b[0] & b[1] & !b[2] & b[3])
+			texture = BlockGlassNew.glass49;
+		else if(!b[0] & b[1] & b[2] & b[3])
+			texture = BlockGlassNew.glass33;
+		else if(b[0] & !b[1] & b[2] & b[3])
+			texture = BlockGlassNew.glass35;
+		else if(b[0] & b[1] & !b[2] & b[3])
+			texture = BlockGlassNew.glass50;
+		else if(b[0] & b[1] & b[2] & !b[3])
+			texture = BlockGlassNew.glass18;
+		else if(b[0] & b[1] & b[2] & b[3])
+			texture = BlockGlassNew.glass34;
+
+		if(Block.leaves.isOpaqueCube()) {
+			return texture;
+		}
+
+		boolean b2[] = new boolean[6];
+		if(i <= 1) {
+			b2[0] = !isShouldBeConnected(iblockaccess, x + 1, y, z + 1, i, d);
+			b2[1] = !isShouldBeConnected(iblockaccess, x - 1, y, z + 1, i, d);
+			b2[2] = !isShouldBeConnected(iblockaccess, x + 1, y, z - 1, i, d);
+			b2[3] = !isShouldBeConnected(iblockaccess, x - 1, y, z - 1, i, d);
+		} else if(i == 2) {
+			b2[0] = !isShouldBeConnected(iblockaccess, x - 1, y - 1, z, i, d);
+			b2[1] = !isShouldBeConnected(iblockaccess, x + 1, y - 1, z, i, d);
+			b2[2] = !isShouldBeConnected(iblockaccess, x - 1, y + 1, z, i, d);
+			b2[3] = !isShouldBeConnected(iblockaccess, x + 1, y + 1, z, i, d);
+		} else if(i == 3) {
+			b2[0] = !isShouldBeConnected(iblockaccess, x + 1, y - 1, z, i, d);
+			b2[1] = !isShouldBeConnected(iblockaccess, x - 1, y - 1, z, i, d);
+			b2[2] = !isShouldBeConnected(iblockaccess, x + 1, y + 1, z, i, d);
+			b2[3] = !isShouldBeConnected(iblockaccess, x - 1, y + 1, z, i, d);
+		} else if(i == 4) {
+			b2[0] = !isShouldBeConnected(iblockaccess, x, y - 1, z + 1, i, d);
+			b2[1] = !isShouldBeConnected(iblockaccess, x, y - 1, z - 1, i, d);
+			b2[2] = !isShouldBeConnected(iblockaccess, x, y + 1, z + 1, i, d);
+			b2[3] = !isShouldBeConnected(iblockaccess, x, y + 1, z - 1, i, d);
+		} else if(i == 5) {
+			b2[0] = !isShouldBeConnected(iblockaccess, x, y - 1, z - 1, i, d);
+			b2[1] = !isShouldBeConnected(iblockaccess, x, y - 1, z + 1, i, d);
+			b2[2] = !isShouldBeConnected(iblockaccess, x, y + 1, z - 1, i, d);
+			b2[3] = !isShouldBeConnected(iblockaccess, x, y + 1, z + 1, i, d);
+		}
+
+		if(texture == BlockGlassNew.glass17 && b2[0])
+			texture = BlockGlassNew.glass4;
+		else if(texture == BlockGlassNew.glass19 && b2[1])
+			texture = BlockGlassNew.glass5;
+		else if(texture == BlockGlassNew.glass49 && b2[2])
+			texture = BlockGlassNew.glass20;
+		else if(texture == BlockGlassNew.glass51 && b2[3])
+			texture = BlockGlassNew.glass21;
+		else if(texture == BlockGlassNew.glass18 && b2[0] && b2[1])
+			texture = BlockGlassNew.glass7;
+		else if(texture == BlockGlassNew.glass33 && b2[0] && b2[2])
+			texture = BlockGlassNew.glass6;
+		else if(texture == BlockGlassNew.glass35 && b2[3] && b2[1])
+			texture = BlockGlassNew.glass23;
+		else if(texture == BlockGlassNew.glass50 && b2[3] && b2[2])
+			texture = BlockGlassNew.glass22;
+
+		else if(texture == BlockGlassNew.glass18 && !b2[0] && b2[1])
+			texture = BlockGlassNew.glass39;
+		else if(texture == BlockGlassNew.glass33 && b2[0] && !b2[2])
+			texture = BlockGlassNew.glass38;
+		else if(texture == BlockGlassNew.glass35 && !b2[3] && b2[1])
+			texture = BlockGlassNew.glass53;
+		else if(texture == BlockGlassNew.glass50 && b2[3] && !b2[2])
+			texture = BlockGlassNew.glass52;
+
+		else if(texture == BlockGlassNew.glass18 && b2[0] && !b2[1])
+			texture = BlockGlassNew.glass37;
+		else if(texture == BlockGlassNew.glass33 && !b2[0] && b2[2])
+			texture = BlockGlassNew.glass36;
+		else if(texture == BlockGlassNew.glass35 && b2[3] && !b2[1])
+			texture = BlockGlassNew.glass55;
+		else if(texture == BlockGlassNew.glass50 && !b2[3] && b2[2])
+			texture = BlockGlassNew.glass54;
+
+		else if(texture == BlockGlassNew.glass34 && b2[0] && b2[1] && b2[2] && b2[3])
+			texture = BlockGlassNew.glass58;
+
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && b2[1] && b2[2] && b2[3])
+			texture = BlockGlassNew.glass9;
+		else if(texture == BlockGlassNew.glass34 && b2[0] && !b2[1] && b2[2] && b2[3])
+			texture = BlockGlassNew.glass25;
+		else if(texture == BlockGlassNew.glass34 && b2[0] && b2[1] && !b2[2] && b2[3])
+			texture = BlockGlassNew.glass8;
+		else if(texture == BlockGlassNew.glass34 && b2[0] && b2[1] && b2[2] && !b2[3])
+			texture = BlockGlassNew.glass24;
+
+		else if(texture == BlockGlassNew.glass34 && b2[0] && b2[1] && !b2[2] && !b2[3])
+			texture = BlockGlassNew.glass11;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && !b2[1] && b2[2] && b2[3])
+			texture = BlockGlassNew.glass26;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && b2[1] && !b2[2] && b2[3])
+			texture = BlockGlassNew.glass27;
+		else if(texture == BlockGlassNew.glass34 && b2[0] && !b2[1] && b2[2] && !b2[3])
+			texture = BlockGlassNew.glass10;
+
+		else if(texture == BlockGlassNew.glass34 && b2[0] && !b2[1] && !b2[2] && b2[3])
+			texture = BlockGlassNew.glass42;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && b2[1] && b2[2] && !b2[3])
+			texture = BlockGlassNew.glass43;
+
+		else if(texture == BlockGlassNew.glass34 && b2[0] && !b2[1] && !b2[2] && !b2[3])
+			texture = BlockGlassNew.glass40;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && b2[1] && !b2[2] && !b2[3])
+			texture = BlockGlassNew.glass41;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && !b2[1] && b2[2] && !b2[3])
+			texture = BlockGlassNew.glass56;
+		else if(texture == BlockGlassNew.glass34 && !b2[0] && !b2[1] && !b2[2] && b2[3])
+			texture = BlockGlassNew.glass57;
+		return texture;
+	}
+
+	public int genericBlockTextureFromSideAndMetadata(int i, int j) {
+		if(i == 0 || i == 1)
+			return super.getBlockTextureFromSideAndMetadata(i, j);
+		return sideTexture;
+	}
+
+	protected boolean isShouldBeConnected(IBlockAccess iblockaccess, int x, int y, int z, int i, int d) {
+		int x2 = x;
+		int y2 = y;
+		int z2 = z;
+		if(i == 0)
+			y2--;
+		else if(i == 1)
+			y2++;
+		else if(i == 2)
+			z2--;
+		else if(i == 3)
+			z2++;
+		else if(i == 4)
+			x2--;
+		else if(i == 5)
+			x2++;
+		return ((iblockaccess.getBlockId(x, y, z) == blockID && iblockaccess.getBlockMetadata(x, y, z) == d) && !iblockaccess.isBlockOpaqueCube(x2, y2, z2) && (iblockaccess.getBlockId(x2, y2, z2) != blockID));
+	}
+}

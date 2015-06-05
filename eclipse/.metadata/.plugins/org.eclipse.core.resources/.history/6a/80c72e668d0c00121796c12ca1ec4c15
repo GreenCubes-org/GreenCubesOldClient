@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class EntityDotFX extends EntityFX {
+
+	public EntityDotFX(World world, double d, double d1, double d2, double d3, double d4, double d5) {
+		super(world, d, d1, d2, 0, 0, 0);
+		this.particleMaxAge = 20 * 60 * 10;
+	}
+
+}

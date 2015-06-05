@@ -1,0 +1,17 @@
+package net.minecraft.src;
+
+import org.greencubes.items.unique.DecorItemQuality;
+
+public class ItemCloth extends ItemWearable {
+
+	public ItemCloth(int id, int texture, int slot) {
+		super(id, texture. slot);
+		setMaxDamage(-1);
+	}
+
+	@Override
+	public DecorItemQuality getDecorQuality() {
+		return DecorItemQuality.NORMAL_WEAR;
+	}
+
+}

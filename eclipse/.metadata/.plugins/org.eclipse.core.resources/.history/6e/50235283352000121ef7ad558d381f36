@@ -1,0 +1,14 @@
+package net.minecraft.src;
+
+import java.io.File;
+
+public class GuiReplayElement {
+
+	public NBTTagCompound replayTag;
+	public File replayFolder;
+	
+	public GuiReplayElement(File folder) {
+		replayFolder = folder;
+		
+	}
+}

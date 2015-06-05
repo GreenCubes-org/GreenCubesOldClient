@@ -1,0 +1,20 @@
+package net.minecraft.src;
+
+import java.util.List;
+
+public class ItemRenameMod extends Item {
+
+	public ItemRenameMod(int i) {
+		super(i);
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		list.add("Для переименования используйте команду \247rb/rename");
+		if(itemstack.nbtData != null && itemstack.nbtData.hasKey("ModValue")) {
+			list.add("После использования на предмете сменит его имя на:");
+			list.add("\2477\"" + itemstack.nbtData.getString("ModValue") + "\"");
+		}
+	}
+
+}

@@ -1,0 +1,200 @@
+package net.minecraft.src;
+
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import net.minecraft.client.Minecraft;
+
+import org.lwjgl.opengl.ARBOcclusionQuery;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
+
+public class ARBOcclusionChecker {
+
+	private static final int arbQueryMaxSize = 20480;
+	private static final int ticksToClear = 60;
+	
+	public static ARBOcclusionChecker instance = new ARBOcclusionChecker();
+	
+	private Minecraft mc;
+	private boolean enabled = false;
+	private IntBuffer glOcclusionQueryBase;
+	private IntBuffer occlusionResult;
+	private Map<Object,ARBResult> arbResult = new HashMap<Object,ARBResult>();
+	private Queue<Integer> arbIdsQueue;
+	private boolean isInQueue = false;
+	private List<ARBResult> resultsList;
+	
+	public int objects = 0;
+	public int hiddenObjects = 0;
+	public int passed = 0;
+	private int p = 0;
+	
+	private ARBOcclusionChecker() {
+		
+	}
+	
+	public void init() {
+		mc = Minecraft.theMinecraft;
+		enabled = GLContext.getCapabilities().GL_ARB_occlusion_query;
+		if(enabled) {
+			occlusionResult = GLAllocation.createDirectIntBuffer(64);
+			glOcclusionQueryBase = GLAllocation.createDirectIntBuffer(arbQueryMaxSize);
+			glOcclusionQueryBase.clear();
+			glOcclusionQueryBase.position(0);
+			glOcclusionQueryBase.limit(arbQueryMaxSize);
+			ARBOcclusionQuery.glGenQueriesARB(glOcclusionQueryBase);
+			System.out.println("ARB Occlusion Enabled");
+			arbIdsQueue = new ArrayBlockingQueue<Integer>(arbQueryMaxSize);
+			for(int i = 0; i < arbQueryMaxSize; ++i)
+				arbIdsQueue.add(Integer.valueOf(i));
+			resultsList = new ArrayList<ARBResult>();
+		}
+	}
+	
+	private int getNextBufferId() {
+		Integer ret = arbIdsQueue.poll();
+		if(ret == null)
+			return -1;
+		return ret;
+	}
+	
+	public void tick() {
+		if(!enabled)
+			return;
+		objects = resultsList.size();
+		hiddenObjects = 0;
+		passed = p;
+		p = 0;
+		if(resultsList.size() > 0) {
+			Profiler.startSection("ARB");
+			GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+			GL11.glDisable(2896 /* GL_LIGHTING */);
+			GL11.glDisable(3008 /* GL_ALPHA_TEST */);
+			GL11.glDisable(2912 /* GL_FOG */);
+			GL11.glColorMask(false, false, false, false);
+			GL11.glDepthMask(false);
+			GL11.glPushMatrix();
+			for(int i = 0; i < resultsList.size(); ++i) {
+				ARBResult r = resultsList.get(i);
+				r.ticksFromLastCheck++;
+				if(r.ticksFromLastCheck > 60) {
+					clearResult(r);
+					continue;
+				}
+				if(!r.isQueuing) {
+					r.isQueuing = true;
+					ARBOcclusionQuery.glBeginQueryARB(35092 /* GL_SAMPLES_PASSED_ARB */, r.id);
+					if(r.bb != null) {
+						r.list = GL11.glGenLists(1);
+						GL11.glNewList(r.list, GL11.GL_COMPILE_AND_EXECUTE);
+						RenderItem.renderAABB(r.bb);
+						GL11.glEndList();
+						r.bb = null;
+					} else if(r.list != -1) {
+						GL11.glCallList(r.list);
+					}
+					ARBOcclusionQuery.glEndQueryARB(35092 /* GL_SAMPLES_PASSED_ARB */);
+				} else if(!r.hasResult) {
+					ARBOcclusionQuery.glGetQueryObjectuARB(r.id, 34919 /* GL_QUERY_RESULT_AVAILABLE_ARB */, occlusionResult);
+					if(occlusionResult.get(0) != 0) {
+						r.hasResult = true;
+						occlusionResult.clear();
+						ARBOcclusionQuery.glGetQueryObjectuARB(r.id, 34918 /* GL_QUERY_RESULT_ARB */, occlusionResult);
+						r.result = r.oldResult = occlusionResult.get(0) != 0;
+					}
+				}
+				if(r.hasResult) {
+					if(!r.result)
+						hiddenObjects++;
+				} else if(r.hasOldResult) {
+					if(!r.oldResult)
+						hiddenObjects++;
+				}
+			}
+			GL11.glPopMatrix();
+			if(mc.gameSettings.anaglyph) {
+				if(EntityRenderer.anaglyphField == 0) {
+					GL11.glColorMask(false, true, true, true);
+				} else {
+					GL11.glColorMask(true, false, false, true);
+				}
+			} else {
+				GL11.glColorMask(true, true, true, true);
+			}
+			GL11.glDepthMask(true);
+			GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+			GL11.glEnable(3008 /* GL_ALPHA_TEST */);
+			GL11.glEnable(2912 /* GL_FOG */);
+			Profiler.endSection();
+		}
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	private void clearResult(ARBResult result) {
+		resultsList.remove(result);
+		arbResult.remove(result.o);
+		arbIdsQueue.add(result.id);
+		if(result.list != -1)
+			GL11.glDeleteLists(result.list, 1);
+	}
+	
+	public boolean queueForARB(Object object, AxisAlignedBB bb) {
+		return queueForARB(object, bb, -1);
+	}
+	
+	public boolean hasCheck(Object o) {
+		return arbResult.get(o) != null;
+	}
+	
+	public boolean queueForARB(Object object, AxisAlignedBB bb, int list) {
+		if(!enabled)
+			return true;
+		ARBResult r = arbResult.get(object);
+		if(r == null) {
+			if(bb == null && list == -1)
+				throw new IllegalStateException("No model for new arb check!");
+			int nextBuffer = getNextBufferId();
+			if(nextBuffer == -1)
+				return true;
+			r = new ARBResult();
+			r.id = glOcclusionQueryBase.get(nextBuffer);
+			r.o = object;
+			r.bb = bb;
+			r.list = list;
+			resultsList.add(r);
+			arbResult.put(object, r);
+		} else if(!r.hasResult && !r.hasOldResult) {
+			r.ticksFromLastCheck = 0;
+			return true;
+		} else if(r.hasResult) {
+			r.oldResult = r.result;
+			r.hasOldResult = true;
+			r.hasResult = false;
+			r.isQueuing = false;
+		}
+		r.ticksFromLastCheck = 0;
+		return (!r.hasOldResult && !r.hasResult) || r.oldResult;
+	}
+	
+	private class ARBResult {
+		public boolean isQueuing = false;
+		public boolean hasResult = false;
+		public boolean hasOldResult = false;
+		public boolean result = false;
+		public int ticksFromLastCheck = 0;
+		public boolean oldResult = false;
+		public int id;
+		public Object o;
+		public AxisAlignedBB bb;
+		public int list;
+	}
+}

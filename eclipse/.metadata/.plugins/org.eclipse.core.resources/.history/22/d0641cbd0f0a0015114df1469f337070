@@ -1,0 +1,16 @@
+package net.minecraft.src;
+
+import static net.minecraft.src.GreenTextures.glassStepTexture;
+
+public class BlockColoredGreenStelGlass extends BlockGreenStepGlass {
+	
+	public final int[][] colors;
+	private int currentPass;
+	private boolean renderingItem = false;
+
+	public BlockColoredGreenStelGlass(int id, Block original, boolean up, int[][] colors) {
+		super(id, Block.glass.blockIndexInTexture, glassStepTexture, original, up);
+		// TODO Auto-generated constructor stub
+	}
+
+}

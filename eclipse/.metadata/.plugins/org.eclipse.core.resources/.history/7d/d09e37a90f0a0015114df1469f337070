@@ -1,0 +1,10 @@
+package net.minecraft.src;
+
+public class BlockColoredGreenStelGlass extends BlockGreenStepGlass {
+
+	public BlockColoredGreenStelGlass(int i, int upTexture, int sideTexture, Block original, boolean up) {
+		super(i, upTexture, sideTexture, original, up);
+		// TODO Auto-generated constructor stub
+	}
+
+}
