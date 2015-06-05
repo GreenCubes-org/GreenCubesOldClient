@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename local variable &apos;byte0&apos; in &apos;net.minecraft.src.RenderItem.doRenderItem(...)&apos; to &apos;renderedCount&apos;&#x0D;&#x0A;- Original project: &apos;Client&apos;&#x0D;&#x0A;- Original element: &apos;net.minecraft.src.RenderItem.doRenderItem(EntityItem, double, double, double, float, float).byte0&apos;&#x0D;&#x0A;- Renamed element: &apos;byte0&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;byte0&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;net.minecraft.src{RenderItem.java[RenderItem~doRenderItem~QEntityItem;~D~D~D~F~F@byte0!1588!1597!1592!1596!I!0!false" name="renderedCount" references="true" stamp="1357543981025" version="1.0"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;net.minecraft.src.BlockClothStairs&apos; to &apos;BlockStairsCloth&apos;&#x0D;&#x0A;- Original project: &apos;Client&apos;&#x0D;&#x0A;- Original element: &apos;net.minecraft.src.BlockClothStairs&apos;&#x0D;&#x0A;- Renamed element: &apos;net.minecraft.src.BlockStairsCloth&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;BlockClothStairs&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;net.minecraft.src{BlockClothStairs.java[BlockClothStairs" matchStrategy="1" name="BlockStairsCloth" qualified="false" references="true" similarDeclarations="false" stamp="1332716111205" textual="false" version="1.0"/>
-</session>

@@ -1,7 +1,0 @@
-package net.minecraft.src;
-
-public class GuiReplayElement {
-
-	public NBTTagCompound replayTag;
-	public File replayFolder;
-}

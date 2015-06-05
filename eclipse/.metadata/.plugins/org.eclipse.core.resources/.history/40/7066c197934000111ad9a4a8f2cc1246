@@ -1,6 +1,0 @@
-package net.minecraft.src;
-
-public class BlockSlope extends Block {
-	
-
-}

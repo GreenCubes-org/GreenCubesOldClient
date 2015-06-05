@@ -1,9 +1,0 @@
-package net.minecraft.src;
-
-public class ItemBanner extends Item {
-
-	protected ItemBanner(int i) {
-		super(i);
-	}
-
-}
