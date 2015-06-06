@@ -76,10 +76,10 @@ public class Item {
 	public static Item plateDiamond = new ItemArmorRepairable(55, EnumArmorMaterial.DIAMOND, 3, 1, 3046).setIconCoord(3, 1).setItemName("chestplateDiamond");
 	public static Item legsDiamond = new ItemArmorRepairable(56, EnumArmorMaterial.DIAMOND, 3, 2, 3046).setIconCoord(3, 2).setItemName("leggingsDiamond");
 	public static Item bootsDiamond = new ItemArmorRepairable(57, EnumArmorMaterial.DIAMOND, 3, 3, 3046).setIconCoord(3, 3).setItemName("bootsDiamond");
-	public static Item helmetGold = new ItemArmor(58, EnumArmorMaterial.GOLD, 4, 0, ingotGold.shiftedIndex).setIconCoord(4, 0).setItemName("helmetGold");
-	public static Item plateGold = new ItemArmor(59, EnumArmorMaterial.GOLD, 4, 1, ingotGold.shiftedIndex).setIconCoord(4, 1).setItemName("chestplateGold");
-	public static Item legsGold = new ItemArmor(60, EnumArmorMaterial.GOLD, 4, 2, ingotGold.shiftedIndex).setIconCoord(4, 2).setItemName("leggingsGold");
-	public static Item bootsGold = new ItemArmor(61, EnumArmorMaterial.GOLD, 4, 3, ingotGold.shiftedIndex).setIconCoord(4, 3).setItemName("bootsGold");
+	public static Item helmetGold = new ItemArmorRepairable(58, EnumArmorMaterial.GOLD, 4, 0, ingotGold.shiftedIndex).setIconCoord(4, 0).setItemName("helmetGold");
+	public static Item plateGold = new ItemArmorRepairable(59, EnumArmorMaterial.GOLD, 4, 1, ingotGold.shiftedIndex).setIconCoord(4, 1).setItemName("chestplateGold");
+	public static Item legsGold = new ItemArmorRepairable(60, EnumArmorMaterial.GOLD, 4, 2, ingotGold.shiftedIndex).setIconCoord(4, 2).setItemName("leggingsGold");
+	public static Item bootsGold = new ItemArmorRepairable(61, EnumArmorMaterial.GOLD, 4, 3, ingotGold.shiftedIndex).setIconCoord(4, 3).setItemName("bootsGold");
 	public static Item flint = new Item(62).setIconCoord(6, 0).setItemName("flint");
 	public static Item porkRaw = new ItemFood(63, 3, 0.3F, true).setIconCoord(7, 5).setItemName("porkchopRaw");
 	public static Item porkCooked = new ItemFood(64, 8, 0.8F, true).setIconCoord(8, 5).setItemName("porkchopCooked");
