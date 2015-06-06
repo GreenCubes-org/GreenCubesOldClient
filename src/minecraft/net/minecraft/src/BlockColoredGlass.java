@@ -51,12 +51,7 @@ public class BlockColoredGlass extends BlockGlassNew {
 	@Override
 	protected void init() {
 		if(Item.itemsList[blockID] == null)
-			new ItemBlock(blockID - 256) {
-				@Override
-				public int getPlacedBlockMetadata(int i) {
-					return i;
-				}
-			};
+			new ItemBlockColored(blockID - 256);
 		super.init();
 	}
 }

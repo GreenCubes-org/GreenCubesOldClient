@@ -140,7 +140,7 @@ public class Block {
 	public static final Block stoneBrick = new BlockStoneBrick(98).setHardness(1.5F).setResistance(10F).setStepSound(soundStoneFootstep).setBlockName("stonebricksmooth");
 	public static final Block mushroomCapBrown = new BlockMushroomCap(99, Material.wood, 142, 0).setHardness(0.2F).setStepSound(soundWoodFootstep).setBlockName("mushroom").setRequiresSelfNotify();
 	public static final Block mushroomCapRed = new BlockMushroomCap(100, Material.wood, 142, 1).setHardness(0.2F).setStepSound(soundWoodFootstep).setBlockName("mushroom").setRequiresSelfNotify();
-	public static final Block fenceIron = new BlockPane(101, 85, 85, 85, Material.iron, true).setHardness(5F).setResistance(10F).setStepSound(soundMetalFootstep).setBlockName("fenceIron");
+	public static final Block fenceIron = new BlockPane(101, 85, pane_iron, pane_iron, Material.iron, true).setHardness(5F).setResistance(10F).setStepSound(soundMetalFootstep).setBlockName("fenceIron");
 	public static final Block thinGlass = new BlockPane(102, 49, glass_pane, glass_pane_cut, Material.glass, false).setHardness(0.3F).setStepSound(soundGlassFootstep).setBlockName("thinGlass");
 	public static final Block melon = new BlockMelon(103).setHardness(1.0F).setStepSound(soundWoodFootstep).setBlockName("melon");
 	public static final Block pumpkinStem = new BlockStem(104, pumpkin).setHardness(0.0F).setStepSound(soundWoodFootstep).setBlockName("pumpkinStem").setRequiresSelfNotify();
@@ -497,7 +497,7 @@ public class Block {
 	public static final Block blockSakuraPlanks = new Block(1238, sakuraplank, Material.wood).setStepSound(Block.soundWoodFootstep).setBlockName("sakuraPlanks").setHardness(2.0F);
 	public static final Block blockSakuraPlanksStairs = new BlockStairs(1463, blockSakuraPlanks).setStepSound(Block.soundWoodFootstep).setBlockName("sakuraPlanksStairs");
 	public static final Block blockAppleTreeLeavesPlayer = new BlockAppleTreeLeaves(1239, BlockAppleTreeLeaves.leaves).setHardness(Block.leaves.blockHardness).setStepSound(Block.soundGrassFootstep).setBlockName("appleTreeLeaves");
-	public static final Block blockGoldFence = new BlockPane(1240, goldFenceTexture, goldFenceTexture, goldFenceTexture, Material.iron, true).setHardness(5F).setResistance(10F).setStepSound(Block.soundMetalFootstep).setBlockName("goldFence");
+	public static final Block blockGoldFence = new BlockPane(1240, goldFenceTexture, pane_gold, pane_gold, Material.iron, true).setHardness(5F).setResistance(10F).setStepSound(Block.soundMetalFootstep).setBlockName("goldFence");
 	public static final Block blockBriarShrub = new BlockBriar(1241, true).setHardness(0.2F).setStepSound(Block.soundGrassFootstep).setBlockName("briar");
 	public static final Block blockCoalBlock = new BlockCoal(1242).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setBlockName("coalBlock");
 	public static final Block blockFacelessPumpkin = new BlockFacelessPumpkin(1243).setHardness(1.0F).setStepSound(Block.soundWoodFootstep).setBlockName("facelessPumpkin");

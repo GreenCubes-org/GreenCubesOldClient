@@ -86,14 +86,14 @@ public class BlockColoredGreenStepGlass extends BlockGreenStepGlass {
 					public int getPlacedBlockMetadata(int i) {
 						return i;
 					}
-				};
-			} else {
-				new ItemBlock(blockID - 256) {
+					
 					@Override
-					public int getPlacedBlockMetadata(int i) {
-						return i;
+					public String getItemNameIS(ItemStack itemstack) {
+						return (new StringBuilder()).append(super.getItemName()).append(".").append(ItemDye.dyeColorNames[BlockWool.getBlockFromDye(itemstack.getItemDamage())]).toString();
 					}
 				};
+			} else {
+				new ItemBlockColored(blockID - 256);
 			}
 		}
 		super.init();

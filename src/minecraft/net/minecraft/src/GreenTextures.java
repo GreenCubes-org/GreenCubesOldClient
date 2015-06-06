@@ -551,6 +551,8 @@ public class GreenTextures {
 	
 	public static int glass_pane = ModLoader.addOverride("/terrain.png", "/gc_images/glass.pane.png");
 	public static int glass_pane_cut = ModLoader.addOverride("/terrain.png", "/gc_images/glass.pane.inner.png");
+	public static int pane_iron = ModLoader.addOverride("/terrain.png", "/gc_images/pane.iron.png");
+	public static int pane_gold = ModLoader.addOverride("/terrain.png", "/gc_images/pane.gold.png");
 
 	public static int P_L_TEX_1_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/light_1_1.png");
 	public static int P_L_TEX_1_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/light_1_2.png");

@@ -59,7 +59,7 @@ public class BlockCarpet extends Block {
 	@Override
 	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer entityplayer, int face) {
 		ItemStack item = entityplayer.getCurrentEquippedItem();
-		if(item == null || !(item.getItem() instanceof ItemCarpet))
+		if(item == null || !(item.getItem() instanceof ItemBlockColored))
 			return;
 		int data = world.getBlockMetadata(x, y, z);
 		int sides = ((data & 0xF) + 1) % 16;
@@ -69,7 +69,17 @@ public class BlockCarpet extends Block {
 	@Override
 	protected void init() {
 		if(Item.itemsList[blockID] == null)
-			new ItemCarpet(blockID - 256);
+			new ItemBlock(blockID - 256) {
+				@Override
+				public int getPlacedBlockMetadata(int i) {
+					return i;
+				}
+				
+				@Override
+				public String getItemNameIS(ItemStack itemstack) {
+					return (new StringBuilder()).append(super.getItemName()).append(".").append(itemstack.getItemDamage()).toString();
+				}
+			};
 		super.init();
 	}
 }

@@ -204,12 +204,7 @@ public class BlockPane extends Block {
 	@Override
 	protected void init() {
 		if(Item.itemsList[blockID] == null)
-			new ItemBlock(blockID - 256) {
-				@Override
-				public int getIconFromDamage(int i) {
-					return blockIndexInTexture;
-				}
-			};
+			new ItemBlockPane(blockID - 256);
 		super.init();
 	}
 }
