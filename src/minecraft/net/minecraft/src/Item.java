@@ -186,7 +186,7 @@ public class Item {
 	public static Item cherryBow = new ItemCherryBow(3036 - 256, 2.0f).setIconIndex(cherryBowIcon).setItemName("cherryBow");
 	public static Item diamondArrow = new ItemArrow(3037 - 256, 2f, 2f).setIconIndex(diamondArrowIcon).setItemName("diamondArrow");
 	public static Item cherryStick = new Item(3038 - 256).setIconIndex(cherryStickIcon).setItemName("cherryStick").setFull3D().setUsable();
-	public static Item explosiveArrow = new ItemArrow(3039 - 256, 1f, 0.8f).setIconIndex(explosiveArrowIcon).setItemName("explosiveArrow");
+	public static Item explosiveArrow = new ItemArrow(3039 - 256, 8f, 0.5f).setIconIndex(explosiveArrowIcon).setItemName("explosiveArrow");
 	public static Item redTileItem = new ItemReed(3040 - 256, Block.blockTileRed_45degree).setIconIndex(redTileIcon).setItemName("redTile");
 	public static Item orangeTileItem = new ItemReed(3041 - 256, Block.blockTileOrange_45degree).setIconIndex(orangeTileIcon).setItemName("orangeTile");
 	public static Item whiteTileItem = new ItemReed(3042 - 256, Block.blockTileWhite_45degree).setIconIndex(whiteTileIcon).setItemName("whiteTile");
