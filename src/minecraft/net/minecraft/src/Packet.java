@@ -10,11 +10,13 @@ import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
 import java.util.*;
 
 public abstract class Packet {
 
 	public static TIntObjectHashMap<Class<? extends Packet>> packetIdToClassMap = new TIntObjectHashMap<Class<? extends Packet>>();
+	private static final Constructor<? extends Packet>[] constructors = new Constructor[256];
 	private static Map<Class<? extends Packet>, Integer> packetClassToIdMap = new THashMap<Class<? extends Packet>, Integer>();
 	private static TIntSet clientPacketIdList = new TIntHashSet();
 	private static TIntSet serverPacketIdList = new TIntHashSet();
@@ -25,28 +27,33 @@ public abstract class Packet {
 		isChunkDataPacket = false;
 	}
 
-	static void addIdClassMapping(int i, boolean fromClient, boolean fromServer, Class<? extends Packet> class1) {
+	static void addIdClassMapping(int i, boolean fromServer, boolean fromClient, Class<? extends Packet> class1) {
 		if(packetIdToClassMap.containsKey(i))
 			throw new IllegalArgumentException((new StringBuilder()).append("Duplicate packet id:").append(i).toString());
 		if(packetClassToIdMap.containsKey(class1))
 			throw new IllegalArgumentException((new StringBuilder()).append("Duplicate packet class:").append(class1).toString());
 		packetIdToClassMap.put(i, class1);
 		packetClassToIdMap.put(class1, i);
-		if(fromClient)
+		if(fromServer) {
 			clientPacketIdList.add(i);
-		if(fromServer)
+			try {
+				constructors[i] = class1.getConstructor();
+			} catch(Throwable e) {
+				throw new AssertionError("Packet " + i + " (" + class1.getName() + ") missing empty constructor, but can be recieved from server");
+			}
+		}
+		if(fromClient)
 			serverPacketIdList.add(i);
 	}
 
 	public static Packet getNewPacket(int i) {
 		try {
-			Class class1 = (Class) packetIdToClassMap.get(i);
-			if(class1 == null) {
+			Constructor<? extends Packet> constructor = constructors[i];
+			if(constructor == null)
 				return null;
-			} else {
-				return (Packet) class1.newInstance();
-			}
-		} catch (Exception exception) {
+			else
+				return constructor.newInstance();
+		} catch(Exception exception) {
 			exception.printStackTrace();
 		}
 		System.out.println((new StringBuilder()).append("Skipping packet with id ").append(i).toString());
@@ -201,6 +208,10 @@ public abstract class Packet {
 		addIdClassMapping(32, true, false, net.minecraft.src.Packet32EntityLook.class);
 		addIdClassMapping(33, true, false, net.minecraft.src.Packet33RelEntityMoveLook.class);
 		addIdClassMapping(34, true, false, net.minecraft.src.Packet34EntityTeleport.class);
+		addIdClassMapping(35, true, false, Packet035EntityHealthChange.class);
+		addIdClassMapping(36, true, false, Packet036EntityHealth.class);
+		
+		
 		addIdClassMapping(38, true, false, net.minecraft.src.Packet38EntityStatus.class);
 		addIdClassMapping(39, true, false, net.minecraft.src.Packet39AttachEntity.class);
 		addIdClassMapping(40, true, false, net.minecraft.src.Packet40EntityMetadata.class);
@@ -234,7 +245,7 @@ public abstract class Packet {
 
 		addIdClassMapping(130, true, true, net.minecraft.src.Packet130UpdateSign.class);
 		addIdClassMapping(131, true, false, net.minecraft.src.Packet131MapData.class);
-		addIdClassMapping(132, false, true, Packet132TileData.class);
+		addIdClassMapping(132, true, false, Packet132TileData.class);
 
 		addIdClassMapping(200, true, false, net.minecraft.src.Packet200Statistic.class);
 		addIdClassMapping(201, true, false, net.minecraft.src.Packet201PlayerInfo.class);
@@ -247,8 +258,8 @@ public abstract class Packet {
 		addIdClassMapping(207, false, true, Packet207Notify.class);
 		addIdClassMapping(208, true, false, Packet208NotifyAnswer.class);
 		addIdClassMapping(209, false, true, Packet209Dialog.class);
-		addIdClassMapping(210, true, false, Packet210DialogAnswer.class);
-		addIdClassMapping(211, true, false, Packet211UseBlock2.class);
+		addIdClassMapping(210, false, true, Packet210DialogAnswer.class);
+		addIdClassMapping(211, false, true, Packet211UseBlock2.class);
 		addIdClassMapping(212, true, true, Packet212MultiData.class);
 
 		addIdClassMapping(221, false, true, net.minecraft.src.Packet221ConnectionReady.class);

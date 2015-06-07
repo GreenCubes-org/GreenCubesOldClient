@@ -312,4 +312,12 @@ public abstract class NetHandler {
 	public void handleTile(Packet132TileData packet) {
 		registerPacket(packet);
 	}
+	
+	public void handleEntityHealthChange(Packet035EntityHealthChange packet) {
+		registerPacket(packet);
+	}
+	
+	public void handleEntityHealth(Packet036EntityHealth packet) {
+		registerPacket(packet);
+	}
 }

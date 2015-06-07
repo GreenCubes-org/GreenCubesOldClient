@@ -20,7 +20,9 @@ public class Packet20NamedEntitySpawn extends Packet {
 	public int zPosition;
 	public byte rotation;
 	public byte pitch;
-
+	public int playerId;
+	public int organizationId;
+	
 	public Packet20NamedEntitySpawn() {
 	}
 
@@ -38,7 +40,7 @@ public class Packet20NamedEntitySpawn extends Packet {
 	@Override
 	public void readPacketData(DataInputStream datainputstream) throws IOException {
 		entityId = datainputstream.readInt();
-		datainputstream.readInt();
+		playerId = datainputstream.readInt();
 		name = readString(datainputstream, 32);
 		xPosition = datainputstream.readInt();
 		yPosition = datainputstream.readInt();
@@ -46,12 +48,13 @@ public class Packet20NamedEntitySpawn extends Packet {
 		rotation = datainputstream.readByte();
 		pitch = datainputstream.readByte();
 		coloredName = readString(datainputstream, 64);
+		organizationId = datainputstream.readInt();
 	}
 
 	@Override
 	public void writePacketData(DataOutputStream dataoutputstream) throws IOException {
 		dataoutputstream.writeInt(entityId);
-		dataoutputstream.writeInt(0);
+		dataoutputstream.writeInt(playerId);
 		writeString(name, dataoutputstream);
 		dataoutputstream.writeInt(xPosition);
 		dataoutputstream.writeInt(yPosition);
@@ -59,6 +62,7 @@ public class Packet20NamedEntitySpawn extends Packet {
 		dataoutputstream.writeByte(rotation);
 		dataoutputstream.writeByte(pitch);
 		writeString(coloredName, dataoutputstream);
+		dataoutputstream.writeInt(organizationId);
 	}
 
 	@Override
@@ -68,6 +72,6 @@ public class Packet20NamedEntitySpawn extends Packet {
 
 	@Override
 	public int getPacketSize() {
-		return 28;
+		return 32;
 	}
 }
