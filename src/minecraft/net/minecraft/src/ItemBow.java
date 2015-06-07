@@ -96,9 +96,9 @@ public class ItemBow extends Item {
 	}
 
 	public int getBowIcon(ItemStack itemstack, int inUse) {
-		if(inUse >= 18)
+		if(inUse >= 20)
 			return 133;
-		if(inUse > 13)
+		if(inUse > 10)
 			return 117;
 		return 101;
 	}

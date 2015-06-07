@@ -6,6 +6,9 @@
 /jars/stats/
 /jars/screenshots
 /jars/replay
+/jars/ModLoader.txt
+/jars/config/
+/jars/mods/sppcommands/
 /bin
 /jars/chat/
 **/Thumbs.db

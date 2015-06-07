@@ -3584,6 +3584,7 @@ public class RenderBlocks {
 			d4 = k1 / RenderEngine.TERRAIN_HEIGHT_F;
 			d6 = (k1 + 15.99F) / RenderEngine.TERRAIN_HEIGHT_F;
 		}
+		final float m = 2f / RenderEngine.TERRAIN_MULT;
 		if(byte0 == 0) {
 			if((flag1) || (flag2) || (flag3) || (flag)) {
 				if(!flag) {
@@ -3602,13 +3603,13 @@ public class RenderBlocks {
 					f7 += 0.3125F;
 				}
 				if(!flag2) {
-					d4 += 0.009765625D;
+					d4 += 0.009765625D * m;
 				}
 				if(!flag3) {
 					f8 -= 0.3125F;
 				}
 				if(!flag3) {
-					d6 -= 0.009765625D;
+					d6 -= 0.009765625D * m;
 				}
 			}
 			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6);
@@ -3616,30 +3617,30 @@ public class RenderBlocks {
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4);
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6);
 			tessellator.setColorOpaque_F(f, f, f);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d2, d4 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6 + 0.03125D);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D * m);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d2, d4 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6 + 0.03125D * m);
 		} else if(byte0 == 1) {
 			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6);
 			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d2, d4);
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4);
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6);
 			tessellator.setColorOpaque_F(f, f, f);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d2, d4 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6 + 0.03125D);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D * m);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d2, d4 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d, d6 + 0.03125D * m);
 		} else if(byte0 == 2) {
 			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6);
 			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d, d6);
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4);
 			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d2, d4);
 			tessellator.setColorOpaque_F(f, f, f);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D);
-			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d, d6 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D);
-			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d2, d4 + 0.03125D);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f8, d2, d6 + 0.03125D * m);
+			tessellator.addVertexWithUV(f6, j + 0.015625F, f7, d, d6 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f7, d, d4 + 0.03125D * m);
+			tessellator.addVertexWithUV(f5, j + 0.015625F, f8, d2, d4 + 0.03125D * m);
 		}
 		if(!blockAccess.isBlockNormalCube(i, j + 1, k)) {
 			double d1 = (j1 + 16) / 256.0F;
@@ -3653,10 +3654,10 @@ public class RenderBlocks {
 				tessellator.addVertexWithUV(i + 0.015625F, j + 0, k + 0, d1, d7);
 				tessellator.addVertexWithUV(i + 0.015625F, j + 1 + 0.021875F, k + 0, d3, d7);
 				tessellator.setColorOpaque_F(f, f, f);
-				tessellator.addVertexWithUV(i + 0.015625F, j + 1 + 0.021875F, k + 1, d3, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0.015625F, j + 0, k + 1, d1, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0.015625F, j + 0, k + 0, d1, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0.015625F, j + 1 + 0.021875F, k + 0, d3, d7 + 0.03125D);
+				tessellator.addVertexWithUV(i + 0.015625F, j + 1 + 0.021875F, k + 1, d3, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0.015625F, j + 0, k + 1, d1, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0.015625F, j + 0, k + 0, d1, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0.015625F, j + 1 + 0.021875F, k + 0, d3, d7 + 0.03125D * m);
 			}
 			if((blockAccess.isBlockNormalCube(i + 1, j, k)) && (blockAccess.getBlockId(i + 1, j + 1, k) == Block.redstoneWire.blockID)) {
 				tessellator.setColorOpaque_F(f * f2, f * f3, f * f4);
@@ -3665,10 +3666,10 @@ public class RenderBlocks {
 				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 1 + 0.021875F, k + 0, d3, d5);
 				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 0, k + 0, d1, d5);
 				tessellator.setColorOpaque_F(f, f, f);
-				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 0, k + 1, d1, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 1 + 0.021875F, k + 1, d3, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 1 + 0.021875F, k + 0, d3, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 0, k + 0, d1, d5 + 0.03125D);
+				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 0, k + 1, d1, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 1 + 0.021875F, k + 1, d3, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 1 + 0.021875F, k + 0, d3, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 1 - 0.015625F, j + 0, k + 0, d1, d5 + 0.03125D * m);
 			}
 			if((blockAccess.isBlockNormalCube(i, j, k - 1)) && (blockAccess.getBlockId(i, j + 1, k - 1) == Block.redstoneWire.blockID)) {
 				tessellator.setColorOpaque_F(f * f2, f * f3, f * f4);
@@ -3677,10 +3678,10 @@ public class RenderBlocks {
 				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 0.015625F, d3, d5);
 				tessellator.addVertexWithUV(i + 0, j + 0, k + 0.015625F, d1, d5);
 				tessellator.setColorOpaque_F(f, f, f);
-				tessellator.addVertexWithUV(i + 1, j + 0, k + 0.015625F, d1, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 1, j + 1 + 0.021875F, k + 0.015625F, d3, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 0.015625F, d3, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0, j + 0, k + 0.015625F, d1, d5 + 0.03125D);
+				tessellator.addVertexWithUV(i + 1, j + 0, k + 0.015625F, d1, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 1, j + 1 + 0.021875F, k + 0.015625F, d3, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 0.015625F, d3, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0, j + 0, k + 0.015625F, d1, d5 + 0.03125D * m);
 			}
 			if((blockAccess.isBlockNormalCube(i, j, k + 1)) && (blockAccess.getBlockId(i, j + 1, k + 1) == Block.redstoneWire.blockID)) {
 				tessellator.setColorOpaque_F(f * f2, f * f3, f * f4);
@@ -3689,10 +3690,10 @@ public class RenderBlocks {
 				tessellator.addVertexWithUV(i + 0, j + 0, k + 1 - 0.015625F, d1, d7);
 				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 1 - 0.015625F, d3, d7);
 				tessellator.setColorOpaque_F(f, f, f);
-				tessellator.addVertexWithUV(i + 1, j + 1 + 0.021875F, k + 1 - 0.015625F, d3, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 1, j + 0, k + 1 - 0.015625F, d1, d5 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0, j + 0, k + 1 - 0.015625F, d1, d7 + 0.03125D);
-				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 1 - 0.015625F, d3, d7 + 0.03125D);
+				tessellator.addVertexWithUV(i + 1, j + 1 + 0.021875F, k + 1 - 0.015625F, d3, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 1, j + 0, k + 1 - 0.015625F, d1, d5 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0, j + 0, k + 1 - 0.015625F, d1, d7 + 0.03125D * m);
+				tessellator.addVertexWithUV(i + 0, j + 1 + 0.021875F, k + 1 - 0.015625F, d3, d7 + 0.03125D * m);
 			}
 		}
 		return true;

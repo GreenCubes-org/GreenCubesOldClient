@@ -184,7 +184,7 @@ public class Item {
 	public static Item coconutCookie = new ItemFood((3034 - 256), 1, 0, false).setIconIndex(coconutcookie).setItemName("coconutCookie");
 	public static Item premiumCoupon = new ItemPremiumCoupon((3035 - 256)).setIconIndex(couponIcon).setItemName("ticketPremium");
 	public static Item cherryBow = new ItemCherryBow(3036 - 256, 2.0f).setIconIndex(cherryBowIcon).setItemName("cherryBow");
-	public static Item diamondArrow = new ItemArrow(3037 - 256, 1.5f, 2f).setIconIndex(diamondArrowIcon).setItemName("diamondArrow");
+	public static Item diamondArrow = new ItemArrow(3037 - 256, 2f, 2f).setIconIndex(diamondArrowIcon).setItemName("diamondArrow");
 	public static Item cherryStick = new Item(3038 - 256).setIconIndex(cherryStickIcon).setItemName("cherryStick").setFull3D().setUsable();
 	public static Item explosiveArrow = new ItemArrow(3039 - 256, 1f, 0.8f).setIconIndex(explosiveArrowIcon).setItemName("explosiveArrow");
 	public static Item redTileItem = new ItemReed(3040 - 256, Block.blockTileRed_45degree).setIconIndex(redTileIcon).setItemName("redTile");

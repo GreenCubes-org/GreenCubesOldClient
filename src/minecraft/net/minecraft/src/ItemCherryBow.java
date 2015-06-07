@@ -14,7 +14,7 @@ public class ItemCherryBow extends ItemBow {
 
 	@Override
 	public int getBowIcon(ItemStack itemstack, int inUse) {
-		if(inUse >= 55)
+		if(inUse >= 50)
 			return bow3;
 		if(inUse > 25)
 			return bow2;
@@ -23,6 +23,6 @@ public class ItemCherryBow extends ItemBow {
 
 	@Override
 	public float getMaxUse() {
-		return 60.0F;
+		return 50.0F;
 	}
 }

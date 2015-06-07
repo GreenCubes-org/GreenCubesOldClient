@@ -523,21 +523,11 @@ public final class ItemStack {
 		}
 		int	n = arraylist.size();
 		
-		if(hasNBTData()) {
-			if(nbtData.hasKey("Dropped")) {
-				NBTTagCompound dropped = nbtData.getCompoundTag("Dropped");
-				arraylist.add("\247rff0ac80aПредмет получен игроком " + dropped.getString("N"));
-			}
-			if(nbtData.hasKey("Found")) {
-				NBTTagList founds = nbtData.getTagList("Found");
-				for(int i = founds.size() - 1; i >= 0; --i) {
-					NBTTagCompound found = (NBTTagCompound) founds.get(i);
-					arraylist.add("\247rff0ac80aНайден в Мистическом сундуке: " + found.getString("N") + ", " + GCUtil.getLocalizedDate2(found.getLong("T")));
-				}
-			}
-			if(nbtData.hasKey("Expires")) {
-				arraylist.add("\247rff0ac80aПредмет исчезнет: " + GCUtil.getLocalizedDate2(nbtData.getLong("Expires")));
-			}
+		item.appendAttributes(this, arraylist);
+		if(hasNBTData() && nbtData.hasKey("TextAttrs")) {
+			NBTTagList list = (NBTTagList) nbtData.getTag("TextAttrs");
+			for(int i = 0; i < list.size(); ++i)
+				arraylist.add(((NBTTagString) list.get(i)).stringValue);
 		}
 		if(getItem().isDamageable()) {
 			StringBuilder sb = new StringBuilder().append("\2477Прочность: \247f");
@@ -569,12 +559,6 @@ public final class ItemStack {
 			if(nbtData.getBoolean("NoRepair"))
 				arraylist.add("\2477Нельзя чинить");
 		}
-		if(hasNBTData() && nbtData.hasKey("TextAttrs")) {
-			NBTTagList list = (NBTTagList) nbtData.getTag("TextAttrs");
-			for(int i = 0; i < list.size(); ++i)
-				arraylist.add(((NBTTagString) list.get(i)).stringValue);
-		}
-		item.appendAttributes(this, arraylist);
 		if(isUnbreakable() && (nbtData == null || !nbtData.getBoolean("Invulnerable")))
 			arraylist.add("\247rffaaffffНе уничтожается от повреждений");
 		if(hasNBTData()) {
@@ -684,6 +668,20 @@ public final class ItemStack {
 					}
 				}
 			}
+			if(nbtData.hasKey("Dropped")) {
+				NBTTagCompound dropped = nbtData.getCompoundTag("Dropped");
+				arraylist.add("\247rff0ac80aПредмет получен игроком " + dropped.getString("N"));
+			}
+			if(nbtData.hasKey("Found")) {
+				NBTTagList founds = nbtData.getTagList("Found");
+				for(int i = founds.size() - 1; i >= 0; --i) {
+					NBTTagCompound found = (NBTTagCompound) founds.get(i);
+					arraylist.add("\247rff0ac80aНайден в Мистическом сундуке: " + found.getString("N") + ", " + GCUtil.getLocalizedDate2(found.getLong("T")));
+				}
+			}
+			if(nbtData.hasKey("Expires")) {
+				arraylist.add("\247rff0ac80aПредмет исчезнет: " + GCUtil.getLocalizedDate2(nbtData.getLong("Expires")));
+			}
 			if(nbtData.hasKey("Glow") && itemID != Item.GLOWING_MOD.shiftedIndex) {
 				if(nbtData.hasKey("DColor"))
 					ItemGlowModifier.appendDescriptionToItem(this, arraylist);
@@ -701,12 +699,10 @@ public final class ItemStack {
 					}
 				}
 			}
-			if(nbtData.hasKey("UserName")) {
-				if(nbtData.hasKey("Count")) {
-					int[] cArr = nbtData.getIntArray("Count");
-					if(cArr.length < 2 || cArr[0] <= cArr[1])
-						arraylist.add("\2477Оригинальный номер предмета: #" + cArr[0]);
-				}
+			if(nbtData.hasKey("UserName") && nbtData.hasKey("Count")) {
+				int[] cArr = nbtData.getIntArray("Count");
+				if(cArr.length < 2 || cArr[0] <= cArr[1])
+					arraylist.add("\2477Оригинальный номер предмета: #" + cArr[0]);
 			}
 		}
 		if(arraylist.size() > n)

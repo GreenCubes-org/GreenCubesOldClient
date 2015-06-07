@@ -39,6 +39,13 @@ public class BlockCarpet extends Block {
 	}
 	
 	@Override
+	public boolean canPlaceBlockOnSide(World world, int i, int j, int k, int l) {
+		if(l != 1)
+			return false;
+		return super.canPlaceBlockOnSide(world, i, j, k, l);
+	}
+	
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k) {
 		renderingItem = false;
 		int data = iblockaccess.getBlockMetadata(i, j, k);
