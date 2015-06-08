@@ -19,7 +19,7 @@ import net.minecraft.client.Minecraft;
 
 public class NetClientHandler extends NetHandler {
 
-	public static int protocolVersion = 157;
+	public static int protocolVersion = 158;
 	public static int chunksToLoad = 49;
 	private long lastReport = 0;
 

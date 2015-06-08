@@ -240,6 +240,12 @@ public class BlockGlassNew extends BlockGlass {
 	}
 
 	protected boolean isShouldBeConnected(IBlockAccess iblockaccess, int x, int y, int z, int i, int data) {
+		int b = iblockaccess.getBlockId(x, y, z);
+		if(b != blockID) {
+			Block block = Block.blocksList[b];
+			if(block == null || !(block instanceof BlockGlassNew))
+				return false;
+		}
 		int x2 = x;
 		int y2 = y;
 		int z2 = z;
@@ -255,7 +261,7 @@ public class BlockGlassNew extends BlockGlass {
 			x2--;
 		else if(i == 5)
 			x2++;
-		return (iblockaccess.getBlockId(x, y, z) == blockID) && !iblockaccess.isBlockOpaqueCube(x2, y2, z2) && (iblockaccess.getBlockId(x2, y2, z2) != blockID);
+		return !iblockaccess.isBlockOpaqueCube(x2, y2, z2) && iblockaccess.getBlockId(x2, y2, z2) != blockID;
 	}
 
 }

@@ -25,4 +25,14 @@ public class BlockGlass extends BlockBreakable {
 	public int getRenderBlockPass() {
 		return 0;
 	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
+		int i1 = iblockaccess.getBlockId(i, j, k);
+		if(i1 == blockID || (Block.blocksList[i1] != null && Block.blocksList[i1] instanceof BlockGlass)) {
+			return false;
+		} else {
+			return super.shouldSideBeRendered(iblockaccess, i, j, k, l);
+		}
+	}
 }
