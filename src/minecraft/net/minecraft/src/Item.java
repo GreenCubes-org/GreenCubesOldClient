@@ -359,6 +359,7 @@ public class Item {
 	public static final Item PANTS_BONE = new ItemRareCloth(4318 - 256, 44, 2, DecorItemQuality.RARE_WEAR).setIconIndex(pants_bone).setItemName("pants.bone");
 	public static final Item BOOTS_BONE = new ItemRareCloth(4319 - 256, 44, 3, DecorItemQuality.RARE_WEAR).setIconIndex(boots_bone).setItemName("boots.bone");
 	public static final Item HEAD_CROWN_BONE = new ItemRareCloth(4320 - 256, 45, 0, DecorItemQuality.HIGH_QUALITY_WEAR).setItemName("head.crown.bone").setIconIndex(head_crown_bone);
+	public static final Item BOW_BONE = new ItemBow(4321 - 256, 1.0f).setActionIcons(new int[]{bow_bone_1, bow_bone_2, bow_bone_3}).setMaxDamage(500).setIconIndex(bow_bone).setItemName("bow.bone");
 	
 	public final int shiftedIndex;
 

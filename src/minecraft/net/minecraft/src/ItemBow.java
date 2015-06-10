@@ -11,12 +11,18 @@ public class ItemBow extends Item {
 	
 	protected int baseDamage = 5;
 	protected float accuracy;
-
+	protected int[] icons = {101, 117, 133};
+	
 	public ItemBow(int i, float accuracy) {
 		super(i);
 		this.maxStackSize = 1;
 		this.accuracy = accuracy;
 		setMaxDamage(384);
+	}
+	
+	public ItemBow setActionIcons(int[] icons) {
+		this.icons = icons;
+		return this;
 	}
 	
 	@Override
@@ -97,10 +103,10 @@ public class ItemBow extends Item {
 
 	public int getBowIcon(ItemStack itemstack, int inUse) {
 		if(inUse >= 20)
-			return 133;
+			return icons[2];
 		if(inUse > 10)
-			return 117;
-		return 101;
+			return icons[1];
+		return icons[0];
 	}
 
 	@Override
