@@ -104,10 +104,10 @@ public class ItemRenderer {
 					}
 					Tessellator tessellator = Tessellator.instance;
 					int j = texture;
-					float f = (((j % 16) * 16) + 0.0F) / 256F;
-					float f1 = (((j % 16) * 16) + 15.99F) / 256F;
-					float f2 = (((j / 16) * 16) + 0.0F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
-					float f3 = (((j / 16) * 16) + 15.99F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
+					double f = (((j % 16) * 16) + 0.0d) / 256d;
+					double f1 = (((j % 16) * 16) + 15.99d) / 256d;
+					double f2 = (((j / 16) * 16) + 0.0d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
+					double f3 = (((j / 16) * 16) + 15.99d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
 					float f4 = 0.0F;
 					float f5 = 0.3F;
 					GL11.glEnable(32826 /* GL_RESCALE_NORMAL_EXT */);
@@ -192,10 +192,10 @@ public class ItemRenderer {
 				}
 				Tessellator tessellator = Tessellator.instance;
 				int j = itemIcon;
-				float f = (((j % 16) * 16) + 0.0F) / 256F;
-				float f1 = (((j % 16) * 16) + 15.99F) / 256F;
-				float f2 = (((j / 16) * 16) + 0.0F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
-				float f3 = (((j / 16) * 16) + 15.99F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
+				double f = (((j % 16) * 16) + 0.0d) / 256d;
+				double f1 = (((j % 16) * 16) + 15.99d) / 256d;
+				double f2 = (((j / 16) * 16) + 0.0d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
+				double f3 = (((j / 16) * 16) + 15.99d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
 				float f4 = 0.0F;
 				float f5 = 0.3F;
 				GL11.glEnable(32826 /* GL_RESCALE_NORMAL_EXT */);
@@ -249,15 +249,15 @@ public class ItemRenderer {
 		Profiler.endSection();
 	}
 
-	public void func_40686_a(Tessellator tessellator, float f, float f1, float f2, float f3) {
-		float f4 = 1.0F;
-		float f5 = 0.0625F;
+	public void func_40686_a(Tessellator tessellator, double f, double f1, double f2, double f3) {
+		double f4 = 1.0d;
+		double f5 = 0.0625d;
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0.0F, 0.0F, 1.0F);
-		tessellator.addVertexWithUV(0.0D, 0.0D, 0.0D, f, f3);
-		tessellator.addVertexWithUV(f4, 0.0D, 0.0D, f2, f3);
-		tessellator.addVertexWithUV(f4, 1.0D, 0.0D, f2, f1);
-		tessellator.addVertexWithUV(0.0D, 1.0D, 0.0D, f, f1);
+		tessellator.addVertexWithUV(0.0D, 0.0D, 0D, f, f3);
+		tessellator.addVertexWithUV(f4, 0.0D, 0D, f2, f3);
+		tessellator.addVertexWithUV(f4, 1.0D, 0D, f2, f1);
+		tessellator.addVertexWithUV(0.0D, 1.0D, 0D, f, f1);
 		tessellator.setNormal(0.0F, 0.0F, -1F);
 		tessellator.addVertexWithUV(0.0D, 1.0D, 0.0F - f5, f, f1);
 		tessellator.addVertexWithUV(f4, 1.0D, 0.0F - f5, f2, f1);
@@ -266,9 +266,9 @@ public class ItemRenderer {
 		tessellator.setNormal(-1F, 0.0F, 0.0F);
 		int textSize = RenderEngine.getTextureSize();
 		for(int i = 0; i < textSize; i++) {
-			float f6 = (float) i / textSize;
-			float f10 = (f + (f2 - f) * f6) - 0.001953125F / RenderEngine.ITEMS_MULT;
-			float f14 = f4 * f6;
+			double f6 = (double) i / textSize;
+			double f10 = (f + (f2 - f) * f6) - 0.001953125d / RenderEngine.ITEMS_MULT;
+			double f14 = f4 * f6;
 			tessellator.addVertexWithUV(f14, 0.0D, 0.0F - f5, f10, f3);
 			tessellator.addVertexWithUV(f14, 0.0D, 0.0D, f10, f3);
 			tessellator.addVertexWithUV(f14, 1.0D, 0.0D, f10, f1);
@@ -277,9 +277,9 @@ public class ItemRenderer {
 
 		tessellator.setNormal(1.0F, 0.0F, 0.0F);
 		for(int j = 0; j < textSize; j++) {
-			float f7 = (float) j / textSize;
-			float f11 = (f + (f2 - f) * f7) - 0.001953125F / RenderEngine.ITEMS_MULT;
-			float f15 = f4 * f7 + 0.0625F;
+			double f7 = (double) j / textSize;
+			double f11 = (f + (f2 - f) * f7) - 0.001953125d / RenderEngine.ITEMS_MULT;
+			double f15 = f4 * f7 + 0.0625d;
 			tessellator.addVertexWithUV(f15, 1.0D, 0.0F - f5, f11, f1);
 			tessellator.addVertexWithUV(f15, 1.0D, 0.0D, f11, f1);
 			tessellator.addVertexWithUV(f15, 0.0D, 0.0D, f11, f3);
@@ -288,9 +288,9 @@ public class ItemRenderer {
 
 		tessellator.setNormal(0.0F, 1.0F, 0.0F);
 		for(int k = 0; k < textSize; k++) {
-			float f8 = (float) k / textSize;
-			float f12 = (f3 + (f1 - f3) * f8) - 0.001953125F / RenderEngine.ITEMS_MULT;
-			float f16 = f4 * f8 + 0.0625F;
+			double f8 = (double) k / textSize;
+			double f12 = (f3 + (f1 - f3) * f8) - 0.001953125d / RenderEngine.ITEMS_MULT;
+			double f16 = f4 * f8 + 0.0625d;
 			tessellator.addVertexWithUV(0.0D, f16, 0.0D, f, f12);
 			tessellator.addVertexWithUV(f4, f16, 0.0D, f2, f12);
 			tessellator.addVertexWithUV(f4, f16, 0.0F - f5, f2, f12);
@@ -299,9 +299,9 @@ public class ItemRenderer {
 
 		tessellator.setNormal(0.0F, -1F, 0.0F);
 		for(int l = 0; l < textSize; l++) {
-			float f9 = (float) l / textSize;
-			float f13 = (f3 + (f1 - f3) * f9) - 0.001953125F / RenderEngine.ITEMS_MULT;
-			float f17 = f4 * f9;
+			double f9 = (double) l / textSize;
+			double f13 = (f3 + (f1 - f3) * f9) - 0.001953125d / RenderEngine.ITEMS_MULT;
+			double f17 = f4 * f9;
 			tessellator.addVertexWithUV(f4, f17, 0.0D, f2, f13);
 			tessellator.addVertexWithUV(0.0D, f17, 0.0D, f, f13);
 			tessellator.addVertexWithUV(0.0D, f17, 0.0F - f5, f, f13);
@@ -486,7 +486,12 @@ public class ItemRenderer {
 						GL11.glRotatef(335F, 0.0F, 0.0F, 1.0F);
 					}
 				}
-				if(itemstack.getItem().shouldRotateAroundWhenRendering()) {
+				if(itemstack.getItem().shouldReverseWhenRendering()) {
+					GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
+					GL11.glRotatef(-25F, 0.0F, 0.0F, 1.0F);
+					GL11.glRotatef(-35F, 1.0F, 0.0F, 0.0F);
+					GL11.glTranslatef(0.0625F, 0F, -0.08F);
+				} else if(itemstack.getItem().shouldRotateAroundWhenRendering()) {
 					GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
 				}
 				if(itemstack.itemID == Item.potion.shiftedIndex) {

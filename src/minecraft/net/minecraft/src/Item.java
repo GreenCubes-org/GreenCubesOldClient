@@ -326,6 +326,7 @@ public class Item {
 	public static final Item HALLOWEEN_BAG_2014 = new ItemGiftBagNy(4105 - 256).setItemName("halloweenBag2014").setIconIndex(halloweenBag).setMaxStackSize(64);
 	public static final Item GIFT_BAG_NY2015 = new ItemGiftBagNy(4106 - 256).setItemName("treasure.ny2015giftbag").setIconIndex(treasure_ny2015giftbag);
 	public static final Item POST_NY2015 = new ItemGiftBagNy(4107 - 256).setItemName("treasure.ny2015postage").setIconIndex(giftpost);
+	public static final Item TREASURE_OSSUARIUM = new ItemGiftBagNy(4108 - 256).setItemName("treasure.ossuarium").setIconIndex(treasure_ossuarium);
 	
 	public static final Item COLLECTIBLES_RARE = new ItemCollectible(4199 - 256, new String[] {"collectible.goldensakura"}, new int[] {collectible_goldensakura}, DecorItemQuality.COLLECTIBLE_RARE);
 	public static final Item GLASSES_DEAL_WITH_IT = new ItemRareCloth(4200 - 256, 39, 0, DecorItemQuality.RARE_WEAR).setItemName("dealwithit").setIconIndex(dealwithit);
@@ -346,6 +347,18 @@ public class Item {
 			frame_base_10, frame_base_11, frame_base_12, frame_base_13, frame_base_14, frame_base_15, frame_panel_glass, frame_panel_ice, frame_bckg_leather, frame_bckg_velvet});
 	public static final Item POTION_SATYR = new ItemPotionGC(4307 - 256).setIconIndex(potion_satyr).setItemName("potion.satyr");
 	public static final Item BANNER = new ItemBanner(4308 - 256, new String[] {"banner.satyr", "banner.slime"}, new int[] {banner_satyr, banner_slime});
+	public static final Item MODIFIER_BONE = new Item(4309 - 256).setItemName("modifier.bone").setIconIndex(modifier_bone);
+	public static final Item STICK_BONE = new Item(4310 - 256).setItemName("stick.bone").setIconIndex(stick_bone).setFull3D().setUsable();
+	public static final Item SWORD_DIAMOND_BONE = new ItemSword(4311 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setItemName("sword.diamond.bone").setIconIndex(sword_diamond_bone).reverse().rotate();
+	public static final Item SHOVEL_DIAMOND_BONE = new ItemSpade(4312 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setItemName("shovel.diamond.bone").setIconIndex(shovel_diamond_bone);
+	public static final Item PICKAXE_DIAMOND_BONE = new ItemPickaxe(4313 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setItemName("pickaxe.diamond.bone").setIconIndex(pickaxe_diamond_bone);
+	public static final Item AXE_DIAMOND_BONE = new ItemAxe(4314 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setItemName("axe.diamond.bone").setIconIndex(axe_diamond_bone);
+	public static final Item HOE_DIAMOND_BONE = new ItemHoe(4315 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setItemName("hoe.diamond.bone").setIconIndex(hoe_diamond_bone);
+	public static final Item HEAD_BONE = new ItemRareCloth(4316 - 256, 44, 0, DecorItemQuality.RARE_WEAR).setIconIndex(head_bone).setItemName("head.bone");
+	public static final Item CHESTPIECE_BONE = new ItemRareCloth(4317 - 256, 44, 1, DecorItemQuality.RARE_WEAR).setIconIndex(chestpiece_bone).setItemName("chestpiece.bone");
+	public static final Item PANTS_BONE = new ItemRareCloth(4318 - 256, 44, 2, DecorItemQuality.RARE_WEAR).setIconIndex(pants_bone).setItemName("pants.bone");
+	public static final Item BOOTS_BONE = new ItemRareCloth(4319 - 256, 44, 3, DecorItemQuality.RARE_WEAR).setIconIndex(boots_bone).setItemName("boots.bone");
+	public static final Item HEAD_CROWN_BONE = new ItemRareCloth(4320 - 256, 45, 0, DecorItemQuality.HIGH_QUALITY_WEAR).setItemName("head.crown.bone").setIconIndex(head_crown_bone);
 	
 	public final int shiftedIndex;
 
@@ -361,6 +374,7 @@ public class Item {
 	public boolean isUsable;
 	public boolean rotate = false;
 	protected boolean undropable = false;
+	public boolean reverse = false;
 
 	protected Item(int i) {
 		maxStackSize = 64;
@@ -499,6 +513,15 @@ public class Item {
 
 	public boolean shouldRotateAroundWhenRendering() {
 		return rotate;
+	}
+	
+	public Item reverse() {
+		this.reverse = true;
+		return this;
+	}
+	
+	public boolean shouldReverseWhenRendering() {
+		return reverse;
 	}
 
 	public Item setItemName(String s) {

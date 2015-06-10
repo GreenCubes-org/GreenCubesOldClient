@@ -226,9 +226,10 @@ public class RenderPlayer extends RenderLiving {
 					GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
 				} else if(Item.itemsList[itemstack1.itemID].isFull3D()) {
 					float f6 = 0.625F;
-					if(Item.itemsList[itemstack1.itemID].shouldRotateAroundWhenRendering()) {
+					if(Item.itemsList[itemstack1.itemID].shouldRotateAroundWhenRendering() || Item.itemsList[itemstack1.itemID].shouldReverseWhenRendering()) {
 						GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-						GL11.glTranslatef(0.0F, -0.125F, 0.0F);
+						GL11.glRotatef(12.5F, 1.0F, 0.0F, 0.0F);
+						GL11.glTranslatef(0.0625F, -0.20F, -0.08F);
 					}
 					if(entityplayer.func_35205_Y() > 0 && enumaction == EnumAction.block) {
 						GL11.glTranslatef(0.05F, 0.0F, -0.1F);

@@ -212,10 +212,10 @@ public class RenderItem extends Render {
 			}
 			Tessellator tessellator = Tessellator.instance;
 			int j = itemstack.getIconIndex();
-			float f = (((j % 16) * 16) + 0.0F) / 256F;
-			float f1 = (((j % 16) * 16) + 15.99F) / 256F;
-			float f2 = (((j / 16) * 16) + 0.0F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
-			float f3 = (((j / 16) * 16) + 15.99F) / (block ? RenderEngine.TERRAIN_HEIGHT_F : RenderEngine.ITEMS_HEIGHT_F);
+			double f = (((j % 16) * 16) + 0.0d) / 256d;
+			double f1 = (((j % 16) * 16) + 15.99d) / 256d;
+			double f2 = (((j / 16) * 16) + 0.0d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
+			double f3 = (((j / 16) * 16) + 15.99d) / (block ? RenderEngine.TERRAIN_HEIGHT_D : RenderEngine.ITEMS_HEIGHT_D);
 			float f4 = 0.0F;
 			float f5 = 0.3F;
 			GL11.glTranslatef(-f4, -f5, 0.0F);

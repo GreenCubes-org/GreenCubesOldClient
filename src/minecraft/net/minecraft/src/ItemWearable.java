@@ -22,7 +22,7 @@ public abstract class ItemWearable extends Item {
 		"steve_mask", "zombie_mask", "speed_boots", "japanese_bandage", "watermelon", "laureate_wreath",
 		"red_dotted_bow", "black_bow", "samurai", "blue_xmas_hat", "felt_boots", "bowler_hat", "gent_set",
 		"guyfawkes_mask", "monocle", "mustache", "tie", "dealwithitglasses", "dealwithitglassesgold",
-		"ny2015beard", "bluenyhat2014beard", "rednyhat2013beard"
+		"ny2015beard", "bluenyhat2014beard", "rednyhat2013beard", "bone.armor", "bone.crown",
 	};
 
 	/**

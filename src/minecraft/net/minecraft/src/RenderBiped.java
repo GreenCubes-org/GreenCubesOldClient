@@ -70,6 +70,11 @@ public class RenderBiped extends RenderLiving {
 			}
 			for(int i = 0; i < cache.size(); ++i) {
 				itemstack = cache.get(i);
+				
+				EnumAction enumaction = null;
+				if(entityliving.func_35205_Y() > 0) {
+					enumaction = itemstack.getItemUseAction();
+				}
 				GL11.glPushMatrix();
 				modelBipedMain.bipedRightArm.postRender(0.0625F);
 				GL11.glTranslatef(-0.0625F, 0.4375F, 0.0625F);
@@ -88,9 +93,20 @@ public class RenderBiped extends RenderLiving {
 					GL11.glRotatef(-100F, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
 				} else if(Item.itemsList[itemstack.itemID].isFull3D()) {
-					float f3 = 0.625F;
-					GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
-					GL11.glScalef(f3, -f3, f3);
+					float f6 = 0.625F;
+					if(Item.itemsList[itemstack.itemID].shouldRotateAroundWhenRendering() || Item.itemsList[itemstack.itemID].shouldReverseWhenRendering()) {
+						GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+						GL11.glRotatef(12.5F, 1.0F, 0.0F, 0.0F);
+						GL11.glTranslatef(0.0625F, -0.20F, -0.08F);
+					}
+					if(entityliving.func_35205_Y() > 0 && enumaction == EnumAction.block) {
+						GL11.glTranslatef(0.05F, 0.0F, -0.1F);
+						GL11.glRotatef(-50F, 0.0F, 1.0F, 0.0F);
+						GL11.glRotatef(-10F, 1.0F, 0.0F, 0.0F);
+						GL11.glRotatef(-60F, 0.0F, 0.0F, 1.0F);
+					}
+					GL11.glTranslatef(0.0F, 0.1875F + Item.itemsList[itemstack.itemID].getRenderShift(), 0.0F);
+					GL11.glScalef(f6, -f6, f6);
 					GL11.glRotatef(-100F, 1.0F, 0.0F, 0.0F);
 					GL11.glRotatef(45F, 0.0F, 1.0F, 0.0F);
 				} else {

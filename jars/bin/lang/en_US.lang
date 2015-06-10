@@ -1848,6 +1848,21 @@ item.collectible.slime.tentacle.name=Щупальце чёрной слизи
 item.banner.satyr.name=Знамя сатиров
 item.banner.slime.name=Знамя чёрной слизи
 
+item.axe.diamond.bone.name=Костяной алмазный топор
+item.pickaxe.diamond.bone.name=Костяная алмазная кирка
+item.sword.diamond.bone.name=Костяной алмазный меч
+item.shovel.diamond.bone.name=Костяная алмазная лопата
+item.hoe.diamond.bone.name=Костяная алмазная мотыга
+item.treasure.ossuarium.name=Костница
+item.head.crown.bone.name=Костяная корона
+item.head.bone.name=Костяной шлем
+item.chestpiece.bone.name=Костяной нагрудник
+item.pants.bone.name=Костяные поножи
+item.boots.bone.name=Костяные ботинки
+item.bow.bone.name=Костяной лук
+item.stick.bone.name=Декоративная кость
+item.modifier.bone.name=Костяной модификатор
+
 entity.Item.name=Предмет
 entity.XPOrb.name=Сфера опыта
 

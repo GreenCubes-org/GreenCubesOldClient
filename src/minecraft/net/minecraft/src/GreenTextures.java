@@ -532,6 +532,24 @@ public class GreenTextures {
 	public static int carpet_14 = ModLoader.addOverride("/terrain.png", "/gc_images/carpet.14.png");
 	public static int carpet_15 = ModLoader.addOverride("/terrain.png", "/gc_images/carpet.15.png");
 	
+	public static int axe_diamond_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/axe.diamond.bone.png");
+	public static int pickaxe_diamond_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/pickaxe.diamond.bone.png");
+	public static int hoe_diamond_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/hoe.diamond.bone.png");
+	public static int sword_diamond_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/sword.diamond.bone.png");
+	public static int shovel_diamond_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/shovel.diamond.bone.png");
+	public static int treasure_ossuarium = ModLoader.addOverride("/gui/items.png", "/gc_images/treasure.ossuarium.png");
+	public static int stick_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/stick.bone.png");
+	public static int head_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/head.bone.png");
+	public static int chestpiece_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/chestpiece.bone.png");
+	public static int pants_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/pants.bone.png");
+	public static int boots_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/boots.bone.png");
+	public static int bow_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.bone.png");
+	public static int bow_bone_1 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.bone.1.png");
+	public static int bow_bone_2 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.bone.2.png");
+	public static int bow_bone_3 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.bone.3.png");
+	public static int modifier_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/modifier.bone.png");
+	public static int head_crown_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/head.crown.bone.png");
+	
 	public static int glass_color_black = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.black.png");
 	public static int glass_color_blue = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.blue.png");
 	public static int glass_color_brown = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.brown.png");
