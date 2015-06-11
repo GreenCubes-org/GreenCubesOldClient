@@ -245,7 +245,7 @@ public abstract class Packet {
 
 		addIdClassMapping(130, true, true, net.minecraft.src.Packet130UpdateSign.class);
 		addIdClassMapping(131, true, false, net.minecraft.src.Packet131MapData.class);
-		addIdClassMapping(132, true, false, Packet132TileData.class);
+		addIdClassMapping(132, true, true, Packet132TileData.class);
 
 		addIdClassMapping(200, true, false, net.minecraft.src.Packet200Statistic.class);
 		addIdClassMapping(201, true, false, net.minecraft.src.Packet201PlayerInfo.class);
@@ -255,16 +255,16 @@ public abstract class Packet {
 		addIdClassMapping(204, true, false, Packet204Channel.class);
 		addIdClassMapping(205, true, true, Packet205StatusReport.class);
 		addIdClassMapping(206, true, false, Packet206SpawnEffect.class);
-		addIdClassMapping(207, false, true, Packet207Notify.class);
-		addIdClassMapping(208, true, false, Packet208NotifyAnswer.class);
-		addIdClassMapping(209, false, true, Packet209Dialog.class);
+		addIdClassMapping(207, true, true, Packet207Notify.class);
+		addIdClassMapping(208, true, true, Packet208NotifyAnswer.class);
+		addIdClassMapping(209, true, true, Packet209Dialog.class);
 		addIdClassMapping(210, false, true, Packet210DialogAnswer.class);
-		addIdClassMapping(211, false, true, Packet211UseBlock2.class);
+		addIdClassMapping(211, true, true, Packet211UseBlock2.class);
 		addIdClassMapping(212, true, true, Packet212MultiData.class);
 
-		addIdClassMapping(221, false, true, net.minecraft.src.Packet221ConnectionReady.class);
+		addIdClassMapping(221, true, true, net.minecraft.src.Packet221ConnectionReady.class);
 		addIdClassMapping(222, true, true, net.minecraft.src.Packet222TextMessage.class);
-		addIdClassMapping(224, false, true, net.minecraft.src.Packet224AskBook.class);
+		addIdClassMapping(224, true, true, net.minecraft.src.Packet224AskBook.class);
 		// GreenCubes end
 		addIdClassMapping(254, false, true, net.minecraft.src.Packet254ServerPing.class);
 		addIdClassMapping(255, true, true, net.minecraft.src.Packet255KickDisconnect.class);

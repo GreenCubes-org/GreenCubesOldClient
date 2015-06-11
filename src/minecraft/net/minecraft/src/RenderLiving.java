@@ -286,10 +286,55 @@ public class RenderLiving extends Render {
 			return;
 		}
 		FontRenderer fontrenderer = getFontRendererFromRenderManager();
+		int j = fontrenderer.getStringWidth(s) / 2;
+		boolean hasLogo = false;
 		float f1 = scale;
 		float f2 = 0.01666667F * f1;
+		Tessellator tessellator = Tessellator.instance;
+		if(entityliving instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entityliving;
+			Minecraft.theMinecraft.renderEngine.blurTexture = true;
+			if(player.organizationUrl != null && loadDownloadableImageTexture(player.organizationUrl, null)) {
+				hasLogo = true;
+				GL11.glPushMatrix();
+				GL11.glTranslatef((float) d + 0.0F, (float) d1 + 2.3F, (float) d2);
+				GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+				GL11.glRotatef(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+				GL11.glRotatef(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+				GL11.glScalef(-f2, -f2, f2);
+				GL11.glDepthMask(false);
+				GL11.glDisable(2896 /*GL_LIGHTING*/);
+				GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+				GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
+				GL11.glTranslatef(-4.5f - j, 0, 0);
+				GL11.glEnable(3042 /*GL_BLEND*/);
+				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				tessellator.startDrawingQuads();
+				tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
+				tessellator.addVertex(-1, -1, 0.0D);
+				tessellator.addVertex(-1, 8, 0.0D);
+				tessellator.addVertex(8, 8, 0.0D);
+				tessellator.addVertex(8, -1, 0.0D);
+				tessellator.draw();
+				GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+				GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
+				GL11.glDepthMask(true);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(-1, -1, 0.0D, 0d, 0d);
+				tessellator.addVertexWithUV(-1, 8, 0.0D, 0d, 1d);
+				tessellator.addVertexWithUV(8, 8, 0.0D, 1d, 1d);
+				tessellator.addVertexWithUV(8, -1, 0.0D, 1d, 0d);
+				tessellator.draw();
+				GL11.glEnable(2896 /*GL_LIGHTING*/);
+				GL11.glDisable(3042 /*GL_BLEND*/);
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GL11.glPopMatrix();
+			}
+			Minecraft.theMinecraft.renderEngine.blurTexture = false;
+		}
 		GL11.glPushMatrix();
-		GL11.glTranslatef((float) d + 0.0F, (float) d1 + 2.3F, (float) d2);
+		GL11.glTranslatef((float) d, (float) d1 + 2.3F, (float) d2);
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 		GL11.glRotatef(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
@@ -298,12 +343,12 @@ public class RenderLiving extends Render {
 		GL11.glDepthMask(false);
 		GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
 		GL11.glEnable(3042 /*GL_BLEND*/);
-		GL11.glBlendFunc(770, 771);
-		Tessellator tessellator = Tessellator.instance;
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		if(hasLogo)
+			GL11.glTranslatef(4.5f, 0, 0);
 		byte byte0 = 0;
 		GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
 		tessellator.startDrawingQuads();
-		int j = fontrenderer.getStringWidth(s) / 2;
 		tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
 		tessellator.addVertex(-j - 1, -1 + byte0, 0.0D);
 		tessellator.addVertex(-j - 1, 8 + byte0, 0.0D);
@@ -319,6 +364,7 @@ public class RenderLiving extends Render {
 		GL11.glDisable(3042 /*GL_BLEND*/);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glPopMatrix();
+		
 	}
 
 	@Override

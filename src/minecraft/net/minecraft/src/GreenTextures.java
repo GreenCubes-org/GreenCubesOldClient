@@ -622,6 +622,40 @@ public class GreenTextures {
 	public static int P_M_TEX_4_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/mchest_4_2.png");
 	public static int P_M_TEX_4_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/mchest_4_3.png");
 	public static int P_M_TEX_4_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/mchest_4_4.png");
+	
+	public static int P_S_C_1_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.1.1.png");
+	public static int P_S_C_1_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.1.2.png");
+	public static int P_S_C_1_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.1.3.png");
+	public static int P_S_C_1_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.1.4.png");
+	public static int P_S_C_2_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.2.1.png");
+	public static int P_S_C_2_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.2.2.png");
+	public static int P_S_C_2_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.2.3.png");
+	public static int P_S_C_2_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.2.4.png");
+	public static int P_S_C_3_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.3.1.png");
+	public static int P_S_C_3_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.3.2.png");
+	public static int P_S_C_3_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.3.3.png");
+	public static int P_S_C_3_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.3.4.png");
+	public static int P_S_C_4_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.4.1.png");
+	public static int P_S_C_4_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.4.2.png");
+	public static int P_S_C_4_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.4.3.png");
+	public static int P_S_C_4_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbc.4.4.png");
+	
+	public static int P_S_U_1_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.1.1.png");
+	public static int P_S_U_1_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.1.2.png");
+	public static int P_S_U_1_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.1.3.png");
+	public static int P_S_U_1_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.1.4.png");
+	public static int P_S_U_2_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.2.1.png");
+	public static int P_S_U_2_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.2.2.png");
+	public static int P_S_U_2_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.2.3.png");
+	public static int P_S_U_2_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.2.4.png");
+	public static int P_S_U_3_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.3.1.png");
+	public static int P_S_U_3_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.3.2.png");
+	public static int P_S_U_3_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.3.3.png");
+	public static int P_S_U_3_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.3.4.png");
+	public static int P_S_U_4_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.1.png");
+	public static int P_S_U_4_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.2.png");
+	public static int P_S_U_4_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.3.png");
+	public static int P_S_U_4_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.4.png");
 
 	//public static int steve = ModLoader.addOverride("/terrain.png", "/gc_images/char.png");
 	//public static int rainbow = ModLoader.addOverride("/terrain.png", "/gc_images/rainbow.png");

@@ -7,8 +7,11 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
+import org.greencubes.items.unique.DecorItemQuality;
+
 public class ItemBow extends Item {
 	
+	protected DecorItemQuality quality;
 	protected int baseDamage = 5;
 	protected float accuracy;
 	protected int[] icons = {101, 117, 133};
@@ -115,5 +118,25 @@ public class ItemBow extends Item {
 			entityplayer.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 		}
 		return itemstack;
+	}
+	
+	public ItemBow setDecor(DecorItemQuality q) {
+		this.quality = q;
+		return this;
+	}
+	
+	@Override
+	public boolean noDrop() {
+		return this.quality != null;
+	}
+	
+	@Override
+	public boolean isUnbreakable() {
+		return this.quality != null;
+	}
+	
+	@Override
+	public DecorItemQuality getDecorQuality() {
+		return this.quality;
 	}
 }

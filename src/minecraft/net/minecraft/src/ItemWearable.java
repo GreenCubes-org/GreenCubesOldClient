@@ -89,23 +89,26 @@ public abstract class ItemWearable extends Item {
 								continue;
 							ItemStack setPart = entity.getEquipment(s);
 							if(setPart == null || setPart.isBroken() || !(setPart.getItem() instanceof ItemWearable))
-								return;
+								continue effs;
 							ItemWearable part = (ItemWearable) setPart.getItem();
-							if(part.renderIndex != this.renderIndex)
-								return;
+							if(part.renderIndex == 44 && this.renderIndex == 45 || part.renderIndex == 45 && this.renderIndex == 4) {
+								// Nothing. I'm too stupit to negate this expression
+							} else if(part.renderIndex != this.renderIndex)
+								continue effs;
 							if(!setPart.hasNBTData() || !setPart.nbtData.hasKey("Effects"))
-								return;
+								continue effs;
 							NBTTagList partEffects = setPart.nbtData.getTagList("Effects");
 							boolean have = false;
 							for(int i1 = 0; i1 < partEffects.size(); ++i1) {
 								NBTTagCompound tag = (NBTTagCompound) partEffects.get(i1);
-								if(tag.getInteger("T") == type && tag.getBoolean("S") && tag.getBoolean("F")) {
+								int t = tag.getInteger("T");
+								if(t == type || (t == 3 && type == 4)) {
 									have = true;
 									break;
 								}
 							}
 							if(!have)
-								break effs;
+								continue effs;
 						}
 					}
 					EntityFXGC fx = null;
@@ -121,6 +124,18 @@ public abstract class ItemWearable extends Item {
 						z = entity.posZ + rand.nextDouble() * 2.4D - 1.2D;
 						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * wearablesHeight[slot] + rand.nextDouble() * 2.4D - 1.2D;
 						fx = new EntityDarknessFXGC(entity.worldObj, x, y, z, entity, wearablesHeight[slot]);
+						break;
+					case 3:
+						x = entity.posX + rand.nextDouble() * 2.0D - 1.0D;
+						z = entity.posZ + rand.nextDouble() * 2.0D - 1.0D;
+						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.5d + rand.nextDouble() * 2.4D - 1.2D;
+						fx = new EntitySandFXGC(entity.worldObj, x, y, z, entity);
+						break;
+					case 4:
+						x = entity.posX + rand.nextDouble() * 2.0D - 1.0D;
+						z = entity.posZ + rand.nextDouble() * 2.0D - 1.0D;
+						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.5d + rand.nextDouble() * 2.4D - 1.2D;
+						fx = new EntitySandUnusualFXGC(entity.worldObj, x, y, z, entity);
 						break;
 					default:
 						return;

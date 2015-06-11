@@ -10,15 +10,16 @@ public class ItemCherryBow extends ItemBow {
 		super(i, accuracy);
 		setMaxDamage(this.getMaxDamage() * 2);
 		this.baseDamage = 8;
+		icons = new int[] {bow1, bow2, bow3};
 	}
 
 	@Override
 	public int getBowIcon(ItemStack itemstack, int inUse) {
 		if(inUse >= 50)
-			return bow3;
+			return icons[2];
 		if(inUse > 25)
-			return bow2;
-		return bow1;
+			return icons[1];
+		return icons[0];
 	}
 
 	@Override

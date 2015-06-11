@@ -4,8 +4,10 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.text.*;
 import java.util.*;
+
 import net.minecraft.client.Minecraft;
 
+import org.greencubes.items.unique.DecorItemQuality;
 import org.greencubes.items.unique.NamedColor;
 import org.lwjgl.input.Keyboard;
 
@@ -172,6 +174,7 @@ public class TMIUtils {
 				e.setInteger("T", 1);
 				e.setBoolean("S", true);
 				e.setBoolean("F", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
 				int k1 = item.getIconIndex(itemstack1);
 				String s = item.getItemNameIS(itemstack1);
 				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
@@ -186,6 +189,7 @@ public class TMIUtils {
 				effects.setTag(e);
 				e.setInteger("T", 1);
 				e.setBoolean("S", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
 				int k1 = item.getIconIndex(itemstack1);
 				String s = item.getItemNameIS(itemstack1);
 				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
@@ -201,6 +205,7 @@ public class TMIUtils {
 				e.setInteger("T", 2);
 				e.setBoolean("S", true);
 				e.setBoolean("F", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
 				int k1 = item.getIconIndex(itemstack1);
 				String s = item.getItemNameIS(itemstack1);
 				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
@@ -215,6 +220,53 @@ public class TMIUtils {
 				effects.setTag(e);
 				e.setInteger("T", 2);
 				e.setBoolean("S", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
+				int k1 = item.getIconIndex(itemstack1);
+				String s = item.getItemNameIS(itemstack1);
+				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
+					list.add(itemstack1);
+				}
+			} else if(item == Item.BOOTS_BONE || item == Item.CHESTPIECE_BONE || item == Item.PANTS_BONE) {
+				ItemStack itemstack1 = new ItemStack(item, item.getItemStackLimit(), 0);
+				itemstack1.nbtData = new NBTTagCompound();
+				NBTTagList effects = new NBTTagList();
+				itemstack1.nbtData.setTag("Effects", effects);
+				NBTTagCompound e = new NBTTagCompound();
+				effects.setTag(e);
+				e.setInteger("T", 3);
+				e.setBoolean("S", true);
+				e.setBoolean("F", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
+				int k1 = item.getIconIndex(itemstack1);
+				String s = item.getItemNameIS(itemstack1);
+				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
+					list.add(itemstack1);
+				}
+			} else if(item == Item.HEAD_BONE) {
+				ItemStack itemstack1 = new ItemStack(item, item.getItemStackLimit(), 0);
+				itemstack1.nbtData = new NBTTagCompound();
+				NBTTagList effects = new NBTTagList();
+				itemstack1.nbtData.setTag("Effects", effects);
+				NBTTagCompound e = new NBTTagCompound();
+				effects.setTag(e);
+				e.setInteger("T", 3);
+				e.setBoolean("S", true);
+				itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
+				int k1 = item.getIconIndex(itemstack1);
+				String s = item.getItemNameIS(itemstack1);
+				if(!itemDisplayName(itemstack1).equals("Unnamed")) {
+					list.add(itemstack1);
+				}
+			} else if(item == Item.HEAD_CROWN_BONE) {
+				ItemStack itemstack1 = new ItemStack(item, item.getItemStackLimit(), 0);
+				itemstack1.nbtData = new NBTTagCompound();
+				NBTTagList effects = new NBTTagList();
+				itemstack1.nbtData.setTag("Effects", effects);
+				NBTTagCompound e = new NBTTagCompound();
+				effects.setTag(e);
+				e.setInteger("T", 4);
+				e.setBoolean("S", true);
+				//itemstack1.nbtData.setByte("DQ", (byte) DecorItemQuality.UNUSUAL_WEAR.id);
 				int k1 = item.getIconIndex(itemstack1);
 				String s = item.getItemNameIS(itemstack1);
 				if(!itemDisplayName(itemstack1).equals("Unnamed")) {

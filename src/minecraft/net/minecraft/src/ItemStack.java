@@ -696,6 +696,10 @@ public final class ItemStack {
 						arraylist.add("\247rffb428faС эффектом \"Частицы света\"" + (effect.getBoolean("S") ? " \2477(необходим весь набор)" : ""));
 					} else if(effect.getInteger("T") == 2) {
 						arraylist.add("\247rffb428faС эффектом \"Частицы тьмы\"" + (effect.getBoolean("S") ? " \2477(необходим весь набор)" : ""));
+					} else if(effect.getInteger("T") == 3) {
+						arraylist.add("\247rffb428faС эффектом \"Песчаный вихрь\"" + (effect.getBoolean("S") ? " \2477(необходим весь набор)" : ""));
+					} else if(effect.getInteger("T") == 4) {
+						arraylist.add("\247rffb428faС эффектом \"Алмазный вихрь\"" + (effect.getBoolean("S") ? " \2477(необходим весь набор)" : ""));
 					}
 				}
 			}

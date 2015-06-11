@@ -1524,6 +1524,9 @@ public class RenderGlobal implements IWorldAccess {
 		if(entity.cloakUrl != null) {
 			renderEngine.obtainImageData(entity.cloakUrl, new ImageBufferDownload());
 		}
+		if(entity instanceof EntityPlayer && ((EntityPlayer) entity).organizationUrl != null) {
+			renderEngine.obtainImageData(((EntityPlayer) entity).organizationUrl, null);
+		}
 	}
 
 	@Override
@@ -1535,6 +1538,9 @@ public class RenderGlobal implements IWorldAccess {
 		}
 		if(entity.cloakUrl != null) {
 			renderEngine.releaseImageData(entity.cloakUrl);
+		}
+		if(entity instanceof EntityPlayer && ((EntityPlayer) entity).organizationUrl != null) {
+			renderEngine.releaseImageData(((EntityPlayer) entity).organizationUrl);
 		}
 	}
 

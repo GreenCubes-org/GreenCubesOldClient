@@ -4,7 +4,9 @@ import org.greencubes.items.unique.DecorItemQuality;
 
 public class ItemPackedNamedItem extends ItemGiftBagNy {
 
-	protected static final String[] packedNames = new String[]{"cherryStick", "diamondPickaxe", "diamondShovel", "diamondAxe", "decorBow", "ironPickaxe", "ivyStick", "diamondSword", "bow.cherry"};
+	protected static final String[] packedNames = new String[]{"cherryStick",
+		"diamondPickaxe", "diamondShovel", "diamondAxe", "decorBow", "ironPickaxe", "ivyStick", "diamondSword",
+		"bow.cherry", "bone"};
 
 	protected ItemPackedNamedItem(int i) {
 		super(i);
@@ -22,7 +24,7 @@ public class ItemPackedNamedItem extends ItemGiftBagNy {
 
 	@Override
 	public int getIconFromDamage(int i) {
-		if(i == 0 || i == 6)
+		if(i == 0 || i == 6 || i == 9)
 			return GreenTextures.packedstick;
 		return iconIndex;
 	}

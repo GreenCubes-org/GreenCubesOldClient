@@ -29,6 +29,8 @@ class SlotArmor extends Slot {
 	public boolean isItemValid(ItemStack itemstack) {
 		if(itemstack.getItem() instanceof ItemArmor)
 			return ((ItemArmor) itemstack.getItem()).slot == armorType;
+		if(armorType == 3 && (itemstack.getItem() instanceof ItemSpeedBoots || itemstack.getItem() instanceof ItemValenki))
+			return true;
 		return false;
 	}
 	

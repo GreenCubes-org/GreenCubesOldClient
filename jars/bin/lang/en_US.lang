@@ -1722,6 +1722,7 @@ item.packedItem.decorBow.name=Упакованный именной лук
 item.packedItem.ironPickaxe.name=Упакованная именная железная кирка
 item.packedItem.ivyStick.name=Упакованная именная цветущая палочка
 item.packedItem.diamondSword.name=Упакованный именной алмазный меч
+item.packedItem.bone.name=Упакованная именная декоративная кость
 
 item.counterMod.name=Модификатор счётчика
 item.counterModClear.name=Модификатор счётчика - обнуление

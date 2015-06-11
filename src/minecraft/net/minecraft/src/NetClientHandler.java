@@ -391,6 +391,10 @@ public class NetClientHandler extends NetHandler {
 		entityotherplayermp.setSpawnPosition(d, d1, d2);
 		entityotherplayermp.setPositionAndRotation(d, d1, d2, f, f1);
 		entityotherplayermp.coloredName = packet20namedentityspawn.coloredName;
+		entityotherplayermp.organizationId = packet20namedentityspawn.organizationId;
+		if(entityotherplayermp.organizationId > 0) {
+			entityotherplayermp.organizationUrl = "http://greenusercontent.net/mc/org/logo/" + entityotherplayermp.organizationId +".png";
+		}
 		worldClient.addEntityWithId(packet20namedentityspawn.entityId, entityotherplayermp);
 	}
 

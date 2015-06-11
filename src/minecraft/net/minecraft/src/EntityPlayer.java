@@ -65,6 +65,8 @@ public abstract class EntityPlayer extends EntityLiving {
 	public float currentXP;
 	protected float speedOnGround;
 	protected float speedInAir;
+	public int organizationId = 0;
+	public String organizationUrl = null;
 
 	public FlyControl flyControl = new FlyControl(this);
 
