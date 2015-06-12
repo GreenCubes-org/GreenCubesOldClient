@@ -1,5 +1,5 @@
 enable:true
-enablemp:false
+enablemp:true
 itemsonly:false
 give-command:/i {1},{3} {2}
 key:o

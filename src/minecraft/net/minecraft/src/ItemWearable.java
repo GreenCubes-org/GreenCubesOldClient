@@ -114,24 +114,32 @@ public abstract class ItemWearable extends Item {
 					EntityFXGC fx = null;
 					switch(type) {
 					case 1:
+						if(slot == 0) // Not for item in hands effect
+							break;
 						double x = entity.posX + rand.nextDouble() * 0.6D - 0.3D;
 						double z = entity.posZ + rand.nextDouble() * 0.6D - 0.3D;
 						double y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * wearablesHeight[slot] + rand.nextDouble() * 0.6D - 0.3D;
 						fx = new EntityLightFXGC(entity.worldObj, x, y, z, entity, wearablesHeight[slot]);
 						break;
 					case 2:
+						if(slot == 0) // Not for item in hands effect
+							break;
 						x = entity.posX + rand.nextDouble() * 2.4D - 1.2D;
 						z = entity.posZ + rand.nextDouble() * 2.4D - 1.2D;
 						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * wearablesHeight[slot] + rand.nextDouble() * 2.4D - 1.2D;
 						fx = new EntityDarknessFXGC(entity.worldObj, x, y, z, entity, wearablesHeight[slot]);
 						break;
 					case 3:
+						if(slot == 0) // Not for item in hands effect
+							break;
 						x = entity.posX + rand.nextDouble() * 2.0D - 1.0D;
 						z = entity.posZ + rand.nextDouble() * 2.0D - 1.0D;
 						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.5d + rand.nextDouble() * 2.4D - 1.2D;
 						fx = new EntitySandFXGC(entity.worldObj, x, y, z, entity);
 						break;
 					case 4:
+						if(slot == 0) // Not for item in hands effect
+							break;
 						x = entity.posX + rand.nextDouble() * 2.0D - 1.0D;
 						z = entity.posZ + rand.nextDouble() * 2.0D - 1.0D;
 						y = entity.boundingBox.minY + (entity.boundingBox.maxY - entity.boundingBox.minY) * 0.5d + rand.nextDouble() * 2.4D - 1.2D;
