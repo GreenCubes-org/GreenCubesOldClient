@@ -38,7 +38,7 @@ public class EntityBreakingFXGC extends EntityFXGC {
 		float f6 = ((getTextureIndex() % 16) + particleTextureJitterX / 4F) / 16F;
 		float f7 = f6 + 0.01560938F;
 		float f8 = ((getTextureIndex() / 16) + particleTextureJitterY / 4F) / (16F * RenderEngine.ITEMS_MULT);
-		float f9 = f8 + 0.01560938F;
+		float f9 = f8 + 0.01560938F / RenderEngine.ITEMS_MULT;
 		float f10 = 0.1F * particleScale;
 		float f11 = (float) ((prevPosX + (posX - prevPosX) * f) - interpPosX);
 		float f12 = (float) ((prevPosY + (posY - prevPosY) * f) - interpPosY);
