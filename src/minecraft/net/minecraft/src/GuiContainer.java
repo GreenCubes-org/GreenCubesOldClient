@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 
+import org.greencubes.gui.FancyGUI;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -151,7 +152,11 @@ public abstract class GuiContainer extends GuiScreen {
 
 				zLevel = 300F;
 				itemRenderer.zLevel = 300F;
-				int i3 = 0xf0100010;
+				FancyGUI.getInstance().enableMode();
+				FancyGUI.getInstance().renderInterfaceNinePart(i2 - 5, k2 - 5, j1 + 10, l2 + 10, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
+				FancyGUI.getInstance().disableMode();
+				GL11.glDisable(GL11.GL_DEPTH_TEST);
+				/*int i3 = 0xf0100010;
 				drawGradientRect(i2 - 3, k2 - 4, i2 + j1 + 3, k2 - 3, i3, i3);
 				drawGradientRect(i2 - 3, k2 + l2 + 3, i2 + j1 + 3, k2 + l2 + 4, i3, i3);
 				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, k2 + l2 + 3, i3, i3);
@@ -162,7 +167,7 @@ public abstract class GuiContainer extends GuiScreen {
 				drawGradientRect(i2 - 3, (k2 - 3) + 1, (i2 - 3) + 1, (k2 + l2 + 3) - 1, j3, k3);
 				drawGradientRect(i2 + j1 + 2, (k2 - 3) + 1, i2 + j1 + 3, (k2 + l2 + 3) - 1, j3, k3);
 				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, (k2 - 3) + 1, j3, j3);
-				drawGradientRect(i2 - 3, k2 + l2 + 2, i2 + j1 + 3, k2 + l2 + 3, k3, k3);
+				drawGradientRect(i2 - 3, k2 + l2 + 2, i2 + j1 + 3, k2 + l2 + 3, k3, k3);*/
 
 				for(int l3 = 0; l3 < list.size(); l3++) {
 					String s1 = (String) list.get(l3);

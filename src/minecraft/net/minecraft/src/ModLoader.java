@@ -782,7 +782,7 @@ public final class ModLoader
     }
 
     public static BufferedImage loadImage(RenderEngine renderengine, String s) throws Exception {
-        TexturePackList texturepacklist = (TexturePackList)getPrivateValue(net.minecraft.src.RenderEngine.class, renderengine, 11);
+        TexturePackList texturepacklist = (TexturePackList) getPrivateValue(net.minecraft.src.RenderEngine.class, renderengine, 11);
         InputStream inputstream = texturepacklist.selectedTexturePack.getResourceAsStream(s);
         if(inputstream == null)
             throw new Exception((new StringBuilder("Image not found: ")).append(s).toString());

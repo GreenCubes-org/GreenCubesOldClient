@@ -5,6 +5,8 @@
 package net.minecraft.src;
 
 import java.util.*;
+
+import org.greencubes.gui.FancyGUI;
 import org.lwjgl.opengl.GL11;
 
 // Referenced classes of package net.minecraft.src:
@@ -54,6 +56,7 @@ public class GuiInventory extends GuiContainer {
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
 		fontRenderer.drawString("Крафт", 95, 16, 0x404040); // GreenCubes
+		
 	}
 
 	@Override
