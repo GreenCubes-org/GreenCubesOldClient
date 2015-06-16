@@ -118,10 +118,6 @@ public class GuiChat extends GuiScreen {
 			}
 			if(j > 0) {
 				message.insert(cursorPosition, s.substring(0, j));
-				// message = (new
-				// StringBuilder(String.valueOf(message.substring(0,
-				// cursorPosition)))).append(s.substring(0,
-				// j)).append(message.substring(cursorPosition)).toString();
 				cursorPosition += j;
 			}
 			checkcursor();
@@ -164,8 +160,6 @@ public class GuiChat extends GuiScreen {
 		}
 		if(allowedCharacters.indexOf(c) >= 0 && message.length() + (mc.chat.activeTab.sendPrefix != null ? mc.chat.activeTab.sendPrefix.length() : 0) < 256) {
 			message.insert(cursorPosition, c);
-			// message = (new StringBuilder(String.valueOf(message.substring(0,
-			// cursorPosition)))).append(c).append(message.substring(cursorPosition)).toString();
 			cursorPosition++;
 		}
 		message = mc.chat.processKeyInput(message, cursorPosition);
@@ -186,18 +180,16 @@ public class GuiChat extends GuiScreen {
 		List<StringBuilder> list = mc.chat.processChatDisplay(newMessage);
 		int i1 = list.size();
 		int j1 = mc.chat.bgColor;
-		drawRect(2, height - 4 - i1 * 12, width - 2, height - 2, j1);
+		drawRect(2, height - 4 - i1 * 12, 2 + GChat.chatWidth, height - 2, j1);
 		int passed = 0;
 		boolean drawed = false;
 		for(int n = 0; n < list.size(); ++n) {
 			fontRenderer.drawStringBuilderWithShadow(list.get(n), 4, height - 12 * i1--, 0xe0e0e0);
 			if(this.updateCounter % 12 > 4 && !drawed && !mc.ingameGUI.inSettings) {
-				//System.out.println("Line: " + list.get(n).length() + ", passed: " + passed + ", cursor: " + cursorPosition);
 				if(realCursor - passed <= list.get(n).length()) {
 					drawed = true;
 					int padding = mc.fontRenderer.getStringPartWidth(list.get(n), realCursor - passed);
-					//System.out.println("Draw at: " + (3 + padding) + " " + (height - 12 * i1 - 11));
-					drawString(fontRenderer, "_", 3 + padding, height - 12 * i1 - 11, 0xe0e0e0);
+					drawString(fontRenderer, "|", 3 + padding, height - 12 * i1 - 11, 0xe0e0e0);
 				} else
 					passed += list.get(n).length();
 			}

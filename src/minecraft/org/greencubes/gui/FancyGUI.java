@@ -79,11 +79,7 @@ public class FancyGUI {
 		this.scale = scale;
 	}
 	
-	public void renderScaledTooltip(int x, int y, String[] lines, int screenWidth, int screenHeight) {
-		renderScaledTooltip(x, y, lines, screenWidth, screenHeight, 2);
-	}
-	
-	public void renderScaledTooltip(int x, int y, String[] lines, int screenWidth, int screenHeight, int firstLinePadding) {
+	public void renderScaledTooltipUp(int x, int y, String[] lines, int screenWidth, int screenHeight, int firstLinePadding) {
 		FontRenderer fontRenderer = Minecraft.theMinecraft.fontRenderer;
 		FancyGUI.getInstance().enableMode();
 		int w = 0;
@@ -94,8 +90,41 @@ public class FancyGUI {
 		FancyGUI.getInstance().setScale(0.5f);
 		if(x + 6 + w + 8 > screenWidth)
 			x -= (x + 6 + w + 8) - screenWidth;
-		if(y + 6 + 10 * lines.length + 8 + firstLinePadding > screenHeight)
-			y -= (y + 6 + 10 * lines.length + 8 + firstLinePadding) - screenHeight;
+		if(y - 6 - 10 * lines.length - 8 - firstLinePadding < 0)
+			y += y - 6 - 10 * lines.length - 8 - firstLinePadding;
+		FancyGUI.getInstance().renderInterfaceNinePart(x + 6, y - 6 - 10 * lines.length + 8 + firstLinePadding, w + 8, 10 * lines.length + 8 + firstLinePadding, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
+		for(int i1 = 0; i1 < lines.length; ++i1) {
+			String s = lines[i1];
+			fontRenderer.renderString(s, x + 6 + 4, y + 6 + i1 * 10 + 4 + (i1 != 0 ? firstLinePadding : 0) , 0xFFFFFF, false);
+		}
+		FancyGUI.getInstance().setScale(1f);
+		FancyGUI.getInstance().disableMode();
+	}
+	
+	public void renderScaledTooltip(int x, int y, String[] lines, int screenWidth, int screenHeight, int padding) {
+		renderScaledTooltip(x, y, lines, screenWidth, screenHeight, 2, padding);
+	}
+	
+	public void renderScaledTooltip(int x, int y, String[] lines, int screenWidth, int screenHeight, int firstLinePadding, int padding) {
+		x += padding;
+		y += padding;
+		FontRenderer fontRenderer = Minecraft.theMinecraft.fontRenderer;
+		FancyGUI.getInstance().enableMode();
+		int w = 0;
+		for(String s : lines)
+			w = Math.max(w, fontRenderer.getStringWidth(s));
+		if(lines.length < 2)
+			firstLinePadding = 0;
+		FancyGUI.getInstance().setScale(0.5f);
+		if(x + 6 + w + 8 > screenWidth)
+			x -= (x + 6 + w + 8) - screenWidth;
+		if(y + 6 + 10 * lines.length + 8 + firstLinePadding > screenHeight) {
+			if(y - padding - padding / 2 - (6 + 10 * lines.length + 8 + firstLinePadding) > 0) {
+				y -= padding + (6 + 10 * lines.length + 8 + firstLinePadding) + padding / 2;
+			} else {
+				y -= (y + 6 + 10 * lines.length + 8 + firstLinePadding) - screenHeight;
+			}
+		}
 		FancyGUI.getInstance().renderInterfaceNinePart(x + 6, y + 6, w + 8, 10 * lines.length + 8 + firstLinePadding, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
 		for(int i1 = 0; i1 < lines.length; ++i1) {
 			String s = lines[i1];

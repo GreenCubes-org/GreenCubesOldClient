@@ -90,6 +90,9 @@ public class GuiIngame extends Gui {
 		ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
+		int mouseX = (Mouse.getEventX() * k) / mc.displayWidth;
+		int mouseY = l - (Mouse.getEventY() * l) / mc.displayHeight - 1;
+		boolean inGui = mc.currentScreen instanceof GuiChat;
 
 		FontRenderer fontrenderer = mc.fontRenderer;
 		mc.entityRenderer.setupOverlayRendering();
@@ -107,6 +110,7 @@ public class GuiIngame extends Gui {
 				renderPortalOverlay(f1, k, l);
 		}
 		
+		String[] renderTooltip = null;
 		
 		if(!mc.playerController.func_35643_e()) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -241,6 +245,9 @@ public class GuiIngame extends Gui {
 					BuffActive buff = iterator.value();
 					if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
 						renderBuff(buff, k7 + n * 19, i8);
+						if(inGui && mouseX > k7 + n * 19 && mouseX < k7 + n * 19 + 19 && mouseY > i8 && mouseY < i8 + 19) {
+							renderTooltip = buff.buff.getBuffDescription(buff).split("\n");
+						}
 						n++;
 					}
 				}
@@ -317,7 +324,10 @@ public class GuiIngame extends Gui {
 		if(itemStackDescription != null) {
 			List<String> list = TMIUtils.itemDisplayNameMultiline(itemStackDescription, TMIConfig.getInstance().isEnabled());
 			if(!list.isEmpty())
-				FancyGUI.getInstance().renderScaledTooltip(k / 2 + 5, l / 2 + 5, list.toArray(new String[list.size()]), k, l);
+				FancyGUI.getInstance().renderScaledTooltip(k / 2, l / 2, list.toArray(new String[list.size()]), k, l, 5);
+		}
+		if(renderTooltip != null) {
+			FancyGUI.getInstance().renderScaledTooltip(mouseX, mouseY, renderTooltip, k, l, 4);
 		}
 		
 		if(recordPlayingUpFor > 0) {
@@ -344,7 +354,7 @@ public class GuiIngame extends Gui {
 		// GreenCubes Chat start
 		int byte2 = mc.chat.lines;
 		byte leftPadding = 2;
-		boolean showInterface = mc.currentScreen instanceof GuiChat || mc.chat.locked;
+		boolean showInterface = inGui || mc.chat.locked;
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);

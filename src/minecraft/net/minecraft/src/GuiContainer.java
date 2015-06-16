@@ -124,10 +124,10 @@ public abstract class GuiContainer extends GuiScreen {
 
 			if(!list.isEmpty()) {
 
-				int i2 = (par1 - i) + 6;
-				int k2 = par2 - j + 6;
+				int i2 = (par1 - i);
+				int k2 = par2 - j;
 				
-				FancyGUI.getInstance().renderScaledTooltip(i2, k2, list.toArray(new String[list.size()]), width - i, height - j);
+				FancyGUI.getInstance().renderScaledTooltip(i2, k2, list.toArray(new String[list.size()]), width - i, height - j, 4);
 			}
 		}
 

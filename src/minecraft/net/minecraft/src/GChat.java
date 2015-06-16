@@ -44,7 +44,7 @@ public class GChat {
 	private static final Pattern channelColorPattern = Pattern.compile("\247w");
 	public static final String defaultColor = "f";
 	public static final char colorChar = '\247';
-	public static final int chatWidth = 340;
+	public static final int chatWidth = 320;
 	public static final int chatWindowWidth = 315;
 	private static final StringBuilder emptySb = new StringBuilder(0);
 	private static final Pattern commandpattern = Pattern.compile("񘿿񘿹([^|]*)\\|?(.*)");

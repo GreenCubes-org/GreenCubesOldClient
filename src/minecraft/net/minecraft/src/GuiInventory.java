@@ -145,7 +145,7 @@ public class GuiInventory extends GuiContainer {
 					BuffActive buff = iterator.value();
 					if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
 						if(mouseX > i && mouseX < i + 19 && mouseY > j + n * 19 && mouseY < j + n * 19 + 19) {
-							FancyGUI.getInstance().renderScaledTooltip(mouseX + 6, mouseY + 6, buff.buff.getBuffDescription(buff).split("\n"), width - guiLeft, height - guiTop);
+							FancyGUI.getInstance().renderScaledTooltip(mouseX, mouseY, buff.buff.getBuffDescription(buff).split("\n"), width - guiLeft, height - guiTop, 4);
 						}
 						n++;
 					}
