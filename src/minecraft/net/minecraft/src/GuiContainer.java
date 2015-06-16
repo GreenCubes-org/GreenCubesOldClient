@@ -120,77 +120,14 @@ public abstract class GuiContainer extends GuiScreen {
 
 		if(inventoryplayer.getItemStack() == null && slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
-			List list = TMIUtils.itemDisplayNameMultiline(slot.getStack(), TMIConfig.getInstance().isEnabled());
+			List<String> list = TMIUtils.itemDisplayNameMultiline(slot.getStack(), TMIConfig.getInstance().isEnabled());
 
 			if(!list.isEmpty()) {
-				int j1 = 0;
-				Iterator iterator = list.iterator();
 
-				do {
-					if(!iterator.hasNext()) {
-						break;
-					}
-
-					String s = (String) iterator.next();
-					int j2 = fontRenderer.getStringWidth(s);
-
-					if(j2 > j1) {
-						j1 = j2;
-					}
-				} while(true);
-
-				int i2 = (par1 - i) + 12;
-				int k2 = par2 - j + 12;
-				int l2 = 8;
-
-				if(list.size() > 1) {
-					l2 += 2 + (list.size() - 1) * 10;
-				}
-				int d = height - (k2 + l2 + guiTop);
-				if(d < 0)
-					k2 += d;
-
-				zLevel = 300F;
-				itemRenderer.zLevel = 300F;
-				FancyGUI.getInstance().enableMode();
-				FancyGUI.getInstance().setScale(0.5f);
-				FancyGUI.getInstance().renderInterfaceNinePart(i2 - 5, k2 - 5, j1 + 10, l2 + 10, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
-				FancyGUI.getInstance().setScale(1f);
-				FancyGUI.getInstance().disableMode();
-				GL11.glDisable(GL11.GL_DEPTH_TEST);
-				/*int i3 = 0xf0100010;
-				drawGradientRect(i2 - 3, k2 - 4, i2 + j1 + 3, k2 - 3, i3, i3);
-				drawGradientRect(i2 - 3, k2 + l2 + 3, i2 + j1 + 3, k2 + l2 + 4, i3, i3);
-				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, k2 + l2 + 3, i3, i3);
-				drawGradientRect(i2 - 4, k2 - 3, i2 - 3, k2 + l2 + 3, i3, i3);
-				drawGradientRect(i2 + j1 + 3, k2 - 3, i2 + j1 + 4, k2 + l2 + 3, i3, i3);
-				int j3 = 0x505000ff;
-				int k3 = (j3 & 0xfefefe) >> 1 | j3 & 0xff000000;
-				drawGradientRect(i2 - 3, (k2 - 3) + 1, (i2 - 3) + 1, (k2 + l2 + 3) - 1, j3, k3);
-				drawGradientRect(i2 + j1 + 2, (k2 - 3) + 1, i2 + j1 + 3, (k2 + l2 + 3) - 1, j3, k3);
-				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, (k2 - 3) + 1, j3, j3);
-				drawGradientRect(i2 - 3, k2 + l2 + 2, i2 + j1 + 3, k2 + l2 + 3, k3, k3);*/
-
-				for(int l3 = 0; l3 < list.size(); l3++) {
-					String s1 = (String) list.get(l3);
-
-					if(l3 == 0) {
-						s1 = (new StringBuilder()).append("\247").append(Integer.toHexString(itemstack1.getRarity().field_40535_e)).append(s1).toString();
-					} else {
-						s1 = (new StringBuilder()).append("\2477").append(s1).toString();
-					}
-
-					fontRenderer.drawStringWithShadow(s1, i2, k2, -1);
-
-					if(l3 == 0) {
-						k2 += 2;
-					}
-
-					k2 += 10;
-				}
-
-				zLevel = 0.0F;
-				itemRenderer.zLevel = 0.0F;
+				int i2 = (par1 - i) + 6;
+				int k2 = par2 - j + 6;
+				
+				FancyGUI.getInstance().renderScaledTooltip(i2, k2, list.toArray(new String[list.size()]), width - i, height - j);
 			}
 		}
 

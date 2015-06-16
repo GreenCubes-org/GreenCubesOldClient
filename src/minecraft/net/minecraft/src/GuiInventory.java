@@ -145,19 +145,7 @@ public class GuiInventory extends GuiContainer {
 					BuffActive buff = iterator.value();
 					if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
 						if(mouseX > i && mouseX < i + 19 && mouseY > j + n * 19 && mouseY < j + n * 19 + 19) {
-							FancyGUI.getInstance().enableMode();
-							String[] strings = buff.buff.getBuffDescription(buff).split("\n");
-							int w = 0;
-							for(String s : strings)
-								w = Math.max(w, fontRenderer.getStringWidth(s));
-							FancyGUI.getInstance().setScale(0.5f);
-							FancyGUI.getInstance().renderInterfaceNinePart(mouseX + 6, mouseY + 6, w + 8, 10 * strings.length + 8, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
-							for(int i1 = 0; i1 < strings.length; ++i1) {
-								String s = strings[i1];
-								fontRenderer.renderString(s, mouseX + 6 + 4, mouseY + 6 + i1 * 10 + 4, 0xFFFFFF, false);
-							}
-							FancyGUI.getInstance().setScale(1f);
-							FancyGUI.getInstance().disableMode();
+							FancyGUI.getInstance().renderScaledTooltip(mouseX + 6, mouseY + 6, buff.buff.getBuffDescription(buff).split("\n"), width - guiLeft, height - guiTop);
 						}
 						n++;
 					}

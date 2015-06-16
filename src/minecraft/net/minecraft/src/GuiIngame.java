@@ -107,52 +107,6 @@ public class GuiIngame extends Gui {
 				renderPortalOverlay(f1, k, l);
 		}
 		
-		GL11.glPushMatrix();
-		GL11.glTranslatef(k / 2 + 5, l / 2 + 5, 0);
-		if(itemStackDescription != null) {
-			List<String> list = TMIUtils.itemDisplayNameMultiline(itemStackDescription, TMIConfig.getInstance().isEnabled());
-			if(!list.isEmpty()) {
-				int j1 = 0;
-				Iterator<String> iterator = list.iterator();
-				while(iterator.hasNext()) {
-					String s = iterator.next();
-					int j2 = fontrenderer.getStringWidth(s);
-					if(j2 > j1)
-						j1 = j2;
-				}
-				int i2 = 12;
-				int k2 = 12;
-				int l2 = 8;
-				if(list.size() > 1)
-					l2 += 2 + (list.size() - 1) * 10;
-				int i3 = 0xf0100010;
-				drawGradientRect(i2 - 3, k2 - 4, i2 + j1 + 3, k2 - 3, i3, i3);
-				drawGradientRect(i2 - 3, k2 + l2 + 3, i2 + j1 + 3, k2 + l2 + 4, i3, i3);
-				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, k2 + l2 + 3, i3, i3);
-				drawGradientRect(i2 - 4, k2 - 3, i2 - 3, k2 + l2 + 3, i3, i3);
-				drawGradientRect(i2 + j1 + 3, k2 - 3, i2 + j1 + 4, k2 + l2 + 3, i3, i3);
-				int j3 = 0x505000ff;
-				int k3 = (j3 & 0xfefefe) >> 1 | j3 & 0xff000000;
-				drawGradientRect(i2 - 3, (k2 - 3) + 1, (i2 - 3) + 1, (k2 + l2 + 3) - 1, j3, k3);
-				drawGradientRect(i2 + j1 + 2, (k2 - 3) + 1, i2 + j1 + 3, (k2 + l2 + 3) - 1, j3, k3);
-				drawGradientRect(i2 - 3, k2 - 3, i2 + j1 + 3, (k2 - 3) + 1, j3, j3);
-				drawGradientRect(i2 - 3, k2 + l2 + 2, i2 + j1 + 3, k2 + l2 + 3, k3, k3);
-				for(int l3 = 0; l3 < list.size(); l3++) {
-					String s1 = (String) list.get(l3);
-					if(l3 == 0)
-						s1 = (new StringBuilder()).append("\247").append(Integer.toHexString(itemStackDescription.getRarity().field_40535_e)).append(s1).toString();
-					else
-						s1 = (new StringBuilder()).append("\2477").append(s1).toString();
-					fontrenderer.drawStringWithShadow(s1, i2, k2, -1);
-					if(l3 == 0)
-						k2 += 2;
-					k2 += 10;
-				}
-			}
-			zLevel -= 10;
-		}
-		GL11.glPopMatrix();
-		
 		
 		if(!mc.playerController.func_35643_e()) {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -359,6 +313,13 @@ public class GuiIngame extends Gui {
 			int c = mc.thePlayer.getFoodStats().getFoodLevel();
 			fontrenderer.drawStringWithShadow(c + "", k / 2 + 92, l - 33, (c >= 150 ? 40 : c < -40 ? 255 : (c <= 50 ? Math.abs((int) (c * 1.7) - 140) : 0)) << 16 | (c >= 150 ? 255 : c < -40 ? 40 : (c >= 10 ? (int) (c * 1.7) - 15 : 0)) << 8 | 40);
 		}
+		
+		if(itemStackDescription != null) {
+			List<String> list = TMIUtils.itemDisplayNameMultiline(itemStackDescription, TMIConfig.getInstance().isEnabled());
+			if(!list.isEmpty())
+				FancyGUI.getInstance().renderScaledTooltip(k / 2 + 5, l / 2 + 5, list.toArray(new String[list.size()]), k, l);
+		}
+		
 		if(recordPlayingUpFor > 0) {
 			float f2 = recordPlayingUpFor - f;
 			int k1 = (int) ((f2 * 256F) / 20F);
