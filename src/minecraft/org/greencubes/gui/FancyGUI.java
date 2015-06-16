@@ -22,8 +22,8 @@ public class FancyGUI {
 	
 	private final RenderEngine renderEngine;
 	
-	private int textureWidth;
-	private int textureHeight;
+	private int textureWidth = 1024;
+	private int textureHeight = 512;
 	private int textureId;
 	private float texturePixelWidth;
 	private float texturePixelHeight;
@@ -40,8 +40,9 @@ public class FancyGUI {
 		try {
 			BufferedImage interfaceTexture = ModLoader.loadImage(renderEngine, "/gui/interface.png");
 			interfaceTexture = ImageUtil.flipVertical(interfaceTexture);
-			textureWidth = interfaceTexture.getWidth();
-			textureHeight = interfaceTexture.getHeight();
+			// We do not read actual texture size to allow gentle texture packs modifications
+			//textureWidth = interfaceTexture.getWidth();
+			//textureHeight = interfaceTexture.getHeight();
 			texturePixelWidth = 1f / (float) textureWidth;
 			texturePixelHeight = 1f / (float) textureHeight;
 			textureId = renderEngine.allocateAndSetupTexture(interfaceTexture);
@@ -136,7 +137,7 @@ public class FancyGUI {
 	
 	public void renderInterface(float x, float y, float w, float h, int srcX, int srcY, int srcW, int srcH) {
 		renderEngine.bindTexture(textureId);
-		renderImage(x, y, w, h, textureWidth, textureHeight, srcX, srcY, srcW, srcH, color);
+		renderImage(x, y, w, h, srcX, srcY, srcW, srcH, color);
 	}
 	
 	public void renderInterfaceNinePart(float x, float y, float w, float h, int srcX, int srcY, NinePartInfo npi) {
@@ -178,18 +179,18 @@ public class FancyGUI {
 			float tileX = x;
 			while (tileX < endX) {
 				float tileWidth = Math.min(srcW, endX - tileX);
-				renderImage(tileX, tileY, tileWidth, tileHeight, textureWidth, textureHeight, srcX, srcY, (int) tileWidth, (int) tileHeight, color);
+				renderImage(tileX, tileY, tileWidth, tileHeight, srcX, srcY, (int) tileWidth, (int) tileHeight, color);
 				tileX += tileWidth;
 			}
 			tileY += tileHeight;
 		}
 	}
 	
-	private void renderImage(float x, float y, float w, float h, int imageWidth, int imageHeight, int srcX, int srcY, int srcW, int srcH, ColorRGBA color) {
-		float startX = (float) srcX / (float) imageWidth;
-		float startY = (float) srcY / (float) imageHeight;
-		float endX = startX + ((float) srcW / (float) imageWidth);
-		float endY = startY + ((float) srcH / (float) imageHeight);
+	private void renderImage(float x, float y, float w, float h, int srcX, int srcY, int srcW, int srcH, ColorRGBA color) {
+		float startX = (float) srcX * texturePixelWidth;
+		float startY = (float) srcY * texturePixelHeight;
+		float endX = startX + (float) srcW * texturePixelWidth;
+		float endY = startY + (float) srcH * texturePixelHeight;
 		float f1 = 1f - startY;
 		startY = 1f - endY;
 		endY = f1;
