@@ -27,7 +27,7 @@ public class GuiGift extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer() {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRenderer.drawString(lowerChestInventory.getInvName(), 8, 6, 0x404040);
 		fontRenderer.drawString(upperChestInventory.getInvName(), 8, (ySize - 96) + 2, 0x404040);
 		fontRenderer.drawString(giftTitle.toString() + (editable && (cursorCycle / 10) % 2 == 0 ? "\247f_" : ""), 30, 23, 0xffffff);

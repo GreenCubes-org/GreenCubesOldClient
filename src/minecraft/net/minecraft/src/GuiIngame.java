@@ -20,6 +20,7 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 
+import org.greencubes.gui.FancyGUI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -277,15 +278,15 @@ public class GuiIngame extends Gui {
 			RenderHelper.disableStandardItemLighting();
 			GL11.glDisable(32826 /* GL_RESCALE_NORMAL_EXT */);
 			if(mc.thePlayer.activeBuffs.size() > 0) {
-				int k7 = (k / 2 - 90) + 180 + 2;
-				int i8 = l - 16 - 3;
+				int k7 = (k / 2 - 90) + 180 + 3;
+				int i8 = l - 19;
 				int n = 0;
 				TIntObjectIterator<BuffActive> iterator = mc.thePlayer.activeBuffs.iterator();
 				while(iterator.hasNext()) {
 					iterator.advance();
 					BuffActive buff = iterator.value();
-					if(buff != null && buff.buff != null) {
-						renderBuff(buff, k7 + n * 16, i8);
+					if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
+						renderBuff(buff, k7 + n * 19, i8);
 						n++;
 					}
 				}
@@ -596,7 +597,9 @@ public class GuiIngame extends Gui {
 		//GL11.glEndList();
 	}
 
-	private void renderBuff(BuffActive buff, int x, int y) {
+	public void renderBuff(BuffActive buff, int x, int y) {
+		FancyGUI.getInstance().enableMode();
+		FancyGUI.getInstance().renderInterface(x - 1, y - 1, 17, 17, 305, 339, 34, 34);
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(buff.buff.getTextureFramed()));
 		Tessellator t = Tessellator.instance;
@@ -608,8 +611,10 @@ public class GuiIngame extends Gui {
 		t.draw();
 		if(buff.timeLeft != -1) {
 			String s = GCUtil.getMaxTimeString(buff.timeLeft);
-			mc.fontRenderer.drawStringWithShadow(s, (x + 19) - 4 - mc.fontRenderer.getStringWidth(s), y + 6 + 3, 0x0AC80A);
+			mc.fontRenderer.drawStringWithShadow(s, (x + 19) - 4 - mc.fontRenderer.getStringWidth(s), y + 6, 0x0AC80A);
 		}
+		FancyGUI.getInstance().renderInterface(x - 1, y - 1, 17, 17, 305, 374, 34, 34);
+		FancyGUI.getInstance().disableMode();
 	}
 
 	public void notifyAnswer() {

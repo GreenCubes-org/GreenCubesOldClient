@@ -4,7 +4,11 @@
 
 package net.minecraft.src;
 
+import gnu.trove.iterator.TIntObjectIterator;
+
 import java.util.*;
+
+import net.minecraft.client.Minecraft;
 
 import org.greencubes.gui.FancyGUI;
 import org.lwjgl.opengl.GL11;
@@ -47,7 +51,7 @@ public class GuiInventory extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer() {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		if(inventorySlots.getSlot(inventorySlots.inventorySlots.size() - 1).getHasStack()) {
 			int k = GreenTextures.trashcan;
 			GL11.glDisable(GL11.GL_LIGHTING);
@@ -55,8 +59,8 @@ public class GuiInventory extends GuiContainer {
 			drawTexturedModalRectItem(133, 62, (k % 16) * 16, (k / 16) * 16, 16, 16);
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
-		fontRenderer.drawString("Крафт", 95, 16, 0x404040); // GreenCubes
-		
+		fontRenderer.drawString("Крафт", 95, 16, 0x404040);
+		displayDebuffEffects(mouseX, mouseY);
 	}
 
 	@Override
@@ -74,7 +78,6 @@ public class GuiInventory extends GuiContainer {
 		int l = guiLeft;
 		int i1 = guiTop;
 		drawTexturedModalRect(l, i1, 0, 0, xSize, ySize);
-		displayDebuffEffects();
 		GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
 		GL11.glEnable(2903 /*GL_COLOR_MATERIAL*/);
 		GL11.glPushMatrix();
@@ -115,36 +118,52 @@ public class GuiInventory extends GuiContainer {
 		}
 	}
 
-	private void displayDebuffEffects() {
-		int i = guiLeft - 124;
-		int j = guiTop;
-		int k = mc.renderEngine.getTexture("/gui/inventory.png");
-		Collection collection = mc.thePlayer.func_40118_aO();
-		if(collection.isEmpty()) {
-			return;
-		}
-		int l = 33;
-		if(collection.size() > 5) {
-			l = 132 / (collection.size() - 1);
-		}
-		for(Iterator iterator = mc.thePlayer.func_40118_aO().iterator(); iterator.hasNext();) {
-			PotionEffect potioneffect = (PotionEffect) iterator.next();
-			Potion potion = Potion.potionTypes[potioneffect.getPotionID()];
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.renderEngine.bindTexture(k);
-			drawTexturedModalRect(i, j, 0, ySize, 140, 32);
-			if(potion.func_40617_d()) {
-				int i1 = potion.func_40611_e();
-				drawTexturedModalRect(i + 6, j + 7, 0 + (i1 % 8) * 18, ySize + 32 + (i1 / 8) * 18, 18, 18);
+	private void displayDebuffEffects(int mouseX, int mouseY) {
+		int i = - 19;
+		int j = + 2;
+		if(mc.thePlayer.activeBuffs.size() > 0) {
+			int n = 0;
+			boolean renderTooltip = false;
+			TIntObjectIterator<BuffActive> iterator = mc.thePlayer.activeBuffs.iterator();
+			while(iterator.hasNext()) {
+				iterator.advance();
+				BuffActive buff = iterator.value();
+				if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
+					Minecraft.theMinecraft.ingameGUI.renderBuff(buff, i, j + n * 19);
+					if(mouseX > i && mouseX < i + 19 && mouseY > j + n * 19 && mouseY < j + n * 19 + 19) {
+						renderTooltip = true;
+					}
+					n++;
+				}
 			}
-			String s = StatCollector.translateToLocal(potion.func_40623_c());
-			if(potioneffect.getAmplifier() > 0) {
-				s = (new StringBuilder()).append(s).append(" ").append(StatCollector.translateToLocal((new StringBuilder()).append("potion.potency.").append(potioneffect.getAmplifier()).toString())).toString();
+			
+			if(renderTooltip) {
+				n = 0;
+				iterator = mc.thePlayer.activeBuffs.iterator();
+				while(iterator.hasNext()) {
+					iterator.advance();
+					BuffActive buff = iterator.value();
+					if(buff != null && buff.buff != null && buff.buff.getTextureFramed() != null) {
+						if(mouseX > i && mouseX < i + 19 && mouseY > j + n * 19 && mouseY < j + n * 19 + 19) {
+							FancyGUI.getInstance().enableMode();
+							String[] strings = buff.buff.getBuffDescription(buff).split("\n");
+							int w = 0;
+							for(String s : strings)
+								w = Math.max(w, fontRenderer.getStringWidth(s));
+							FancyGUI.getInstance().setScale(0.5f);
+							FancyGUI.getInstance().renderInterfaceNinePart(mouseX + 6, mouseY + 6, w + 8, 10 * strings.length + 8, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
+							for(int i1 = 0; i1 < strings.length; ++i1) {
+								String s = strings[i1];
+								fontRenderer.renderString(s, mouseX + 6 + 4, mouseY + 6 + i1 * 10 + 4, 0xFFFFFF, false);
+							}
+							FancyGUI.getInstance().setScale(1f);
+							FancyGUI.getInstance().disableMode();
+						}
+						n++;
+					}
+				}
 			}
-			fontRenderer.drawStringWithShadow(s, i + 10 + 18, j + 6, 0xffffff);
-			String s1 = Potion.func_40620_a(potioneffect);
-			fontRenderer.drawStringWithShadow(s1, i + 10 + 18, j + 6 + 10, 0x7f7f7f);
-			j += l;
+			GL11.glColor4f(1, 1, 1, 1);
 		}
 
 	}

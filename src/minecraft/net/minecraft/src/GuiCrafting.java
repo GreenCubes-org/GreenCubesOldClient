@@ -22,7 +22,7 @@ public class GuiCrafting extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer() {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		// GreenCubes start
 		fontRenderer.drawString("Крафт", 28, 6, 0x404040);
 		fontRenderer.drawString("Инвентарь", 8, (ySize - 96) + 2, 0x404040);

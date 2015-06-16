@@ -103,7 +103,7 @@ public class GuiContainerCreative extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer() {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		fontRenderer.drawString("Item selection", 8, 6, 0x404040);
 	}
 

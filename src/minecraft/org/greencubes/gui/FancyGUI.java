@@ -11,6 +11,7 @@ import com.jme3.math.ColorRGBA;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderEngine;
+import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.Tessellator;
 
 public class FancyGUI {
@@ -26,6 +27,7 @@ public class FancyGUI {
 	private float texturePixelWidth;
 	private float texturePixelHeight;
 	private ColorRGBA color = ColorRGBA.White;
+	private float scale = 1f;
 	
 	public NinePartInfo inventoryWindowNPI = new NinePartInfo(5, 1, 5, 5, 5, 1, 5, 1, 5, 1, 5, 5);
 	public NinePartInfo itemDescriptionNPI = new NinePartInfo(4, 2, 4, 4, 4, 2, 4, 2, 4, 2, 4, 4);
@@ -72,58 +74,62 @@ public class FancyGUI {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	
-	public void renderInterface(int x, int y, int w, int h, int srcX, int srcY, int srcW, int srcH) {
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+	
+	public void renderInterface(float x, float y, float w, float h, int srcX, int srcY, int srcW, int srcH) {
 		renderEngine.bindTexture(textureId);
 		renderImage(x, y, w, h, textureWidth, textureHeight, srcX, srcY, srcW, srcH, color);
 	}
 	
-	public void renderInterfaceNinePart(int x, int y, int w, int h, int srcX, int srcY, NinePartInfo npi) {
-		renderInterface(x, y, npi.top_leftWidth, npi.top_height, srcX, srcY, npi.top_leftWidth, npi.top_height);
+	public void renderInterfaceNinePart(float x, float y, float w, float h, int srcX, int srcY, NinePartInfo npi) {
+		renderInterface(x, y, npi.top_leftWidth * scale, npi.top_height * scale, srcX, srcY, npi.top_leftWidth, npi.top_height);
 		if(npi.repeat) {
-			renderInterfaceRepeat(x + npi.top_leftWidth, y, w - npi.top_leftWidth - npi.top_rightWidth, npi.top_height, srcX + npi.top_leftWidth, srcY, npi.top_centerWidth, npi.top_height);
+			renderInterfaceRepeat(x + npi.top_leftWidth * scale, y, w - npi.top_leftWidth * scale - npi.top_rightWidth * scale, npi.top_height * scale, srcX + npi.top_leftWidth, srcY, npi.top_centerWidth, npi.top_height);
 		} else {
-			renderInterface(x + npi.top_leftWidth, y, w - npi.top_leftWidth - npi.top_rightWidth, npi.top_height, srcX + npi.top_leftWidth, srcY, npi.top_centerWidth, npi.top_height);
+			renderInterface(x + npi.top_leftWidth * scale, y, w - npi.top_leftWidth * scale - npi.top_rightWidth  * scale, npi.top_height * scale, srcX + npi.top_leftWidth, srcY, npi.top_centerWidth, npi.top_height);
 		}
-		renderInterface(x + w - npi.top_rightWidth, y, npi.top_rightWidth, npi.top_height, srcX + npi.top_leftWidth + npi.top_centerWidth, srcY, npi.top_rightWidth, npi.top_height);
+		renderInterface(x + w - npi.top_rightWidth * scale, y, npi.top_rightWidth * scale, npi.top_height * scale, srcX + npi.top_leftWidth + npi.top_centerWidth, srcY, npi.top_rightWidth, npi.top_height);
 		
 		if(npi.repeat) {
-			renderInterfaceRepeat(x, y + npi.top_height, npi.center_leftWidth, h - npi.top_height - npi.bottom_height, srcX, srcY + npi.top_height, npi.center_leftWidth, npi.center_height);
-			renderInterfaceRepeat(x + npi.center_leftWidth, y + npi.top_height, w - npi.center_leftWidth - npi.center_rightWidth, h - npi.top_height - npi.bottom_height, srcX + npi.center_leftWidth, srcY + npi.top_height, npi.center_centerWidth, npi.center_height);
-			renderInterfaceRepeat(x + w - npi.center_rightWidth, y + npi.top_height, npi.center_rightWidth, h - npi.top_height - npi.bottom_height, srcX + npi.center_leftWidth + npi.center_centerWidth, srcY + npi.top_height, npi.center_rightWidth, npi.center_height);
+			renderInterfaceRepeat(x, y + npi.top_height * scale, npi.center_leftWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX, srcY + npi.top_height, npi.center_leftWidth, npi.center_height);
+			renderInterfaceRepeat(x + npi.center_leftWidth * scale, y + npi.top_height * scale, w - npi.center_leftWidth * scale - npi.center_rightWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX + npi.center_leftWidth, srcY + npi.top_height, npi.center_centerWidth, npi.center_height);
+			renderInterfaceRepeat(x + w - npi.center_rightWidth * scale, y + npi.top_height * scale, npi.center_rightWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX + npi.center_leftWidth + npi.center_centerWidth, srcY + npi.top_height, npi.center_rightWidth, npi.center_height);
 		} else {
-			renderInterface(x, y + npi.top_height, npi.center_leftWidth, h - npi.top_height - npi.bottom_height, srcX, srcY + npi.top_height, npi.center_leftWidth, npi.center_height);
-			renderInterface(x + npi.center_leftWidth, y + npi.top_height, w - npi.center_leftWidth - npi.center_rightWidth, h - npi.top_height - npi.bottom_height, srcX + npi.center_leftWidth, srcY + npi.top_height, npi.center_centerWidth, npi.center_height);
-			renderInterface(x + w - npi.center_rightWidth, y + npi.top_height, npi.center_rightWidth, h - npi.top_height - npi.bottom_height, srcX + npi.center_leftWidth + npi.center_centerWidth, srcY + npi.top_height, npi.center_rightWidth, npi.center_height);
+			renderInterface(x, y + npi.top_height * scale, npi.center_leftWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX, srcY + npi.top_height, npi.center_leftWidth, npi.center_height);
+			renderInterface(x + npi.center_leftWidth * scale, y + npi.top_height * scale, w - npi.center_leftWidth * scale - npi.center_rightWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX + npi.center_leftWidth, srcY + npi.top_height, npi.center_centerWidth, npi.center_height);
+			renderInterface(x + w - npi.center_rightWidth * scale, y + npi.top_height * scale, npi.center_rightWidth * scale, h - npi.top_height * scale - npi.bottom_height * scale, srcX + npi.center_leftWidth + npi.center_centerWidth, srcY + npi.top_height, npi.center_rightWidth, npi.center_height);
 		}
 		
-		renderInterface(x, y + h - npi.bottom_height, npi.bottom_leftWidth, npi.bottom_height, srcX, srcY + npi.top_height + npi.center_height, npi.bottom_leftWidth, npi.bottom_height);
+		renderInterface(x, y + h - npi.bottom_height * scale, npi.bottom_leftWidth * scale, npi.bottom_height * scale, srcX, srcY + npi.top_height + npi.center_height, npi.bottom_leftWidth, npi.bottom_height);
 		if(npi.repeat) {
-			renderInterfaceRepeat(x + npi.bottom_leftWidth, y + h - npi.bottom_height, w - npi.bottom_leftWidth - npi.bottom_rightWidth, npi.bottom_height, srcX + npi.bottom_leftWidth, srcY + npi.top_height + npi.center_height, npi.bottom_centerWidth, npi.bottom_height);
+			renderInterfaceRepeat(x + npi.bottom_leftWidth * scale, y + h - npi.bottom_height * scale, w - npi.bottom_leftWidth * scale - npi.bottom_rightWidth * scale, npi.bottom_height * scale, srcX + npi.bottom_leftWidth, srcY + npi.top_height + npi.center_height, npi.bottom_centerWidth, npi.bottom_height);
 		} else {
-			renderInterface(x + npi.bottom_leftWidth, y + h - npi.bottom_height, w - npi.bottom_leftWidth - npi.bottom_rightWidth, npi.bottom_height, srcX + npi.bottom_leftWidth, srcY + npi.top_height + npi.center_height, npi.bottom_centerWidth, npi.bottom_height);
+			renderInterface(x + npi.bottom_leftWidth * scale, y + h - npi.bottom_height * scale, w - npi.bottom_leftWidth * scale - npi.bottom_rightWidth * scale, npi.bottom_height * scale, srcX + npi.bottom_leftWidth, srcY + npi.top_height + npi.center_height, npi.bottom_centerWidth, npi.bottom_height);
 		}
-		renderInterface(x + w - npi.bottom_rightWidth, y + h - npi.bottom_height, npi.bottom_rightWidth, npi.bottom_height, srcX + npi.bottom_leftWidth + npi.bottom_centerWidth, srcY + npi.top_height + npi.center_height, npi.bottom_rightWidth, npi.bottom_height);
+		renderInterface(x + w - npi.bottom_rightWidth * scale, y + h - npi.bottom_height * scale, npi.bottom_rightWidth * scale, npi.bottom_height * scale, srcX + npi.bottom_leftWidth + npi.bottom_centerWidth, srcY + npi.top_height + npi.center_height, npi.bottom_rightWidth, npi.bottom_height);
 	}
 	
-	public void renderInterfaceRepeat(int x, int y, int w, int h, int srcX, int srcY, int srcW, int srcH) {
+	public void renderInterfaceRepeat(float x, float y, float w, float h, int srcX, int srcY, int srcW, int srcH) {
 		renderEngine.bindTexture(textureId);
-		int endX = x + w;
-		int endY = y + h;
+		float endX = x + w;
+		float endY = y + h;
 
-		int tileY = y;
+		float tileY = y;
 		while (tileY < endY) {
-			int tileHeight = Math.min(srcH, endY - tileY);
-			int tileX = x;
+			float tileHeight = Math.min(srcH, endY - tileY);
+			float tileX = x;
 			while (tileX < endX) {
-				int tileWidth = Math.min(srcW, endX - tileX);
-				renderImage(tileX, tileY, tileWidth, tileHeight, textureWidth, textureHeight, srcX, srcY, tileWidth, tileHeight, color);
+				float tileWidth = Math.min(srcW, endX - tileX);
+				renderImage(tileX, tileY, tileWidth, tileHeight, textureWidth, textureHeight, srcX, srcY, (int) tileWidth, (int) tileHeight, color);
 				tileX += tileWidth;
 			}
 			tileY += tileHeight;
 		}
 	}
 	
-	private void renderImage(int x, int y, int w, int h, int imageWidth, int imageHeight, int srcX, int srcY, int srcW, int srcH, ColorRGBA color) {
+	private void renderImage(float x, float y, float w, float h, int imageWidth, int imageHeight, int srcX, int srcY, int srcW, int srcH, ColorRGBA color) {
 		float startX = (float) srcX / (float) imageWidth;
 		float startY = (float) srcY / (float) imageHeight;
 		float endX = startX + ((float) srcW / (float) imageWidth);

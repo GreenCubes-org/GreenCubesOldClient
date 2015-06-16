@@ -95,7 +95,7 @@ public abstract class GuiContainer extends GuiScreen {
 			}
 		}
 
-		drawGuiContainerForegroundLayer();
+		drawGuiContainerForegroundLayer(par1 - i, par2 - j);
 		InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
 
 		if(inventoryplayer.getItemStack() != null) {
@@ -153,7 +153,9 @@ public abstract class GuiContainer extends GuiScreen {
 				zLevel = 300F;
 				itemRenderer.zLevel = 300F;
 				FancyGUI.getInstance().enableMode();
+				FancyGUI.getInstance().setScale(0.5f);
 				FancyGUI.getInstance().renderInterfaceNinePart(i2 - 5, k2 - 5, j1 + 10, l2 + 10, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
+				FancyGUI.getInstance().setScale(1f);
 				FancyGUI.getInstance().disableMode();
 				GL11.glDisable(GL11.GL_DEPTH_TEST);
 				/*int i3 = 0xf0100010;
@@ -201,7 +203,7 @@ public abstract class GuiContainer extends GuiScreen {
 	/**
 	 * Draw the foreground layer for the GuiContainer (everythin in front of the items)
 	 */
-	protected void drawGuiContainerForegroundLayer() {
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 	}
 
 	/**
