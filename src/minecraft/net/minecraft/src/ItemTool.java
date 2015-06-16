@@ -21,6 +21,7 @@ public class ItemTool extends Item {
 	protected float efficiencyOnProperMaterial;
 	private int damageVsEntity;
 	protected EnumToolMaterial toolMaterial;
+	protected ItemStack toFix;
 
 	protected ItemTool(int i, int j, EnumToolMaterial enumtoolmaterial, Block ablock[], BlockDataPair[] effectiveBlocks) {
 		super(i);
@@ -34,6 +35,12 @@ public class ItemTool extends Item {
 		setMaxDamage(enumtoolmaterial.getMaxUses());
 		efficiencyOnProperMaterial = enumtoolmaterial.getEfficiencyOnProperMaterial();
 		damageVsEntity = j + enumtoolmaterial.getDamageVsEntity();
+	}
+	
+	public ItemTool setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
 	}
 
 	@Override

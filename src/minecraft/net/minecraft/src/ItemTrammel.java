@@ -9,10 +9,18 @@ import org.lwjgl.opengl.GL11;
 
 public class ItemTrammel extends Item {
 
+	protected ItemStack toFix;
+	
 	protected ItemTrammel(int id) {
 		super(id);
 		setMaxStackSize(1);
 		setMaxDamage(512);
+	}
+	
+	public ItemTrammel setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
 	}
 
 	@Override
@@ -197,6 +205,18 @@ public class ItemTrammel extends Item {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Штангенциркуль");
+		if(toFix != null) {
+			sb.append(", чинится: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
 	}
 
 }

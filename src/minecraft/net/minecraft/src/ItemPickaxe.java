@@ -4,6 +4,8 @@
 
 package net.minecraft.src;
 
+import java.util.List;
+
 // Referenced classes of package net.minecraft.src:
 //            ItemTool, Block, EnumToolMaterial, Material, 
 //            ItemStack
@@ -63,5 +65,17 @@ public class ItemPickaxe extends ItemTool {
 		if(block.blockMaterial == Material.iron)
 			return true;
 		return block.blockMaterial.getIsHarvestable();
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Кирка");
+		if(toFix != null) {
+			sb.append(", чинится: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
 	}
 }

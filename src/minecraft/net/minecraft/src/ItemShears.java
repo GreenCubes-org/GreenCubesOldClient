@@ -4,16 +4,38 @@
 
 package net.minecraft.src;
 
+import java.util.List;
+
 // Referenced classes of package net.minecraft.src:
 //            Item, Block, BlockLeaves, BlockTallGrass, 
 //            ItemStack, EntityLiving
 
 public class ItemShears extends Item {
+	
+	protected ItemStack toFix;
 
 	public ItemShears(int i) {
 		super(i);
 		setMaxStackSize(1);
 		setMaxDamage(238);
+	}
+	
+	public ItemShears setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Ножницы");
+		if(toFix != null) {
+			sb.append(", чинятся: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
 	}
 
 	@Override

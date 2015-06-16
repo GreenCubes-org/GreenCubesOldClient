@@ -4,6 +4,8 @@
 
 package net.minecraft.src;
 
+import java.util.List;
+
 import org.greencubes.items.unique.DecorItemQuality;
 
 // Referenced classes of package net.minecraft.src:
@@ -12,12 +14,19 @@ import org.greencubes.items.unique.DecorItemQuality;
 
 public class ItemHoe extends Item {
 
+	protected ItemStack toFix;
 	protected DecorItemQuality quality;
 	
 	public ItemHoe(int i, EnumToolMaterial enumtoolmaterial) {
 		super(i);
 		maxStackSize = 1;
 		setMaxDamage(enumtoolmaterial.getMaxUses());
+	}
+	
+	public ItemHoe setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
 	}
 
 	@Override
@@ -42,6 +51,18 @@ public class ItemHoe extends Item {
 		}
 	}
 
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Мотыга");
+		if(toFix != null) {
+			sb.append(", чинится: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
+	}
+	
 	@Override
 	public boolean isFull3D() {
 		return true;

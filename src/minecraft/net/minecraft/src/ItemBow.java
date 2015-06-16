@@ -15,6 +15,7 @@ public class ItemBow extends Item {
 	protected int baseDamage = 5;
 	protected float accuracy;
 	protected int[] icons = {101, 117, 133};
+	protected ItemStack toFix;
 	
 	public ItemBow(int i, float accuracy) {
 		super(i);
@@ -26,6 +27,24 @@ public class ItemBow extends Item {
 	public ItemBow setActionIcons(int[] icons) {
 		this.icons = icons;
 		return this;
+	}
+	
+	public ItemBow setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Лук");
+		if(toFix != null) {
+			sb.append(", чинится: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
 	}
 	
 	@Override

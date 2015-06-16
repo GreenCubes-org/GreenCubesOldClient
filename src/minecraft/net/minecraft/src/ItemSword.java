@@ -15,6 +15,7 @@ import org.greencubes.items.unique.DecorItemQuality;
 
 public class ItemSword extends Item {
 
+	protected ItemStack toFix;
 	protected DecorItemQuality quality;
 	private int weaponDamage;
 	private final EnumToolMaterial material;
@@ -25,6 +26,24 @@ public class ItemSword extends Item {
 		maxStackSize = 1;
 		setMaxDamage(enumtoolmaterial.getMaxUses());
 		weaponDamage = 4 + enumtoolmaterial.getDamageVsEntity() * 2;
+	}
+	
+	public ItemSword setFixItem(int id) {
+		if(id != -1)
+			this.toFix = new ItemStack(id, 1, 0);
+		return this;
+	}
+	
+	@Override
+	public void appendDescription(ItemStack itemstack, List<String> list) {
+		super.appendDescription(itemstack, list);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\2477Меч");
+		if(toFix != null) {
+			sb.append(", чинится: ");
+			sb.append(toFix.getItem().getTranslatedName(toFix));
+		}
+		list.add(sb.toString());
 	}
 
 	@Override
