@@ -51,8 +51,23 @@ public class BlockColumn extends Block implements IBlockMadeOf {
 		int data = world.getBlockMetadata(x, y, z);
 		setBlockBounds(getSideDiff(0, data), 0.0F, getSideDiff(1, data), 1 - getSideDiff(2, data), 1.0F, 1 - getSideDiff(3, data));
 	}
+	
+	public static int getSide(BlockFace face) {
+		switch(face) {
+		case NORTH:
+			return 0;
+		case SOUTH:
+			return 2;
+		case EAST:
+			return 1;
+		case WEST:
+			return 3;
+		default:
+			return 0;
+		}
+	}
 
-	protected float getSideDiff(int side, int data) {
+	public static float getSideDiff(int side, int data) {
 		data = (data >> side) & 0x11;
 		if(data == 0x11)
 			return 0.375F;

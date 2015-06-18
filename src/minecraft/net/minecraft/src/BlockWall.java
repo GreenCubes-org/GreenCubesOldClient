@@ -41,10 +41,10 @@ public class BlockWall extends Block {
 	 */
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-		boolean var5 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1);
-		boolean var6 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1);
-		boolean var7 = this.canConnectWallTo(par1IBlockAccess, par2 - 1, par3, par4);
-		boolean var8 = this.canConnectWallTo(par1IBlockAccess, par2 + 1, par3, par4);
+		boolean var5 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1, BlockFace.EAST);
+		boolean var6 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1, BlockFace.WEST);
+		boolean var7 = this.canConnectWallTo(par1IBlockAccess, par2 - 1, par3, par4, BlockFace.NORTH);
+		boolean var8 = this.canConnectWallTo(par1IBlockAccess, par2 + 1, par3, par4, BlockFace.SOUTH);
 		float var9 = 0.25F;
 		float var10 = 0.75F;
 		float var11 = 0.25F;
@@ -98,10 +98,16 @@ public class BlockWall extends Block {
 	/**
 	 * Return whether an adjacent block can connect to a wall.
 	 */
-	public boolean canConnectWallTo(IBlockAccess par1IBlockAccess, int x, int y, int z) {
+	public boolean canConnectWallTo(IBlockAccess par1IBlockAccess, int x, int y, int z, BlockFace face) {
 		int var5 = par1IBlockAccess.getBlockId(x, y, z);
 		if(blocksList[var5] == null)
 			return false;
+		if(blocksList[var5].isOpaqueCube())
+			return true;
+		if(blocksList[var5] instanceof BlockColumn) {
+			if(BlockColumn.getSideDiff(BlockColumn.getSide(face.getOpposite()), par1IBlockAccess.getBlockMetadata(x, y, z)) == 0.0f)
+				return true;
+		}
 		return blocksList[var5] instanceof BlockWall || blocksList[var5] instanceof BlockFenceGate;
 	}
 

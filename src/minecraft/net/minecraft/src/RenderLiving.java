@@ -285,7 +285,7 @@ public class RenderLiving extends Render {
 	protected void passSpecialRender(EntityLiving entity, double d, double d1, double d2) {
 		Tessellator tessellator = Tessellator.instance;
 		FontRenderer fr = getFontRendererFromRenderManager();
-		if(Minecraft.isGuiEnabled()) {
+		if(Minecraft.isGuiEnabled() && entity != Minecraft.theMinecraft.renderViewEntity) {
 			float f = 1.6F;
 			float scale = 0.01666667F * f;
 			if(entity.getDistanceToEntity(renderManager.livingPlayer) < (entity.isSneaking() ? 32F : 64F)) {

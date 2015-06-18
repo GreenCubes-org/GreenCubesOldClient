@@ -502,10 +502,10 @@ public class RenderBlocks {
 	}
 
 	public boolean renderBlockWall(BlockWall block, int x, int y, int z) {
-		boolean var5 = block.canConnectWallTo(this.blockAccess, x - 1, y, z);
-		boolean var6 = block.canConnectWallTo(this.blockAccess, x + 1, y, z);
-		boolean var7 = block.canConnectWallTo(this.blockAccess, x, y, z - 1);
-		boolean var8 = block.canConnectWallTo(this.blockAccess, x, y, z + 1);
+		boolean var5 = block.canConnectWallTo(this.blockAccess, x - 1, y, z, BlockFace.NORTH);
+		boolean var6 = block.canConnectWallTo(this.blockAccess, x + 1, y, z, BlockFace.SOUTH);
+		boolean var7 = block.canConnectWallTo(this.blockAccess, x, y, z - 1, BlockFace.EAST);
+		boolean var8 = block.canConnectWallTo(this.blockAccess, x, y, z + 1, BlockFace.WEST);
 		boolean var9 = var7 && var8 && !var5 && !var6;
 		boolean var10 = !var7 && !var8 && var5 && var6;
 		boolean var11 = this.blockAccess.isAirBlock(x, y + 1, z);
