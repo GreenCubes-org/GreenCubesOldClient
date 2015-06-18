@@ -69,7 +69,7 @@ public class RenderPlayer extends RenderLiving {
 		DistributedModels.reset();
 	}
 
-	protected void renderName(EntityPlayer entityplayer, double d, double d1, double d2) {
+	protected double renderName(EntityPlayer entityplayer, double d, double d1, double d2) {
 		if(Minecraft.isGuiEnabled() && entityplayer != renderManager.livingPlayer) {
 			float f = 1.6F;
 			float f1 = 0.01666667F * f;
@@ -79,15 +79,19 @@ public class RenderPlayer extends RenderLiving {
 				String s = entityplayer.username;
 				if(entityplayer instanceof EntityOtherPlayerMP && ((EntityOtherPlayerMP) entityplayer).coloredName != null)
 					s = ((EntityOtherPlayerMP) entityplayer).coloredName;
-				if(s.isEmpty())
-					return;
 				if(!entityplayer.isSneaking()) {
+					float offset = 0.0f;
+					if(s.isEmpty())
+						return offset * 2;
 					if(entityplayer.isPlayerSleeping()) {
-						renderLivingLabel(entityplayer, s, d, d1 - 1.5D, d2, 64);
+						renderLivingLabel(entityplayer, s, d, d1 - 1.5D, d2, 64, 2, offset, 0.0f);
 					} else {
-						renderLivingLabel(entityplayer, s, d, d1, d2, 64);
+						renderLivingLabel(entityplayer, s, d, d1, d2, 64, 2, offset, 0.0f);
 					}
+					return getFontRendererFromRenderManager().getStringWidth(s) + offset * 2;
 				} else {
+					if(s.isEmpty())
+						return 0.0f;
 					FontRenderer fontrenderer = getFontRendererFromRenderManager();
 					GL11.glPushMatrix();
 					GL11.glTranslatef((float) d + 0.0F, (float) d1 + 2.3F, (float) d2);
@@ -117,9 +121,11 @@ public class RenderPlayer extends RenderLiving {
 					GL11.glDisable(3042 /*GL_BLEND*/);
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 					GL11.glPopMatrix();
+					return getFontRendererFromRenderManager().getStringWidth(s);
 				}
 			}
 		}
+		return 0.0f;
 	}
 
 	private List<ItemStack> cache = new ArrayList<ItemStack>();
@@ -293,11 +299,11 @@ public class RenderPlayer extends RenderLiving {
 		}
 	}
 
-	@Override
+	/*@Override
 	protected void passSpecialRender(EntityLiving entityliving, double d, double d1, double d2) {
-		renderName((EntityPlayer) entityliving, d, d1, d2);
-		renderStatusLine(entityliving, d, d1, d2, 3.0d);
-	}
+		double d4 = renderName((EntityPlayer) entityliving, d, d1, d2);
+		renderStatusLine(entityliving, d, d1, d2, 3.0d, d4);
+	}*/
 
 	@Override
 	protected void preRenderCallback(EntityLiving entityliving, float f) {

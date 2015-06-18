@@ -37,13 +37,8 @@ public class EntitySlime extends EntityLiving implements IMob {
 		dataWatcher.updateObject(16, new Byte((byte) i));
 		setSize(0.6F * i, 0.6F * i);
 		setPosition(posX, posY, posZ);
-		setEntityHealth(getMaxHealth());
-	}
-
-	@Override
-	public int getMaxHealth() {
-		int i = getSlimeSize();
-		return i * i;
+		maxHealth = i * i;
+		setEntityHealth(maxHealth);
 	}
 
 	public int getSlimeSize() {

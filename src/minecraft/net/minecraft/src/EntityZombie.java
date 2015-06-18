@@ -15,11 +15,7 @@ public class EntityZombie extends EntityMob {
 		texture = "/mob/zombie.png";
 		moveSpeed = 0.5F;
 		attackStrength = 4;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		this.health = this.maxHealth = 20;
 	}
 
 	@Override

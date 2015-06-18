@@ -28,11 +28,7 @@ public class EntityWolf extends EntityAnimal {
 		texture = "/mob/wolf.png";
 		setSize(0.8F, 0.8F);
 		moveSpeed = 1.1F;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return !isWolfTamed() ? 8 : 20;
+		this.health = this.maxHealth = 8;
 	}
 
 	@Override

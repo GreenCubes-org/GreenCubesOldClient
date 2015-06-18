@@ -17,11 +17,7 @@ public class EntitySnowman extends EntitySnowmanBase {
 		super(world);
 		texture = "/mob/snowman.png";
 		setSize(0.4F, 1.8F);
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 4;
+		this.health = this.maxHealth = 4;
 	}
 
 	@Override

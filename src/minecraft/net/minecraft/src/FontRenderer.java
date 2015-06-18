@@ -308,7 +308,7 @@ public class FontRenderer {
 	}
 
 	public void drawStringBuilderWithShadow(StringBuilder s, int i, int j, int k) {
-		renderStringBuilder(s, i + 1, j + 1, k + 1, true);
+		renderStringBuilder(s, i + 1, j + 1, k, true);
 		renderStringBuilder(s, i, j, k, false);
 	}
 

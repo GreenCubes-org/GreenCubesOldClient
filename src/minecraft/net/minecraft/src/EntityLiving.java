@@ -42,7 +42,8 @@ public abstract class EntityLiving extends Entity {
 	public float jumpMovementFactor = 0.02F;
 	public float prevSwingProgress;
 	public float swingProgress;
-	protected int health = getMaxHealth();
+	public int maxHealth = 10;
+	protected int health = maxHealth;
 	public int prevHealth;
 	protected int field_40129_bA;
 	private int livingSoundTime;
@@ -110,6 +111,11 @@ public abstract class EntityLiving extends Entity {
 			swingProgressInt = -1;
 			isSwinging = true;
 		}
+	}
+	
+	// Made it final to rework how max health system work
+	public final int getMaxHealth() {
+		return maxHealth;
 	}
 	
 	protected int getArmSwingSpeed() {
@@ -344,6 +350,21 @@ public abstract class EntityLiving extends Entity {
 			setEating(true);
 		}
 	}
+	
+	public boolean isDanger() {
+		if(activeBuffs.size() > 0) {
+			TIntObjectIterator<BuffActive> iterator = activeBuffs.iterator();
+			while(iterator.hasNext()) {
+				iterator.advance();
+				BuffActive ab = iterator.value();
+				for(BuffEffect be : ab.effects) {
+					if(be.type == BuffEffectType.PVP)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	@Override
 	public void onUpdate() {
@@ -439,20 +460,18 @@ public abstract class EntityLiving extends Entity {
 		if(health <= 0)
 			return;
 		health += i;
-		if(health > getMaxHealth())
-			health = getMaxHealth();
+		if(health > maxHealth)
+			health = maxHealth;
 		heartsLife = heartsHalvesLife / 2;
 	}
-
-	public abstract int getMaxHealth();
 
 	public int getEntityHealth() {
 		return health;
 	}
 
 	public void setEntityHealth(int i) {
-		if(i > getMaxHealth())
-			i = getMaxHealth();
+		if(maxHealth > 0 && i > maxHealth)
+			i = maxHealth;
 		health = i;
 	}
 
@@ -769,7 +788,7 @@ public abstract class EntityLiving extends Entity {
 	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		health = nbttagcompound.getShort("Health");
 		if(!nbttagcompound.hasKey("Health"))
-			health = getMaxHealth();
+			health = maxHealth;
 		hurtTime = nbttagcompound.getShort("HurtTime");
 		deathTime = nbttagcompound.getShort("DeathTime");
 		attackTime = nbttagcompound.getShort("AttackTime");

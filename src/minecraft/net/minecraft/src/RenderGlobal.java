@@ -298,7 +298,7 @@ public class RenderGlobal implements IWorldAccess {
 			return;
 		Profiler.startSection("prepare");
 		TileEntityRenderer.instance.cacheActiveRenderInfo(worldObj, renderEngine, mc.fontRenderer, mc.renderViewEntity, f);
-		RenderManager.instance.cacheActiveRenderInfo(worldObj, renderEngine, mc.fontRenderer, mc.renderViewEntity, mc.gameSettings, f);
+		RenderManager.instance.cacheActiveRenderInfo(worldObj, renderEngine, mc.worldFontRenderer, mc.renderViewEntity, mc.gameSettings, f);
 		TileEntityRenderer.instance.func_40742_a();
 		countEntitiesTotal = 0;
 		countEntitiesRendered = 0;
@@ -321,6 +321,19 @@ public class RenderGlobal implements IWorldAccess {
 				RenderManager.instance.renderEntity(entity, f);
 			}
 		}
+		
+		Profiler.endStartSection("tileentities");
+		RenderHelper.enableStandardItemLighting();
+		tilesRendered = 0;
+		for(int k = 0; k < tileEntities.size(); k++) {
+			TileEntity t = tileEntities.get(k);
+			if(!icamera.isBoxInFrustum(t.xCoord, t.yCoord, t.zCoord, t.xCoord + 2, t.yCoord + 1, t.zCoord + 2))
+				continue;
+			if(!isBlockVisible(t.xCoord, t.yCoord, t.zCoord) && (!(t instanceof TileEntityChest) || !isBlockVisible(t.xCoord + 1, t.yCoord, t.zCoord + 1)))
+				continue;
+			TileEntityRenderer.instance.renderTileEntity(t, f);
+		}
+		TileEntityRenderer.instance.secondPass(f);
 
 		Profiler.endStartSection("entities");
 		for(int j = 0; j < list.size(); j++) {
@@ -340,18 +353,7 @@ public class RenderGlobal implements IWorldAccess {
 				RenderManager.instance.renderEntity(entity1, f);
 			}
 		}
-		Profiler.endStartSection("tileentities");
-		RenderHelper.enableStandardItemLighting();
-		tilesRendered = 0;
-		for(int k = 0; k < tileEntities.size(); k++) {
-			TileEntity t = tileEntities.get(k);
-			if(!icamera.isBoxInFrustum(t.xCoord, t.yCoord, t.zCoord, t.xCoord + 2, t.yCoord + 1, t.zCoord + 2))
-				continue;
-			if(!isBlockVisible(t.xCoord, t.yCoord, t.zCoord) && (!(t instanceof TileEntityChest) || !isBlockVisible(t.xCoord + 1, t.yCoord, t.zCoord + 1)))
-				continue;
-			TileEntityRenderer.instance.renderTileEntity(t, f);
-		}
-		TileEntityRenderer.instance.secondPass(f);
+		
 		mc.entityRenderer.disableLightmap(f);
 		Profiler.endSection();
 	}

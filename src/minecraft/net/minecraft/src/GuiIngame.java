@@ -21,6 +21,7 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 
 import org.greencubes.gui.FancyGUI;
+import org.greencubes.util.ChatColor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -252,7 +253,24 @@ public class GuiIngame extends Gui {
 					}
 				}
 			}
-			RenderHelper.disableStandardItemLighting();
+			
+			FancyGUI.getInstance().enableMode();
+			// Party icon
+			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 339, 34, 34);
+			FancyGUI.getInstance().renderInterface(k - 18, l - 18, 16, 16, 373, 347, 32, 32);
+			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 374, 34, 34);
+			mc.fontRenderer.drawStringWithShadow(ChatColor.GOLD + "P", (k - 19 + 19) - 4 - mc.fontRenderer.getStringWidth("P"), l - 19 + 8, 0x0AC80A);
+			FancyGUI.getInstance().enableMode();
+			// Journal icon
+			/*FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 339, 34, 34);
+			FancyGUI.getInstance().renderInterface(k - 18, l - 18, 16, 16, 340, 347, 32, 32);
+			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 374, 34, 34);
+			mc.fontRenderer.drawStringWithShadow(ChatColor.GOLD + "J", (k - 19 + 19) - 4 - mc.fontRenderer.getStringWidth("J"), l - 19 + 8, 0x0AC80A);
+			FancyGUI.getInstance().enableMode();*/
+			//String tt = "\2476Приглашение в группу!\n\n" +
+			//"\247fВы получили приглашение в группу от игрока \247r99446666[\247rff66c016G\247rfff7f7f7C\247r99446666] \247rffea8df7Rena4ka\247f. Чтобы принять приглашение, нажмите \247bP\247f или напишите в чате \247b/p accept\247f.";
+			//FancyGUI.getInstance().renderScaledTooltip(k - 19, l - 19, GChat.wrapText(tt, 250, 0, false), k, l, 4);
+			FancyGUI.getInstance().disableMode();
 		}
 		if(mc.thePlayer.getSleepTimer() > 0) {
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -589,18 +607,6 @@ public class GuiIngame extends Gui {
 	}
 
 	public void notifyAnswer() {
-		/*Packet209Dialog packet = new Packet209Dialog();
-		packet.cancel = true;
-		packet.ok = true;
-		packet.title = "Миу-миу, квестик!";
-		packet.pages = new String[] {"Миу-миу, страница один! Бла-бла-бла-бла-бла, миу-миу-миу, я кошка, все остальные не няши. :3 Хозяйка - няша, а остальные - нет. Хочу мяса!\nАбзац 2, а тут предметы:{ITEM}{ITEM}Продолжение страницы...{ITEM}^ Предмет!","Страница 2, ололо! :3\nМиу-миу."};
-		ItemStack glowing = new ItemStack(mod_gc.premiumCoupon, 1, 0);
-		glowing.field_40715_d = new NBTTagCompound();
-		glowing.field_40715_d.setInteger("Glow", 0x00FF00);
-		packet.items = new ItemStack[] {new ItemStack(278, 1, 0), glowing, new ItemStack(1, 11, 0)};
-		packet.itemsDescriptions = new String[] {"Миу-миу\nКирочка!","Светящийся премим-купон!","Добыча камня:\n0 / 20000"};
-		GuiDialog dialog = new GuiDialog(packet);
-		mc.displayGuiScreen(dialog);*/
 		if(currentNotify != null)
 			hideNotify = true;
 		mc.getSendQueue().addToSendQueue(new Packet208NotifyAnswer());

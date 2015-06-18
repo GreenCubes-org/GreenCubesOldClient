@@ -14,11 +14,7 @@ public class EntityCaveSpider extends EntitySpider {
 		super(world);
 		texture = "/mob/cavespider.png";
 		setSize(0.7F, 0.5F);
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 12;
+		this.health = this.maxHealth = 12;
 	}
 
 	@Override

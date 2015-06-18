@@ -75,9 +75,9 @@ public class EntityFXGC {
 		motionZ = mz + ((float) (Math.random() * 2D - 1.0D) * 0.4F);
 		float f = (float) (Math.random() + Math.random() + 1.0D) * 0.15F;
 		float f1 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
-		motionX = (motionX / f1) * f * 0.40000000596046448D;
-		motionY = (motionY / f1) * f * 0.40000000596046448D + 0.10000000149011612D;
-		motionZ = (motionZ / f1) * f * 0.40000000596046448D;
+		motionX = (motionX / f1) * f * 0.4D;
+		motionY = (motionY / f1) * f * 0.4D + 0.1D;
+		motionZ = (motionZ / f1) * f * 0.4D;
 		particleTextureJitterX = rand.nextFloat() * 3F;
 		particleTextureJitterY = rand.nextFloat() * 3F;
 		particleScale = (rand.nextFloat() * 0.5F + 0.5F) * 2.0F;
@@ -185,15 +185,15 @@ public class EntityFXGC {
 		}
 	}
 
-	public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void renderParticle(Tessellator tessellator, float framePart, float f1, float f2, float f3, float f4, float f5) {
 		float f6 = (particleTextureIndex % 16) / 16F;
 		float f7 = f6 + 0.0624375F;
 		float f8 = (particleTextureIndex / 16) / (16F * (getFXLayer() == 2 ? RenderEngine.ITEMS_MULT : getFXLayer() == 1 ? RenderEngine.TERRAIN_MULT : 1));
 		float f9 = f8 + 0.0624375F / (getFXLayer() == 2 ? RenderEngine.ITEMS_MULT : getFXLayer() == 1 ? RenderEngine.TERRAIN_MULT : 1);
 		float f10 = 0.1F * particleScale;
-		float f11 = (float) ((prevPosX + (posX - prevPosX) * f) - interpPosX);
-		float f12 = (float) ((prevPosY + (posY - prevPosY) * f) - interpPosY);
-		float f13 = (float) ((prevPosZ + (posZ - prevPosZ) * f) - interpPosZ);
+		float f11 = (float) ((prevPosX + (posX - prevPosX) * framePart) - interpPosX);
+		float f12 = (float) ((prevPosY + (posY - prevPosY) * framePart) - interpPosY);
+		float f13 = (float) ((prevPosZ + (posZ - prevPosZ) * framePart) - interpPosZ);
 		tessellator.setColorRGBA_F(particleRed, particleGreen, particleBlue, particleAlpha);
 		tessellator.addVertexWithUV(f11 - f1 * f10 - f4 * f10, f12 - f2 * f10, f13 - f3 * f10 - f5 * f10, f7, f9);
 		tessellator.addVertexWithUV((f11 - f1 * f10) + f4 * f10, f12 + f2 * f10, (f13 - f3 * f10) + f5 * f10, f7, f8);

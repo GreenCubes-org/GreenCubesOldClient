@@ -34,6 +34,7 @@ public class FancyGUI {
 	public NinePartInfo itemDescriptionNPI = new NinePartInfo(4, 2, 4, 4, 4, 2, 4, 2, 4, 2, 4, 4);
 	public NinePartInfo inventoryPanelNPI = new NinePartInfo(3, 1, 3, 3, 3, 1, 3, 1, 3, 1, 3, 3);
 	public NinePartInfo butonNPI = new NinePartInfo(4, 40, 4, 4, 4, 40, 4, 31, 4, 40, 4, 4);
+	public NinePartInfo inputFieldNPI = new NinePartInfo(4, 1, 4, 4, 4, 1, 4, 1, 4, 1, 4, 4);
 	
 	private FancyGUI() {
 		renderEngine = Minecraft.theMinecraft.renderEngine;
@@ -78,28 +79,6 @@ public class FancyGUI {
 	
 	public void setScale(float scale) {
 		this.scale = scale;
-	}
-	
-	public void renderScaledTooltipUp(int x, int y, String[] lines, int screenWidth, int screenHeight, int firstLinePadding) {
-		FontRenderer fontRenderer = Minecraft.theMinecraft.fontRenderer;
-		FancyGUI.getInstance().enableMode();
-		int w = 0;
-		for(String s : lines)
-			w = Math.max(w, fontRenderer.getStringWidth(s));
-		if(lines.length < 2)
-			firstLinePadding = 0;
-		FancyGUI.getInstance().setScale(0.5f);
-		if(x + 6 + w + 8 > screenWidth)
-			x -= (x + 6 + w + 8) - screenWidth;
-		if(y - 6 - 10 * lines.length - 8 - firstLinePadding < 0)
-			y += y - 6 - 10 * lines.length - 8 - firstLinePadding;
-		FancyGUI.getInstance().renderInterfaceNinePart(x + 6, y - 6 - 10 * lines.length + 8 + firstLinePadding, w + 8, 10 * lines.length + 8 + firstLinePadding, 228, 198, FancyGUI.getInstance().itemDescriptionNPI);
-		for(int i1 = 0; i1 < lines.length; ++i1) {
-			String s = lines[i1];
-			fontRenderer.renderString(s, x + 6 + 4, y + 6 + i1 * 10 + 4 + (i1 != 0 ? firstLinePadding : 0) , 0xFFFFFF, false);
-		}
-		FancyGUI.getInstance().setScale(1f);
-		FancyGUI.getInstance().disableMode();
 	}
 	
 	public void renderScaledTooltip(int x, int y, String[] lines, int screenWidth, int screenHeight, int padding) {

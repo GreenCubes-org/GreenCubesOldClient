@@ -75,8 +75,8 @@ public class RenderManager {
 		entityRenderMap.put(net.minecraft.src.EntityFireworkTrace.class, new RenderSnowball(GreenTextures.flareammo, 0.2f));
 		ModLoader.AddAllRenderers(entityRenderMap);
 		Render render;
-		for(Iterator iterator = entityRenderMap.values().iterator(); iterator.hasNext(); render.setRenderManager(this)) {
-			render = (Render) iterator.next();
+		for(Iterator<Render> iterator = entityRenderMap.values().iterator(); iterator.hasNext(); render.setRenderManager(this)) {
+			render = iterator.next();
 		}
 
 	}

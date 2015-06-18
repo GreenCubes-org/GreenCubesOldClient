@@ -38,7 +38,12 @@ public class GameSettings {
 	public KeyBinding keyBindCommand = new KeyBinding("", Keyboard.KEY_SLASH);
 	public KeyBinding keyFly = new KeyBinding("key.fly", Keyboard.KEY_Z);
 	public KeyBinding keySpeed = new KeyBinding("key.speed", Keyboard.KEY_LCONTROL);
-	public KeyBinding[] keyBindings = new KeyBinding[]{keyBindAttack, keyBindUseItem, keyBindForward, keyBindLeft, keyBindBack, keyBindRight, keyBindJump, keyBindSneak, keyBindDrop, keyBindInventory, keyBindChat, keyBindPlayerList, keyBindPickBlock, keyBindNotify, keyFly, keySpeed};
+	public KeyBinding keyJournal = new KeyBinding("key.journal", Keyboard.KEY_J);
+	public KeyBinding keyParty = new KeyBinding("key.party", Keyboard.KEY_P);
+	public KeyBinding[] keyBindings = new KeyBinding[]{keyBindAttack, keyBindUseItem, keyBindForward,
+			keyBindLeft, keyBindBack, keyBindRight, keyBindJump, keyBindSneak, keyBindDrop,
+			keyBindInventory, keyBindChat, keyBindPlayerList, keyBindPickBlock, keyBindNotify,
+			keyJournal, keyParty, keyFly, keySpeed};
 
 	// Fly settings
 	public float flySpeed = 2.0F;

@@ -14,11 +14,7 @@ public class EntityDragonBase extends EntityLiving {
 	public EntityDragonBase(World world) {
 		super(world);
 		field_40157_aB = 100;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return field_40157_aB;
+		this.health = this.maxHealth = 100;
 	}
 
 	public boolean func_40156_a(DragonPart dragonpart, DamageSource damagesource, int i) {

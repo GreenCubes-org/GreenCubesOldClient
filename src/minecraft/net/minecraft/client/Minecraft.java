@@ -33,6 +33,7 @@ import net.minecraft.src.*;
 import org.greencubes.executor.IInvokeable;
 import org.greencubes.executor.Task;
 import org.greencubes.executor.TaskWithResult;
+import org.greencubes.party.Party;
 import org.greencubes.util.MacOSX;
 import org.greencubes.util.Util;
 import org.json.JSONArray;
@@ -84,6 +85,7 @@ public abstract class Minecraft implements Runnable {
 	public volatile boolean isGamePaused = false;
 	public RenderEngine renderEngine;
 	public FontRenderer fontRenderer;
+	public FontRenderer worldFontRenderer;
 	public FontRenderer standardGalacticFontRenderer;
 	public GuiScreen currentScreen = null;
 	public LoadingScreenRenderer loadingScreen;
@@ -204,6 +206,9 @@ public abstract class Minecraft implements Runnable {
 		renderEngine = new RenderEngine(texturePackList, gameSettings);
 		loadScreen();
 		fontRenderer = new FontRenderer(gameSettings, "/font/default.png", renderEngine, true);
+		//renderEngine.blurTexture = true;
+		worldFontRenderer = new FontRenderer(gameSettings, "/font/default.png", renderEngine, true);
+		//renderEngine.blurTexture = false;
 		standardGalacticFontRenderer = new FontRenderer(gameSettings, "/font/alternate.png", renderEngine, false);
 		ColorizerWater.getWaterBiomeColorizer(renderEngine.getTextureContents("/misc/watercolor.png"));
 		ColorizerGrass.setGrassBiomeColorizer(renderEngine.getTextureContents("/misc/grasscolor.png"));
@@ -1165,8 +1170,12 @@ public abstract class Minecraft implements Runnable {
 			boolean isSlash = false;
 			while(isMultiplayerWorld() && ((isSlash = gameSettings.keyBindCommand.isPressed()) || gameSettings.keyBindChat.isPressed()))
 				displayGuiScreen(new GuiChat(isSlash));
-			while(gameSettings.keyBindNotify.isPressed())
+			while(isMultiplayerWorld() && gameSettings.keyBindNotify.isPressed())
 				ingameGUI.notifyAnswer();
+			while(isMultiplayerWorld() && gameSettings.keyParty.isPressed())
+				displayGuiScreen(new GuiParty());
+			//while(gameSettings.keyJournal.isPressed())
+			//	displayGuiScreen(new GuiJournal());
 			if(thePlayer.isUsingItem()) {
 				if(!gameSettings.keyBindUseItem.pressed)
 					playerController.onStoppedUsingItem(thePlayer);

@@ -16,15 +16,16 @@ public class Packet036EntityHealth extends Packet {
 	@Override
 	public void readPacketData(DataInputStream input) throws IOException {
 		entityId = input.readInt();
-		currentHealth = input.readInt();
 		maxHealth = input.readInt();
+		currentHealth = input.readInt();
+		
 	}
 
 	@Override
 	public void writePacketData(DataOutputStream output) throws IOException {
 		output.writeInt(entityId);
-		output.writeInt(currentHealth);
 		output.writeInt(maxHealth);
+		output.writeInt(currentHealth);
 	}
 
 	@Override

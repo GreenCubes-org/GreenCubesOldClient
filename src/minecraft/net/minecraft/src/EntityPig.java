@@ -15,11 +15,7 @@ public class EntityPig extends EntityAnimal {
 		super(world);
 		texture = "/mob/pig.png";
 		setSize(0.9F, 0.9F);
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 10;
+		this.health = this.maxHealth = 10;
 	}
 
 	@Override

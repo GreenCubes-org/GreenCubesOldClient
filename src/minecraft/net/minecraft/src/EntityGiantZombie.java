@@ -16,11 +16,7 @@ public class EntityGiantZombie extends EntityMob {
 		attackStrength = 50;
 		yOffset *= 6F;
 		setSize(width * 6F, height * 6F);
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 100;
+		this.health = this.maxHealth = 100;
 	}
 
 	@Override

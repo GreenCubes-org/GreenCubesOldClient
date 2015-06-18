@@ -8,6 +8,7 @@ import gnu.trove.iterator.TIntObjectIterator;
 
 import java.util.*;
 
+import org.greencubes.party.Party;
 import org.greencubes.util.TrigMath;
 
 import net.minecraft.client.Minecraft;
@@ -65,10 +66,16 @@ public abstract class EntityPlayer extends EntityLiving {
 	public float currentXP;
 	protected float speedOnGround;
 	protected float speedInAir;
-	public int organizationId = 0;
-	public String organizationUrl = null;
 
 	public FlyControl flyControl = new FlyControl(this);
+	
+	public int organizationId = 0;
+	public String organizationUrl = null;
+	public Party party = new Party(this);
+	/**
+	 * Server-side global player id
+	 */
+	public int playerId;
 
 	public EntityPlayer(World world) {
 		super(world);
@@ -95,11 +102,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		field_9353_B = 180F;
 		fireResistance = 20;
 		texture = "/mob/char.png";
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		health = maxHealth = 20;
 	}
 
 	@Override
@@ -231,7 +234,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		yOffset = 1.62F;
 		setSize(0.6F, 1.8F);
 		super.preparePlayerToSpawn();
-		setEntityHealth(getMaxHealth());
+		setEntityHealth(maxHealth);
 		deathTime = 0;
 	}
 
@@ -287,7 +290,7 @@ public abstract class EntityPlayer extends EntityLiving {
 		if(flyToggleTimer > 0) {
 			flyToggleTimer--;
 		}
-		if(worldObj.difficultySetting == 0 && getEntityHealth() < getMaxHealth() && (ticksExisted % 20) * 12 == 0) {
+		if(worldObj.difficultySetting == 0 && getEntityHealth() < maxHealth && (ticksExisted % 20) * 12 == 0) {
 			heal(1);
 		}
 		inventory.decrementAnimations();
@@ -1139,7 +1142,7 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	public boolean shouldHeal() {
-		return getEntityHealth() > 0 && getEntityHealth() < getMaxHealth();
+		return getEntityHealth() > 0 && getEntityHealth() < maxHealth;
 	}
 
 	public boolean func_35190_e(int i, int j, int k) {

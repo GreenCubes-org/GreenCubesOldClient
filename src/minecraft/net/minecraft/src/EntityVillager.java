@@ -20,11 +20,7 @@ public class EntityVillager extends EntityCreature {
 		field_40141_a = i;
 		func_40140_ac();
 		moveSpeed = 0.5F;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		this.health = this.maxHealth = 20;
 	}
 
 	@Override

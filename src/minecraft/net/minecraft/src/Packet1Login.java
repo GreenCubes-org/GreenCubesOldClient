@@ -12,7 +12,7 @@ import java.io.*;
 public class Packet1Login extends Packet {
 
 	public int entityId;
-	public long mapSeed;
+	public int playerId;
 	public byte worldType;
 
 	public Packet1Login() {
@@ -21,14 +21,14 @@ public class Packet1Login extends Packet {
 	@Override
 	public void readPacketData(DataInputStream datainputstream) throws IOException {
 		entityId = datainputstream.readInt();
-		datainputstream.readInt();
+		playerId = datainputstream.readInt();
 		worldType = datainputstream.readByte();
 	}
 
 	@Override
 	public void writePacketData(DataOutputStream out) throws IOException {
 		out.writeInt(entityId);
-		out.writeInt(0);
+		out.writeInt(playerId);
 		out.writeByte(worldType);
 	}
 

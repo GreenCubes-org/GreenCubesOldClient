@@ -12,6 +12,7 @@ import org.greencubes.compatibility.BlockDurabilityFactory;
 import org.greencubes.downloader.Downloader;
 import org.greencubes.launcher.util.Util;
 import org.greencubes.nbt.NBTWorker;
+import org.greencubes.util.ChatColor;
 
 import net.lahwran.wecui.CuboidRegion;
 import net.lahwran.wecui.WorldEditCUI;
@@ -58,6 +59,25 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	// GreenCubes start
+	
+	@Override
+	public void handleEntityHealthChange(Packet035EntityHealthChange packet) {
+		Entity e = worldClient.getEntityById(packet.entityId);
+		if(e != null && e instanceof EntityLiving) {
+			EntityFXGC e2 = new EntityDamageFXGC(e, e.posX, e.posY + e.height + 0.2d, e.posZ, (packet.changeType.isNegative ? ChatColor.DARK_RED : ChatColor.GREEN) + String.valueOf(packet.changeValue));
+			mc.effectRenderer.addEffect(e2);
+		}
+	}
+	
+	@Override
+	public void handleEntityHealth(Packet036EntityHealth packet) {
+		Entity e = worldClient.getEntityById(packet.entityId);
+		if(e != null && e instanceof EntityLiving) {
+			((EntityLiving) e).maxHealth = packet.maxHealth;
+			((EntityLiving) e).setEntityHealth(packet.currentHealth);
+		}
+	}
+	
 	@Override
 	public void handleTile(Packet132TileData packet) {
 		try {
@@ -185,10 +205,11 @@ public class NetClientHandler extends NetHandler {
 		this.connectionStatus = "Получение информации";
 		mc.playerController = new PlayerControllerMP(mc, this);
 		mc.statFileWriter.readStat(StatList.joinMultiplayerStat, 1);
-		worldClient = new WorldClient(this, new WorldSettings(packet1login.mapSeed, 0, false, false), packet1login.worldType, 0);
+		worldClient = new WorldClient(this, new WorldSettings(0, 0, false, false), packet1login.worldType, 0);
 		worldClient.multiplayerWorld = true;
 		mc.changeWorld1(worldClient);
 		mc.thePlayer.dimension = packet1login.worldType;
+		mc.thePlayer.playerId = packet1login.playerId;
 		mc.displayGuiScreen(new GuiDownloadTerrain(this));
 		worldClient.respawnPlayer(mc.thePlayer, packet1login.entityId);
 		((PlayerControllerMP) mc.playerController).func_35648_a(false);

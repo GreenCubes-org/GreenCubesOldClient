@@ -17,11 +17,7 @@ public class EntityCreeper extends EntityMob {
 	public EntityCreeper(World world) {
 		super(world);
 		texture = "/mob/creeper.png";
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		this.health = this.maxHealth = 20;
 	}
 
 	@Override

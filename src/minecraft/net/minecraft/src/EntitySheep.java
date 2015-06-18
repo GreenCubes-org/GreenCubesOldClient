@@ -19,11 +19,7 @@ public class EntitySheep extends EntityAnimal {
 		super(world);
 		texture = "/mob/sheep.png";
 		setSize(0.9F, 1.3F);
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 8;
+		this.health = this.maxHealth = 8;
 	}
 
 	@Override

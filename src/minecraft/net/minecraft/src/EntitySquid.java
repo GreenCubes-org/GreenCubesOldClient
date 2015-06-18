@@ -45,11 +45,7 @@ public class EntitySquid extends EntityWaterMob {
 		texture = "/mob/squid.png";
 		setSize(0.95F, 0.95F);
 		field_21080_l = (1.0F / (rand.nextFloat() + 1.0F)) * 0.2F;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 10;
+		this.health = this.maxHealth = 10;
 	}
 
 	@Override

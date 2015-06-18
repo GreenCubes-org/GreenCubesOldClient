@@ -16,6 +16,7 @@ public class EntitySpider extends EntityMob {
 		texture = "/mob/spider.png";
 		setSize(1.4F, 0.9F);
 		moveSpeed = 0.8F;
+		this.health = this.maxHealth = 16;
 	}
 
 	@Override
@@ -35,11 +36,6 @@ public class EntitySpider extends EntityMob {
 		if(!worldObj.multiplayerWorld) {
 			func_40148_a(isCollidedHorizontally);
 		}
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 16;
 	}
 
 	@Override

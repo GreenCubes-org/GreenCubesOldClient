@@ -187,6 +187,8 @@ key.mouseButton=Кнопка %1$s
 key.notify=Уведомления
 key.fly=Полет
 key.speed=Ускорение полета
+key.journal=Журнал
+key.party=Группа
 
 texturePack.openFolder=Открыть папку текстур
 texturePack.title=Выберите набор текстур

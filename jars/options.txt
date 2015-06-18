@@ -35,5 +35,7 @@ key_key.chat:28
 key_key.playerlist:52
 key_key.pickItem:-98
 key_key.notify:62
+key_key.journal:36
+key_key.party:25
 key_key.fly:34
 key_key.speed:42

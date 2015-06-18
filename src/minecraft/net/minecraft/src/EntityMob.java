@@ -18,6 +18,11 @@ public abstract class EntityMob extends EntityCreature implements IMob {
 		attackStrength = 2;
 		field_35171_bJ = 5;
 	}
+	
+	@Override
+	public boolean isDanger() {
+		return true;
+	}
 
 	@Override
 	public void onLivingUpdate() {

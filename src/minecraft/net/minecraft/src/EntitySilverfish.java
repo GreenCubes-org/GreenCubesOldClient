@@ -19,11 +19,7 @@ public class EntitySilverfish extends EntityMob {
 		setSize(0.3F, 0.7F);
 		moveSpeed = 0.6F;
 		attackStrength = 1;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 8;
+		this.health = this.maxHealth = 8;
 	}
 
 	@Override

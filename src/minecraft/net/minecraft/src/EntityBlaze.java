@@ -22,11 +22,7 @@ public class EntityBlaze extends EntityMob {
 		isImmuneToFire = true;
 		attackStrength = 6;
 		field_35171_bJ = 10;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		this.health = this.maxHealth = 20;
 	}
 
 	@Override

@@ -76,7 +76,7 @@ public class Potion {
 
 	public void performEffect(EntityLiving entityliving, int i) {
 		if(id == potionRegeneration.id) {
-			if(entityliving.getEntityHealth() < entityliving.getMaxHealth()) {
+			if(entityliving.getEntityHealth() < entityliving.maxHealth) {
 				entityliving.heal(1);
 			}
 		} else if(id == potionPoison.id) {

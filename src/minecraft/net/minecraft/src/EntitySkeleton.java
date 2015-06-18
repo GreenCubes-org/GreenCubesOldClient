@@ -16,11 +16,7 @@ public class EntitySkeleton extends EntityMob {
 	public EntitySkeleton(World world) {
 		super(world);
 		texture = "/mob/skeleton.png";
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 20;
+		this.health = this.maxHealth = 20;
 	}
 
 	@Override

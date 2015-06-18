@@ -29,6 +29,7 @@ public class BuffEffectType {
 	public static final BuffEffectType NO_RUN = new BuffEffectType(21, "NoRun", I18n.get("\247cНельзя бегать")); // TODO translate
 	public static final BuffEffectType HUNGER_SLOW = new BuffEffectType(22, "HungerSlow", I18n.get("\247aЗамедление голода: %s")); // TODO translate
 	public static final BuffEffectType SNOW_BOOST = new IntegerBuffEffectType(23, "SnowBoost", I18n.get("\247aУскорение на снегу: +%s")); // TODO translate
+	public static final BuffEffectType PVP = new BuffEffectType(24, "PVP", null);
 
 	public final int id;
 	public final String name;

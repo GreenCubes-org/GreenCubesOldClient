@@ -28,11 +28,7 @@ public class EntityEnderman extends EntityMob {
 		attackStrength = 7;
 		setSize(0.6F, 2.9F);
 		stepHeight = 1.0F;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 40;
+		this.health = this.maxHealth = 40;
 	}
 
 	@Override

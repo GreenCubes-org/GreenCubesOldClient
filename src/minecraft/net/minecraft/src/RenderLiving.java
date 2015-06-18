@@ -4,8 +4,16 @@
 
 package net.minecraft.src;
 
+import gnu.trove.iterator.TIntObjectIterator;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
+
 import org.lwjgl.opengl.GL11;
+
+import com.jme3.math.ColorRGBA;
 
 // Referenced classes of package net.minecraft.src:
 //            Render, ModelBase, EntityLiving, OpenGlHelper, 
@@ -14,6 +22,9 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderLiving extends Render {
 
+	protected static final ColorRGBA healthDangerColor = new ColorRGBA(0.6f, 0.1f, 0.1f, 1f);
+	protected static final ColorRGBA healthPeacefulColor = new ColorRGBA(0.1f, 0.6f, 0.1f, 1f);
+	
 	protected ModelBase mainModel;
 	protected ModelBase renderPassModel;
 	public float scale = 0.0F;
@@ -207,19 +218,6 @@ public class RenderLiving extends Render {
 		passSpecialRender(entityliving, x, y, z);
 	}
 
-	protected void renderStatusLine(EntityLiving entity, double d, double d1, double d2, double height) {
-		if(!Minecraft.theMinecraft.isMultiplayerWorld())
-			return;
-		float f2 = entity.getDistanceToEntity(renderManager.livingPlayer);
-		float f3 = entity.isSneaking() ? 32F : 64F;
-		if(f2 < f3) {
-			String s = Minecraft.theMinecraft.getSendQueue().entityStatus.get(entity.entityId);
-			if(s == null || s.isEmpty())
-				return;
-			renderLivingLabel(entity, s, d, d1 + 0.4, d2, 64, 2);
-		}
-	}
-
 	protected void func_40270_a(EntityLiving entityliving, float f, float f1, float f2, float f3, float f4, float f5) {
 		loadDownloadableImageTexture(entityliving.skinUrl, entityliving.getEntityTexture());
 		mainModel.render(entityliving, f, f1, f2, f3, f4, f5);
@@ -270,69 +268,224 @@ public class RenderLiving extends Render {
 
 	protected void preRenderCallback(EntityLiving entityliving, float f) {
 	}
-
-	protected void passSpecialRender(EntityLiving entityliving, double d, double d1, double d2) {
-		if(!Minecraft.isDebugInfoEnabled())
-			;
-	}
 	
-	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i) {
-		renderLivingLabel(entityliving, s, d, d1, d2, i, 1.6f);
+	protected boolean hasOrganizationLabel(EntityLiving entity) {
+		if(!(entity instanceof EntityPlayer))
+			return false;
+		EntityPlayer player = (EntityPlayer) entity;
+		if(player.organizationUrl == null)
+			return false;
+		RenderEngine renderengine = renderManager.renderEngine;
+		Minecraft.theMinecraft.renderEngine.blurTexture = true;
+		boolean b = renderengine.getTextureForDownloadableImage(player.organizationUrl, null) >= 0;
+		Minecraft.theMinecraft.renderEngine.blurTexture = false;
+		return b;
 	}
 
-	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i, float scale) {
-		float f = entityliving.getDistanceToEntity(renderManager.livingPlayer);
-		if(f > i) {
-			return;
-		}
-		FontRenderer fontrenderer = getFontRendererFromRenderManager();
-		int j = fontrenderer.getStringWidth(s) / 2;
-		boolean hasLogo = false;
-		float f1 = scale;
-		float f2 = 0.01666667F * f1;
+	protected void passSpecialRender(EntityLiving entity, double d, double d1, double d2) {
 		Tessellator tessellator = Tessellator.instance;
-		if(entityliving instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) entityliving;
-			Minecraft.theMinecraft.renderEngine.blurTexture = true;
-			if(player.organizationUrl != null && loadDownloadableImageTexture(player.organizationUrl, null)) {
-				hasLogo = true;
+		FontRenderer fr = getFontRendererFromRenderManager();
+		if(Minecraft.isGuiEnabled()) {
+			float f = 1.6F;
+			float scale = 0.01666667F * f;
+			if(entity.getDistanceToEntity(renderManager.livingPlayer) < (entity.isSneaking() ? 32F : 64F)) {
+				float height = entity.height + 0.5f;
+				if(entity.isPlayerSleeping())
+					height -= 1.5f;
+				
 				GL11.glPushMatrix();
-				GL11.glTranslatef((float) d + 0.0F, (float) d1 + 2.3F, (float) d2);
+				GL11.glTranslatef((float) d + 0.0F, (float) d1 + height, (float) d2);
 				GL11.glNormal3f(0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
 				GL11.glRotatef(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-				GL11.glScalef(-f2, -f2, f2);
-				GL11.glDepthMask(false);
-				GL11.glDisable(2896 /*GL_LIGHTING*/);
-				GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
-				GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
-				GL11.glTranslatef(-4.5f - j, 0, 0);
-				GL11.glEnable(3042 /*GL_BLEND*/);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				tessellator.startDrawingQuads();
-				tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-				tessellator.addVertex(-1, -1, 0.0D);
-				tessellator.addVertex(-1, 8, 0.0D);
-				tessellator.addVertex(8, 8, 0.0D);
-				tessellator.addVertex(8, -1, 0.0D);
-				tessellator.draw();
-				GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
-				GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
-				GL11.glDepthMask(true);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				tessellator.startDrawingQuads();
-				tessellator.addVertexWithUV(-1, -1, 0.0D, 0d, 0d);
-				tessellator.addVertexWithUV(-1, 8, 0.0D, 0d, 1d);
-				tessellator.addVertexWithUV(8, 8, 0.0D, 1d, 1d);
-				tessellator.addVertexWithUV(8, -1, 0.0D, 1d, 0d);
-				tessellator.draw();
-				GL11.glEnable(2896 /*GL_LIGHTING*/);
-				GL11.glDisable(3042 /*GL_BLEND*/);
+				GL11.glScalef(-scale, -scale, scale);
+				
+				float labelWidth = 0;
+
+				// Organization label and player name
+				if(entity instanceof EntityPlayer) {
+					EntityPlayer player = (EntityPlayer) entity;
+					String name = player.username;
+					if(player instanceof EntityOtherPlayerMP && ((EntityOtherPlayerMP) player).coloredName != null)
+						name = ((EntityOtherPlayerMP) player).coloredName;
+					int nameWidth = fr.getStringWidth(name);
+					boolean org = hasOrganizationLabel(entity);
+					labelWidth = nameWidth + (org ? 8 : 0) + 2;
+					
+					GL11.glDepthMask(false);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					GL11.glDisable(GL11.GL_DEPTH_TEST);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					// Label bg
+					tessellator.startDrawingQuads();
+					tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
+					tessellator.addVertex(- labelWidth / 2, 0, 0.0D);
+					tessellator.addVertex(- labelWidth / 2, 8, 0.0D);
+					tessellator.addVertex(labelWidth / 2, 8, 0.0D);
+					tessellator.addVertex(labelWidth / 2, 0, 0.0D);
+					tessellator.draw();
+					// Label content
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.25F);
+					GL11.glEnable(GL11.GL_TEXTURE_2D);
+					if(org) { // Organization (no depth)
+						Minecraft.theMinecraft.renderEngine.blurTexture = true;
+						loadDownloadableImageTexture(player.organizationUrl, null);
+						tessellator.startDrawingQuads();
+						tessellator.addVertexWithUV(- labelWidth / 2 + 0, 0, 0.0D, 0d, 0d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 0, 8, 0.0D, 0d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 8, 8, 0.0D, 1d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 8, 0, 0.0D, 1d, 0d);
+						tessellator.draw();
+					}
+					GL11.glEnable(GL11.GL_DEPTH_TEST);
+					GL11.glDepthMask(true);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					if(org) { // Organization
+						tessellator.startDrawingQuads();
+						tessellator.addVertexWithUV(- labelWidth / 2 + 0, 0, 0.0D, 0d, 0d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 0, 8, 0.0D, 0d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 8, 8, 0.0D, 1d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 8, 0, 0.0D, 1d, 0d);
+						tessellator.draw();
+						Minecraft.theMinecraft.renderEngine.blurTexture = false;
+					}
+					GL11.glDisable(GL11.GL_DEPTH_TEST);
+					GL11.glDepthMask(false);
+					fr.drawString(name, (int) - labelWidth / 2 + 1 + (org ? 9 : 0), 0, 0x20ffffff);
+					GL11.glEnable(GL11.GL_DEPTH_TEST);
+					GL11.glDepthMask(true);
+					fr.drawString(name, (int) - labelWidth / 2 + 1 + (org ? 9 : 0), 0, -1);
+					GL11.glTranslatef(0, 8, 0);
+				}
+				
+				boolean isDanger = entity.isDanger();
+				if(isDanger || entity.getEntityHealth() != entity.maxHealth) {
+					// Health
+					float percent = (float) entity.getEntityHealth() / (float) entity.maxHealth;
+					String helath = entity.getEntityHealth() + " / " + entity.maxHealth;
+					labelWidth = Math.max(labelWidth, fr.getStringWidth(helath) + 2);
+					
+					labelWidth *= 2;
+					labelWidth -= 1;
+					GL11.glScalef(0.5f, 0.5f, 0.5f);
+					
+					GL11.glDepthMask(true);
+					GL11.glDisable(GL11.GL_LIGHTING);
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					// Label bg
+					tessellator.startDrawingQuads();
+					ColorRGBA hpColor = isDanger ? healthDangerColor : healthPeacefulColor;
+					tessellator.setColorRGBA_F(hpColor.r, hpColor.g, hpColor.b, 0.7F);
+					tessellator.addVertex(- labelWidth / 2, 0.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2, 9.5, 0.0D);
+					float w = labelWidth * percent;
+					tessellator.addVertex(- labelWidth / 2 + w, 9.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 + w, 0.5, 0.0D);
+					if(percent < 1.0f) {
+						tessellator.setColorRGBA_F(0.3F, 0.3F, 0.3F, 0.7F);
+						tessellator.addVertex(- labelWidth / 2 + w, 0.5, 0.0D);
+						tessellator.addVertex(- labelWidth / 2 + w, 9.5, 0.0D);
+						tessellator.addVertex(labelWidth / 2, 9.5, 0.0D);
+						tessellator.addVertex(labelWidth / 2, 0.5, 0.0D);
+					}
+					// Border
+					tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.7F);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 0.0, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 0.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 0.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 0.0, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 0.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 9.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2, 9.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2, 0.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2, 0.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2, 9.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 9.5, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 0.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 9.5, 0.0D);
+					tessellator.addVertex(- labelWidth / 2 - 0.5, 10.0, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 10.0, 0.0D);
+					tessellator.addVertex(labelWidth / 2 + 0.5, 9.5, 0.0D);
+					tessellator.draw();
+					// Label content
+					GL11.glDepthMask(true);
+					GL11.glEnable(GL11.GL_TEXTURE_2D);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					GL11.glTranslatef(0, 1, -1);
+					fr.drawString(helath, - fr.getStringWidth(helath) / 2, 0, -1);
+					GL11.glTranslatef(0, -1, 1);
+					GL11.glScalef(2f, 2f, 2f);
+					GL11.glTranslatef(0, -8, 0);
+					labelWidth += 1;
+					labelWidth /= 2;
+				}
+				
+				List<String> icons = new ArrayList<String>();
+				if(entity.activeBuffs.size() > 0 && !(entity instanceof EntityPlayer)) {
+					TIntObjectIterator<BuffActive> iterator = entity.activeBuffs.iterator();
+					while(iterator.hasNext()) {
+						iterator.advance();
+						BuffActive ab = iterator.value();
+						if(ab.buff.getTextureFramed() != null)
+							icons.add(ab.buff.getTextureFramed());
+					}
+				}
+				if(icons.size() > 0) {
+					labelWidth = Math.max(labelWidth, icons.size() * 5);
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glTranslatef(0, -4.5f, 0);
+					GL11.glEnable(GL11.GL_DEPTH_TEST);
+					GL11.glDepthMask(true);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+					for(int i = 0; i < icons.size(); ++i) {
+						GL11.glDisable(GL11.GL_TEXTURE_2D);
+						tessellator.startDrawingQuads();
+						tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
+						tessellator.addVertex(- labelWidth / 2 + i * 5, 0, 0.0D);
+						tessellator.addVertex(- labelWidth / 2 + i * 5, 4, 0.0D);
+						tessellator.addVertex(- labelWidth / 2 + 4 + i * 5, 4, 0.0D);
+						tessellator.addVertex(- labelWidth / 2 + 4 + i * 5, 0, 0.0D);
+						tessellator.draw();
+						GL11.glEnable(GL11.GL_TEXTURE_2D);
+						loadTexture(icons.get(i));
+						tessellator.startDrawingQuads();
+						tessellator.addVertexWithUV(- labelWidth / 2 + i * 5, 0, -0.01D, 0d, 0d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + i * 5, 4, -0.01D, 0d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 4 + i * 5, 4, -0.01D, 1d, 1d);
+						tessellator.addVertexWithUV(- labelWidth / 2 + 4 + i * 5, 0, -0.01D, 1d, 0d);
+						tessellator.draw();
+					}
+				}
+				
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glDisable(GL11.GL_BLEND);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				GL11.glPopMatrix();
 			}
-			Minecraft.theMinecraft.renderEngine.blurTexture = false;
 		}
+		
+		//renderStatusLine(entity, d, d1, d2, 3.0d, 0.0d);
+	}
+	
+	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i) {
+		renderLivingLabel(entityliving, s, d, d1, d2, i, 1.6f, 0.0f, 0.0f);
+	}
+
+	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i, float scale, float xTranslation, double minWidth) {
+		float f = entityliving.getDistanceToEntity(renderManager.livingPlayer);
+		if(f > i)
+			return;
+		FontRenderer fontrenderer = getFontRendererFromRenderManager();
+		double j = fontrenderer.getStringWidth(s) / 2 + 1;
+		if(j < minWidth / 2.0d)
+			j = minWidth / 2.0d;
+		float f1 = scale;
+		float f2 = 0.01666667F * f1;
+		Tessellator tessellator = Tessellator.instance;
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) d, (float) d1 + 2.3F, (float) d2);
 		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -344,22 +497,21 @@ public class RenderLiving extends Render {
 		GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
 		GL11.glEnable(3042 /*GL_BLEND*/);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		if(hasLogo)
-			GL11.glTranslatef(4.5f, 0, 0);
-		byte byte0 = 0;
+		if(xTranslation != 0.0f)
+			GL11.glTranslatef(xTranslation, 0, 0);
 		GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
 		tessellator.startDrawingQuads();
 		tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-		tessellator.addVertex(-j - 1, -1 + byte0, 0.0D);
-		tessellator.addVertex(-j - 1, 8 + byte0, 0.0D);
-		tessellator.addVertex(j + 1, 8 + byte0, 0.0D);
-		tessellator.addVertex(j + 1, -1 + byte0, 0.0D);
+		tessellator.addVertex(-j, -1, 0.0D);
+		tessellator.addVertex(-j, 8, 0.0D);
+		tessellator.addVertex(j, 8, 0.0D);
+		tessellator.addVertex(j, -1, 0.0D);
 		tessellator.draw();
 		GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
-		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
+		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, 0x20ffffff);
 		GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
 		GL11.glDepthMask(true);
-		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
+		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, -1);
 		GL11.glEnable(2896 /*GL_LIGHTING*/);
 		GL11.glDisable(3042 /*GL_BLEND*/);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

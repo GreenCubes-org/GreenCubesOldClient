@@ -26,11 +26,7 @@ public class EntityChicken extends EntityAnimal {
 		texture = "/mob/chicken.png";
 		setSize(0.3F, 0.7F);
 		timeUntilNextEgg = rand.nextInt(6000) + 6000;
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 4;
+		health = maxHealth = 4;
 	}
 
 	@Override

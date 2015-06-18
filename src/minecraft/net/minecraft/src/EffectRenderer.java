@@ -96,20 +96,19 @@ public class EffectRenderer {
 		}
 	}
 
-	public void func_1187_b(Entity entity, float f) {
+	public void func_1187_b(Entity entity, float framePart) {
 		float f1 = MathHelper.cos((entity.rotationYaw * 3.141593F) / 180F);
 		float f2 = MathHelper.sin((entity.rotationYaw * 3.141593F) / 180F);
 		float f3 = -f2 * MathHelper.sin((entity.rotationPitch * 3.141593F) / 180F);
 		float f4 = f1 * MathHelper.sin((entity.rotationPitch * 3.141593F) / 180F);
 		float f5 = MathHelper.cos((entity.rotationPitch * 3.141593F) / 180F);
-		int byte0 = 3;
-		if(fxLayers[byte0].size() == 0)
+		if(fxLayers[3].size() == 0)
 			return;
 		Tessellator tessellator = Tessellator.instance;
-		for(Iterator<EntityFXGC> iterator = fxLayers[byte0].iterator(); iterator.hasNext();) {
+		for(Iterator<EntityFXGC> iterator = fxLayers[3].iterator(); iterator.hasNext();) {
 			EntityFXGC entityfx = iterator.next();
-			tessellator.setBrightness(entityfx.getEntityBrightnessForRender(f));
-			entityfx.renderParticle(tessellator, f, f1, f5, f2, f3, f4);
+			tessellator.setBrightness(entityfx.getEntityBrightnessForRender(framePart));
+			entityfx.renderParticle(tessellator, framePart, f1, f5, f2, f3, f4);
 		}
 	}
 

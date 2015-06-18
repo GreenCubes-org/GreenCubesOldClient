@@ -32,6 +32,7 @@ public class EntityGhast extends EntityFlying implements IMob {
 		setSize(4F, 4F);
 		isImmuneToFire = true;
 		field_35171_bJ = 5;
+		this.health = this.maxHealth = 10;
 	}
 
 	@Override
@@ -49,11 +50,6 @@ public class EntityGhast extends EntityFlying implements IMob {
 	protected void entityInit() {
 		super.entityInit();
 		dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-	}
-
-	@Override
-	public int getMaxHealth() {
-		return 10;
 	}
 
 	@Override

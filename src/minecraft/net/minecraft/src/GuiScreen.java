@@ -47,18 +47,6 @@ public class GuiScreen extends Gui {
 		}
 	}
 
-	public static String getClipboardString() {
-		try {
-			java.awt.datatransfer.Transferable transferable = java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
-			if(transferable != null && transferable.isDataFlavorSupported(java.awt.datatransfer.DataFlavor.stringFlavor)) {
-				String s = (String) transferable.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
-				return s;
-			}
-		} catch (Exception exception) {
-		}
-		return null;
-	}
-
 	protected void mouseClicked(int i, int j, int k) {
 		if(k == 0) {
 			for(int l = 0; l < controlList.size(); l++) {
@@ -168,6 +156,18 @@ public class GuiScreen extends Gui {
 
 	public static boolean isShiftKeyDown() {
 		return Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54);
+	}
+	
+	public static String getClipboardString() {
+		try {
+			java.awt.datatransfer.Transferable transferable = java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+			if(transferable != null && transferable.isDataFlavorSupported(java.awt.datatransfer.DataFlavor.stringFlavor)) {
+				String s = (String) transferable.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
+				return s;
+			}
+		} catch (Exception exception) {
+		}
+		return null;
 	}
 
 }
