@@ -252,7 +252,7 @@ public class Item {
 	public static Item SPIDER_MASK = new ItemRareCloth(3097 - 256, 21, 0, DecorItemQuality.NORMAL_WEAR).setItemName("spiderMask").setIconIndex(spiderMask);
 	public static Item STEVE_MASK = new ItemRareCloth(3098 - 256, 22, 0, DecorItemQuality.NORMAL_WEAR).setItemName("steveMask").setIconIndex(steveMask);
 	public static Item ZOMBIE_MASK = new ItemRareCloth(3099 - 256, 23, 0, DecorItemQuality.NORMAL_WEAR).setItemName("zombieMask").setIconIndex(zombieMask);
-	public static Item SPEED_BOOTS = new ItemSpeedBoots(3100 - 256, 24, 0.2f).setIconIndex(speedboots).setItemName("speedBoots");
+	public static Item SPEED_BOOTS = new ItemSpeedBoots(3100 - 256, 24, 0.2f).setFixItem(ingotGold.shiftedIndex).setIconIndex(speedboots).setItemName("speedBoots");
 	public static Item MELON_HAT = new ItemRareCloth(3101 - 256, 26, 0, DecorItemQuality.NORMAL_WEAR).setItemName("watermelon").setIconIndex(watermelonhat);
 	public static Item JAPAN_PATH = new ItemRareCloth(3102 - 256, 25, 0, DecorItemQuality.NORMAL_WEAR).setItemName("japaneseBandage").setIconIndex(japanpath);
 	public static Item LAUREATE_WREATH = new ItemRareCloth(3103 - 256, 27, 0, DecorItemQuality.RARE_WEAR).setItemName("laureateWreath").setIconIndex(laureatewreath);
@@ -360,6 +360,12 @@ public class Item {
 	public static final Item BOOTS_BONE = new ItemRareCloth(4319 - 256, 44, 3, DecorItemQuality.RARE_WEAR).setIconIndex(boots_bone).setItemName("boots.bone");
 	public static final Item HEAD_CROWN_BONE = new ItemRareCloth(4320 - 256, 45, 0, DecorItemQuality.HIGH_QUALITY_WEAR).setItemName("head.crown.bone").setIconIndex(head_crown_bone);
 	public static final Item BOW_BONE = new ItemCherryBow(4321 - 256, 2.0f).setFixItem(bone.shiftedIndex).setDecor(DecorItemQuality.IMPROOVED).setActionIcons(new int[]{bow_bone_1, bow_bone_2, bow_bone_3}).setIconIndex(bow_bone).setItemName("bow.bone");
+	public static final Item BOW_WINNER_SATYR = new ItemCherryBow(4322 - 256, 2.0f).setFixItem(cherryStick.shiftedIndex).setDecor(DecorItemQuality.NAMED).setActionIcons(new int[]{bow_winner_satyr_1, bow_winner_satyr_2, bow_winner_satyr_3}).setIconIndex(bow_winner_satyr).setItemName("bow.winner.satyr");
+	public static final Item BOW_WINNER_BLACKSLIME = new ItemCherryBow(4323 - 256, 2.0f).setFixItem(cherryStick.shiftedIndex).setDecor(DecorItemQuality.NAMED).setActionIcons(new int[]{bow_winner_blackslime_1, bow_winner_blackslime_2, bow_winner_blackslime_3}).setIconIndex(bow_winner_blackslime).setItemName("bow.winner.blackslime");
+	public static final Item SWORD_WINNER_SATYR = new ItemSword(4324 - 256, EnumToolMaterial.DIAMOND).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.satyr").setIconIndex(sword_winner_satyr);
+	public static final Item SWORD_WINNER_BLACKSLIME = new ItemSword(4325 - 256, EnumToolMaterial.DIAMOND).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.blackslime").setIconIndex(sword_winner_blackslime);
+	
+	public static final Item DECOR_PARTICLE = new Item(4400 - 256).setIconIndex(decorparticle).setItemName("decorparticle");
 	
 	public final int shiftedIndex;
 

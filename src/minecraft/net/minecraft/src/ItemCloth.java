@@ -20,6 +20,11 @@ public class ItemCloth extends ItemWearable {
 			this.toFix = new ItemStack(toFix, 1, 0);
 	}
 
+	public ItemCloth setFixItem(int id) {
+		this.toFix = new ItemStack(id, 1, 0);
+		return this;
+	}
+	
 	@Override
 	public DecorItemQuality getDecorQuality() {
 		return DecorItemQuality.NORMAL_WEAR;

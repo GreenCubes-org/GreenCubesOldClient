@@ -550,6 +550,19 @@ public class GreenTextures {
 	public static int modifier_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/modifier.bone.png");
 	public static int head_crown_bone = ModLoader.addOverride("/gui/items.png", "/gc_images/head.crown.bone.png");
 	
+	public static int bow_winner_satyr = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.satyr.png");
+	public static int bow_winner_satyr_1 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.satyr.1.png");
+	public static int bow_winner_satyr_2 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.satyr.2.png");
+	public static int bow_winner_satyr_3 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.satyr.3.png");
+	public static int bow_winner_blackslime = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.blackslime.png");
+	public static int bow_winner_blackslime_1 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.blackslime.1.png");
+	public static int bow_winner_blackslime_2 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.blackslime.2.png");
+	public static int bow_winner_blackslime_3 = ModLoader.addOverride("/gui/items.png", "/gc_images/bow.winner.blackslime.3.png");
+	public static int sword_winner_satyr = ModLoader.addOverride("/gui/items.png", "/gc_images/sword.winner.satyr.png");
+	public static int sword_winner_blackslime = ModLoader.addOverride("/gui/items.png", "/gc_images/sword.winner.blackslime.png");
+	
+	public static int decorparticle = ModLoader.addOverride("/gui/items.png", "/gc_images/decorparticle.png");
+	
 	public static int glass_color_black = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.black.png");
 	public static int glass_color_blue = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.blue.png");
 	public static int glass_color_brown = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.brown.png");

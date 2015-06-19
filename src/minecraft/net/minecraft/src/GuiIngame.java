@@ -254,15 +254,18 @@ public class GuiIngame extends Gui {
 				}
 			}
 			
-			FancyGUI.getInstance().enableMode();
 			// Party icon
+			/*
+			FancyGUI.getInstance().enableMode();
 			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 339, 34, 34);
 			FancyGUI.getInstance().renderInterface(k - 18, l - 18, 16, 16, 373, 347, 32, 32);
 			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 374, 34, 34);
 			mc.fontRenderer.drawStringWithShadow(ChatColor.GOLD + "P", (k - 19 + 19) - 4 - mc.fontRenderer.getStringWidth("P"), l - 19 + 8, 0x0AC80A);
-			FancyGUI.getInstance().enableMode();
+			*/
 			// Journal icon
-			/*FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 339, 34, 34);
+			/*
+			FancyGUI.getInstance().enableMode();
+			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 339, 34, 34);
 			FancyGUI.getInstance().renderInterface(k - 18, l - 18, 16, 16, 340, 347, 32, 32);
 			FancyGUI.getInstance().renderInterface(k - 19, l - 19, 17, 17, 305, 374, 34, 34);
 			mc.fontRenderer.drawStringWithShadow(ChatColor.GOLD + "J", (k - 19 + 19) - 4 - mc.fontRenderer.getStringWidth("J"), l - 19 + 8, 0x0AC80A);
@@ -270,7 +273,8 @@ public class GuiIngame extends Gui {
 			//String tt = "\2476Приглашение в группу!\n\n" +
 			//"\247fВы получили приглашение в группу от игрока \247r99446666[\247rff66c016G\247rfff7f7f7C\247r99446666] \247rffea8df7Rena4ka\247f. Чтобы принять приглашение, нажмите \247bP\247f или напишите в чате \247b/p accept\247f.";
 			//FancyGUI.getInstance().renderScaledTooltip(k - 19, l - 19, GChat.wrapText(tt, 250, 0, false), k, l, 4);
-			FancyGUI.getInstance().disableMode();
+			
+			//FancyGUI.getInstance().disableMode();
 		}
 		if(mc.thePlayer.getSleepTimer() > 0) {
 			GL11.glDisable(GL11.GL_DEPTH_TEST);

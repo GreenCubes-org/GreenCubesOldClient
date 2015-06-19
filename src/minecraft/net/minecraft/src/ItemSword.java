@@ -28,6 +28,11 @@ public class ItemSword extends Item {
 		weaponDamage = 4 + enumtoolmaterial.getDamageVsEntity() * 2;
 	}
 	
+	public ItemSword setWeaponDamage(int damage) {
+		this.weaponDamage = damage;
+		return this;
+	}
+	
 	public ItemSword setFixItem(int id) {
 		if(id != -1)
 			this.toFix = new ItemStack(id, 1, 0);

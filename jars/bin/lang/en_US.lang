@@ -1866,6 +1866,12 @@ item.bow.bone.name=Костяной лук
 item.stick.bone.name=Декоративная кость
 item.modifier.bone.name=Костяной модификатор
 
+item.bow.winner.satyr.name=Лук победителя сатиров
+item.bow.winner.blackslime.name=Лук победителя чёрной слизи
+item.sword.winner.satyr.name=Меч победителя сатиров
+item.sword.winner.blackslime.name=Меч победителя чёрной слизи
+item.decorparticle.name=Декоративная частица
+
 entity.Item.name=Предмет
 entity.XPOrb.name=Сфера опыта
 
