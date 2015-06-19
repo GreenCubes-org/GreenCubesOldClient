@@ -14,6 +14,8 @@ public class EntityDamageFXGC extends EntityFXGC {
 		this.source = source;
 		this.string = string;
 		this.particleMaxAge = 60;
+		this.motionX *= 0.1d;
+		this.motionZ *= 0.1d;
 	}
 	
 	@Override
