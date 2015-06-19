@@ -106,6 +106,7 @@ public class TMIItemInfo {
 		showItemWithDamageRange(Block.COLORED_GLASS_STEP_UP_1.blockID, 0, 15);
 		showItemWithDamageRange(Block.COLORED_GLASS_STAIRS_1.blockID, 0, 15);
 		showItemWithDamageRange(Block.COLORED_GLASS_PANE_1.blockID, 0, 15);
+		setMaxDamageException(Item.PACKED_ITEM.shiftedIndex, 9);
 		setMaxDamageException(Block.COLORED_GLASS_1.blockID, 15);
 		setMaxDamageException(Block.COLORED_GLASS_HALF_BLOCK_1.blockID, 15);
 		setMaxDamageException(Block.COLORED_GLASS_STEP_1.blockID, 15);
