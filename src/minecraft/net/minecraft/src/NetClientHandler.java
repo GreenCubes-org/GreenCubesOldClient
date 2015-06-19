@@ -20,7 +20,7 @@ import net.minecraft.client.Minecraft;
 
 public class NetClientHandler extends NetHandler {
 
-	public static int protocolVersion = 158;
+	public static int protocolVersion = 159;
 	public static int chunksToLoad = 49;
 	private long lastReport = 0;
 
@@ -59,6 +59,25 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	// GreenCubes start
+	
+	@Override
+	public void handlePlayerReturn(Packet044PlayerReturn packet) {
+		EntityPlayerSP entityplayersp = mc.thePlayer;
+		double d = packet.x;
+		double d1 = packet.y;
+		double d2 = packet.z;
+		float f = entityplayersp.rotationYaw;
+		float f1 = entityplayersp.rotationPitch;
+		Packet13PlayerLookMove packet10flying = new Packet13PlayerLookMove();
+		entityplayersp.ySize = 0.0F;
+		entityplayersp.motionX = entityplayersp.motionY = entityplayersp.motionZ = 0.0D;
+		entityplayersp.setPositionAndRotation(d, d1, d2, f, f1);
+		packet10flying.xPosition = entityplayersp.posX;
+		packet10flying.yPosition = entityplayersp.boundingBox.minY;
+		packet10flying.zPosition = entityplayersp.posZ;
+		packet10flying.stance = entityplayersp.posY;
+		netManager.addToSendQueue(packet10flying);
+	}
 	
 	@Override
 	public void handleEntityHealthChange(Packet035EntityHealthChange packet) {

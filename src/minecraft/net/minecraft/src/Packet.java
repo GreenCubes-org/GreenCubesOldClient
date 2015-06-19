@@ -218,6 +218,7 @@ public abstract class Packet {
 		addIdClassMapping(41, true, false, net.minecraft.src.Packet41EntityEffect.class);
 		addIdClassMapping(42, true, false, net.minecraft.src.Packet42RemoveEntityEffect.class);
 		addIdClassMapping(43, true, false, net.minecraft.src.Packet43Experience.class);
+		addIdClassMapping(44, true, true, Packet044PlayerReturn.class);
 
 		addIdClassMapping(50, true, false, net.minecraft.src.Packet50PreChunk.class);
 		addIdClassMapping(51, true, false, net.minecraft.src.Packet51MapChunk.class);

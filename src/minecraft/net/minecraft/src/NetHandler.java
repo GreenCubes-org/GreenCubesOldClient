@@ -320,4 +320,8 @@ public abstract class NetHandler {
 	public void handleEntityHealth(Packet036EntityHealth packet) {
 		registerPacket(packet);
 	}
+	
+	public void handlePlayerReturn(Packet044PlayerReturn packet) {
+		registerPacket(packet);
+	}
 }
