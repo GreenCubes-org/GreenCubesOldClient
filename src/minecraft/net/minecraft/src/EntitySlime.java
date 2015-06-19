@@ -26,6 +26,11 @@ public class EntitySlime extends EntityLiving implements IMob {
 		setSlimeSize(i);
 		field_35171_bJ = i;
 	}
+	
+	@Override
+	public boolean isDanger() {
+		return true;
+	}
 
 	@Override
 	protected void entityInit() {
