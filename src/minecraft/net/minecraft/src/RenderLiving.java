@@ -365,7 +365,7 @@ public class RenderLiving extends Render {
 					// Health
 					float percent = (float) entity.getEntityHealth() / (float) entity.maxHealth;
 					String helath = entity.getEntityHealth() + " / " + entity.maxHealth;
-					labelWidth = Math.max(labelWidth, fr.getStringWidth(helath) + 2);
+					labelWidth = Math.max(labelWidth, fr.getStringWidth(helath) / 2 + 10);
 					
 					labelWidth *= 2;
 					labelWidth -= 1;
@@ -425,7 +425,7 @@ public class RenderLiving extends Render {
 				}
 				
 				List<String> icons = new ArrayList<String>();
-				if(entity.activeBuffs.size() > 0 && !(entity instanceof EntityPlayer)) {
+				if(entity.activeBuffs.size() > 0 && (!(entity instanceof EntityPlayer) || isDanger)) {
 					TIntObjectIterator<BuffActive> iterator = entity.activeBuffs.iterator();
 					while(iterator.hasNext()) {
 						iterator.advance();
