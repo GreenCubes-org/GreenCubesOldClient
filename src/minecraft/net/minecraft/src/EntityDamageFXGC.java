@@ -13,7 +13,7 @@ public class EntityDamageFXGC extends EntityFXGC {
 		super(source.worldObj, x, y, z, 0, 0.1d, 0);
 		this.source = source;
 		this.string = string;
-		this.particleMaxAge = 60;
+		this.particleMaxAge = 40;
 		this.motionX *= 0.1d;
 		this.motionZ *= 0.1d;
 	}
