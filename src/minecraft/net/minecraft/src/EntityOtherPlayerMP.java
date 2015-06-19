@@ -88,6 +88,18 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 
 	@Override
 	public void onLivingUpdate() {
+		prevSwingProgress = swingProgress;
+		int i1 = getArmSwingSpeed();
+		if(isSwinging) {
+			swingProgressInt++;
+			if(swingProgressInt >= i1) {
+				swingProgressInt = 0;
+				isSwinging = false;
+			}
+		} else {
+			swingProgressInt = 0;
+		}
+		swingProgress = (float) swingProgressInt / (float) i1;
 		super.updateEntityActionState();
 		if(otherPlayerMPPosRotationIncrements > 0) {
 			double d = posX + (otherPlayerMPX - posX) / otherPlayerMPPosRotationIncrements;

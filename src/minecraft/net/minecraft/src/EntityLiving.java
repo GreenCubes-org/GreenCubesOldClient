@@ -172,7 +172,6 @@ public abstract class EntityLiving extends Entity {
 
 	@Override
 	public void onEntityUpdate() {
-		prevSwingProgress = swingProgress;
 		super.onEntityUpdate();
 		Profiler.startSection("mobBaseTick");
 		if(rand.nextInt(1000) < livingSoundTime++) {
@@ -815,6 +814,7 @@ public abstract class EntityLiving extends Entity {
 	}
 
 	public void onLivingUpdate() {
+		prevSwingProgress = swingProgress;
 		int i1 = getArmSwingSpeed();
 		if(isSwinging) {
 			swingProgressInt++;
