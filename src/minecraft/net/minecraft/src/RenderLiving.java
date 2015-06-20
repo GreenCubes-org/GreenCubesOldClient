@@ -430,7 +430,7 @@ public class RenderLiving extends Render {
 					while(iterator.hasNext()) {
 						iterator.advance();
 						BuffActive ab = iterator.value();
-						if(ab.buff.getTextureFramed() != null)
+						if(ab.buff != Buff.PVP && ab.buff.getTextureFramed() != null)
 							icons.add(ab.buff.getTextureFramed());
 					}
 				}
