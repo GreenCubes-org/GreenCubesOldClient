@@ -96,6 +96,7 @@ public abstract class GuiContainer extends GuiScreen {
 		}
 
 		drawGuiContainerForegroundLayer(par1 - i, par2 - j);
+		GL11.glEnable(GL11.GL_LIGHTING);
 		InventoryPlayer inventoryplayer = mc.thePlayer.inventory;
 
 		if(inventoryplayer.getItemStack() != null) {
