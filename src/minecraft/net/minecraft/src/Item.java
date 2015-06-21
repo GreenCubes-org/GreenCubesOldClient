@@ -365,7 +365,7 @@ public class Item {
 	public static final Item SWORD_WINNER_SATYR = new ItemSword(4324 - 256, EnumToolMaterial.DIAMOND).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.satyr").setIconIndex(sword_winner_satyr);
 	public static final Item SWORD_WINNER_BLACKSLIME = new ItemSword(4325 - 256, EnumToolMaterial.DIAMOND).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.blackslime").setIconIndex(sword_winner_blackslime);
 	
-	public static final Item DECOR_PARTICLE = new Item(4400 - 256).setIconIndex(decorparticle).setItemName("decorparticle");
+	public static final Item SIMPLE_MATERIAL = new ItemMultidata(4400 - 256, new String[] {"decorparticle"}, new int[] {decorparticle});
 	
 	public final int shiftedIndex;
 
