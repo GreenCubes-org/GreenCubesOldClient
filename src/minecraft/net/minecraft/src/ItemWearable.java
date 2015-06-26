@@ -171,8 +171,8 @@ public abstract class ItemWearable extends Item {
 					bonus = getDefaultBuffMultiplier(BuffEffectType.BOW_SPEED);
 				}
 				if(bonus > 0) {
-					target.add(I18n.get("\247rffaaffffСкорость натяжения титевы: +%d%%", (int) (bonus * 100))); // TODO translate
-					target.add(I18n.get("\247rffaaffffЗамедление при натягивании титевы: -%d%%", (int) (bonus * 100))); // TODO translate
+					target.add(I18n.get("\247rffaaffffСкорость натяжения тетивы: +%d%%", (int) (bonus * 100))); // TODO translate
+					target.add(I18n.get("\247rffaaffffЗамедление при натягивании тетивы: -%d%%", (int) (bonus * 100))); // TODO translate
 				}
 			}
 		}
