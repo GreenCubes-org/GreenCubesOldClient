@@ -558,7 +558,7 @@ public final class ItemStack {
 			arraylist.add(sb.toString());
 		}
 		if(isUnbreakable() && (nbtData == null || !nbtData.getBoolean("Invulnerable")))
-			arraylist.add("\247rffaaffffНе уничтожается от повреждений");
+			arraylist.add("\2477Не уничтожается от повреждений");
 		if(noDrop())
 			arraylist.add("\2477Не выпадает при смерти");
 		if(hasNBTData()) {
@@ -571,16 +571,16 @@ public final class ItemStack {
 			if(nbtData.hasKey("DigSpeed")) {
 				float ds = nbtData.getFloat("DigSpeed");
 				if(ds > 0)
-					arraylist.add("\247rffaaffffСкорость: \247f+" + ((int) (ds * 100)) + "%");
+					arraylist.add("\247rffaaffffСкорость: +" + ((int) (ds * 100)) + "%");
 				else
-					arraylist.add("\247rffaaffffСкорость: \247f" + ((int) (ds * 100)) + "%");
+					arraylist.add("\247rffaaffffСкорость: " + ((int) (ds * 100)) + "%");
 			}
 			if(nbtData.hasKey("Efficiency")) {
 				float ef = nbtData.getFloat("Efficiency");
 				if(ef > 0)
-					arraylist.add("\247rffaaffffЭффективность: \247f+" + ((int) (ef * 100)) + "%");
+					arraylist.add("\247rffaaffffЭффективность: +" + ((int) (ef * 100)) + "%");
 				else
-					arraylist.add("\247rffaaffffЭффективность: \247f" + ((int) (ef * 100)) + "%");
+					arraylist.add("\247rffaaffffЭффективность: " + ((int) (ef * 100)) + "%");
 			}
 			if(nbtData.hasKey("Counters")) {
 				NBTTagList counters = nbtData.getTagList("Counters");
