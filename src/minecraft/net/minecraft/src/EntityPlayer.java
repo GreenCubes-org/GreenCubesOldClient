@@ -1060,35 +1060,6 @@ public abstract class EntityPlayer extends EntityLiving {
 	}
 
 	@Override
-	public int getItemIcon(ItemStack itemstack, int i) {
-		int j = super.getItemIcon(itemstack, i);
-		if(itemstack.itemID == Item.fishingRod.shiftedIndex && fishEntity != null) {
-			j = itemstack.getIconIndex() + 16;
-		} else {
-			if(itemstack.itemID == Item.potion.shiftedIndex) {
-				if(i == 1) {
-					return itemstack.getIconIndex();
-				} else {
-					return 141;
-				}
-			}
-			if(itemInUse != null && itemstack.itemID == Item.bow.shiftedIndex) {
-				int k = itemstack.getMaxItemUseDuration() - itemInUseCount;
-				if(k >= 18) {
-					return 133;
-				}
-				if(k > 13) {
-					return 117;
-				}
-				if(k > 0) {
-					return 101;
-				}
-			}
-		}
-		return j;
-	}
-
-	@Override
 	public void setInPortal() {
 		if(timeUntilPortal > 0) {
 			timeUntilPortal = 10;

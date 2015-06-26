@@ -30,14 +30,13 @@ public class ItemSpeedBoots extends ItemCloth {
 	}
 
 	@Override
-	public void appendAttributes(ItemStack itemstack, List<String> list) {
-		float speed = this.speed;
-		if(itemstack.nbtData != null && itemstack.nbtData.hasKey("RunSpeed"))
-			speed = itemstack.nbtData.getFloat("RunSpeed");
-		if(speed > 0.0f)
-			list.add("\247rffaaffff+" + ((int) (speed * 100)) + "% к скорости бега");
-		else if(speed < 0.0f)
-			list.add("\247rffff4444-" + ((int) (speed * -100)) + "% к скорости бега");
+	public List<Buff> getBuffs(EntityLiving entity, ItemStack item) {
+		List<Buff> buffs = super.getBuffs(entity, item);
+		if(!buffs.contains(Buff.FAST_RUN))
+			buffs.add(Buff.FAST_RUN);
+		else if(item.getNBTData() != null && item.getNBTData().hasKey("RunSpeed") && item.getNBTData().getFloat("RunSpeed") == 0.0f)
+			buffs.remove(Buff.FAST_RUN);
+		return buffs;
 	}
 
 }

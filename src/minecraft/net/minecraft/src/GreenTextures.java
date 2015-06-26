@@ -510,6 +510,7 @@ public class GreenTextures {
 	public static int stub_chestplate = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.chestplate.useful.png");
 	public static int stub_leggins = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.leggins.useful.png");
 	public static int stub_boots = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.boots.useful.png");
+	public static int stub_gloves = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.gloves.useful.png");
 	public static int stub_helmet_decor = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.helmet.decorative.png");
 	public static int stub_chestplate_decor = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.chestplate.decorative.png");
 	public static int stub_leggins_decor = ModLoader.addOverride("/gui/items.png", "/gc_images/icon.leggins.decorative.png");
@@ -562,6 +563,7 @@ public class GreenTextures {
 	public static int sword_winner_blackslime = ModLoader.addOverride("/gui/items.png", "/gc_images/sword.winner.blackslime.png");
 	
 	public static int decorparticle = ModLoader.addOverride("/gui/items.png", "/gc_images/decorparticle.png");
+	public static int gloves_leather = ModLoader.addOverride("/gui/items.png", "/gc_images/gloves.leather.png");
 	
 	public static int glass_color_black = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.black.png");
 	public static int glass_color_blue = ModLoader.addOverride("/terrain.png", "/gc_images/glass.color.blue.png");

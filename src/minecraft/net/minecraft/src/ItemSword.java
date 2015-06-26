@@ -7,6 +7,7 @@ package net.minecraft.src;
 import java.util.List;
 
 import org.greencubes.items.unique.DecorItemQuality;
+import org.greencubes.util.I18n;
 
 // Referenced classes of package net.minecraft.src:
 //            Item, EnumToolMaterial, Block, ItemStack, 
@@ -19,13 +20,17 @@ public class ItemSword extends Item {
 	protected DecorItemQuality quality;
 	private int weaponDamage;
 	private final EnumToolMaterial material;
+	protected float criticalDamage;
+	protected float criticalChance;
 
-	public ItemSword(int i, EnumToolMaterial enumtoolmaterial) {
+	public ItemSword(int i, EnumToolMaterial enumtoolmaterial, float criticalChance, float criticalDamage) {
 		super(i);
 		material = enumtoolmaterial;
 		maxStackSize = 1;
 		setMaxDamage(enumtoolmaterial.getMaxUses());
 		weaponDamage = 4 + enumtoolmaterial.getDamageVsEntity() * 2;
+		this.criticalChance = criticalChance;
+		this.criticalDamage = criticalDamage;
 	}
 	
 	public ItemSword setWeaponDamage(int damage) {
@@ -112,7 +117,7 @@ public class ItemSword extends Item {
 	public void appendAttributes(ItemStack itemstack, List<String> list) {
 		StringBuilder sb = new StringBuilder();
 		int damage = weaponDamage;
-		sb.append("\2477Урон: ");
+		sb.append("\2477Урон: \247f");
 		if(itemstack.hasNBTData()) {
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler") + 1;
@@ -124,7 +129,7 @@ public class ItemSword extends Item {
 		}
 		sb.append(damage);
 		if(itemstack.hasNBTData() && (itemstack.getNBTData().hasKey("DamageMultipler") || itemstack.getNBTData().hasKey("AddDamage"))) {
-			sb.append(" (");
+			sb.append(" \2477(");
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler");
 				sb.append("+").append((int) (multipler * 100)).append("%");
@@ -137,6 +142,18 @@ public class ItemSword extends Item {
 			sb.append(")");
 		}
 		list.add(sb.toString());
+		float cc = criticalChance;
+		float cm = criticalDamage;
+		if(itemstack.getNBTData() != null) {
+			if(itemstack.getNBTData().hasKey("CriticalMultipler"))
+				cm = itemstack.getNBTData().getFloat("CriticalMultipler");
+			if(itemstack.getNBTData().hasKey("CriticalChance"))
+				cc = itemstack.getNBTData().getFloat("CriticalChance");
+		}
+		if(cc > 0.0f && cm > 1.0f) {
+			list.add(I18n.get("\2477Шанс критического урона: \247f%d%%", (int) (cc * 100)));
+			list.add(I18n.get("\2477Критический урон: \247f%d%%", (int) (cm * 100)));
+		}
 		super.appendAttributes(itemstack, list);
 	}
 	

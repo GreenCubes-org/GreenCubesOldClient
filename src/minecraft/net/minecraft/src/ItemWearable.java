@@ -4,9 +4,13 @@
 
 package net.minecraft.src;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import org.greencubes.util.I18n;
 
 import net.minecraft.client.Minecraft;
 
@@ -28,11 +32,13 @@ public abstract class ItemWearable extends Item {
 	/**
 	 * Hand, feet, pants, body, head
 	 */
-	protected static final double wearablesHeight[] = {0.7D, 0.1D, 0.25D, 0.6D, 0.85D};
+	protected static final double wearablesHeight[] = {0.7D, 0.1D, 0.25D, 0.6D, 0.85D, 0.7D};
 
 	protected final Random rand = new Random();
 	public final int renderIndex;
 	public final int slot;
+	protected BuffEffect[] defaultEffects;
+	protected Buff[] defaultBuffs;
 
 	public ItemWearable(int i, int texture, int slot) {
 		super(i);
@@ -40,7 +46,21 @@ public abstract class ItemWearable extends Item {
 		this.renderIndex = texture;
 		this.maxStackSize = 1;
 	}
-
+	
+	protected ItemWearable setDefaultEffects(Buff[] buffs, BuffEffect[] effects) {
+		this.defaultEffects = effects;
+		this.defaultBuffs = buffs;
+		return this;
+	}
+	
+	public float getDefaultBuffMultiplier(BuffEffectType type) {
+		if(defaultEffects != null)
+			for(BuffEffect bf : defaultEffects)
+				if(bf.type == type)
+					return bf.multipler;
+		return 0;
+	}
+	
 	public void bindTexture(RenderEngine re, ItemStack itemstack) {
 		String orig = new StringBuilder().append("/armor/").append(armorFilenamePrefix[this.renderIndex]).append("_").append(slot != 2 ? 1 : 2).append(".png").toString();
 		int texture = 0;
@@ -69,7 +89,95 @@ public abstract class ItemWearable extends Item {
 		modelbiped.bipedLeftLeg.showModel = slot == 2 || slot == 3;
 		return modelbiped;
 	}
-
+	
+	public List<Buff> getBuffs(EntityLiving entity, ItemStack item) {
+		List<Buff> buffs = new ArrayList<Buff>();
+		if(item.nbtData != null) {
+			if(item.nbtData.hasKey("RunSpeed") && item.nbtData.getFloat("RunSpeed") != 0.0f)
+				buffs.add(Buff.FAST_RUN);
+			if(item.nbtData.hasKey("SnowBoost") && item.nbtData.getInteger("SnowBoost") != 0)
+				buffs.add(Buff.SNOW_BOOST);
+			if(item.nbtData.hasKey("BuffCriticalChance") && item.nbtData.getFloat("BuffCriticalChance") != 0.0f)
+				buffs.add(Buff.CRITICAL_CHANCE_ARMOR);
+			if(item.nbtData.hasKey("BuffBowSpeed") && item.nbtData.getFloat("BuffBowSpeed") != 0.0f)
+				buffs.add(Buff.BOW_SPEED_ARMOR);
+		}
+		if(defaultBuffs != null) {
+			for(Buff b : defaultBuffs) {
+				if(!buffs.contains(b)) {
+					if(b == Buff.FAST_RUN) {
+						if(item.nbtData != null && item.nbtData.hasKey("RunSpeed") && item.nbtData.getFloat("RunSpeed") == 0.0f)
+							continue;
+					} else if(b == Buff.SNOW_BOOST) {
+						if(item.nbtData != null && item.nbtData.hasKey("SnowBoost") && item.nbtData.getInteger("SnowBoost") == 0)
+							continue;
+					} else if(b == Buff.CRITICAL_CHANCE_ARMOR) {
+						if(item.nbtData != null && item.nbtData.hasKey("BuffCriticalChance") && item.nbtData.getFloat("BuffCriticalChance") == 0.0f)
+							continue;
+					} else if(b == Buff.BOW_SPEED_ARMOR) {
+						if(item.nbtData != null && item.nbtData.hasKey("BuffBowSpeed") && item.nbtData.getFloat("BuffBowSpeed") == 0.0f)
+							continue;
+					}
+					buffs.add(b);
+				}
+			}
+		}
+		return buffs;
+	}
+	
+	@Override
+	public void appendAttributes(ItemStack itemStack, List<String> target) {
+		List<Buff> buffs = getBuffs(null, itemStack);
+		for(int i = 0; i < buffs.size(); ++i) {
+			Buff buff = buffs.get(i);
+			if(buff == Buff.FAST_RUN) {
+				float speed = 0;
+				if(itemStack.getNBTData() != null && itemStack.getNBTData().hasKey("RunSpeed")) {
+					speed = itemStack.getNBTData().getFloat("RunSpeed");
+				} else {
+					Item boots = itemStack.getItem();
+					if(boots != null && boots instanceof ItemSpeedBoots)
+						speed = ((ItemSpeedBoots) boots).speed;
+				}
+				if(speed > 0.0f)
+					target.add(I18n.get("\247rffaaffff+%d%% к скорости бега", (int) (speed * 100))); // TODO translate
+				else if(speed < 0.0f)
+					target.add(I18n.get("\247rffff4444-%d%% к скорости бега", (int) (speed * -100))); // TODO translate
+			} else if(buff == Buff.SNOW_BOOST) {
+				int bonus = 0;
+				if(itemStack.getNBTData() != null && itemStack.getNBTData().hasKey("SnowBoost")) {
+					bonus = itemStack.getNBTData().getInteger("SnowBoost");
+				} else {
+					Item valenki = itemStack.getItem();
+					if(valenki != null && valenki instanceof ItemValenki)
+						bonus = ((ItemValenki) valenki).bonus;
+				}
+				if(bonus != 0)
+					target.add(I18n.get("\247rffaaffff+%d к скорости передвижения по снегу", bonus)); // TODO translate
+			} else if(buff == Buff.CRITICAL_CHANCE_ARMOR) {
+				float bonus = 0f;
+				if(itemStack.getNBTData() != null && itemStack.getNBTData().hasKey("BuffCriticalChance")) {
+					bonus = itemStack.getNBTData().getFloat("BuffCriticalChance");
+				} else {
+					bonus = getDefaultBuffMultiplier(BuffEffectType.CRITICAL_CHANCE);
+				}
+				if(bonus != 1)
+					target.add(I18n.get("\247rffaaffffКритический урон: x%.1f", bonus)); // TODO translate
+			} else if(buff == Buff.BOW_SPEED_ARMOR) {
+				float bonus = 0f;
+				if(itemStack.getNBTData() != null && itemStack.getNBTData().hasKey("BuffBowSpeed")) {
+					bonus = itemStack.getNBTData().getFloat("BuffBowSpeed");
+				} else {
+					bonus = getDefaultBuffMultiplier(BuffEffectType.BOW_SPEED);
+				}
+				if(bonus > 0) {
+					target.add(I18n.get("\247rffaaffffСкорость натяжения титевы: +%d%%", (int) (bonus * 100))); // TODO translate
+					target.add(I18n.get("\247rffaaffffЗамедление при натягивании титевы: -%d%%", (int) (bonus * 100))); // TODO translate
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void updateInInventory(ItemStack item, EntityLiving entity, int slot) {
 		if(item.hasNBTData() && item.nbtData.hasKey("Effects")) {

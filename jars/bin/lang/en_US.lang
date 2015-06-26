@@ -1871,6 +1871,8 @@ item.bow.winner.blackslime.name=Лук победителя чёрной сли�
 item.sword.winner.satyr.name=Меч победителя сатиров
 item.sword.winner.blackslime.name=Меч победителя чёрной слизи
 item.decorparticle.name=Декоративная частица
+item.gloves.leather.swordsman.name=Кожаные перчатки мечника
+item.gloves.leather.archer.name=Кожаные перчатки лучника
 
 entity.Item.name=Предмет
 entity.XPOrb.name=Сфера опыта

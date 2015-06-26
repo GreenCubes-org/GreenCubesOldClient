@@ -15,8 +15,8 @@ public class ItemArrow extends Item {
 
 	@Override
 	public void appendAttributes(ItemStack itemstack, List<String> list) {
-		list.add("\2477Урон: " + damageMultipler);
-		list.add("\2477Точность: " + accuracy);
+		list.add(String.format("\2477Урон: \247f%.1f", damageMultipler));
+		list.add(String.format("\2477Точность: \247f%.1f", accuracy));
 		super.appendAttributes(itemstack, list);
 	}
 }

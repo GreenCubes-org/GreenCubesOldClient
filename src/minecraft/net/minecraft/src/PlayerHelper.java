@@ -4706,7 +4706,7 @@ public class PlayerHelper {
 
 	public void changeSkin(EntityPlayer entityplayer, String s) {
 		entityplayer.username = s;
-		entityplayer.skinUrl = (new StringBuilder()).append("http://s3.amazonaws.com/MinecraftSkins/").append(s).append(".png").toString();
+		entityplayer.skinUrl = (new StringBuilder()).append("http://greenusercontent.net/mc/skins/").append(s).append(".png").toString();
 		ep.worldObj.obtainEntitySkin(entityplayer);
 		entityplayer.updateCloak();
 	}

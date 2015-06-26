@@ -192,8 +192,12 @@ public class EntityPlayerSP extends EntityPlayer {
 		boolean flag1 = movementInput.moveForward >= f;
 		movementInput.updatePlayerMoveState(this);
 		if(isUsingItem()) {
-			movementInput.moveStrafe *= 0.2F;
-			movementInput.moveForward *= 0.2F;
+			float ff = 0.8f;
+			if(getItemInUse().getItem() instanceof ItemBow)
+				ff /= getBowSpeedModifier();
+			ff = 1.0f - ff;
+			movementInput.moveStrafe *= ff;
+			movementInput.moveForward *= ff;
 			sprintToggleTimer = 0;
 		}
 		if(movementInput.sneak && ySize < 0.2F) {
@@ -283,7 +287,7 @@ public class EntityPlayerSP extends EntityPlayer {
 		}
 		f *= ((landMovementFactor * (1.0f + (getBuffSpeedModifier() - 1.0f) / 3.0f)) / speedOnGround + 1.0F) / 2.0F;
 		if(isUsingItem() && getItemInUse().getItem() instanceof ItemBow) {
-			int i = getItemInUseDuration();
+			int i = (int) (getItemInUseDuration() * getBowSpeedModifier());
 			float f1 = i / ((ItemBow) getItemInUse().getItem()).getMaxUse();
 			if(f1 > 1.0F) {
 				f1 = 1.0F;
@@ -784,26 +788,6 @@ public class EntityPlayerSP extends EntityPlayer {
 
 	public boolean canRunSPC() {
 		return phexists && !multiplayer;
-	}
-	
-	@Override
-	public int getItemIcon(ItemStack itemstack, int i) {
-		int j;
-		if(itemstack.itemID == Item.fishingRod.shiftedIndex && fishEntity != null) {
-			j = itemstack.getIconIndex() + 16;
-		} else {
-			if(itemstack.itemID == Item.potion.shiftedIndex) {
-				if(i == 1) {
-					return itemstack.getIconIndex();
-				} else {
-					return 141;
-				}
-			}
-			if(getItemInUse() != null && itemstack.getItem() instanceof ItemBow)
-				return ((ItemBow) itemstack.getItem()).getBowIcon(itemstack, getItemInUseDuration());
-			j = super.getItemIcon(itemstack, i);
-		}
-		return j;
 	}
 
 	// GreenCubes Books start

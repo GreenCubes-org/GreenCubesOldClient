@@ -1123,7 +1123,7 @@ public abstract class EntityLiving extends Entity {
 				}
 			}
 			if(getItemInUse() != null && itemstack.getItem() instanceof ItemBow)
-				return ((ItemBow) itemstack.getItem()).getBowIcon(itemstack, getItemInUseDuration());
+				return ((ItemBow) itemstack.getItem()).getBowIcon(itemstack, (int) (getItemInUseDuration() * getBowSpeedModifier()));
 			return itemstack.getIconIndex();
 		}
 	}
@@ -1264,6 +1264,22 @@ public abstract class EntityLiving extends Entity {
 
 	protected void onFinishedPotionEffect(PotionEffect potioneffect) {
 		needUpdatePotionEffects = true;
+	}
+	
+	protected float getBowSpeedModifier() {
+		float f = 1.0F;
+		if(activeBuffs.size() > 0) {
+			TIntObjectIterator<BuffActive> iterator = activeBuffs.iterator();
+			while(iterator.hasNext()) {
+				iterator.advance();
+				BuffActive ab = iterator.value();
+				for(BuffEffect be : ab.effects) {
+					if(be.type == BuffEffectType.BOW_SPEED)
+						f += be.multipler;
+				}
+			}
+		}
+		return f;
 	}
 
 	protected float getBuffSpeedModifier() {

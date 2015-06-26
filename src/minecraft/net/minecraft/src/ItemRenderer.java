@@ -466,7 +466,7 @@ public class ItemRenderer {
 						GL11.glRotatef(-12F, 0.0F, 1.0F, 0.0F);
 						GL11.glRotatef(-8F, 1.0F, 0.0F, 0.0F);
 						GL11.glTranslatef(-0.9F, 0.2F, 0.0F);
-						float f25 = itemstack.getMaxItemUseDuration() - ((entityplayersp.func_35205_Y() - f) + 1.0F);
+						float f25 = itemstack.getMaxItemUseDuration() - ((entityplayersp.func_35205_Y() - f) + 1.0F) * entityplayersp.getBowSpeedModifier();
 						float f29 = f25 / 20F;
 						f29 = (f29 * f29 + f29 * 2.0F) / 3F;
 						if(f29 > 1.0F) {

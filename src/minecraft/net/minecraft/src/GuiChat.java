@@ -52,6 +52,7 @@ public class GuiChat extends GuiScreen {
 		}
 		if(mc.ingameGUI.inSettings)
 			return;
+		boolean process = false;
 		// GreenCubes Improved Chat start
 		boolean flag = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
 		if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
@@ -102,6 +103,8 @@ public class GuiChat extends GuiScreen {
 				mc.chat.previosTab();
 			else
 				mc.chat.nextTab();
+		} else {
+			process = true;
 		}
 		if(c == '\026') {
 			String s = GChat.paste();
@@ -157,12 +160,17 @@ public class GuiChat extends GuiScreen {
 				while(flag && cursorPosition > 0 && Character.isLetterOrDigit(message.charAt(cursorPosition - 1)))
 					message.deleteCharAt(--cursorPosition);
 			}
+			process = false;
 		}
 		if(allowedCharacters.indexOf(c) >= 0 && message.length() + (mc.chat.activeTab.sendPrefix != null ? mc.chat.activeTab.sendPrefix.length() : 0) < 256) {
 			message.insert(cursorPosition, c);
 			cursorPosition++;
+			process = false;
 		}
 		message = mc.chat.processKeyInput(message, cursorPosition);
+		if(process && i == mc.gameSettings.keyBindChat.keyCode) {
+			// close
+		}
 	}
 
 	@Override

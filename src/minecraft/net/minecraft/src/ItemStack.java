@@ -529,6 +529,12 @@ public final class ItemStack {
 			for(int i = 0; i < list.size(); ++i)
 				arraylist.add(((NBTTagString) list.get(i)).stringValue);
 		}
+		if(hasNBTData()) {
+			if(nbtData.getBoolean("Undropable"))
+				arraylist.add("\247cНельзя выбросить");
+			if(nbtData.getBoolean("NoRepair"))
+				arraylist.add("\247cНельзя чинить");
+		}
 		if(getItem().isDamageable()) {
 			StringBuilder sb = new StringBuilder().append("\2477Прочность: \247f");
 			if(nbtData != null && nbtData.getBoolean("Invulnerable")) {
@@ -539,28 +545,22 @@ public final class ItemStack {
 					if(nbtData.hasKey("Durability") || nbtData.hasKey("DurAdd")) {
 						sb.append(" \2477(");
 						if(nbtData.hasKey("Durability")) {
-							sb.append("\2477+").append((int) (nbtData.getFloat("Durability") * 100)).append("%");
+							sb.append("+").append((int) (nbtData.getFloat("Durability") * 100)).append("%");
 							if(nbtData.hasKey("DurAdd"))
-								sb.append("\2477, ");
+								sb.append(", ");
 						}
 						if(nbtData.hasKey("DurAdd"))
-							sb.append("\2477+").append(nbtData.getInteger("DurAdd"));
-						sb.append("\2477)");
+							sb.append("+").append(nbtData.getInteger("DurAdd"));
+						sb.append(")");
 					}
 				}
 			}
 			arraylist.add(sb.toString());
 		}
-		if(noDrop())
-			arraylist.add("\2477Не выпадает при смерти");
-		if(hasNBTData()) {
-			if(nbtData.getBoolean("Undropable"))
-				arraylist.add("\2477Нельзя выбросить");
-			if(nbtData.getBoolean("NoRepair"))
-				arraylist.add("\2477Нельзя чинить");
-		}
 		if(isUnbreakable() && (nbtData == null || !nbtData.getBoolean("Invulnerable")))
 			arraylist.add("\247rffaaffffНе уничтожается от повреждений");
+		if(noDrop())
+			arraylist.add("\2477Не выпадает при смерти");
 		if(hasNBTData()) {
 			if(nbtData.getBoolean("Invulnerable"))
 				arraylist.add("\247rffaaffffНе повреждается");
@@ -568,35 +568,20 @@ public final class ItemStack {
 				arraylist.add("\247rffaaffffМгновенное ломание блоков");
 			if(nbtData.getBoolean("NoAmmo"))
 				arraylist.add("\247rffaaffffНе требует патронов");
-			if(nbtData.hasKey("DamageMultipler"))
-				arraylist.add("\247rffaaffff+" + ((int) (nbtData.getFloat("DamageMultipler") * 100)) + "% урона");
-			if(nbtData.hasKey("Accuracy"))
-				arraylist.add("\247rffaaffff+" + ((int) (nbtData.getFloat("Accuracy") * 100)) + "% точности");
 			if(nbtData.hasKey("DigSpeed")) {
 				float ds = nbtData.getFloat("DigSpeed");
 				if(ds > 0)
-					arraylist.add("\247rffaaffffСкорость: +" + ((int) (ds * 100)) + "%");
+					arraylist.add("\247rffaaffffСкорость: \247f+" + ((int) (ds * 100)) + "%");
 				else
-					arraylist.add("\247rffaaffffСкорость: " + ((int) (ds * 100)) + "%");
+					arraylist.add("\247rffaaffffСкорость: \247f" + ((int) (ds * 100)) + "%");
 			}
 			if(nbtData.hasKey("Efficiency")) {
 				float ef = nbtData.getFloat("Efficiency");
 				if(ef > 0)
-					arraylist.add("\247rffaaffffЭффективность: +" + ((int) (ef * 100)) + "%");
+					arraylist.add("\247rffaaffffЭффективность: \247f+" + ((int) (ef * 100)) + "%");
 				else
-					arraylist.add("\247rffaaffffЭффективность: " + ((int) (ef * 100)) + "%");
+					arraylist.add("\247rffaaffffЭффективность: \247f" + ((int) (ef * 100)) + "%");
 			}
-			/*if(nbtData.hasKey("Durability") || nbtData.hasKey("DurAdd")) {
-				StringBuilder sb = new StringBuilder();
-				if(nbtData.hasKey("Durability")) {
-					sb.append("\247rffaaffff+").append((int) (nbtData.getFloat("Durability") * 100)).append("% прочности");
-					if(nbtData.hasKey("DurAdd"))
-						sb.append("\2477, ");
-				}
-				if(nbtData.hasKey("DurAdd"))
-					sb.append("\247rffaaffff+").append(nbtData.getInteger("DurAdd")).append(" прочности");
-				arraylist.add(sb.toString());
-			}*/
 			if(nbtData.hasKey("Counters")) {
 				NBTTagList counters = nbtData.getTagList("Counters");
 				for(int i = 0; i < counters.size(); ++i) {

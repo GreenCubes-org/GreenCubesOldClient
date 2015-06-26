@@ -25,17 +25,17 @@ public class ContainerPlayer extends Container {
 		craftMatrix = new InventoryCrafting(this, 2, 2);
 		craftResult = new InventoryCraftResult();
 		isSinglePlayer = flag;
-		addSlot(new SlotCrafting(inventoryplayer.player, craftMatrix, craftResult, 0, 152, 36));
+		addSlot(new SlotCrafting(inventoryplayer.player, craftMatrix, craftResult, 0, 152, 34));
 		for(int i = 0; i < 2; i++) {
 			for(int i1 = 0; i1 < 2; i1++) {
-				addSlot(new Slot(craftMatrix, i1 + i * 2, 96 + i1 * 18, 26 + i * 18));
+				addSlot(new Slot(craftMatrix, i1 + i * 2, 96 + i1 * 18, 24 + i * 18));
 			}
 
 		}
 
 		for(int j = 0; j < 4; j++) {
 			int j1 = j;
-			addSlot(new SlotArmor(this, inventoryplayer, inventoryplayer.getSizeInventory() - 6 - j, 26, 8 + j * 18, j1));
+			addSlot(new SlotArmor(this, inventoryplayer, inventoryplayer.getSizeInventory() - 7 - j, 26, 8 + j * 18, j1));
 		}
 		
 		for(int k = 0; k < 3; k++) {
@@ -55,10 +55,12 @@ public class ContainerPlayer extends Container {
 		
 		for(int j = 0; j < 4; j++) {
 			int j1 = j;
-			addSlot(new SlotCloth(this, inventoryplayer, inventoryplayer.getSizeInventory() - 2 - j, 8, 8 + j * 18, j1));
+			addSlot(new SlotCloth(this, inventoryplayer, inventoryplayer.getSizeInventory() - 3 - j, 8, 8 + j * 18, j1));
 		}
 		
-		addSlot(new SlotTrashcan(inventoryplayer, inventoryplayer.getSizeInventory() - 1, 152, 62));
+		addSlot(new SlotTrashcan(inventoryplayer, inventoryplayer.getSizeInventory() - 2, 152, 62));
+		
+		addSlot(new SlotArmor(this, inventoryplayer, inventoryplayer.getSizeInventory() - 1, 96, 62, 4));
 
 		onCraftMatrixChanged(craftMatrix);
 	}

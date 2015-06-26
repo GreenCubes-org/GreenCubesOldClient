@@ -7,6 +7,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
 
 public class RenderEntity extends Entity {
+	
 	private Minecraft mc;
 
 	public RenderEntity(Minecraft mc, World arg0) {
@@ -23,19 +24,16 @@ public class RenderEntity extends Entity {
 	
 	@Override
 	protected void entityInit() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -832,7 +832,7 @@ public class NetClientHandler extends NetHandler {
 	public void handleSetSlot(Packet103SetSlot packet103setslot) {
 		if(packet103setslot.windowId == -1) {
 			mc.thePlayer.inventory.setItemStack(packet103setslot.myItemStack);
-		} else if(packet103setslot.windowId == 0 && packet103setslot.itemSlot >= 0 && packet103setslot.itemSlot < 50) {
+		} else if(packet103setslot.windowId == 0 && packet103setslot.itemSlot >= 0 && packet103setslot.itemSlot < 51) {
 			ItemStack itemstack = mc.thePlayer.inventorySlots.getSlot(packet103setslot.itemSlot).getStack();
 			if(packet103setslot.myItemStack != null && (itemstack == null || itemstack.stackSize < packet103setslot.myItemStack.stackSize)) {
 				packet103setslot.myItemStack.animationsToGo = 5;

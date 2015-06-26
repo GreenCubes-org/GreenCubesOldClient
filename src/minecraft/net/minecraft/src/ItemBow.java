@@ -16,11 +16,13 @@ public class ItemBow extends Item {
 	protected float accuracy;
 	protected int[] icons = {101, 117, 133};
 	protected ItemStack toFix;
+	protected float speed;
 	
-	public ItemBow(int i, float accuracy) {
+	public ItemBow(int i, float accuracy, float speed) {
 		super(i);
 		this.maxStackSize = 1;
 		this.accuracy = accuracy;
+		this.speed = speed;
 		setMaxDamage(384);
 	}
 	
@@ -51,16 +53,15 @@ public class ItemBow extends Item {
 	public void appendAttributes(ItemStack itemstack, List<String> list) {
 		StringBuilder sb = new StringBuilder();
 		int damage = baseDamage;
-		sb.append("\2477Урон: ");
 		if(itemstack.hasNBTData()) {
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler") + 1;
 				damage *= multipler;
 			}
 		}
-		sb.append(damage);
+		sb.append(String.format("\2477Урон: \247f%d", damage));
 		if(itemstack.hasNBTData() && itemstack.getNBTData().hasKey("DamageMultipler")) {
-			sb.append(" (");
+			sb.append(" \247f(");
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler");
 				sb.append("+").append((int) (multipler * 100)).append("%");
@@ -68,7 +69,8 @@ public class ItemBow extends Item {
 			sb.append(")");
 		}
 		list.add(sb.toString());
-		list.add("\2477Точность: " + accuracy);
+		list.add(String.format("\2477Точность: \247f%.1f", accuracy));
+		list.add(String.format("\2477Скорость: \247f%.1f", 1f / speed));
 		super.appendAttributes(itemstack, list);
 	}
 

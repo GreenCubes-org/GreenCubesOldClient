@@ -415,9 +415,9 @@ public class RenderLiving extends Render {
 					GL11.glDepthMask(true);
 					GL11.glEnable(GL11.GL_TEXTURE_2D);
 					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-					GL11.glTranslatef(0, 1, -1);
+					GL11.glTranslatef(0, 1, -0.1f);
 					fr.drawString(helath, - fr.getStringWidth(helath) / 2, 0, -1);
-					GL11.glTranslatef(0, -1, 1);
+					GL11.glTranslatef(0, -1, 0.1f);
 					GL11.glScalef(2f, 2f, 2f);
 					GL11.glTranslatef(0, -8, 0);
 					labelWidth += 1;
@@ -467,56 +467,6 @@ public class RenderLiving extends Render {
 				GL11.glPopMatrix();
 			}
 		}
-		
-		//renderStatusLine(entity, d, d1, d2, 3.0d, 0.0d);
-	}
-	
-	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i) {
-		renderLivingLabel(entityliving, s, d, d1, d2, i, 1.6f, 0.0f, 0.0f);
-	}
-
-	protected void renderLivingLabel(EntityLiving entityliving, String s, double d, double d1, double d2, int i, float scale, float xTranslation, double minWidth) {
-		float f = entityliving.getDistanceToEntity(renderManager.livingPlayer);
-		if(f > i)
-			return;
-		FontRenderer fontrenderer = getFontRendererFromRenderManager();
-		double j = fontrenderer.getStringWidth(s) / 2 + 1;
-		if(j < minWidth / 2.0d)
-			j = minWidth / 2.0d;
-		float f1 = scale;
-		float f2 = 0.01666667F * f1;
-		Tessellator tessellator = Tessellator.instance;
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) d, (float) d1 + 2.3F, (float) d2);
-		GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-		GL11.glScalef(-f2, -f2, f2);
-		GL11.glDisable(2896 /*GL_LIGHTING*/);
-		GL11.glDepthMask(false);
-		GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
-		GL11.glEnable(3042 /*GL_BLEND*/);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		if(xTranslation != 0.0f)
-			GL11.glTranslatef(xTranslation, 0, 0);
-		GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
-		tessellator.startDrawingQuads();
-		tessellator.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
-		tessellator.addVertex(-j, -1, 0.0D);
-		tessellator.addVertex(-j, 8, 0.0D);
-		tessellator.addVertex(j, 8, 0.0D);
-		tessellator.addVertex(j, -1, 0.0D);
-		tessellator.draw();
-		GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
-		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, 0x20ffffff);
-		GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
-		GL11.glDepthMask(true);
-		fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, 0, -1);
-		GL11.glEnable(2896 /*GL_LIGHTING*/);
-		GL11.glDisable(3042 /*GL_BLEND*/);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
-		
 	}
 
 	@Override

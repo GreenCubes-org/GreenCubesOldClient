@@ -149,24 +149,4 @@ public class EntityOtherPlayerMP extends EntityPlayer {
 	public float getEyeHeight() {
 		return 1.82F;
 	}
-
-	@Override
-	public int getItemIcon(ItemStack itemstack, int i) {
-		int j;
-		if(itemstack.itemID == Item.fishingRod.shiftedIndex && fishEntity != null) {
-			j = itemstack.getIconIndex() + 16;
-		} else {
-			if(itemstack.itemID == Item.potion.shiftedIndex) {
-				if(i == 1) {
-					return itemstack.getIconIndex();
-				} else {
-					return 141;
-				}
-			}
-			if(getItemInUse() != null && itemstack.getItem() instanceof ItemBow)
-				return ((ItemBow) itemstack.getItem()).getBowIcon(itemstack, getItemInUseDuration());
-			j = super.getItemIcon(itemstack, i);
-		}
-		return j;
-	}
 }

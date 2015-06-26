@@ -25,12 +25,13 @@ public class ItemValenki extends ItemCloth {
 	}
 
 	@Override
-	public void appendAttributes(ItemStack itemstack, List<String> list) {
-		int bonus = this.bonus;
-		if(itemstack.nbtData != null && itemstack.nbtData.hasKey("SnowBoost"))
-			bonus = itemstack.nbtData.getInteger("SnowBoost");
-		if(bonus > 0)
-			list.add("\247rffaaffff+" + bonus + " к скорости передвижения по снегу");
+	public List<Buff> getBuffs(EntityLiving entity, ItemStack item) {
+		List<Buff> buffs = super.getBuffs(entity, item);
+		if(!buffs.contains(Buff.SNOW_BOOST))
+			buffs.add(Buff.SNOW_BOOST);
+		else if(item.getNBTData() != null && item.getNBTData().hasKey("SnowBoost") && item.getNBTData().getInteger("SnowBoost") == 0)
+				buffs.remove(Buff.SNOW_BOOST);
+		return buffs;
 	}
 
 }

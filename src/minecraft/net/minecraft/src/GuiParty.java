@@ -45,6 +45,12 @@ public class GuiParty extends GuiScreen {
 	}
 	
 	@Override
+	protected void mouseClicked(int x, int y, int key) {
+		if(playerInputField.mouseClicked(x, y, key))
+			return;
+	}
+	
+	@Override
 	protected void keyTyped(char c, int i) {
 		if(playerInputField.isTyping) {
 			playerInputField.keyTyped(c, i);
@@ -85,7 +91,6 @@ public class GuiParty extends GuiScreen {
 		if(party.isPlayerLeader()) {
 			fr.drawStringWithShadow("Пригласить игрока в группу: ", guiStartX + 5, h, 0xFFFFFF);
 			h += 13;
-			playerInputField.isTyping = true; // TODO
 			playerInputField.render(adapter, guiStartX + 5, h, scale);
 			gui.enableMode();
 			gui.renderInterface(guiStartX + guiWidth - 15, h + 1.5f, 9.5f, 9.5f, 54, 289, 19, 19);

@@ -15,6 +15,7 @@ public class InventoryPlayer implements IInventory {
 	public ItemStack armorInventory[];
 	public ItemStack decorInventory[] = new ItemStack[4];
 	public ItemStack trashcan[] = new ItemStack[1];
+	public ItemStack accessories[] = new ItemStack[1];
 	public int currentItem;
 	public EntityPlayer player;
 	private ItemStack itemStack;
@@ -214,6 +215,10 @@ public class InventoryPlayer implements IInventory {
 			i -= aitemstack.length;
 			aitemstack = trashcan;
 		}
+		if(i >= aitemstack.length) {
+			i -= aitemstack.length;
+			aitemstack = accessories;
+		}
 		if(aitemstack[i] != null) {
 			if(aitemstack[i].stackSize <= j) {
 				ItemStack itemstack = aitemstack[i];
@@ -244,6 +249,10 @@ public class InventoryPlayer implements IInventory {
 		if(i >= aitemstack.length) {
 			i -= aitemstack.length;
 			aitemstack = trashcan;
+		}
+		if(i >= aitemstack.length) {
+			i -= aitemstack.length;
+			aitemstack = accessories;
 		}
 		aitemstack[i] = itemstack;
 	}
@@ -283,6 +292,14 @@ public class InventoryPlayer implements IInventory {
 				nbttaglist.setTag(nbttagcompound1);
 			}
 		}
+		for(int j = 0; j < accessories.length; j++) {
+			if(accessories[j] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) (j + 200 + 4));
+				accessories[j].writeToNBT(nbttagcompound1);
+				nbttaglist.setTag(nbttagcompound1);
+			}
+		}
 
 		return nbttaglist;
 	}
@@ -306,6 +323,9 @@ public class InventoryPlayer implements IInventory {
 			if(j >= 200 && j < decorInventory.length + 200) {
 				decorInventory[j - 200] = itemstack;
 			}
+			if(j >= 204 && j < accessories.length + 204) {
+				accessories[j - 204] = itemstack;
+			}
 			if(j >= 255 && j < trashcan.length + 255) {
 				trashcan[j - 255] = itemstack;
 			}
@@ -315,7 +335,7 @@ public class InventoryPlayer implements IInventory {
 
 	@Override
 	public int getSizeInventory() {
-		return mainInventory.length + 9;
+		return mainInventory.length + 10;
 	}
 
 	@Override
@@ -332,6 +352,10 @@ public class InventoryPlayer implements IInventory {
 		if(i >= aitemstack.length) {
 			i -= aitemstack.length;
 			aitemstack = trashcan;
+		}
+		if(i >= aitemstack.length) {
+			i -= aitemstack.length;
+			aitemstack = accessories;
 		}
 		return aitemstack[i];
 	}

@@ -52,14 +52,14 @@ public class GuiInventory extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		if(inventorySlots.getSlot(inventorySlots.inventorySlots.size() - 1).getHasStack()) {
+		if(inventorySlots.getSlot(inventorySlots.inventorySlots.size() - 2).getHasStack()) {
 			int k = GreenTextures.trashcan;
 			GL11.glDisable(GL11.GL_LIGHTING);
 			mc.renderEngine.bindTexture(mc.renderEngine.getTexture("/gui/items.png"));
 			drawTexturedModalRectItem(133, 62, (k % 16) * 16, (k / 16) * 16, 16, 16);
 			GL11.glEnable(GL11.GL_LIGHTING);
 		}
-		fontRenderer.drawString("Крафт", 95, 16, 0x404040);
+		fontRenderer.drawString("Крафт", 95, 14, 0x404040);
 		displayDebuffEffects(mouseX, mouseY);
 	}
 

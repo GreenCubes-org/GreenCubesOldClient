@@ -10,7 +10,7 @@ package net.minecraft.src;
 
 class SlotArmor extends Slot {
 
-	public static final int[] icons = new int[] {GreenTextures.stub_helmet, GreenTextures.stub_chestplate, GreenTextures.stub_leggins, GreenTextures.stub_boots};
+	public static final int[] icons = new int[] {GreenTextures.stub_helmet, GreenTextures.stub_chestplate, GreenTextures.stub_leggins, GreenTextures.stub_boots, GreenTextures.stub_gloves};
 	public final int armorType; /* synthetic field */
 	public final ContainerPlayer inventory; /* synthetic field */
 
@@ -27,10 +27,13 @@ class SlotArmor extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
-		if(itemstack.getItem() instanceof ItemArmor)
-			return ((ItemArmor) itemstack.getItem()).slot == armorType;
-		if(armorType == 3 && (itemstack.getItem() instanceof ItemSpeedBoots || itemstack.getItem() instanceof ItemValenki))
+		Item item = itemstack.getItem();
+		if(item instanceof ItemArmor)
+			return ((ItemArmor) item).slot == armorType;
+		if(armorType == 3 && (item instanceof ItemSpeedBoots || item instanceof ItemValenki))
 			return true;
+		if(armorType == 4 && item instanceof ItemWearable)
+			return ((ItemWearable) item).slot == armorType;
 		return false;
 	}
 	

@@ -36,6 +36,9 @@ public class ItemArmor extends ItemWearable {
 		case 3:
 			sb.append("обувь");
 			break;
+		case 4:
+			sb.append("перчатки");
+			break;
 		}
 		sb.append(')');
 		if(toFix != null) {

@@ -6,8 +6,8 @@ public class ItemCherryBow extends ItemBow {
 	private int bow2 = ModLoader.addOverride("/gui/items.png", "/gc_images/cherrybow2.png");
 	private int bow3 = ModLoader.addOverride("/gui/items.png", "/gc_images/cherrybow3.png");
 
-	public ItemCherryBow(int i, float accuracy) {
-		super(i, accuracy);
+	public ItemCherryBow(int i, float accuracy, float speed) {
+		super(i, accuracy, speed);
 		setMaxDamage(this.getMaxDamage() * 2);
 		this.baseDamage = 8;
 		icons = new int[] {bow1, bow2, bow3};

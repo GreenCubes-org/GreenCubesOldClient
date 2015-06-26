@@ -114,7 +114,7 @@ public class ItemTool extends Item {
 	public void appendAttributes(ItemStack itemstack, List<String> list) {
 		StringBuilder sb = new StringBuilder();
 		int damage = damageVsEntity;
-		sb.append("\2477Урон: ");
+		sb.append("\2477Урон: \247f");
 		if(itemstack.hasNBTData()) {
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler") + 1;
@@ -126,7 +126,7 @@ public class ItemTool extends Item {
 		}
 		sb.append(damage);
 		if(itemstack.hasNBTData() && (itemstack.getNBTData().hasKey("DamageMultipler") || itemstack.getNBTData().hasKey("AddDamage"))) {
-			sb.append(" (");
+			sb.append(" \2477(");
 			if(itemstack.getNBTData().hasKey("DamageMultipler")) {
 				float multipler = itemstack.getNBTData().getFloat("DamageMultipler");
 				sb.append("+").append((int) (multipler * 100)).append("%");

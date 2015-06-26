@@ -1172,8 +1172,8 @@ public abstract class Minecraft implements Runnable {
 				displayGuiScreen(new GuiChat(isSlash));
 			while(isMultiplayerWorld() && gameSettings.keyBindNotify.isPressed())
 				ingameGUI.notifyAnswer();
-			while(isMultiplayerWorld() && gameSettings.keyParty.isPressed())
-				displayGuiScreen(new GuiParty());
+			//while(isMultiplayerWorld() && gameSettings.keyParty.isPressed())
+			//	displayGuiScreen(new GuiParty());
 			//while(gameSettings.keyJournal.isPressed())
 			//	displayGuiScreen(new GuiJournal());
 			if(thePlayer.isUsingItem()) {

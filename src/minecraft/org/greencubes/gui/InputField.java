@@ -19,6 +19,8 @@ public class InputField {
 	private StringBuilder string = new StringBuilder();
 	private int cursorPosition = 0;
 	private int width;
+	private int x = -1;
+	private int y = -1;
 	
 	public InputField(int maxLength, int width) {
 		this.maxLength = maxLength;
@@ -60,6 +62,17 @@ public class InputField {
 		}
 	}
 	
+	public boolean mouseClicked(int x, int y, int key) {
+		if(this.x == -1 && this.y == -1 || key != 0)
+			return false;
+		if(x > this.x && y > this.y && x < this.x + this.width && y < this.y + 13) {
+			this.isTyping = true;
+			return true;
+		}
+		this.isTyping = false;
+		return false;
+	}
+	
 	public void update() {
 		this.updateCounter++;
 	}
@@ -71,6 +84,8 @@ public class InputField {
 	}
 	
 	public void render(GuiAdapter adapter, int x, int y, float scale) {
+		this.x = x;
+		this.y = y;
 		gui.enableMode();
 		gui.setScale(scale);
 		gui.renderInterfaceNinePart(x, y, width, 13, 394, 257, gui.inputFieldNPI);
