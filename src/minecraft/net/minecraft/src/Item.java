@@ -335,7 +335,7 @@ public class Item {
 	public static final Item BLUE_NYHAT_2014_BEARD = new ItemRareCloth(4203 - 256, 42, 0, DecorItemQuality.RARE_WEAR).setItemName("head.bluenyhat2014beard").setIconIndex(head_bluenyhat2014beard);
 	public static final Item RED_NYHAT_2013_BEARD = new ItemRareCloth(4204 - 256, 43, 0, DecorItemQuality.RARE_WEAR).setItemName("head.rednyhat2013beard").setIconIndex(head_rednyhat2013beard);
 	
-	public static final Item PICKAXE_DIAMOND_ICY = new ItemPickaxe(4300 - 256, EnumToolMaterial.DIAMOND).setDecor(DecorItemQuality.IMPROOVED).setIconIndex(pickaxe_diamond_icy).setItemName("pickaxe.diamond.icy");
+	public static final Item PICKAXE_DIAMOND_ICY = new ItemPickaxe(4300 - 256, EnumToolMaterial.DIAMOND).setFixItem(diamondDustItem.shiftedIndex).setDecor(DecorItemQuality.IMPROOVED).setIconIndex(pickaxe_diamond_icy).setItemName("pickaxe.diamond.icy");
 	
 	public static final Item MODIFIER = new Item(4302 - 256).setIconIndex(modifier_power).setItemName("modifier.toolpower");
 	public static final Item GARLAND_NYPINE = new Item(4303 - 256).setItemName("garland.nypine").setIconIndex(garland_nypine_icon).setUsable();
