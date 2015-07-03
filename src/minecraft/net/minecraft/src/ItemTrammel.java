@@ -111,7 +111,8 @@ public class ItemTrammel extends Item {
 		int block = world.getBlockId(i, j, k);
 		Block type = Block.blocksList[block];
 		if(type != null && type instanceof BlockParts) {
-			itemstack.nbtData = new NBTTagCompound();
+			if(itemstack.nbtData == null)
+				itemstack.nbtData = new NBTTagCompound();
 			NBTTagCompound content = new NBTTagCompound();
 			itemstack.nbtData.setCompoundTag("Content", content);
 			content.setInteger("Id", block);
