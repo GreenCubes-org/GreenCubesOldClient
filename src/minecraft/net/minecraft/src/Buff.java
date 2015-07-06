@@ -21,8 +21,8 @@ public abstract class Buff {
 	public static final Buff WALKED_COUNTER = new EmptyBuff(8);
 	public static final Buff NY_MOOD = new SimpleBuff(9, "nymood.png", COLOR_PREFIX_GOOD, I18n.get("Новогоднее настроение"), null);
 	public static final Buff PRESENT_CD = new SimpleBuff(10, "presentcd.png", COLOR_PREFIX_GOOD, I18n.get("Ожидание подарка"), null);
-	public static final Buff SATYR = new SimpleBuff(11, "satyr.png", COLOR_PREFIX_GOOD, I18n.get("Сила сатиров"), I18n.get("\n\n${EFFECTS}"));
-	public static final Buff PVP = new SimpleBuff(12, null, COLOR_PREFIX_BAD, I18n.get("PVP"), I18n.get("\n\nВаш статус PVP включён, другие игроки могут вас атаковать."));
+	public static final Buff SATYR = new SimpleBuff(11, "satyr.png", COLOR_PREFIX_GOOD, I18n.get("Сила сатиров"), I18n.get("\n${EFFECTS}"));
+	public static final Buff PVP = new SimpleBuff(12, null, COLOR_PREFIX_BAD, I18n.get("PVP"), I18n.get("\nВаш статус PVP включён, другие игроки могут вас атаковать."));
 	public static final Buff CRITICAL_CHANCE_ARMOR =  new EmptyBuff(13);
 	public static final Buff BOW_SPEED_ARMOR =  new EmptyBuff(14);
 	
