@@ -36,17 +36,17 @@ public class EntityZombie extends EntityMob {
 
 	@Override
 	protected String getLivingSound() {
-		return "mob.zombie";
+		return "mob.zombie.say";
 	}
 
 	@Override
 	protected String getHurtSound() {
-		return "mob.zombiehurt";
+		return "mob.zombie.hurt";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "mob.zombiedeath";
+		return "mob.zombie.death";
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class EntitySlime extends EntityLiving implements IMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		dataWatcher.addObject(16, new Byte((byte) 1));
+		setSlimeSize(1);
 	}
 
 	public void setSlimeSize(int i) {
@@ -67,7 +67,7 @@ public class EntitySlime extends EntityLiving implements IMob {
 	}
 
 	protected String func_40138_aj() {
-		return "mob.slime";
+		return "mob.slime.big";
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class EntitySlime extends EntityLiving implements IMob {
 		if(func_40137_ah()) {
 			int i = getSlimeSize();
 			if(canEntityBeSeen(entityplayer) && getDistanceToEntity(entityplayer) < 0.59999999999999998D * i && entityplayer.attackEntityFrom(DamageSource.causeMobDamage(this), func_40130_ai())) {
-				worldObj.playSoundAtEntity(this, "mob.slimeattack", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+				worldObj.playSoundAtEntity(this, "mob.slime.attack", 1.0F, (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
 			}
 		}
 	}
@@ -174,12 +174,12 @@ public class EntitySlime extends EntityLiving implements IMob {
 
 	@Override
 	protected String getHurtSound() {
-		return "mob.slime";
+		return "mob.slime.big";
 	}
 
 	@Override
 	protected String getDeathSound() {
-		return "mob.slime";
+		return "mob.slime.big";
 	}
 
 	@Override
