@@ -1836,9 +1836,6 @@ itemdesc.frame.prefix.bg=Подложка: %s
 itemdesc.frame.prefix.overlay=Покрытие: %s
 
 item.potion.satyr.name=Особое зелье сатиров
-item.potion.satyr.desc=Увеличивает скорость\n\
-	передвижения на 10% и скорость\n\
-	копания на 5% на 10 минут
 item.collectible.satyr.badge.name=Значок победителя сатиров
 item.collectible.satyr.horn.name=Обломанный рог сатира
 item.collectible.satyr.ear.name=Отсеченное ухо сатира

@@ -35,6 +35,7 @@ public class EntitySlime extends EntityLiving implements IMob {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		dataWatcher.addObject(16, new Byte((byte) 0));
 		setSlimeSize(1);
 	}
 

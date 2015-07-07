@@ -29,23 +29,23 @@ public class Item {
 	public static Item diamond = new Item(8).setIconCoord(7, 3).setItemName("emerald").setUndropable();
 	public static Item ingotIron = new Item(9).setIconCoord(7, 1).setItemName("ingotIron");
 	public static Item ingotGold = new Item(10).setIconCoord(7, 2).setItemName("ingotGold");
-	public static Item swordSteel = new ItemSword(11, EnumToolMaterial.IRON, 0.15f, 1.5f).setFixItem(ingotIron.shiftedIndex).setIconCoord(2, 4).setItemName("swordIron");
-	public static Item swordWood = new ItemSword(12, EnumToolMaterial.WOOD, 0.15f, 1.5f).setIconCoord(0, 4).setItemName("swordWood");
+	public static Item swordSteel = new ItemSword(11, EnumToolMaterial.IRON, 0.15f, 2f).setFixItem(ingotIron.shiftedIndex).setIconCoord(2, 4).setItemName("swordIron");
+	public static Item swordWood = new ItemSword(12, EnumToolMaterial.WOOD, 0.15f, 2f).setIconCoord(0, 4).setItemName("swordWood");
 	public static Item shovelWood = new ItemSpade(13, EnumToolMaterial.WOOD).setIconCoord(0, 5).setItemName("shovelWood");
 	public static Item pickaxeWood = new ItemPickaxe(14, EnumToolMaterial.WOOD).setIconCoord(0, 6).setItemName("pickaxeWood");
 	public static Item axeWood = new ItemAxe(15, EnumToolMaterial.WOOD).setIconCoord(0, 7).setItemName("hatchetWood").setUsable();
-	public static Item swordStone = new ItemSword(16, EnumToolMaterial.STONE, 0.15f, 1.5f).setIconCoord(1, 4).setItemName("swordStone");
+	public static Item swordStone = new ItemSword(16, EnumToolMaterial.STONE, 0.15f, 2f).setIconCoord(1, 4).setItemName("swordStone");
 	public static Item shovelStone = new ItemSpade(17, EnumToolMaterial.STONE).setIconCoord(1, 5).setItemName("shovelStone");
 	public static Item pickaxeStone = new ItemPickaxe(18, EnumToolMaterial.STONE).setIconCoord(1, 6).setItemName("pickaxeStone");
 	public static Item axeStone = new ItemAxe(19, EnumToolMaterial.STONE).setIconCoord(1, 7).setItemName("hatchetStone");
-	public static Item swordDiamond = new ItemSword(20, EnumToolMaterial.DIAMOND, 0.15f, 1.5f).setFixItem(3046).setIconCoord(3, 4).setItemName("swordDiamond");
+	public static Item swordDiamond = new ItemSword(20, EnumToolMaterial.DIAMOND, 0.15f, 2f).setFixItem(3046).setIconCoord(3, 4).setItemName("swordDiamond");
 	public static Item shovelDiamond = new ItemSpade(21, EnumToolMaterial.DIAMOND).setFixItem(3046).setIconCoord(3, 5).setItemName("shovelDiamond");
 	public static Item pickaxeDiamond = new ItemPickaxe(22, EnumToolMaterial.DIAMOND).setFixItem(3046).setIconCoord(3, 6).setItemName("pickaxeDiamond");
 	public static Item axeDiamond = new ItemAxe(23, EnumToolMaterial.DIAMOND).setFixItem(3046).setIconCoord(3, 7).setItemName("hatchetDiamond");
 	public static Item stick = new Item(24).setIconCoord(5, 3).setFull3D().setItemName("stick").setUsable();
 	public static Item bowlEmpty = new Item(25).setIconCoord(7, 4).setItemName("bowl");
 	public static Item bowlSoup = new ItemSoup(26, 8).setIconCoord(8, 4).setItemName("mushroomStew");
-	public static Item swordGold = new ItemSword(27, EnumToolMaterial.GOLD, 0.15f, 1.5f).setFixItem(ingotGold.shiftedIndex).setIconCoord(4, 4).setItemName("swordGold");
+	public static Item swordGold = new ItemSword(27, EnumToolMaterial.GOLD, 0.15f, 2f).setFixItem(ingotGold.shiftedIndex).setIconCoord(4, 4).setItemName("swordGold");
 	public static Item shovelGold = new ItemSpade(28, EnumToolMaterial.GOLD).setFixItem(ingotGold.shiftedIndex).setIconCoord(4, 5).setItemName("shovelGold");
 	public static Item pickaxeGold = new ItemPickaxe(29, EnumToolMaterial.GOLD).setFixItem(ingotGold.shiftedIndex).setIconCoord(4, 6).setItemName("pickaxeGold");
 	public static Item axeGold = new ItemAxe(30, EnumToolMaterial.GOLD).setFixItem(ingotGold.shiftedIndex).setIconCoord(4, 7).setItemName("hatchetGold");
@@ -275,7 +275,7 @@ public class Item {
 	
 	public static Item IVY_MOD = new Item(3187 - 256).setItemName("modIvy").setIconIndex(modivy);
 	public static Item IVY_STICK = new Item(3188 - 256).setItemName("ivyStick").setIconIndex(ivystick).setFull3D().setUsable();
-	public static Item IVY_DIAMONDSWORD = new ItemSword(3189 - 256, EnumToolMaterial.DIAMOND, 0.15f, 1.5f).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("ivyDiamondSword").setIconIndex(ivydiamondsword);
+	public static Item IVY_DIAMONDSWORD = new ItemSword(3189 - 256, EnumToolMaterial.DIAMOND, 0.15f, 2f).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("ivyDiamondSword").setIconIndex(ivydiamondsword);
 	public static Item IVY_DIAMONDSHOVEL = new ItemSpade(3190 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("ivyDiamondShovel").setIconIndex(ivydiamondshovel);
 	public static Item IVY_DIAMONDPICKAXE = new ItemPickaxe(3191 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("ivyDiamondPickaxe").setIconIndex(ivydiamondpickaxe);
 	public static Item IVY_DIAMONDAXE = new ItemAxe(3192 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("ivyDiamondAxe").setIconIndex(ivydiamondaxe);
@@ -349,7 +349,7 @@ public class Item {
 	public static final Item BANNER = new ItemBanner(4308 - 256, new String[] {"banner.satyr", "banner.slime"}, new int[] {banner_satyr, banner_slime});
 	public static final Item MODIFIER_BONE = new Item(4309 - 256).setItemName("modifier.bone").setIconIndex(modifier_bone);
 	public static final Item STICK_BONE = new ItemDecor(4310 - 256).setDecor(DecorItemQuality.IMPROOVED).setItemName("stick.bone").setIconIndex(stick_bone).setFull3D().setUsable();
-	public static final Item SWORD_DIAMOND_BONE = new ItemSword(4311 - 256, EnumToolMaterial.DIAMOND, 0.15f, 1.5f).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("sword.diamond.bone").setIconIndex(sword_diamond_bone).reverse().rotate();
+	public static final Item SWORD_DIAMOND_BONE = new ItemSword(4311 - 256, EnumToolMaterial.DIAMOND, 0.15f, 2f).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("sword.diamond.bone").setIconIndex(sword_diamond_bone).reverse().rotate();
 	public static final Item SHOVEL_DIAMOND_BONE = new ItemSpade(4312 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("shovel.diamond.bone").setIconIndex(shovel_diamond_bone);
 	public static final Item PICKAXE_DIAMOND_BONE = new ItemPickaxe(4313 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("pickaxe.diamond.bone").setIconIndex(pickaxe_diamond_bone);
 	public static final Item AXE_DIAMOND_BONE = new ItemAxe(4314 - 256, EnumToolMaterial.DIAMOND).setFixItem(3046).setDecor(DecorItemQuality.IMPROOVED).setItemName("axe.diamond.bone").setIconIndex(axe_diamond_bone);
@@ -362,8 +362,8 @@ public class Item {
 	public static final Item BOW_BONE = new ItemCherryBow(4321 - 256, 2.0f, 2.5f).setFixItem(bone.shiftedIndex).setDecor(DecorItemQuality.IMPROOVED).setActionIcons(new int[]{bow_bone_1, bow_bone_2, bow_bone_3}).setIconIndex(bow_bone).setItemName("bow.bone");
 	public static final Item BOW_WINNER_SATYR = new ItemCherryBow(4322 - 256, 2.0f, 2.5f).setFixItem(cherryStick.shiftedIndex).setDecor(DecorItemQuality.NAMED).setActionIcons(new int[]{bow_winner_satyr_1, bow_winner_satyr_2, bow_winner_satyr_3}).setIconIndex(bow_winner_satyr).setItemName("bow.winner.satyr");
 	public static final Item BOW_WINNER_BLACKSLIME = new ItemCherryBow(4323 - 256, 2.0f, 2.5f).setFixItem(cherryStick.shiftedIndex).setDecor(DecorItemQuality.NAMED).setActionIcons(new int[]{bow_winner_blackslime_1, bow_winner_blackslime_2, bow_winner_blackslime_3}).setIconIndex(bow_winner_blackslime).setItemName("bow.winner.blackslime");
-	public static final Item SWORD_WINNER_SATYR = new ItemSword(4324 - 256, EnumToolMaterial.DIAMOND, 0.15f, 1.5f).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.satyr").setIconIndex(sword_winner_satyr);
-	public static final Item SWORD_WINNER_BLACKSLIME = new ItemSword(4325 - 256, EnumToolMaterial.DIAMOND, 0.15f, 1.5f).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.blackslime").setIconIndex(sword_winner_blackslime);
+	public static final Item SWORD_WINNER_SATYR = new ItemSword(4324 - 256, EnumToolMaterial.DIAMOND, 0.15f, 2f).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.satyr").setIconIndex(sword_winner_satyr);
+	public static final Item SWORD_WINNER_BLACKSLIME = new ItemSword(4325 - 256, EnumToolMaterial.DIAMOND, 0.15f, 2f).setWeaponDamage(9).setFixItem(ingotIron.shiftedIndex).setDecor(DecorItemQuality.NAMED).setMaxDamage(500).setItemName("sword.winner.blackslime").setIconIndex(sword_winner_blackslime);
 	public static final Item GLOVES_LEATHER_SWORDSMAN = new ItemGloves(4346 - 256).setDefaultEffects(new Buff[] {Buff.CRITICAL_CHANCE_ARMOR}, new BuffEffect[] {new BuffEffect(BuffEffectType.CRITICAL_CHANCE, 1.5f)}).setItemName("gloves.leather.swordsman").setIconIndex(gloves_leather);
 	public static final Item GLOVES_LEATHER_ARCHER = new ItemGloves(4347 - 256).setDefaultEffects(new Buff[] {Buff.BOW_SPEED_ARMOR}, new BuffEffect[] {new BuffEffect(BuffEffectType.BOW_SPEED, 0.15f)}).setItemName("gloves.leather.archer").setIconIndex(gloves_leather);
 	
