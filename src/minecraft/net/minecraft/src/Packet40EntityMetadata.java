@@ -13,7 +13,7 @@ import java.util.List;
 public class Packet40EntityMetadata extends Packet {
 
 	public int entityId;
-	public List metadata;
+	public List<WatchableObject> metadata;
 
 	public Packet40EntityMetadata() {
 	}
@@ -40,7 +40,7 @@ public class Packet40EntityMetadata extends Packet {
 		return 5;
 	}
 
-	public List getMetadata() {
+	public List<WatchableObject> getMetadata() {
 		return metadata;
 	}
 }

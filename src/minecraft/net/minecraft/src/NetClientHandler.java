@@ -12,8 +12,9 @@ import org.greencubes.launcher.util.Util;
 import org.greencubes.nbt.NBTWorker;
 import org.greencubes.util.ChatColor;
 
+import com.jme3.math.ColorRGBA;
+
 import net.lahwran.wecui.CuboidRegion;
-import net.lahwran.wecui.WorldEditCUI;
 import net.minecraft.client.Minecraft;
 
 public class NetClientHandler extends NetHandler {
@@ -34,8 +35,6 @@ public class NetClientHandler extends NetHandler {
 	protected Random rand = new Random();
 	public String connectionStatus = "Устанавливаю соединение";
 	public int chunksRecieved = 0;
-
-	private WorldEditCUI wCuiInstance;
 
 	public ReplayWriter replay;
 	public boolean canFly = false;
@@ -144,6 +143,16 @@ public class NetClientHandler extends NetHandler {
 			} catch(IOException e) {
 				throw new RuntimeException(e);
 			}
+		} else if(packet.type == Packet212MultiData.GREETINGS) {
+			ColorRGBA color;
+			if(packet.data.length != 12)
+				color = new ColorRGBA(1.0f, 0.6f, 0.0f, 1.0f);
+			else
+				color = new ColorRGBA(Float.intBitsToFloat((packet.data[0] << 24) | (packet.data[1] << 16) | (packet.data[2] << 8) | packet.data[3]),
+						Float.intBitsToFloat((packet.data[4] << 24) | (packet.data[5] << 16) | (packet.data[6] << 8) | packet.data[7]),
+						Float.intBitsToFloat((packet.data[8] << 24) | (packet.data[9] << 16) | (packet.data[10] << 8) | packet.data[11]),
+						1.0f);
+			mc.ingameGUI.setGreetingsMessage(packet.destination, color);
 		}
 	}
 
@@ -718,7 +727,7 @@ public class NetClientHandler extends NetHandler {
 		entityliving.setPositionAndRotation(d, d1, d2, f, f1);
 		entityliving.isMultiplayerEntity = true;
 		worldClient.addEntityWithId(packet24mobspawn.entityId, entityliving);
-		List list = packet24mobspawn.getMetadata();
+		List<WatchableObject> list = packet24mobspawn.getMetadata();
 		if(list != null) {
 			entityliving.getDataWatcher().updateWatchedObjectsFromList(list);
 		}

@@ -51,6 +51,17 @@ public class Packet212MultiData extends Packet {
 	 * <p><b>data</b> — party update data in gzipped NBT binary.</p>
 	 */
 	public static final int PARTY = 4;
+	/**
+	 * <p><b>destination</b> — not used (always empty)</p>
+	 * <p><b>data</b> - gziped NBT binary of player's journal's change.</p>
+	 */
+	public static final int JOURNAL = 5;
+	/**
+	 * <p><b>destination</b> — string to apper on user's screen</p>
+	 * <p><b>data</b> — <code>3 floats</code> for color or <color>nothing</color>
+	 * for default color</p>
+	 */
+	public static final int GREETINGS = 6;
 
 	public int type;
 	public String destination;

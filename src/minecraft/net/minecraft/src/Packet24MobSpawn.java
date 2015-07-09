@@ -21,7 +21,7 @@ public class Packet24MobSpawn extends Packet {
 	public byte yaw;
 	public byte pitch;
 	private DataWatcher metaData;
-	private List receivedMetadata;
+	private List<WatchableObject> receivedMetadata;
 
 	public Packet24MobSpawn() {
 	}
@@ -76,7 +76,7 @@ public class Packet24MobSpawn extends Packet {
 		return 20;
 	}
 
-	public List getMetadata() {
+	public List<WatchableObject> getMetadata() {
 		return receivedMetadata;
 	}
 }

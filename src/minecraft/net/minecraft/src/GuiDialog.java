@@ -5,6 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Mouse;
@@ -335,6 +336,7 @@ public class GuiDialog extends GuiScreen {
 			} else if(c == BR) {
 				isParagraph = true;
 			} else if(c.type == RenderContentType.TEXT) {
+				@SuppressWarnings("unchecked")
 				List<String> lines = (List<String>) c.content;
 				for(int i1 = 0; i1 < lines.size(); ++i1) {
 					float space = 0.0f;

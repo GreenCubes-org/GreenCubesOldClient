@@ -123,11 +123,11 @@ public class DataWatcher {
 		}
 	}
 
-	public static List readWatchableObjects(DataInputStream datainputstream) throws IOException {
-		ArrayList arraylist = null;
+	public static List<WatchableObject> readWatchableObjects(DataInputStream datainputstream) throws IOException {
+		ArrayList<WatchableObject> arraylist = null;
 		for(byte byte0 = datainputstream.readByte(); byte0 != 127; byte0 = datainputstream.readByte()) {
 			if(arraylist == null)
-				arraylist = new ArrayList();
+				arraylist = new ArrayList<WatchableObject>();
 			int i = (byte0 & 0xe0) >> 5;
 			int j = byte0 & 0x1f;
 			WatchableObject watchableobject = null;

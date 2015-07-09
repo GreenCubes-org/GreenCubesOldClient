@@ -5,8 +5,6 @@
 package net.minecraft.src;
 
 import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.list.TIntList;
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.THashMap;
 
 import java.awt.Color;
@@ -25,17 +23,13 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-// Referenced classes of package net.minecraft.src:
-//            Gui, ScaledResolution, EntityRenderer, EntityPlayerSP, 
-//            InventoryPlayer, GameSettings, ItemStack, Block, 
-//            Potion, PlayerController, RenderEngine, FoodStats, 
-//            World, WorldInfo, Material, RenderHelper, 
-//            FontRenderer, MathHelper, GuiChat, ChatLine, 
-//            EntityClientPlayerMP, KeyBinding, NetClientHandler, GuiSavingLevelString, 
-//            RenderDragon, EntityDragon, Tessellator, BlockPortal, 
-//            RenderItem, StringTranslate
+import com.jme3.math.ColorRGBA;
 
 public class GuiIngame extends Gui {
+	
+	private static final long GREETINGS_APPEAR_TIME = 1000L;
+	private static final long GREETINGS_FADE_TIME = 1000L;
+	private static final long GREETINGS_TIME = 5000L;
 
 	private static RenderItem itemRenderer = RenderItem.getInstance();
 	private Random rand = new Random();
@@ -47,7 +41,7 @@ public class GuiIngame extends Gui {
 	private boolean recordIsPlaying = false;
 	public float damageGuiPartialTime;
 	float prevVignetteBrightness = 1.0F;
-	public ArrayList chatMessageList = new ArrayList(); // Мы таскаем это дерьмо для совместимости с каким-то дерьмом...
+	public ArrayList<?> chatMessageList = new ArrayList<Object>(); // Мы таскаем это дерьмо для совместимости с каким-то дерьмом...
 
 	// GreenCubes Chat start
 	private boolean clickedOnMove = false;
@@ -62,30 +56,25 @@ public class GuiIngame extends Gui {
 	public GCNotify newNotify;
 	// GreenCubes end
 
-	private TIntList freeLists = new TIntArrayList();
-
-	private int savedUpdateCounter = -1;
-	private int renderList = -1;
-
 	public final Map<String, String> questData = new THashMap<String, String>();
 	
 	public ItemStack itemStackDescription;
+	
+	private String greetingsMessage;
+	private long greetingsStart;
+	private ColorRGBA greetingsColor;
 
 	public GuiIngame(Minecraft minecraft) {
 		mc = minecraft;
 	}
+	
+	public void setGreetingsMessage(String message, ColorRGBA baseColor) {
+		greetingsMessage = message;
+		greetingsStart = System.currentTimeMillis();
+		greetingsColor = baseColor;
+	}
 
 	public void renderGameOverlay(float f, boolean flag, int i, int j) {
-		/*if(renderList >= 0 && savedUpdateCounter == updateCounter) {
-			Profiler.startSection("Hit");
-			GL11.glCallList(renderList);
-			Profiler.endSection();
-			return;
-		}
-		savedUpdateCounter = updateCounter;
-		if(renderList < 0)
-			renderList = GL11.glGenLists(1);
-		GL11.glNewList(renderList, GL11.GL_COMPILE_AND_EXECUTE);*/
 		ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 		int k = scaledresolution.getScaledWidth();
 		int l = scaledresolution.getScaledHeight();
@@ -107,6 +96,24 @@ public class GuiIngame extends Gui {
 			float f1 = mc.thePlayer.prevTimeInPortal + (mc.thePlayer.timeInPortal - mc.thePlayer.prevTimeInPortal) * f;
 			if(f1 > 0.0F)
 				renderPortalOverlay(f1, k, l);
+		}
+		
+		if(greetingsMessage != null) {
+			int mw = fontrenderer.getStringWidth(greetingsMessage) / 2;
+			GL11.glPushMatrix();
+			GL11.glScalef(2, 2, 1);
+			if(greetingsStart + GREETINGS_APPEAR_TIME > System.currentTimeMillis()) {
+				greetingsColor.a = (float) (System.currentTimeMillis() - greetingsStart) / (float) GREETINGS_APPEAR_TIME * 0.9f + 0.1f;
+			} else if(greetingsStart + GREETINGS_APPEAR_TIME + GREETINGS_TIME > System.currentTimeMillis()) {
+				// Nothing
+			} else if(greetingsStart + GREETINGS_APPEAR_TIME + GREETINGS_TIME + GREETINGS_FADE_TIME > System.currentTimeMillis()) {
+				greetingsColor.a = 1f - (float) (System.currentTimeMillis() - greetingsStart - GREETINGS_APPEAR_TIME - GREETINGS_TIME) / (float) GREETINGS_FADE_TIME * 0.9f;
+			} else {
+				greetingsMessage = null;
+			}
+			if(greetingsMessage != null)
+				fontrenderer.drawStringWithShadow(greetingsMessage, k / 4 - mw, 15, greetingsColor.asIntARGB());
+			GL11.glPopMatrix();
 		}
 		
 		String[] renderTooltip = null;
@@ -585,7 +592,6 @@ public class GuiIngame extends Gui {
 			GL11.glPopMatrix();
 			Profiler.endSection();
 		}
-		//GL11.glEndList();
 	}
 
 	public void renderBuff(BuffActive buff, int x, int y) {
