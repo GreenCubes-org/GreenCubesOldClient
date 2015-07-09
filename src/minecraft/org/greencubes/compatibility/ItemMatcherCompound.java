@@ -80,7 +80,7 @@ public class ItemMatcherCompound implements IItemMatcher {
 	public NBTTagCompound toNBTTag(NBTTagCompound target) {
 		if(target == null)
 			target = new NBTTagCompound();
-		target.setByte("type", (byte) IItemMatcher.MATCHER_COMPOUND);
+		target.setByte("type", IItemMatcher.MATCHER_COMPOUND);
 		target.setString("n", name);
 		NBTTagList list = new NBTTagList();
 		for(int i = 0; i < matchers.length; ++i)

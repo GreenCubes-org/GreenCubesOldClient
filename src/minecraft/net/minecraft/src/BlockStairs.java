@@ -41,7 +41,7 @@ public class BlockStairs extends Block implements IBlockMadeOf {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
 		if(this.field_72156_cr) {
-			this.setBlockBounds(0.5F * (float) (this.field_72160_cs % 2), 0.5F * (float) (this.field_72160_cs / 2 % 2), 0.5F * (float) (this.field_72160_cs / 4 % 2), 0.5F + 0.5F * (float) (this.field_72160_cs % 2), 0.5F + 0.5F * (float) (this.field_72160_cs / 2 % 2), 0.5F + 0.5F * (float) (this.field_72160_cs / 4 % 2));
+			this.setBlockBounds(0.5F * (this.field_72160_cs % 2), 0.5F * (this.field_72160_cs / 2 % 2), 0.5F * (this.field_72160_cs / 4 % 2), 0.5F + 0.5F * (this.field_72160_cs % 2), 0.5F + 0.5F * (this.field_72160_cs / 2 % 2), 0.5F + 0.5F * (this.field_72160_cs / 4 % 2));
 		} else {
 			this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		}
@@ -445,6 +445,7 @@ public class BlockStairs extends Block implements IBlockMadeOf {
 	/**
 	 * if the specified block is in the given AABB, add its collision bounding box to the given list
 	 */
+	@Override
 	public void getCollidingBoundingBoxes(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, ArrayList par6List) {
 		this.func_82541_d(par1World, par2, par3, par4);
 		super.getCollidingBoundingBoxes(par1World, par2, par3, par4, par5AxisAlignedBB, par6List);

@@ -5752,8 +5752,8 @@ public class RenderBlocks {
 	}
 
 	private int mixAoBrightness(int topLeft, int topRight, int bottomLeft, int bottomRight, double topLeftPart, double topRightPart, double bottomRightPart, double bottomLeftPart) {
-		int var13 = (int) ((double) (topLeft >> 16 & 255) * topLeftPart + (double) (topRight >> 16 & 255) * topRightPart + (double) (bottomLeft >> 16 & 255) * bottomRightPart + (double) (bottomRight >> 16 & 255) * bottomLeftPart) & 255;
-		int var14 = (int) ((double) (topLeft & 255) * topLeftPart + (double) (topRight & 255) * topRightPart + (double) (bottomLeft & 255) * bottomRightPart + (double) (bottomRight & 255) * bottomLeftPart) & 255;
+		int var13 = (int) ((topLeft >> 16 & 255) * topLeftPart + (topRight >> 16 & 255) * topRightPart + (bottomLeft >> 16 & 255) * bottomRightPart + (bottomRight >> 16 & 255) * bottomLeftPart) & 255;
+		int var14 = (int) ((topLeft & 255) * topLeftPart + (topRight & 255) * topRightPart + (bottomLeft & 255) * bottomRightPart + (bottomRight & 255) * bottomLeftPart) & 255;
 		return var13 << 16 | var14;
 	}
 

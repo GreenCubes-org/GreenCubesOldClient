@@ -7,9 +7,6 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.NVOcclusionQuery;
 
 // Referenced classes of package net.minecraft.src:
 //            TileEntitySpecialRenderer, SignModel, TileEntitySign, Block, 

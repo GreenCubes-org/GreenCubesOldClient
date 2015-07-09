@@ -2,24 +2,13 @@ package org.greencubes.items.unique;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.set.TIntSet;
-import gnu.trove.set.hash.TIntHashSet;
-
 import java.util.List;
-import java.util.Random;
-
 import net.minecraft.src.Block;
 import net.minecraft.src.GCUtil;
 import net.minecraft.src.InventoryCrafting;
 import net.minecraft.src.Item;
-import net.minecraft.src.ItemWearable;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.ItemTool;
-import net.minecraft.src.NBTBase;
 import net.minecraft.src.NBTTagCompound;
-import net.minecraft.src.NBTTagDouble;
-import net.minecraft.src.NBTTagFloat;
-
 import org.greencubes.util.HSVColor;
 import org.greencubes.util.collections.FastList;
 

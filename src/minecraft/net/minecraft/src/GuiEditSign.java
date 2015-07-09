@@ -4,8 +4,6 @@
 
 package net.minecraft.src;
 
-import java.util.List;
-import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 

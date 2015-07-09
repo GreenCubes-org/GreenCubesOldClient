@@ -8,7 +8,6 @@ import org.greencubes.nbt.NBTTagCompound;
 import org.greencubes.nbt.NBTTagList;
 import org.greencubes.util.Util;
 
-import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IBlockAccess;
 import net.minecraft.src.ItemStack;

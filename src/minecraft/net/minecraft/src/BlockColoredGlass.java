@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import org.greencubes.util.HSVColor;
-import org.greencubes.util.RGBUtils;
 
 public class BlockColoredGlass extends BlockGlassNew {
 

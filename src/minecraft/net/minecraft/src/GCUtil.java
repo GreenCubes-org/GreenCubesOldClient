@@ -11,8 +11,6 @@ import java.util.Calendar;
 import java.util.Random;
 import java.util.Scanner;
 
-import org.greencubes.compatibility.IItemMatcher;
-
 public class GCUtil {
 
 	public static final DateFormat fileDateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");

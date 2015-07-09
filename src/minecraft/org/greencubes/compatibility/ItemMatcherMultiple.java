@@ -67,7 +67,7 @@ public class ItemMatcherMultiple implements IItemMatcher {
 	public NBTTagCompound toNBTTag(NBTTagCompound target) {
 		if(target == null)
 			target = new NBTTagCompound();
-		target.setByte("type", (byte) IItemMatcher.MATCHER_MULTIPLE);
+		target.setByte("type", IItemMatcher.MATCHER_MULTIPLE);
 		target.setString("n", name);
 		NBTTagList list = new NBTTagList();
 		for(int i = 0; i < matchers.length; ++i)

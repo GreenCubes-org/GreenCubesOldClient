@@ -9,11 +9,7 @@ import gnu.trove.map.TIntIntMap;
 import gnu.trove.map.hash.TIntIntHashMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
-
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 

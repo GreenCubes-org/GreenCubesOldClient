@@ -4,12 +4,10 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.net.*;
 import java.util.*;
 
 import org.greencubes.compatibility.BlockDurabilityFactory;
-import org.greencubes.downloader.Downloader;
 import org.greencubes.launcher.util.Util;
 import org.greencubes.nbt.NBTWorker;
 import org.greencubes.util.ChatColor;
@@ -112,10 +110,10 @@ public class NetClientHandler extends NetHandler {
 	
 	@Override
 	public void handleMultiData(Packet212MultiData packet) {
-		if(packet.type == 0) {
+		if(packet.type == Packet212MultiData.ACTIVE_QUESTS) {
 			// Quests
 			try {
-				String data = Packet212MultiData.ByteArrayToUTF16(packet.data);
+				String data = Packet212MultiData.byteArrayToUTF16(packet.data);
 				if(data == null) {
 					if(packet.destination.equals("all"))
 						mc.ingameGUI.questData.clear();
@@ -126,10 +124,10 @@ public class NetClientHandler extends NetHandler {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-		} else if(packet.type == 1) {
+		} else if(packet.type == Packet212MultiData.ENTITY_STATUS_LINE) {
 			// Entity Statuses
 			try {
-				String data = Packet212MultiData.ByteArrayToUTF16(packet.data);
+				String data = Packet212MultiData.byteArrayToUTF16(packet.data);
 				if(data == null) {
 					if(packet.destination.equals("all"))
 						entityStatus.clear();
@@ -140,7 +138,7 @@ public class NetClientHandler extends NetHandler {
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
-		} else if(packet.type == 3) {
+		} else if(packet.type == Packet212MultiData.DURABILITY) {
 			try {
 				BlockDurabilityFactory.loadFromTag(NBTWorker.fromGZIPArray(packet.data));
 			} catch(IOException e) {

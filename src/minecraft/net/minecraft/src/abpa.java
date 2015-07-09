@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +9,6 @@ import java.util.Scanner;
 import net.minecraft.client.Minecraft;
 
 import org.greencubes.downloader.Downloader;
-import org.greencubes.launcher.Main;
 
 public class abpa extends Thread {
 
@@ -80,7 +78,7 @@ public class abpa extends Thread {
 				 */
 				//long start = System.currentTimeMillis();
 				try {
-					Class c;
+					Class<?> c;
 					try {
 						c = Class.forName("net.minecraft.src.Packet221ConnectionReady");
 					} catch (Exception e) {

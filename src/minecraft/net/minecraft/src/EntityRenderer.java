@@ -1,19 +1,14 @@
 package net.minecraft.src;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.Random;
-
-import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.GLU;
 

@@ -64,7 +64,7 @@ public class ItemMatcherDamageable implements IItemMatcher {
 	public NBTTagCompound toNBTTag(NBTTagCompound target) {
 		if(target == null)
 			target = new NBTTagCompound();
-		target.setByte("type", (byte) IItemMatcher.MATCHER_DAMAGEABLE);
+		target.setByte("type", IItemMatcher.MATCHER_DAMAGEABLE);
 		target.setString("n", name);
 		target.setShort("id", (short) id);
 		return target;

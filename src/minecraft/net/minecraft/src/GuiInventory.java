@@ -6,8 +6,6 @@ package net.minecraft.src;
 
 import gnu.trove.iterator.TIntObjectIterator;
 
-import java.util.*;
-
 import net.minecraft.client.Minecraft;
 
 import org.greencubes.gui.FancyGUI;

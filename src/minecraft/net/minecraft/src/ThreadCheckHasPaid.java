@@ -4,8 +4,6 @@
 
 package net.minecraft.src;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:

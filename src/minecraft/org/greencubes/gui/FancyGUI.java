@@ -2,8 +2,6 @@ package org.greencubes.gui;
 
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
-
 import org.lwjgl.opengl.GL11;
 
 import com.jme3.math.ColorRGBA;
@@ -12,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderEngine;
-import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.Tessellator;
 
 public class FancyGUI {
@@ -44,8 +41,8 @@ public class FancyGUI {
 			// We do not read actual texture size to allow gentle texture packs modifications
 			//textureWidth = interfaceTexture.getWidth();
 			//textureHeight = interfaceTexture.getHeight();
-			texturePixelWidth = 1f / (float) textureWidth;
-			texturePixelHeight = 1f / (float) textureHeight;
+			texturePixelWidth = 1f / textureWidth;
+			texturePixelHeight = 1f / textureHeight;
 			textureId = renderEngine.allocateAndSetupTexture(interfaceTexture);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
@@ -167,10 +164,10 @@ public class FancyGUI {
 	}
 	
 	private void renderImage(float x, float y, float w, float h, int srcX, int srcY, int srcW, int srcH, ColorRGBA color) {
-		float startX = (float) srcX * texturePixelWidth;
-		float startY = (float) srcY * texturePixelHeight;
-		float endX = startX + (float) srcW * texturePixelWidth;
-		float endY = startY + (float) srcH * texturePixelHeight;
+		float startX = srcX * texturePixelWidth;
+		float startY = srcY * texturePixelHeight;
+		float endX = startX + srcW * texturePixelWidth;
+		float endY = startY + srcH * texturePixelHeight;
 		float f1 = 1f - startY;
 		startY = 1f - endY;
 		endY = f1;

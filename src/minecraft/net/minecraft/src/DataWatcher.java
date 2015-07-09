@@ -43,23 +43,23 @@ public class DataWatcher {
 	}
 
 	public byte getWatchableObjectByte(int i) {
-		return ((Byte) ((WatchableObject) watchedObjects.get(i)).getObject()).byteValue();
+		return ((Byte) watchedObjects.get(i).getObject()).byteValue();
 	}
 
 	public short func_41062_b(int i) {
-		return ((Short) ((WatchableObject) watchedObjects.get(i)).getObject()).shortValue();
+		return ((Short) watchedObjects.get(i).getObject()).shortValue();
 	}
 
 	public int getWatchableObjectInt(int i) {
-		return ((Integer) ((WatchableObject) watchedObjects.get(i)).getObject()).intValue();
+		return ((Integer) watchedObjects.get(i).getObject()).intValue();
 	}
 
 	public String getWatchableObjectString(int i) {
-		return (String) ((WatchableObject) watchedObjects.get(i)).getObject();
+		return (String) watchedObjects.get(i).getObject();
 	}
 
 	public void updateObject(int i, Object obj) {
-		WatchableObject watchableobject = (WatchableObject) watchedObjects.get(i);
+		WatchableObject watchableobject = watchedObjects.get(i);
 		if(!obj.equals(watchableobject.getObject())) {
 			watchableobject.setObject(obj);
 			watchableobject.setWatching(true);
@@ -181,7 +181,7 @@ public class DataWatcher {
 	}
 
 	public ItemStack getWatchableObjectItemStack(int i) {
-		return (ItemStack) ((WatchableObject) watchedObjects.get(i)).getObject();
+		return (ItemStack) watchedObjects.get(i).getObject();
 	}
 
 	static {

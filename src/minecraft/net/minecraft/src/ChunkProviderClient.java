@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-
 import java.util.Arrays;
 import java.util.List;
 

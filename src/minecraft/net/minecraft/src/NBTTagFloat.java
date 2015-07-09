@@ -86,7 +86,7 @@ public class NBTTagFloat extends NBTBase implements NBTTagNumber {
 
 	@Override
 	public float getFloatValue() {
-		return (float) floatValue;
+		return floatValue;
 	}
 
 	@Override

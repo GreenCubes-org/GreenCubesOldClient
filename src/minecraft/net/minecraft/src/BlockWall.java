@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import java.util.List;
-
 public class BlockWall extends Block {
 
 	public BlockWall(int par1, Block source) {

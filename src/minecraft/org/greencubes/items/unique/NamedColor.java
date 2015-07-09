@@ -1,20 +1,11 @@
 package org.greencubes.items.unique;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-
 import net.minecraft.src.GCUtil;
 
 import org.greencubes.util.HSVColor;
 import org.greencubes.util.RGBUtils;
-import org.greencubes.util.collections.FastList;
-
 import gnu.trove.map.TFloatObjectMap;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.TMap;

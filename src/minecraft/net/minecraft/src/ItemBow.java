@@ -5,8 +5,6 @@
 package net.minecraft.src;
 
 import java.util.List;
-import java.util.Random;
-
 import org.greencubes.items.unique.DecorItemQuality;
 
 public class ItemBow extends Item {

@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.greencubes.util.Util;
 import org.greencubes.util.collections.FastList;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 public class NBTTagList extends NBTBase {
 	

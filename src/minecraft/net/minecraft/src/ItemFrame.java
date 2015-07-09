@@ -2,7 +2,6 @@ package net.minecraft.src;
 
 import static net.minecraft.src.GreenTextures.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.greencubes.util.collections.FastList;
@@ -72,6 +71,7 @@ public class ItemFrame extends Item {
 		return new FastList<ItemStack>(items[source.getItemDamage() % items.length]);
 	}
 	
+	@Override
 	public void init() {
 		for(int i = 0; i < textures.length; ++i) {
 			ItemStack[] list = new ItemStack[2];

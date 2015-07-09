@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.*;
 
 import org.greencubes.util.collections.FastList;
-import org.greencubes.util.collections.SquareMap;
 
 // Referenced classes of package net.minecraft.src:
 //            IChunkProvider, LongHashMap, EmptyChunk, World, 
@@ -140,7 +139,7 @@ public class ChunkProvider implements IChunkProvider {
 	public boolean saveChunks(boolean flag, IProgressUpdate iprogressupdate) {
 		int i = 0;
 		for(int j = 0; j < chunkList.size(); j++) {
-			Chunk chunk = (Chunk) chunkList.get(j);
+			Chunk chunk = chunkList.get(j);
 			if(flag && !chunk.neverSave) {
 				unloadAndSaveChunkData(chunk);
 			}
@@ -182,7 +181,7 @@ public class ChunkProvider implements IChunkProvider {
 				field_35392_h = 0;
 				break;
 			}
-			Chunk chunk = (Chunk) chunkList.get(field_35392_h++);
+			Chunk chunk = chunkList.get(field_35392_h++);
 			EntityPlayer entityplayer = worldObj.getClosestPlayer((chunk.xPosition << 4) + 8D, 64D, (chunk.zPosition << 4) + 8D, 288D);
 			if(entityplayer == null) {
 				dropChunk(chunk.xPosition, chunk.zPosition);

@@ -7,12 +7,9 @@ package net.minecraft.src;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.IntBuffer;
-import java.nio.charset.Charset;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-
-import net.minecraft.client.Minecraft;
 
 import org.lwjgl.opengl.GL11;
 

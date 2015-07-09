@@ -7,9 +7,6 @@ package net.minecraft.src;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
-import java.util.HashMap;
-import java.util.Map;
-
 // Referenced classes of package net.minecraft.src:
 //            Block, ItemStack, Item
 

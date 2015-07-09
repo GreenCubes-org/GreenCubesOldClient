@@ -61,12 +61,12 @@ public class NBTTagInt extends NBTBase implements NBTTagNumber {
 	
 	@Override
 	public int getIntValue() {
-		return (int) intValue;
+		return intValue;
 	}
 
 	@Override
 	public long getLongValue() {
-		return (long) intValue;
+		return intValue;
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class NBTTagInt extends NBTBase implements NBTTagNumber {
 
 	@Override
 	public float getFloatValue() {
-		return (float) intValue;
+		return intValue;
 	}
 
 	@Override

@@ -11,7 +11,6 @@ import gnu.trove.map.hash.THashMap;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 
 import org.greencubes.gui.FancyGUI;
-import org.greencubes.util.ChatColor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;

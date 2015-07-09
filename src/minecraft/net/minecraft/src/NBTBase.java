@@ -165,6 +165,7 @@ public abstract class NBTBase {
 		return "UNKNOWN";
 	}
 
+	@Override
 	public abstract NBTBase clone();
 
 	public abstract String dump();

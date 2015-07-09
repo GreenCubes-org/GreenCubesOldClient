@@ -5,7 +5,6 @@
 package net.minecraft.src;
 
 import java.io.*;
-import java.util.zip.DeflaterInputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;

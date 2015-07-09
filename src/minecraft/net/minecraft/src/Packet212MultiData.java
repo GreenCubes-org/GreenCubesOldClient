@@ -5,6 +5,52 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Packet212MultiData extends Packet {
+	
+	/**
+	 * <p><b>destination</b> — quest name (used internaly)</p>
+	 * <p><b>data</b> — quest line</p>
+	 * 
+	 * <p>If <b>data</b> is empty (null string) — clears quest info.
+	 * If <b>destination</b> is <i>all</i>, clears all quests info.</p>
+	 */
+	public static final int ACTIVE_QUESTS = 0;
+	/**
+	 * <p><b>destination</b> — string representation of entity id</p>
+	 * <p><b>data</b> — status line, displayed under given entity</p>
+	 * 
+	 * <p>If <b>data</b> is empty (null string) — clears line.
+	 * If <b>destination</b> is <i>all</i>, clears from all entities.</p>
+	 * 
+	 * <p>This packet CAN be sent even if entity is not spawned yet and
+	 * status line should not be forgotten on entity respawn.</p>
+	 */
+	public static final int ENTITY_STATUS_LINE = 1;
+	
+	/**
+	 * <p><b>destination</b> — not used (always empty)</p>
+	 * <p><b>data</b>:<br>
+	 * - from client to server: SHA1 hash (40 bytes array) of current recipes list
+	 * or null (empty array) if no recipes cached.<br>
+	 * - from server to client: recipes list in gzipped NBT binary.</p>
+	 */
+	public static final int CRAFT = 2;
+	
+	/**
+	 * <p><b>destination</b> — not used (always empty)</p>
+	 * <p><b>data</b>:<br>
+	 * - from client to server: SHA1 hash (40 bytes array) of current durability list
+	 * or null (empty array) if no recipes cached.<br>
+	 * - from server to client: durability list in gzipped NBT binary.</p>
+	 */
+	public static final int DURABILITY = 3;
+	/**
+	 * <p><b>destination</b>:<br>
+	 * - <code>party</code> for updating status of player's party.<br>
+	 * - <code>lang key</code> to update status of additional party where
+	 * destination is lang key of additional party name.</p>
+	 * <p><b>data</b> — party update data in gzipped NBT binary.</p>
+	 */
+	public static final int PARTY = 4;
 
 	public int type;
 	public String destination;
@@ -63,11 +109,11 @@ public class Packet212MultiData extends Packet {
 		return out;
 	}
 
-	public static String ByteArrayToUTF16(byte[] array) throws IOException {
-		return ByteArrayToUTF16(array, 500);
+	public static String byteArrayToUTF16(byte[] array) throws IOException {
+		return byteArrayToUTF16(array, 500);
 	}
 
-	public static String ByteArrayToUTF16(byte[] array, int maxLength) throws IOException {
+	public static String byteArrayToUTF16(byte[] array, int maxLength) throws IOException {
 		if(array.length == 0)
 			return null;
 		short size = (short) (((array[0] & 0xFF) << 8) | (array[1] & 0xFF));

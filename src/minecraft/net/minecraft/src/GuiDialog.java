@@ -5,9 +5,6 @@ import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.minecraft.client.Minecraft;
 
 import org.lwjgl.input.Mouse;
@@ -304,8 +301,8 @@ public class GuiDialog extends GuiScreen {
 				if(c.type == RenderContentType.ITEM) {
 					ItemStack item = (ItemStack) c.content;
 					if(item != null) {
-						int w = (int) (((hasItem ? 245 : 22) + 6) / 2);
-						int h = (int) ((48 + c.heightPosition) / 2);
+						int w = ((hasItem ? 245 : 22) + 6) / 2;
+						int h = (48 + c.heightPosition) / 2;
 						itemRenderer.renderItemIntoGUI(font, mc.renderEngine, item, w, h);
 						itemRenderer.renderItemOverlayIntoGUI(font, mc.renderEngine, item, w, h);
 					}
@@ -348,16 +345,16 @@ public class GuiDialog extends GuiScreen {
 						spaces = GCUtil.count(lines.get(i1), ' ');
 						space = (float) (reqWidth - width) / spaces;
 					}*/
-					font.renderString(lines.get(i1), (int) ((isParagraph ? 22 + paragraphPadding : 22) / 2), (int) ((43 - 4 + c.heightPosition + 2) / 2 + i1 * 10), 0, false, space, spaces);
+					font.renderString(lines.get(i1), (isParagraph ? 22 + paragraphPadding : 22) / 2, (43 - 4 + c.heightPosition + 2) / 2 + i1 * 10, 0, false, space, spaces);
 					isParagraph = false;
 				}
 			}
 		}
 		if(buttonsOnAllPages || nextContent <= startContent) {
 			if(showOk || timer != -1)
-				font.drawString(accept, (int) ((243 + 12 + 27) / 2), (int) ((43 + height - 4 + 15 + 11) / 2), 0x292929);
+				font.drawString(accept, (243 + 12 + 27) / 2, (43 + height - 4 + 15 + 11) / 2, 0x292929);
 			if(showCancel)
-				font.drawString(decline, (int) ((52 + 12 + 26) / 2), (int) ((43 + height - 4 + 15 + 11) / 2), 0x292929);
+				font.drawString(decline, (52 + 12 + 26) / 2, (43 + height - 4 + 15 + 11) / 2, 0x292929);
 		}
 
 		GL11.glPopMatrix();

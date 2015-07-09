@@ -7,14 +7,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.NetworkInterface;
 import java.text.DecimalFormat;
@@ -25,8 +22,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
-
 import javax.imageio.ImageIO;
 
 import net.minecraft.src.*;
@@ -34,11 +29,9 @@ import net.minecraft.src.*;
 import org.greencubes.executor.IInvokeable;
 import org.greencubes.executor.Task;
 import org.greencubes.executor.TaskWithResult;
-import org.greencubes.party.Party;
 import org.greencubes.util.MacOSX;
 import org.greencubes.util.Util;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Controllers;
@@ -49,11 +42,6 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
-
-import com.jacob.activeX.ActiveXComponent;
-import com.jacob.com.ComThread;
-import com.jacob.com.EnumVariant;
-import com.jacob.com.Variant;
 
 public abstract class Minecraft implements Runnable {
 

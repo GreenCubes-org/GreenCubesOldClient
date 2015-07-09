@@ -1119,7 +1119,7 @@ public class Block {
 	public float getDiggDamage(EntityPlayer player, long timeDelay, int blockData) {
 		if(baseBreakTime == 0)
 			return 0;
-		return (float) timeDelay / getBreakTime(player, blockData) * getBreakMultipler(player, blockData);
+		return timeDelay / getBreakTime(player, blockData) * getBreakMultipler(player, blockData);
 	}
 
 	protected float getBreakTime(EntityPlayer player, int blockData) {

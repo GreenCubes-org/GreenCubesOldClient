@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Client</name>
+	<name>OldClient</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -33,7 +33,7 @@
 	</linkedResources>
 	<filteredResources>
 		<filter>
-			<id>1307293455427</id>
+			<id>0</id>
 			<name>jars</name>
 			<type>13</type>
 			<matcher>
@@ -42,7 +42,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1307305288908</id>
+			<id>0</id>
 			<name>start</name>
 			<type>13</type>
 			<matcher>
@@ -51,7 +51,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1307293504507</id>
+			<id>0</id>
 			<name>jars/bin</name>
 			<type>5</type>
 			<matcher>
@@ -60,7 +60,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1307293480435</id>
+			<id>0</id>
 			<name>jars/bin/natives</name>
 			<type>6</type>
 			<matcher>
@@ -72,7 +72,7 @@
 	<variableList>
 		<variable>
 			<name>MCP_LOC</name>
-			<value>$%7BPARENT-1-WORKSPACE_LOC%7D</value>
+			<value>file:/C:/_Greencubes/Git/OldClient</value>
 		</variable>
 	</variableList>
 </projectDescription>

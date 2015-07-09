@@ -213,7 +213,7 @@ public class NetworkManager implements INetworkManager {
 		}
 		if(readPackets.isEmpty()) {
 			if(timeSinceLastRead++ == 1200) {
-				addErrorInfo = "Last packets: " + lastPacketRecieved + "/" + lastPacketSend + ", status: " + ((NetClientHandler) netHandler).connectionStatus;
+				addErrorInfo = "Last packets: " + lastPacketRecieved + "/" + lastPacketSend + ", status: " + netHandler.connectionStatus;
 				networkShutdown("disconnect.timeout", new Object[0]);
 			}
 		} else {

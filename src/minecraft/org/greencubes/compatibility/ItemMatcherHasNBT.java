@@ -70,7 +70,7 @@ public class ItemMatcherHasNBT implements IItemMatcher {
 	public NBTTagCompound toNBTTag(NBTTagCompound target) {
 		if(target == null)
 			target = new NBTTagCompound();
-		target.setByte("type", (byte) IItemMatcher.MATCHER_HASNBT);
+		target.setByte("type", IItemMatcher.MATCHER_HASNBT);
 		target.setString("n", name);
 		target.setNBTTag("k", NBTTagList.toList(requiredKeys));
 		return target;

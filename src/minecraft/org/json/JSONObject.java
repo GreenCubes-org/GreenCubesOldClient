@@ -109,6 +109,7 @@ public class JSONObject {
 		 * 
 		 * @return NULL.
 		 */
+		@Override
 		protected final Object clone() {
 			return this;
 		}
@@ -121,6 +122,7 @@ public class JSONObject {
 		 * @return true if the object parameter is the JSONObject.NULL object or
 		 *         null.
 		 */
+		@Override
 		public boolean equals(Object object) {
 			return object == null || object == this;
 		}
@@ -130,6 +132,7 @@ public class JSONObject {
 		 * 
 		 * @return The string "null".
 		 */
+		@Override
 		public String toString() {
 			return "null";
 		}
@@ -608,7 +611,7 @@ public class JSONObject {
 		String[] names = new String[length];
 		int i = 0;
 		while(iterator.hasNext()) {
-			names[i] = (String) iterator.next();
+			names[i] = iterator.next();
 			i += 1;
 		}
 		return names;
@@ -1445,7 +1448,7 @@ public class JSONObject {
 			return value.toString();
 		}
 		if(value instanceof Map) {
-			return new JSONObject((Map<Object, Object>) value).toString();
+			return new JSONObject(value).toString();
 		}
 		if(value instanceof Collection) {
 			return new JSONArray((Collection<Object>) value).toString();
@@ -1485,7 +1488,7 @@ public class JSONObject {
 				return new JSONArray(object);
 			}
 			if(object instanceof Map) {
-				return new JSONObject((Map<Object,Object>) object);
+				return new JSONObject(object);
 			}
 			Package objectPackage = object.getClass().getPackage();
 			String objectPackageName = objectPackage != null ? objectPackage.getName() : "";
@@ -1518,7 +1521,7 @@ public class JSONObject {
 		} else if(value instanceof JSONArray) {
 			((JSONArray) value).write(writer, indentFactor, indent);
 		} else if(value instanceof Map) {
-			new JSONObject((Map<Object,Object>) value).write(writer, indentFactor, indent);
+			new JSONObject(value).write(writer, indentFactor, indent);
 		} else if(value instanceof Collection) {
 			new JSONArray((Collection<Object>) value).write(writer, indentFactor, indent);
 		} else if(value.getClass().isArray()) {

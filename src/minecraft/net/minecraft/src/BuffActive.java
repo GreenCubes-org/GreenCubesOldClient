@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class BuffActive {
 
 	private long lastTick = System.currentTimeMillis();

@@ -6,17 +6,9 @@ package net.minecraft.src;
 
 import gnu.trove.iterator.TIntObjectIterator;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
-
-import javax.swing.JFrame;
-import javax.swing.JTextPane;
-
-import org.lwjgl.opengl.Display;
 
 import net.minecraft.client.Minecraft;
 

@@ -5,7 +5,6 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ChatAllowedCharacters;
 import net.minecraft.src.FontRenderer;
-import net.minecraft.src.StringTranslate;
 
 public class InputField {
 	

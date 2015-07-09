@@ -54,6 +54,7 @@ public class BlockPSPortal extends Block {
 		return 1;
 	}
 	
+	@Override
 	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if(entity.ridingEntity == null && entity.riddenByEntity == null) {
 			entity.setInPortal();

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.greencubes.util.Util;
-import org.json.JSONArray;
 
 public class NBTTagShortArray extends NBTBase {
 	

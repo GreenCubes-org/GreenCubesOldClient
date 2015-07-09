@@ -76,7 +76,7 @@ public class ItemMatcherSimpleWithNBT implements IItemMatcher {
 	public NBTTagCompound toNBTTag(NBTTagCompound target) {
 		if(target == null)
 			target = new NBTTagCompound();
-		target.setByte("type", (byte) IItemMatcher.MATCHER_SIMPLE_WITH_NBT);
+		target.setByte("type", IItemMatcher.MATCHER_SIMPLE_WITH_NBT);
 		target.setString("n", name);
 		target.setShort("id", (short) id);
 		target.setShort("damage", (short) damage);

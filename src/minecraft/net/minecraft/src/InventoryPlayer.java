@@ -399,7 +399,7 @@ public class InventoryPlayer implements IInventory {
 		float i = 0;
 		for(int j = 0; j < armorInventory.length; j++) {
 			if(armorInventory[j] != null && armorInventory[j].getItem() instanceof ItemArmor)
-				i += 5f * (float) (armorInventory[j].getMaxDamage() - armorInventory[j].getItemDamage()) / (float) armorInventory[j].getMaxDamage();
+				i += 5f * (armorInventory[j].getMaxDamage() - armorInventory[j].getItemDamage()) / armorInventory[j].getMaxDamage();
 		}
 
 		return (int) i;

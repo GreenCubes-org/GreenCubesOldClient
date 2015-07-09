@@ -24,7 +24,7 @@ public class _tmi_MgCanvas {
 	public _tmi_MgCanvas(GuiScreen guiscreen, RenderItem renderitem) {
 		windowX = 0;
 		windowY = 0;
-		widgets = new ArrayList();
+		widgets = new ArrayList<_tmi_MgWidget>();
 		flatMode = false;
 		window = guiscreen;
 		drawItems = renderitem;

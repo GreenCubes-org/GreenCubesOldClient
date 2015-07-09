@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import java.util.List;
-
 public class BlockHalfBlockSlabs extends BlockHalfBlock {
 
 	public BlockHalfBlockSlabs(int i, Block original) {

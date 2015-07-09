@@ -29,8 +29,6 @@
  */
 package com.jme3.math;
 
-import java.io.IOException;
-
 /**
  * <code>ColorRGBA</code> defines a color made from a collection of red, green
  * and blue values. An alpha value determines is transparency. All values must
