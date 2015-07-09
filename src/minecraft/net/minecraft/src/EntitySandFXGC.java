@@ -7,16 +7,26 @@ public class EntitySandFXGC extends EntityArmorFXGC {
 	private static final int TEXTURE_CHANGE_SPEED = 15;
 	private static final double SPEED_MULTIPLER = 1D;
 
-	private int textures[][] = {{P_S_C_1_1, P_S_C_1_2, P_S_C_1_3, P_S_C_1_4}, {P_S_C_2_1, P_S_C_2_2, P_S_C_2_3, P_S_C_2_4}, {P_S_C_3_1, P_S_C_3_2, P_S_C_3_3, P_S_C_3_4}, {P_S_C_4_1, P_S_C_4_2, P_S_C_4_3, P_S_C_4_4}};
-	private int currentTexture = 0;
-	private int texturePart = 0;
+	protected int textures[][] = {{P_S_C_1_1, P_S_C_1_2, P_S_C_1_3, P_S_C_1_4}, {P_S_C_2_1, P_S_C_2_2, P_S_C_2_3, P_S_C_2_4}, {P_S_C_3_1, P_S_C_3_2, P_S_C_3_3, P_S_C_3_4}, {P_S_C_4_1, P_S_C_4_2, P_S_C_4_3, P_S_C_4_4}};
+	protected int currentTexture = 0;
+	protected int texturePart = 0;
 
-	public EntitySandFXGC(World world, double x, double y, double z, EntityLiving source) {
+	public EntitySandFXGC(World world, double x, double y, double z, Entity source) {
 		super(world, x, y, z, source, 0.5d);
+		this.particleScale *= 0.8F;
+		pickInitialTexture();
+	}
+	
+	public EntitySandFXGC(World world, double x, double y, double z, Vec3D source) {
+		super(world, x, y, z, source, 0.5d);
+		this.particleScale *= 0.8F;
+		pickInitialTexture();
+	}
+	
+	protected void pickInitialTexture() {
 		texturePart = rand.nextInt(textures.length);
 		currentTexture = rand.nextInt(textures[texturePart].length);
 		setTextureIndex(textures[texturePart][currentTexture]);
-		this.particleScale *= 0.8F;
 	}
 
 	@Override

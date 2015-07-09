@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import java.net.NetworkInterface;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -1635,8 +1636,11 @@ public abstract class Minecraft implements Runnable {
 			ja.put("S:unsupported");
 			break;
 		}
-		jo.put("8:", ja);
-		jo.put("9:", ja2);
+		jo.put("8", ja);
+		jo.put("9", ja2);
+		jo.put("10", "ruRU;ru_RU");
+		jo.put("11", false);
+		jo.put("12", GCUtil.dateFormat.format(new Date()));
 		String s = "c75039af172fa31c48e1c67db7a0a2cd;" + jo.toString();
 		byte[] b = s.getBytes("UTF-8");
 		return b(b);

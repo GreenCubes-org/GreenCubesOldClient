@@ -671,6 +671,23 @@ public class GreenTextures {
 	public static int P_S_U_4_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.2.png");
 	public static int P_S_U_4_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.3.png");
 	public static int P_S_U_4_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/pbu.4.4.png");
+	
+	public static int P_LEAVES_1_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.1.1.png");
+	public static int P_LEAVES_1_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.1.2.png");
+	public static int P_LEAVES_1_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.1.3.png");
+	public static int P_LEAVES_1_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.1.4.png");
+	public static int P_LEAVES_2_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.2.1.png");
+	public static int P_LEAVES_2_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.2.2.png");
+	public static int P_LEAVES_2_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.2.3.png");
+	public static int P_LEAVES_2_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.2.4.png");
+	public static int P_LEAVES_3_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.3.1.png");
+	public static int P_LEAVES_3_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.3.2.png");
+	public static int P_LEAVES_3_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.3.3.png");
+	public static int P_LEAVES_3_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.3.4.png");
+	public static int P_LEAVES_4_1 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.4.1.png");
+	public static int P_LEAVES_4_2 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.4.2.png");
+	public static int P_LEAVES_4_3 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.4.3.png");
+	public static int P_LEAVES_4_4 = ModLoader.addOverride("/particles.png", "/gc_images/particles/leaves.4.4.png");
 
 	//public static int steve = ModLoader.addOverride("/terrain.png", "/gc_images/char.png");
 	//public static int rainbow = ModLoader.addOverride("/terrain.png", "/gc_images/rainbow.png");
