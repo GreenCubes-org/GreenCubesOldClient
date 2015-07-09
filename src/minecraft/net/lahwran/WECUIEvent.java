@@ -9,7 +9,7 @@ public class WECUIEvent extends Event<WECUIEvent> {
 	public String[] params;
 	private boolean handled = false;
 
-	public static final HandlerList<WECUIEvent> handlers = new HandlerList();
+	public static final HandlerList<WECUIEvent> handlers = new HandlerList<WECUIEvent>();
 
 	public WECUIEvent(String type, String[] params) {
 		this.type = type;

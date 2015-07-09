@@ -14,8 +14,6 @@ import org.greencubes.util.collections.FastList;
 
 public class Glowing {
 	
-	private static final ItemStack[] iObj = new ItemStack[0];
-	
 	public static final int colorModifier = 0;
 	public static final int glowingLevelModifier = 1;
 	public static final int extractModifier = 2;

@@ -7,7 +7,7 @@ public class WorldRenderEvent extends Event<WorldRenderEvent> {
 	
 	private static final WorldRenderEvent singleton = new WorldRenderEvent();
 	public float partialTick;
-	public static final HandlerList<WorldRenderEvent> handlers = new HandlerList();
+	public static final HandlerList<WorldRenderEvent> handlers = new HandlerList<WorldRenderEvent>();
 
 	public static WorldRenderEvent update(float partialTick) {
 		singleton.partialTick = partialTick;

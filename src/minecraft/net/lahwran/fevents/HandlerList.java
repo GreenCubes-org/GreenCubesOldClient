@@ -5,31 +5,32 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class HandlerList<TEvent extends Event<TEvent>> {
+	
+	private static ArrayList<HandlerList<?>> alllists = new ArrayList<HandlerList<?>>();
+	
 	Listener<TEvent>[][] handlers;
 	int[] handlerids;
 	private final EnumMap<Order, ArrayList<Listener<TEvent>>> handlerslots;
 	private boolean baked = false;
 
-	private static ArrayList<HandlerList> alllists = new ArrayList();
-
 	public static void bakeall() {
-		for(HandlerList h : alllists)
+		for(HandlerList<?> h : alllists)
 			h.bake();
 	}
 
 	public HandlerList() {
-		this.handlerslots = new EnumMap(Order.class);
+		this.handlerslots = new EnumMap<Order, ArrayList<Listener<TEvent>>>(Order.class);
 		for(Order o : Order.values()) {
-			this.handlerslots.put(o, new ArrayList());
+			this.handlerslots.put(o, new ArrayList<Listener<TEvent>>());
 		}
 		alllists.add(this);
 	}
 
 	public void register(Listener<TEvent> listener, Order order) {
-		if(((ArrayList) this.handlerslots.get(order)).contains(listener))
+		if(this.handlerslots.get(order).contains(listener))
 			throw new IllegalStateException("This listener is already registered to order " + order.toString());
 		this.baked = false;
-		((ArrayList) this.handlerslots.get(order)).add(listener);
+		this.handlerslots.get(order).add(listener);
 	}
 
 	public void unregister(Listener<TEvent> listener) {
@@ -38,31 +39,32 @@ public class HandlerList<TEvent extends Event<TEvent>> {
 	}
 
 	public void unregister(Listener<TEvent> listener, Order order) {
-		if(((ArrayList) this.handlerslots.get(order)).contains(listener)) {
+		if(this.handlerslots.get(order).contains(listener)) {
 			this.baked = false;
-			((ArrayList) this.handlerslots.get(order)).remove(listener);
+			this.handlerslots.get(order).remove(listener);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	void bake() {
 		if(this.baked) {
 			return;
 		}
-		ArrayList handlerslist = new ArrayList();
-		ArrayList handleridslist = new ArrayList();
-		for(Map.Entry entry : this.handlerslots.entrySet()) {
+		ArrayList<Listener<TEvent>[]> handlerslist = new ArrayList<Listener<TEvent>[]>();
+		ArrayList<Integer> handleridslist = new ArrayList<Integer>();
+		for(Map.Entry<Order, ArrayList<Listener<TEvent>>> entry : this.handlerslots.entrySet()) {
 			Order orderslot = (Order) entry.getKey();
 
-			ArrayList list = (ArrayList) entry.getValue();
+			ArrayList<Listener<TEvent>> list = entry.getValue();
 
 			int ord = orderslot.getIndex();
-			handlerslist.add(list.toArray(new Listener[list.size()]));
+			handlerslist.add((Listener<TEvent>[]) list.toArray(new Listener[list.size()]));
 			handleridslist.add(Integer.valueOf(ord));
 		}
-		this.handlers = ((Listener[][]) handlerslist.toArray(new Listener[handlerslist.size()][]));
+		this.handlers = (Listener<TEvent>[][]) handlerslist.toArray(new Listener[handlerslist.size()][]);
 		this.handlerids = new int[handleridslist.size()];
 		for(int i = 0; i < handleridslist.size(); i++) {
-			this.handlerids[i] = ((Integer) handleridslist.get(i)).intValue();
+			this.handlerids[i] = handleridslist.get(i).intValue();
 		}
 		this.baked = true;
 	}

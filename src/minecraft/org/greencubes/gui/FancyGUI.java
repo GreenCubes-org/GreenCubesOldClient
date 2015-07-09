@@ -55,10 +55,6 @@ public class FancyGUI {
 		return instance;
 	}
 	
-	private int getDisplayHeight() {
-		return Minecraft.theMinecraft.displayHeight;
-	}
-	
 	public void setColor(ColorRGBA color) {
 		this.color = color;
 	}

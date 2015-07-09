@@ -14,6 +14,8 @@ import net.minecraft.src.*;
 
 public class MinecraftApplet extends Applet {
 
+	private static final long serialVersionUID = -133764370282063251L;
+	
 	private Canvas mcCanvas;
 	private Minecraft mc;
 	private Thread mcThread;

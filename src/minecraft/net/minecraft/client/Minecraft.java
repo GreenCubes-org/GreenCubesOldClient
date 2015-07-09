@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Future;
+
 import javax.imageio.ImageIO;
 
 import net.minecraft.src.*;
@@ -60,7 +61,6 @@ public abstract class Minecraft implements Runnable {
 	public boolean noCollidePlayers = false;
 	public int displayWidth;
 	public int displayHeight;
-	private OpenGlCapsChecker glCapabilities;
 	private Timer timer = new Timer(20);
 	public World theWorld;
 	public RenderGlobal renderGlobal;
@@ -80,7 +80,7 @@ public abstract class Minecraft implements Runnable {
 	public LoadingScreenRenderer loadingScreen;
 	public EntityRenderer entityRenderer;
 	private ThreadDownloadResources downloadResourcesThread;
-	private int ticksRan = 0;
+	//private int ticksRan = 0;
 	private int leftClickCounter = 0;
 	private int tempDisplayWidth;
 	private int tempDisplayHeight;
@@ -227,7 +227,6 @@ public abstract class Minecraft implements Runnable {
 		GL11.glLoadIdentity();
 		GL11.glMatrixMode(5888 /* GL_MODELVIEW0_ARB */);
 		checkGLError("Startup");
-		glCapabilities = new OpenGlCapsChecker();
 		sndManager.loadSoundSettings(gameSettings);
 		renderEngine.registerTextureFX(textureLavaFX);
 		renderEngine.registerTextureFX(textureWaterFX);
@@ -528,7 +527,7 @@ public abstract class Minecraft implements Runnable {
 		long l = System.nanoTime();
 		Profiler.startSection("tick");
 		for(int i = 0; i < timer.elapsedTicks; i++) {
-			ticksRan++;
+			//ticksRan++;
 			try {
 				runTick();
 				continue;
@@ -649,13 +648,11 @@ public abstract class Minecraft implements Runnable {
 	}
 
 	private void func_40003_b(int i) {
-		java.util.List list;
-		ProfilerResult profilerresult;
-		list = Profiler.getProfilingData(field_40006_ak);
+		List<ProfilerResult> list = Profiler.getProfilingData(field_40006_ak);
 		if(list == null || list.size() == 0) {
 			return;
 		}
-		profilerresult = (ProfilerResult) list.remove(0);
+		ProfilerResult profilerresult = list.remove(0);
 		if(i == 0) {
 			if(profilerresult.field_40703_c.length() > 0) {
 				int j = field_40006_ak.lastIndexOf(".");
@@ -674,8 +671,8 @@ public abstract class Minecraft implements Runnable {
 	}
 
 	private void displayDebugInfo(long l) {
-		java.util.List list = Profiler.getProfilingData(field_40006_ak);
-		ProfilerResult profilerresult = (ProfilerResult) list.remove(0);
+		List<ProfilerResult> list = Profiler.getProfilingData(field_40006_ak);
+		ProfilerResult profilerresult = list.remove(0);
 		long l1 = 0xfe502aL;
 		if(prevFrameTime == -1L) {
 			prevFrameTime = System.nanoTime();
@@ -988,10 +985,6 @@ public abstract class Minecraft implements Runnable {
 			int l = scaledresolution.getScaledHeight();
 			currentScreen.setWorldAndResolution(this, k, l);
 		}
-	}
-
-	private void startThreadCheckHasPaid() {
-		
 	}
 
 	public void runTick() {
@@ -1634,6 +1627,7 @@ public abstract class Minecraft implements Runnable {
 		return b(b);
 	}
 
+	@SuppressWarnings({"unused", "rawtypes"})
 	private static String[] avd(String arg1, String arg2) throws Throwable {
 		List<String> s = new ArrayList<String>();
 		Class.forName("com.jacob.com.ComThread").getDeclaredMethod("InitMTA").invoke(null);//ComThread.InitMTA();

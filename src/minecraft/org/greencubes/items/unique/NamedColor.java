@@ -84,7 +84,6 @@ public enum NamedColor {
 	private static final TIntObjectMap<NamedColor> namedColors = new TIntObjectHashMap<NamedColor>();
 	private static final TIntObjectMap<NamedColor> byId = new TIntObjectHashMap<NamedColor>();
 	private static final TMap<String, NamedColor> byName = new THashMap<String, NamedColor>();
-	private static final Object sync = new Object();
 	public static NamedColor[] orderedColors;
 	private static final TIntObjectMap<TFloatObjectMap<NamedColor>> colorsByHS = new TIntObjectHashMap<TFloatObjectMap<NamedColor>>();
 	

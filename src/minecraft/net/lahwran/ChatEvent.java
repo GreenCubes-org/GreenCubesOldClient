@@ -7,7 +7,7 @@ import net.lahwran.wecui.WorldEditCUI;
 
 public class ChatEvent extends Event<ChatEvent> implements Cancellable {
 	public String chat;
-	public static final HandlerList<ChatEvent> handlers = new HandlerList();
+	public static final HandlerList<ChatEvent> handlers = new HandlerList<ChatEvent>();
 
 	public ChatEvent(String chat) {
 		this.chat = chat;
