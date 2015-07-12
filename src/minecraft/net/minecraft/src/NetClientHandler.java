@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.set.TIntSet;
+import gnu.trove.set.hash.TIntHashSet;
 
 import java.io.*;
 import java.net.*;
@@ -39,6 +41,7 @@ public class NetClientHandler extends NetHandler {
 	public ReplayWriter replay;
 	public boolean canFly = false;
 	public TIntObjectMap<String> entityStatus = new TIntObjectHashMap<String>();
+	public TIntSet notificationsPending = new TIntHashSet();
 
 	public NetClientHandler(Minecraft minecraft, String s, int i) throws UnknownHostException, IOException {
 		this.mc = minecraft;

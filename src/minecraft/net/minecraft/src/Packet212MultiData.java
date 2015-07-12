@@ -62,6 +62,11 @@ public class Packet212MultiData extends Packet {
 	 * for default color</p>
 	 */
 	public static final int GREETINGS = 6;
+	/**
+	 * <p><b>destination</b> — not used (always empty)</p>
+	 * <p><b>data</b> — <code>gziped NBT binary</code> of notification</p>
+	 */
+	public static final int NOTIFY = 7;
 
 	public int type;
 	public String destination;
