@@ -29,7 +29,7 @@ public class GuiIngame extends Gui {
 	
 	private static final long GREETINGS_APPEAR_TIME = 1000L;
 	private static final long GREETINGS_FADE_TIME = 1000L;
-	private static final long GREETINGS_TIME = 5000L;
+	private static final long GREETINGS_TIME = 8000L;
 
 	private static RenderItem itemRenderer = RenderItem.getInstance();
 	private Random rand = new Random();
