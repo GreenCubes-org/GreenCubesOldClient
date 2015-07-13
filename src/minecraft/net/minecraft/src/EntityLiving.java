@@ -886,7 +886,7 @@ public abstract class EntityLiving extends Entity {
 		moveEntityWithHeading(moveStrafing, moveForward);
 		landMovementFactor = f;
 		Profiler.startSection("push");
-		List list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+		List<Entity> list = worldObj.getEntitiesWithinAABBExcludingEntity(this, boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 		if(list != null && list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
 				Entity entity = (Entity) list.get(i);
@@ -1212,7 +1212,7 @@ public abstract class EntityLiving extends Entity {
 		} while(true);
 	}
 
-	public Collection func_40118_aO() {
+	public Collection<PotionEffect> func_40118_aO() {
 		return activePotionsMap.values();
 	}
 

@@ -315,10 +315,9 @@ public abstract class Entity {
 
 	public boolean isOffsetPositionInLiquid(double d, double d1, double d2) {
 		AxisAlignedBB axisalignedbb = boundingBox.getOffsetBoundingBox(d, d1, d2);
-		List list = worldObj.getCollidingBoundingBoxes(this, axisalignedbb);
-		if(list.size() > 0) {
+		List<AxisAlignedBB> list = worldObj.getCollidingBoundingBoxes(this, axisalignedbb);
+		if(list.size() > 0)
 			return false;
-		}
 		return !worldObj.getIsAnyLiquid(axisalignedbb);
 	}
 

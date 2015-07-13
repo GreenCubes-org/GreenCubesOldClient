@@ -583,6 +583,6 @@ public class RenderItem extends Render {
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
-		doRenderItem((EntityItem) entity, d, d1, d2, f, f1);
+		doRenderItem((EntityItem) entity, d, d1 + (entity.worldObj.multiplayerWorld ? 0.25d : 0.0d), d2, f, f1);
 	}
 }

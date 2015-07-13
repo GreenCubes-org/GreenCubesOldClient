@@ -139,9 +139,8 @@ public class EntityItem extends Entity {
 		age = nbttagcompound.getShort("Age");
 		NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("Item");
 		item = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-		if(item == null) {
+		if(item == null)
 			setEntityDead();
-		}
 	}
 
 	@Override
