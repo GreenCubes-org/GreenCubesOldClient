@@ -28,6 +28,12 @@ public class EntitySlime extends EntityLiving implements IMob {
 	}
 	
 	@Override
+	public void afterRegister() {
+		super.afterRegister();
+		setSlimeSize(getSlimeSize());
+	}
+	
+	@Override
 	public boolean isDanger() {
 		return true;
 	}

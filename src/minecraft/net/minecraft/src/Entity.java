@@ -120,6 +120,9 @@ public abstract class Entity {
 		dataWatcher.addObject(1, Short.valueOf((short) 300));
 		entityInit();
 	}
+	
+	public void afterRegister() {
+	}
 
 	protected abstract void entityInit();
 

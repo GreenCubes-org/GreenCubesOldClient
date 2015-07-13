@@ -922,6 +922,7 @@ public class World implements IBlockAccess {
 			getChunkFromChunkCoords(i, j).addEntity(entity);
 			loadedEntityList.add(entity);
 			obtainEntitySkin(entity);
+			entity.afterRegister();
 			return true;
 		} else {
 			return false;

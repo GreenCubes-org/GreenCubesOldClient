@@ -729,11 +729,11 @@ public class NetClientHandler extends NetHandler {
 		entityliving.setSpawnPosition(d, d1, d2);
 		entityliving.setPositionAndRotation(d, d1, d2, f, f1);
 		entityliving.isMultiplayerEntity = true;
-		worldClient.addEntityWithId(packet24mobspawn.entityId, entityliving);
 		List<WatchableObject> list = packet24mobspawn.getMetadata();
 		if(list != null) {
 			entityliving.getDataWatcher().updateWatchedObjectsFromList(list);
 		}
+		worldClient.addEntityWithId(packet24mobspawn.entityId, entityliving);
 	}
 
 	@Override
