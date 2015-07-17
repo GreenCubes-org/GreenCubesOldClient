@@ -116,7 +116,7 @@ public class Item {
 	public static Item dyePowder = new ItemDye(95).setIconCoord(14, 4).setItemName("dyePowder");
 	public static Item bone = new Item(96).setIconCoord(12, 1).setItemName("bone").setFull3D();
 	public static Item sugar = new Item(97).setIconCoord(13, 0).setItemName("sugar").func_40407_b(PotionHelper.field_40365_b);
-	public static Item cake = new ItemReed(98, Block.cake).setMaxStackSize(1).setIconCoord(13, 1).setItemName("cake");
+	public static Item cake = new ItemReed(98, Block.cake).setIconCoord(13, 1).setItemName("cake");
 	public static Item bed = new ItemBed(99).setMaxStackSize(1).setIconCoord(13, 2).setItemName("bed");
 	public static Item redstoneRepeater = new ItemReed(100, Block.redstoneRepeaterIdle).setIconCoord(6, 5).setItemName("diode");
 	public static Item cookie = new ItemFood(101, 1, 0.1F, false).setIconCoord(12, 5).setItemName("cookie");
@@ -161,7 +161,7 @@ public class Item {
 	public static Item cocoaBean = new Item(3001 - 256).setIconIndex(cocoabean).setItemName("cocoabean");
 	public static Item banana = new ItemFood((3002 - 256), 2, 0.1F, false).setIconIndex(bananaItemTexture).setItemName("banana");
 	public static Item bananaGreen = new ItemFood((3003 - 256), 1, 0.1F, false).setIconIndex(bananaGreenItemTexture).setItemName("bananaGreen");
-	public static Item bananaCakeItem = new ItemReed(3004 - 256, Block.blockBananaCake).setIconIndex(bananacakeitem).setItemName("bananaCake").setMaxStackSize(1);
+	public static Item bananaCakeItem = new ItemReed(3004 - 256, Block.blockBananaCake).setIconIndex(bananacakeitem).setItemName("bananaCake");
 	public static Item readableBookGolden = new ItemReadableBook(3005 - 256).setIconIndex(readableBookGoldenIcon).setItemName("readableBookGolden").setMaxStackSize(1);
 	public static Item readableBookDiamond = new ItemReadableBook(3006 - 256).setIconIndex(readableBookDiamondIcon).setItemName("readableBookDiamond").setMaxStackSize(1);
 	public static Item readableBookObsidian = new ItemReadableBook(3007 - 256).setIconIndex(readableBookObsidianIcon).setItemName("readableBookobs").setMaxStackSize(1);
@@ -177,7 +177,7 @@ public class Item {
 	public static Item pumpkinSlice = new Item(3026 - 256).setIconIndex(pumpkinSliceIcon).setItemName("pumpkinSlice");
 	public static Item pumpkinSliceSugar = new Item(3027 - 256).setIconIndex(pumpkinSliceSugarIcon).setItemName("pumpkinSliceSugar");
 	public static Item pumpkinSliceFried = new ItemFood((3028 - 256), 1, 0, false).setIconIndex(pumpkinSliceFriedIcon).setItemName("pumpkinSliceFried");
-	public static Item chocoCakeItem = new ItemReed(3029 - 256, Block.blockChocoCake).setIconIndex(chococakeitem).setItemName("chocoCake").setMaxStackSize(1);
+	public static Item chocoCakeItem = new ItemReed(3029 - 256, Block.blockChocoCake).setIconIndex(chococakeitem).setItemName("chocoCake");
 	public static Item lianaItem = new ItemReed(3031 - 256, Block.blockLiana).setIconIndex(lianaitem).setItemName("liana");
 	public static Item coconut = new Item(3032 - 256).setIconIndex(coconutitem).setItemName("coconut");
 	public static Item coconutShaving = new ItemFood((3033 - 256), 1, 0, false).setIconIndex(coconutshaving).setItemName("coconutShaving");
@@ -194,7 +194,7 @@ public class Item {
 	public static Item greenTileItem = new ItemReed(3044 - 256, Block.blockTileGreen_45degree).setIconIndex(greenTileIcon).setItemName("greenTile");
 	public static Item garlandItem = new ItemReed(3045 - 256, Block.blockGarlandRed).setIconIndex(garlandIcon).setItemName("garland");
 	public static Item diamondDustItem = new Item(3046 - 256).setIconIndex(diamonddust).setItemName("diamonddust");
-	public static Item snowMan = new Item(3047 - 256).setIconIndex(snowmanIcon).setItemName("snowman").setUsable().setMaxStackSize(1);
+	public static Item snowMan = new Item(3047 - 256).setIconIndex(snowmanIcon).setItemName("snowman").setUsable();
 	public static Item nyHat = new ItemClothImmortal(3048 - 256, 11, 0).setIconIndex(nyHatIcon).setItemName("nyhat");
 	public static Item giftBagNy = new ItemGiftBagNy(3049 - 256).setIconIndex(giftBagIcon).setItemName("nybag");
 
