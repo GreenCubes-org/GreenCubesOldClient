@@ -94,7 +94,7 @@ public class EntityList {
 
 	static {
 		addMapping(net.minecraft.src.EntityItem.class, "Item", 1);
-		addMapping(net.minecraft.src.EntityXPOrb.class, "XPOrb", 2);
+		addMapping(net.minecraft.src.EntityOrb.class, "XPOrb", 2);
 		addMapping(net.minecraft.src.EntityPainting.class, "Painting", 9);
 		addMapping(net.minecraft.src.EntityArrow.class, "Arrow", 10);
 		addMapping(net.minecraft.src.EntitySnowball.class, "Snowball", 11);

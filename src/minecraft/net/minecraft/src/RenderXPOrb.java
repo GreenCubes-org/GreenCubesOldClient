@@ -22,7 +22,7 @@ public class RenderXPOrb extends Render {
 		field_194_c = 0.75F;
 	}
 
-	public void func_35438_a(EntityXPOrb entityxporb, double d, double d1, double d2, float f, float f1) {
+	public void func_35438_a(EntityOrb entityxporb, double d, double d1, double d2, float f, float f1) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) d, (float) d1, (float) d2);
 		int i = entityxporb.getTextureByXP();
@@ -65,6 +65,6 @@ public class RenderXPOrb extends Render {
 
 	@Override
 	public void doRender(Entity entity, double d, double d1, double d2, float f, float f1) {
-		func_35438_a((EntityXPOrb) entity, d, d1, d2, f, f1);
+		func_35438_a((EntityOrb) entity, d, d1, d2, f, f1);
 	}
 }

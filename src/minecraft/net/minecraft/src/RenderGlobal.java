@@ -36,7 +36,7 @@ public class RenderGlobal implements IWorldAccess {
 	public List<TileEntity> tileEntities;
 	private World worldObj;
 	private RenderEngine renderEngine;
-	private List worldRenderersToUpdate;
+	private List<WorldRenderer> worldRenderersToUpdate;
 	private WorldRenderer sortedWorldRenderers[];
 	private WorldRenderer worldRenderers[];
 	private int renderChunksWide;
@@ -69,9 +69,9 @@ public class RenderGlobal implements IWorldAccess {
 	private int renderersBeingOccluded;
 	private int renderersBeingRendered;
 	private int renderersSkippingRenderPass;
-	private int dummyRenderInt;
+	//private int dummyRenderInt;
 	private int worldRenderersCheckIndex;
-	private List glRenderLists;
+	private List<WorldRenderer> glRenderLists;
 	private RenderList allRenderLists[] = {new RenderList(), new RenderList(), new RenderList(), new RenderList()};
 	double prevSortX;
 	double prevSortY;
@@ -83,14 +83,14 @@ public class RenderGlobal implements IWorldAccess {
 
 	public RenderGlobal(Minecraft minecraft, RenderEngine renderengine) {
 		tileEntities = new ArrayList<TileEntity>();
-		worldRenderersToUpdate = new ArrayList();
+		worldRenderersToUpdate = new ArrayList<WorldRenderer>();
 		occlusionEnabled = false;
 		cloudOffsetX = 0;
 		renderDistance = -1;
 		renderEntitiesStartupCounter = 2;
 		dummyBuf50k = new int[50000];
 		occlusionResult = GLAllocation.createDirectIntBuffer(64);
-		glRenderLists = new ArrayList();
+		glRenderLists = new ArrayList<WorldRenderer>();
 		prevSortX = -9999D;
 		prevSortY = -9999D;
 		prevSortZ = -9999D;
@@ -312,7 +312,7 @@ public class RenderGlobal implements IWorldAccess {
 		TileEntityRenderer.staticPlayerZ = ((Entity) (entityliving)).lastTickPosZ + (((Entity) (entityliving)).posZ - ((Entity) (entityliving)).lastTickPosZ) * f;
 		mc.entityRenderer.enableLightmap(f);
 		Profiler.endStartSection("global");
-		List list = worldObj.getLoadedEntityList();
+		List<?> list = worldObj.getLoadedEntityList();
 		countEntitiesTotal = list.size();
 		for(int i = 0; i < worldObj.weatherEffects.size(); i++) {
 			Entity entity = worldObj.weatherEffects.get(i);
@@ -462,7 +462,7 @@ public class RenderGlobal implements IWorldAccess {
 		}
 		if(i == 0) {
 			renderersLoaded = 0;
-			dummyRenderInt = 0;
+			//dummyRenderInt = 0;
 			renderersBeingClipped = 0;
 			renderersBeingOccluded = 0;
 			renderersBeingRendered = 0;
@@ -1085,7 +1085,7 @@ public class RenderGlobal implements IWorldAccess {
 		byte byte0 = 2;
 		RenderSorter rendersorter = new RenderSorter(entityliving);
 		WorldRenderer aworldrenderer[] = new WorldRenderer[byte0];
-		ArrayList arraylist = null;
+		ArrayList<WorldRenderer> arraylist = null;
 		int l = worldRenderersToUpdate.size();
 		int i1 = 0;
 		for(int j1 = 0; j1 < l; j1++) {
@@ -1109,7 +1109,7 @@ public class RenderGlobal implements IWorldAccess {
 				continue;
 			}
 			if(arraylist == null) {
-				arraylist = new ArrayList();
+				arraylist = new ArrayList<WorldRenderer>();
 			}
 			i1++;
 			arraylist.add(worldrenderer1);

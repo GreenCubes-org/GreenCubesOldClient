@@ -3478,7 +3478,7 @@ public class PlayerHelper {
 							}
 							Random random1 = new Random();
 							for(int k25 = 0; k25 < k14; k25++) {
-								mc.theWorld.entityJoinedWorld(new EntityXPOrb(mc.theWorld, ep.posX + (random1.nextInt(6) - 3), ep.posY + random1.nextInt(3), ep.posZ + (random1.nextInt(6) - 3), l7));
+								mc.theWorld.entityJoinedWorld(new EntityOrb(mc.theWorld, ep.posX + (random1.nextInt(6) - 3), ep.posY + random1.nextInt(3), ep.posZ + (random1.nextInt(6) - 3), l7));
 							}
 
 						} else {

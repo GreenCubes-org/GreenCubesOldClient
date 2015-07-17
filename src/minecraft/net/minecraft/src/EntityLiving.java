@@ -245,9 +245,9 @@ public abstract class EntityLiving extends Entity {
 				return;
 			if((field_34905_c > 0 || func_35163_av()) && !func_40127_l()) {
 				for(int i = func_36001_a(field_34904_b); i > 0;) {
-					int k = EntityXPOrb.getXPSplit(i);
+					int k = EntityOrb.getXPSplit(i);
 					i -= k;
-					worldObj.entityJoinedWorld(new EntityXPOrb(worldObj, posX, posY, posZ, k));
+					worldObj.entityJoinedWorld(new EntityOrb(worldObj, posX, posY, posZ, k));
 				}
 
 			}

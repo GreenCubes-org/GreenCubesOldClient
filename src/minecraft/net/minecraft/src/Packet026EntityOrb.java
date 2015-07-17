@@ -9,23 +9,23 @@ import java.io.*;
 // Referenced classes of package net.minecraft.src:
 //            Packet, EntityXPOrb, MathHelper, NetHandler
 
-public class Packet26EntityExpOrb extends Packet {
+public class Packet026EntityOrb extends Packet {
 
 	public int entityId;
 	public int posX;
 	public int posY;
 	public int posZ;
-	public int count;
+	public int color;
 
-	public Packet26EntityExpOrb() {
+	public Packet026EntityOrb() {
 	}
 
-	public Packet26EntityExpOrb(EntityXPOrb entityxporb) {
+	public Packet026EntityOrb(EntityOrb entityxporb) {
 		entityId = entityxporb.entityId;
 		posX = MathHelper.floor_double(entityxporb.posX * 32D);
 		posY = MathHelper.floor_double(entityxporb.posY * 32D);
 		posZ = MathHelper.floor_double(entityxporb.posZ * 32D);
-		count = entityxporb.getXpValue();
+		color = entityxporb.getXPValue();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Packet26EntityExpOrb extends Packet {
 		posX = datainputstream.readInt();
 		posY = datainputstream.readInt();
 		posZ = datainputstream.readInt();
-		count = datainputstream.readShort();
+		color = datainputstream.readInt();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Packet26EntityExpOrb extends Packet {
 		dataoutputstream.writeInt(posX);
 		dataoutputstream.writeInt(posY);
 		dataoutputstream.writeInt(posZ);
-		dataoutputstream.writeShort(count);
+		dataoutputstream.writeInt(color);
 	}
 
 	@Override
@@ -53,6 +53,6 @@ public class Packet26EntityExpOrb extends Packet {
 
 	@Override
 	public int getPacketSize() {
-		return 18;
+		return 20;
 	}
 }

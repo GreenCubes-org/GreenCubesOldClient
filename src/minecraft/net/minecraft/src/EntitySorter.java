@@ -9,7 +9,7 @@ import java.util.Comparator;
 // Referenced classes of package net.minecraft.src:
 //            Entity, WorldRenderer
 
-public class EntitySorter implements Comparator {
+public class EntitySorter implements Comparator<WorldRenderer> {
 
 	private double entityPosX;
 	private double entityPosY;
@@ -32,7 +32,7 @@ public class EntitySorter implements Comparator {
 	}
 
 	@Override
-	public int compare(Object obj, Object obj1) {
-		return sortByDistanceToEntity((WorldRenderer) obj, (WorldRenderer) obj1);
+	public int compare(WorldRenderer obj, WorldRenderer obj1) {
+		return sortByDistanceToEntity(obj, obj1);
 	}
 }

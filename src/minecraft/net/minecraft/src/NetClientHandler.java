@@ -370,8 +370,8 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	@Override
-	public void handleXPOrb(Packet26EntityExpOrb packet26entityexporb) {
-		EntityXPOrb entityxporb = new EntityXPOrb(worldClient, packet26entityexporb.posX, packet26entityexporb.posY, packet26entityexporb.posZ, packet26entityexporb.count);
+	public void handleXPOrb(Packet026EntityOrb packet26entityexporb) {
+		EntityOrb entityxporb = new EntityOrb(worldClient, packet26entityexporb.posX, packet26entityexporb.posY, packet26entityexporb.posZ, packet26entityexporb.color);
 		entityxporb.serverPosX = packet26entityexporb.posX;
 		entityxporb.serverPosY = packet26entityexporb.posY;
 		entityxporb.serverPosZ = packet26entityexporb.posZ;

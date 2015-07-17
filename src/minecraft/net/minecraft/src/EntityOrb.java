@@ -9,15 +9,16 @@ package net.minecraft.src;
 //            AxisAlignedBB, EntityPlayer, Block, DamageSource, 
 //            NBTTagCompound
 
-public class EntityXPOrb extends Entity {
+public class EntityOrb extends Entity {
 
 	public int xpColor;
 	public int xpOrbAge;
 	public int unusedPickupCooldown;
 	private int xpOrbHealth;
-	private int xpValue;
+	private int xpValue = 1;
+	public int color;
 
-	public EntityXPOrb(World world, double d, double d1, double d2, int i) {
+	public EntityOrb(World world, double d, double d1, double d2, int color) {
 		super(world);
 		xpOrbAge = 0;
 		xpOrbHealth = 5;
@@ -28,20 +29,20 @@ public class EntityXPOrb extends Entity {
 		motionX = (float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F;
 		motionY = (float) (Math.random() * 0.20000000000000001D) * 2.0F;
 		motionZ = (float) (Math.random() * 0.20000000298023224D - 0.10000000149011612D) * 2.0F;
-		xpValue = i;
+		this.color = color;
 	}
-
-	@Override
-	protected boolean canTriggerWalking() {
-		return false;
-	}
-
-	public EntityXPOrb(World world) {
+	
+	public EntityOrb(World world) {
 		super(world);
 		xpOrbAge = 0;
 		xpOrbHealth = 5;
 		setSize(0.25F, 0.25F);
 		yOffset = height / 2.0F;
+	}
+
+	@Override
+	protected boolean canTriggerWalking() {
+		return false;
 	}
 
 	@Override
@@ -169,7 +170,7 @@ public class EntityXPOrb extends Entity {
 		}
 	}
 
-	public int getXpValue() {
+	public int getXPValue() {
 		return xpValue;
 	}
 

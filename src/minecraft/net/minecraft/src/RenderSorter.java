@@ -9,7 +9,7 @@ import java.util.Comparator;
 // Referenced classes of package net.minecraft.src:
 //            WorldRenderer, EntityLiving
 
-public class RenderSorter implements Comparator {
+public class RenderSorter implements Comparator<WorldRenderer> {
 
 	private EntityLiving baseEntity;
 
@@ -39,7 +39,7 @@ public class RenderSorter implements Comparator {
 	}
 
 	@Override
-	public int compare(Object obj, Object obj1) {
-		return doCompare((WorldRenderer) obj, (WorldRenderer) obj1);
+	public int compare(WorldRenderer obj, WorldRenderer obj1) {
+		return doCompare(obj, obj1);
 	}
 }

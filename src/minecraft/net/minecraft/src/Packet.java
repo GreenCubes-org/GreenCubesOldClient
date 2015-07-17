@@ -199,7 +199,7 @@ public abstract class Packet {
 		addIdClassMapping(23, true, false, net.minecraft.src.Packet23VehicleSpawn.class);
 		addIdClassMapping(24, true, false, net.minecraft.src.Packet24MobSpawn.class);
 		addIdClassMapping(25, true, false, net.minecraft.src.Packet25EntityPainting.class);
-		addIdClassMapping(26, true, false, net.minecraft.src.Packet26EntityExpOrb.class);
+		addIdClassMapping(26, true, false, net.minecraft.src.Packet026EntityOrb.class);
 		addIdClassMapping(27, false, true, net.minecraft.src.Packet27Position.class);
 		addIdClassMapping(28, true, false, net.minecraft.src.Packet28EntityVelocity.class);
 		addIdClassMapping(29, true, false, net.minecraft.src.Packet29DestroyEntity.class);

@@ -261,7 +261,7 @@ public abstract class NetHandler {
 		registerPacket(packet107creativesetslot);
 	}
 
-	public void handleXPOrb(Packet26EntityExpOrb packet26entityexporb) {
+	public void handleXPOrb(Packet026EntityOrb packet26entityexporb) {
 		registerPacket(packet26entityexporb);
 	}
 

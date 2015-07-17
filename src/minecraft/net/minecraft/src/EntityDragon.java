@@ -441,9 +441,9 @@ public class EntityDragon extends EntityDragonBase {
 		}
 		if(!worldObj.multiplayerWorld && field_40178_aA > 150 && field_40178_aA % 5 == 0) {
 			for(int i = 1000; i > 0;) {
-				int k = EntityXPOrb.getXPSplit(i);
+				int k = EntityOrb.getXPSplit(i);
 				i -= k;
-				worldObj.entityJoinedWorld(new EntityXPOrb(worldObj, posX, posY, posZ, k));
+				worldObj.entityJoinedWorld(new EntityOrb(worldObj, posX, posY, posZ, k));
 			}
 
 		}
@@ -451,9 +451,9 @@ public class EntityDragon extends EntityDragonBase {
 		renderYawOffset = rotationYaw += 20F;
 		if(field_40178_aA == 200) {
 			for(int j = 10000; j > 0;) {
-				int l = EntityXPOrb.getXPSplit(j);
+				int l = EntityOrb.getXPSplit(j);
 				j -= l;
-				worldObj.entityJoinedWorld(new EntityXPOrb(worldObj, posX, posY, posZ, l));
+				worldObj.entityJoinedWorld(new EntityOrb(worldObj, posX, posY, posZ, l));
 			}
 
 			int i1 = (5 + rand.nextInt(2) * 2) - 1;

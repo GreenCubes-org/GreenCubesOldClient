@@ -65,7 +65,7 @@ public class RenderManager {
 		entityRenderMap.put(net.minecraft.src.EntityFireball.class, new RenderFireball(2.0F));
 		entityRenderMap.put(net.minecraft.src.EntitySmallFireball.class, new RenderFireball(0.5F));
 		entityRenderMap.put(net.minecraft.src.EntityItem.class, RenderItem.getInstance());
-		entityRenderMap.put(net.minecraft.src.EntityXPOrb.class, new RenderXPOrb());
+		entityRenderMap.put(net.minecraft.src.EntityOrb.class, new RenderXPOrb());
 		entityRenderMap.put(net.minecraft.src.EntityTNTPrimed.class, new RenderTNTPrimed());
 		entityRenderMap.put(net.minecraft.src.EntityFallingSand.class, new RenderFallingSand());
 		entityRenderMap.put(net.minecraft.src.EntityMinecart.class, new RenderMinecart());
@@ -81,6 +81,7 @@ public class RenderManager {
 
 	}
 
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public Render getEntityClassRenderObject(Class class1) {
 		Render render = entityRenderMap.get(class1);
 		if(render == null && class1 != net.minecraft.src.Entity.class) {
