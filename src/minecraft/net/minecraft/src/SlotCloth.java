@@ -27,10 +27,16 @@ class SlotCloth extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack) {
-		if(itemstack.getItem() instanceof ItemCloth)
-			return ((ItemCloth) itemstack.getItem()).slot == armorType;
-		if(itemstack.getItem().shiftedIndex == Block.pumpkin.blockID)
+		Item item = itemstack.getItem();
+		if(item.shiftedIndex == Block.pumpkin.blockID)
 			return armorType == 0;
+		if(!(item instanceof ItemWearable))
+			return false;
+		int s = ((ItemWearable) itemstack.getItem()).slot;
+		if(item instanceof ItemCloth && s == armorType)
+			return true;
+		if(itemstack.getDecorQuality() != null)
+			return item instanceof ItemArmor && s == armorType;
 		return false;
 	}
 	
