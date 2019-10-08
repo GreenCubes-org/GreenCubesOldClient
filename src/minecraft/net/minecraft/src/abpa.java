@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import net.minecraft.client.Minecraft;
+import org.greencubes.download.Downloader;
 
-import org.greencubes.downloader.Downloader;
+import net.minecraft.client.Minecraft;
 
 public class abpa extends Thread {
 

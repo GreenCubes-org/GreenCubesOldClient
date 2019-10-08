@@ -90,4 +90,43 @@ public class Util {
 		stream.close();
 		return os.toByteArray();
 	}
+	
+	public static String join(String[] split) {
+		return join(split, "");
+	}
+	
+	public static String join(String[] split, String glue) {
+		return join(split, glue, 0);
+	}
+	
+	public static String join(Object[] split, String glue) {
+		String[] strs = new String[split.length];
+		for(int i = 0; i < split.length; ++i) {
+			strs[i] = String.valueOf(split[i]);
+		}
+		return join(strs, glue, 0);
+	}
+	
+	public static String join(String[] split, String glue, int start) {
+		return join(split, glue, start, split.length - 1);
+	}
+	
+	public static String join(String[] split, String glue, int start, int end) {
+		if(split.length == 0)
+			return "";
+		start = start >= split.length ? split.length - 1 : start;
+		end = end >= split.length ? split.length - 1 : end;
+		int length = glue.length() * (end - start);
+		for(int i = start; i <= end; ++i)
+			length += split[i].length();
+		StringBuilder sb = new StringBuilder(length);
+		boolean set = false;
+		for(int i = start; i <= end; ++i) {
+			if(set)
+				sb.append(glue);
+			sb.append(split[i]);
+			set = true;
+		}
+		return sb.toString();
+	}
 }

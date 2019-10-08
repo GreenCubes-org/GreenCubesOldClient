@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="conf/patches"/>
+	<classpathentry kind="src" path="src/minecraft"/>
+	<classpathentry kind="lib" path="eclipse/OldClient/libs/trove-3.0.2.jar"/>
+	<classpathentry kind="lib" path="eclipse/OldClient/libs/trove4j-3.0.2-sources.jar"/>
+	<classpathentry kind="lib" path="jars/bin/jinput.jar"/>
+	<classpathentry kind="lib" path="jars/bin/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="jars/bin/lwjgl.jar"/>
+	<classpathentry kind="lib" path="jars/bin/minecraft.jar"/>
+	<classpathentry kind="lib" path="lib/jacob.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/exceptor.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/jadretro.jar"/>
+	<classpathentry kind="lib" path="runtime/bin/retroguard.jar"/>
+	<classpathentry kind="lib" path="temp/client_recomp.jar"/>
+	<classpathentry kind="lib" path="temp/client_reobf.jar"/>
+	<classpathentry kind="lib" path="temp/minecraft_exc.jar"/>
+	<classpathentry kind="lib" path="temp/minecraft_rg.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.3.3.jar"/>
+	<classpathentry kind="output" path="bin/minecraft"/>
+</classpath>

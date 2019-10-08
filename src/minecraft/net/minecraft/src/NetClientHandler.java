@@ -10,7 +10,7 @@ import java.net.*;
 import java.util.*;
 
 import org.greencubes.compatibility.BlockDurabilityFactory;
-import org.greencubes.launcher.util.Util;
+import org.greencubes.util.Util;
 import org.greencubes.nbt.NBTWorker;
 import org.greencubes.util.ChatColor;
 
