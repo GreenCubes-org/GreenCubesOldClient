@@ -1,7 +1,14 @@
+# Minecraft Coder Pack Build data
 /temp
 /reobf
+/logs
+file.txt
+
+# Eclipse projects
 /eclipse/.metadata
 /eclipse/Client/bin
+
+# Built client data
 /jars/saves/
 /jars/stats/
 /jars/screenshots
@@ -11,4 +18,6 @@
 /jars/mods/sppcommands/
 /bin
 /jars/chat/
+
+# Windows temp files
 **/Thumbs.db
