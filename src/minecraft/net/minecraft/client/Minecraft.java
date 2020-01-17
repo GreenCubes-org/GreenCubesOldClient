@@ -79,7 +79,6 @@ public abstract class Minecraft implements Runnable {
 	public GuiScreen currentScreen = null;
 	public LoadingScreenRenderer loadingScreen;
 	public EntityRenderer entityRenderer;
-	private ThreadDownloadResources downloadResourcesThread;
 	//private int ticksRan = 0;
 	private int leftClickCounter = 0;
 	private int tempDisplayWidth;
@@ -241,11 +240,6 @@ public abstract class Minecraft implements Runnable {
 		ARBOcclusionChecker.instance.init();
 		GL11.glViewport(0, 0, displayWidth, displayHeight);
 		effectRenderer = new EffectRenderer(theWorld, renderEngine);
-		try {
-			downloadResourcesThread = new ThreadDownloadResources(mcDataDir, this);
-			downloadResourcesThread.start();
-		} catch (Exception e) {
-		}
 		checkGLError("Post startup");
 		ingameGUI = new GuiIngame(this);
 		if(serverName != null)
@@ -317,64 +311,11 @@ public abstract class Minecraft implements Runnable {
 	}
 
 	public static File getAppDir(String s) {
-		if(minecraftDir != null)
-			return minecraftDir;
-		s = "greencubes";
-		String s1 = System.getProperty("user.home", ".");
-		File file;
-		switch(EnumOSMappingHelper.enumOSMappingArray[getOs().ordinal()]) {
-		case 1:
-		case 2:
-			file = new File(s1, (new StringBuilder()).append('.').append(s).append('/').toString());
-			break;
-		case 3:
-			String s2 = System.getenv("APPDATA");
-			if(s2 != null)
-				file = new File(s2, (new StringBuilder()).append(".").append(s).append('/').toString());
-			else
-				file = new File(s1, (new StringBuilder()).append('.').append(s).append('/').toString());
-			break;
-		case 4:
-			file = new File(s1, (new StringBuilder()).append("Library/Application Support/").append(s).toString());
-			break;
-		default:
-			file = new File(s1, (new StringBuilder()).append(s).append('/').toString());
-			break;
-		}
-		if(!file.exists() && !file.mkdirs()) {
-			throw new RuntimeException((new StringBuilder()).append("The working directory could not be created: ").append(file).toString());
-		} else {
-			return file;
-		}
+		return new File("").getAbsoluteFile();
 	}
 
 	public static File getAppDir() {
-		String s1 = System.getProperty("user.home", ".");
-		File file;
-		switch(EnumOSMappingHelper.enumOSMappingArray[getOs().ordinal()]) {
-		case 1:
-		case 2:
-			file = new File(s1);
-			break;
-		case 3:
-			String s2 = System.getenv("APPDATA");
-			if(s2 != null)
-				file = new File(s2);
-			else
-				file = new File(s1);
-			break;
-		case 4:
-			file = new File(s1, (new StringBuilder()).append("Library/").toString());
-			break;
-		default:
-			file = new File(s1);
-			break;
-		}
-		if(!file.exists() && !file.mkdirs()) {
-			throw new RuntimeException((new StringBuilder()).append("The working directory could not be created: ").append(file).toString());
-		} else {
-			return file;
-		}
+		return new File("").getAbsoluteFile();
 	}
 
 	private static EnumOS2 getOs() {
@@ -443,12 +384,6 @@ public abstract class Minecraft implements Runnable {
 			statFileWriter.syncStats();
 			if(mcApplet != null) {
 				mcApplet.clearApplet();
-			}
-			try {
-				if(downloadResourcesThread != null) {
-					downloadResourcesThread.closeMinecraft();
-				}
-			} catch (Exception exception) {
 			}
 			System.out.println("Stopping!");
 			try {
@@ -1160,8 +1095,7 @@ public abstract class Minecraft implements Runnable {
 				if(getSendQueue() != null && getSendQueue().notificationsPending.contains(1)) {
 					getSendQueue().notificationsPending.remove(1);
 					getSendQueue().addToSendQueue(new Packet208NotifyAnswer(1));
-				} else
-					displayGuiScreen(new GuiJournal());
+				}
 			}
 			if(thePlayer.isUsingItem()) {
 				if(!gameSettings.keyBindUseItem.pressed)
@@ -1233,7 +1167,6 @@ public abstract class Minecraft implements Runnable {
 		System.out.println("FORCING RELOAD!");
 		sndManager = new SoundManager();
 		sndManager.loadSoundSettings(gameSettings);
-		downloadResourcesThread.reloadResources();
 	}
 
 	public boolean isMultiplayerWorld() {
