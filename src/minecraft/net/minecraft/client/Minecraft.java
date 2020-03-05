@@ -31,6 +31,7 @@ import org.greencubes.executor.IInvokeable;
 import org.greencubes.executor.Task;
 import org.greencubes.executor.TaskWithResult;
 import org.greencubes.util.MacOSX;
+import org.greencubes.util.Natives;
 import org.greencubes.util.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -409,6 +410,7 @@ public abstract class Minecraft implements Runnable {
 	public void run() {
 		running = true;
 		try {
+			Natives.extractNativeLibs();
 			startGame();
 		} catch (Throwable exception) {
 			exception.printStackTrace();

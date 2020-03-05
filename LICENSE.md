@@ -11,8 +11,8 @@ text of each license nearby.
   * Apache Commons and Apache HTTP client by Apache, Apache 2.0 Licence
   * Trove by Trove Development Team and contributors, GNU GPL 2.1
   * JSON library by JSON.org, MIT License
-* Assets created for GreenCubes.org in folder jars/bin/gc_images are by
+* Assets created for GreenCubes.org in the folder /resources are by
   Sergey 'Murrsh' Tsvetkov and are distributed under Creative Commons Atribution
   4.0 International License. Provide credit if you are using those assets.
-* All other parts are owned by their creators, mainly Mojang AB and provided
+* All other parts are owned by their creators, mainly Mojang AB, and provided
   AS IS without granting you any rights.  
