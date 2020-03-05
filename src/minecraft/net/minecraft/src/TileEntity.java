@@ -74,7 +74,7 @@ public class TileEntity {
 		if(tileentity != null) {
 			tileentity.readFromNBT(nbttagcompound);
 		} else {
-			System.out.println((new StringBuilder()).append("Skipping TileEntity with id ").append(nbttagcompound.getString("id")).toString());
+			//System.out.println((new StringBuilder()).append("Skipping TileEntity with id ").append(nbttagcompound.getString("id")).toString());
 		}
 		return tileentity;
 	}
