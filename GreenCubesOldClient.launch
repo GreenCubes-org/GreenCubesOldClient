@@ -12,5 +12,5 @@
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="Player -"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="GreenCubesOldClient"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xincgc -Xmx1G -Xms1G"/>
-<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="C:\_work\_BUILD\GreenCubes"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="C:\_work\_BUILD\GCOldClient"/>
 </launchConfiguration>

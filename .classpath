@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/minecraft"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="jars/bin/jinput.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jars/bin/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="jars/bin/lwjgl_util.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jars/bin/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="jars/bin/lwjgl.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="jars/bin/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="jars/bin/minecraft.jar"/>
+	<classpathentry kind="src" path="lib/mcresources"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="lib" path="lib/jacob.jar"/>
-	<classpathentry kind="lib" path="runtime/bin/exceptor.jar"/>
-	<classpathentry kind="lib" path="runtime/bin/jadretro.jar"/>
-	<classpathentry kind="lib" path="runtime/bin/retroguard.jar"/>
-	<classpathentry kind="lib" path="temp/client_recomp.jar"/>
-	<classpathentry kind="lib" path="temp/client_reobf.jar"/>
-	<classpathentry kind="lib" path="temp/minecraft_exc.jar"/>
-	<classpathentry kind="lib" path="temp/minecraft_rg.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="lib/httpclient-4.3.6.jar"/>
-	<classpathentry kind="lib" path="lib/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="lib/trove-3.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/trove4j-3.0.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/jinput.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/snakeyaml.jar"/>
+	<classpathentry kind="lib" path="lib/paulscode.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.5.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-cache-4.5.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/natives.jar"/>
+	<classpathentry kind="lib" path="lib/mcresources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

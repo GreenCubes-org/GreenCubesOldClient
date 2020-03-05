@@ -569,7 +569,7 @@ public class Block {
 	public static final Block blockTileBlue_halfDown = new BlockTile(1473, bluetile, bluetileside, Material.rock, 0.5F, 0.5F).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setBlockName("blueTile");
 	public static final Block blockTileBlue_45degree = new BlockTile(1474, bluetile, bluetileside, Material.rock, 0.0F, 0.5F).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setBlockName("blueTile");
 	public static final Block blockTileBlue_floor = new BlockTile(1475, bluetile, bluetileside, Material.rock, 0.875F, 0.5F).setHardness(3.0F).setStepSound(Block.soundStoneFootstep).setBlockName("blueTile");
-	public static final Block blockGiftGС = new BlockGift(1476, Block.wool, giftgcup, giftgcdown, giftgcside).setBlockName("giftGC");
+	public static final Block blockGiftGC = new BlockGift(1476, Block.wool, giftgcup, giftgcdown, giftgcside).setBlockName("giftGC");
 	public static final Block blockPPSandstone = new BlockPressurePlate(1477, Block.blockLapis.blockIndexInTexture + 32, EnumMobType.mobs, Material.rock).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("sandstonePP").setRequiresSelfNotify();
 	public static final Block blockPPlapislazuli = new BlockPressurePlate(1478, Block.blockLapis.blockIndexInTexture, EnumMobType.mobs, Material.rock).setHardness(0.5F).setStepSound(Block.soundStoneFootstep).setBlockName("lapislazuliPP").setRequiresSelfNotify();
 	public static final Block blockPPPlanksJungle = new BlockPressurePlate(1479, jungleplanks, EnumMobType.everything, Material.wood).setHardness(0.5F).setStepSound(Block.soundWoodFootstep).setBlockName("planksJunglePP").setRequiresSelfNotify();
@@ -1402,8 +1402,8 @@ public class Block {
 
 	protected void init() {
 		/*
-		 * Мы можем позволить себе тут делать сколь угодно тяжелые операции, т.к. это выполняется
-		 * всего 1 раз
+		 * пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 * пїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅ
 		 */
 		try {
 			Class c = Class.forName("net.minecraft.src.Item");
@@ -1460,7 +1460,7 @@ public class Block {
 				blocksList[i].init();
 		Item.itemsList[blockGiftNY.blockID].setMaxStackSize(1);
 		Item.itemsList[blockGift1402.blockID].setMaxStackSize(1);
-		Item.itemsList[blockGiftGС.blockID].setMaxStackSize(1);
+		Item.itemsList[blockGiftGC.blockID].setMaxStackSize(1);
 		Item.itemsList[blockDiamond.blockID].setUndropable();
 		Item.itemsList[sponge.blockID].setUndropable();
 		Item.itemsList[blockLavaSponge.blockID].setUndropable();
