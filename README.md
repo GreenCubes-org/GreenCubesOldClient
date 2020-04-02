@@ -12,3 +12,7 @@ You can join [GreenCubes Expedition Discord](https://discord.gg/p7MqPKT) if you 
 ## World
 
 World save from 3rd of September 2017 can be downloaded from here: https://yadi.sk/d/Mg8c9m2KCjbv3g
+
+## TODO
+
+* Need to update how sounds work as they can't be downloaded from MC servers anymore. They're embeded now, but the game doesn't know how to use them
