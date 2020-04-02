@@ -124,6 +124,7 @@ public class ChunkLoader implements IChunkLoader {
 		tag.setByteArray("BlockLight", chunk.blocklightMap.data);
 		tag.setByteArray("HeightMap", chunk.heightMap);
 		tag.setBoolean("TerrainPopulated", chunk.isTerrainPopulated);
+		tag.setByteArray("BiomeData", chunk.biomeData);
 		chunk.hasEntities = false;
 		NBTTagList entitiesList = new NBTTagList();
 		label0: for(int i = 0; i < chunk.entities.length; i++) {
@@ -203,6 +204,8 @@ public class ChunkLoader implements IChunkLoader {
 			chunk.blocklightMap = new NibbleArray(chunk.blocks.length, world.field_35473_a);
 			chunk.func_1014_a();
 		}
+		if(tag.hasKey("BiomeData"))
+			chunk.biomeData = tag.getByteArray("BiomeData");
 		NBTTagList nbttaglist = tag.getTagList("Entities");
 		if(nbttaglist != null) {
 			for(int k = 0; k < nbttaglist.size(); k++) {
