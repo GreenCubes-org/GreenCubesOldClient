@@ -241,6 +241,7 @@ public abstract class Minecraft implements Runnable {
 		ARBOcclusionChecker.instance.init();
 		GL11.glViewport(0, 0, displayWidth, displayHeight);
 		effectRenderer = new EffectRenderer(theWorld, renderEngine);
+		new ThreadDownloadResources(mcDataDir, this).reloadResources();
 		checkGLError("Post startup");
 		ingameGUI = new GuiIngame(this);
 		if(serverName != null)
